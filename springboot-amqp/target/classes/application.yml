@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: dante
+    password: 123456
+    virtual-host: springboot
+    publisher-confirms: true
+    publisher-returns: true 
+  profiles:
+    active: uat
+dante:
+  hello:
+    queue: boot_dante_hello

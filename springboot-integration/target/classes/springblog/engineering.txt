@@ -1,0 +1,3 @@
+《What's New in Spring Data Release Ingalls?》 https://spring.io/blog/2017/01/30/what-s-new-in-spring-data-release-ingalls
+《This Week in Spring - January 31st, 2017》 https://spring.io/blog/2017/01/31/this-week-in-spring-january-31st-2017
+《Spring Tips: Spring Batch》 https://spring.io/blog/2017/02/01/spring-tips-spring-batch

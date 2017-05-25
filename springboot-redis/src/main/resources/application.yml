@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: dante-springboot-logger
+  profiles:
+    active: dev
