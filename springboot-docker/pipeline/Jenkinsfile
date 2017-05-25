@@ -1,0 +1,59 @@
+//withEnv(['PATH=/usr/local/bin:$PATH']) {
+    node {
+        stage('代码更新') {
+            checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']],
+                         userRemoteConfigs: [[url: 'https://github.com/dante7qx/springboot.git']]]
+        }
+        stage('单元测试') {
+            sh "echo '单元测试'"
+        }
+        
+        stage('代码检查') {
+            sh "echo '代码检查'"
+        }
+    }
+    stage('部署确认') {
+        timeout(time:1, unit:'HOURS') {
+            milestone()
+            input "现在执行部署？"
+        }
+    }
+    
+    node {
+        lock(resource: 'SpringBoot_Docker_PAAS', inversePrecedence: true) {
+            stage('部署') {
+                /*
+                sh 'bash ./pipeline/buildImage.sh dev -queue'
+                sh 'bash ./pipeline/makesureImageReady.sh dev -queue'
+                sh "bash ./pipeline/deployImage.sh dev -queue"
+                sh "bash ./pipeline/waitDeployment.sh dev -queue"
+                */
+                
+                echo "部署"
+            }
+            stage('接口测试') {
+                sh "echo '接口测试'"
+                /*
+                withEnv(['SERVICE_NAME=api-app','BACKEND_ADDR="http://devopsgroup-jbh-api-dev.haihangyun.com"']) {
+                    dir('api-test') {
+                        git url: 'git@gitbj.haihangyun.com:JBH/api-doc.git'
+                        sh 'npm run api-test'
+                    }
+                }
+                */
+            }
+            stage('界面测试') {
+                sh "echo '界面测试'"
+                /*
+                withEnv(['PATH=/opt/jdk1.7.0_67/bin:/usr/local/bin:$PATH','JAVA_HOME=/opt/jdk1.7.0_67']) {
+                    dir('e2e-test') {
+                        git url: 'git@gitbj.haihangyun.com:JBH/e2e-test.git'
+                        sh 'mvn clean test'
+                    }
+                }
+                */
+            }
+            milestone()
+        }
+    } 
+//}
