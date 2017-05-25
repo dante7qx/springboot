@@ -2,8 +2,11 @@
 *.class
 
 # Custom file
-/target
+target/
 .project
+.classpath
+.DS_Store
+.springBeans
 .settings/
 
 # Log file
