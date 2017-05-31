@@ -25,6 +25,8 @@
 		<module>springboot-cache</module>
 		<module>springboot-redis</module>
 		<module>springboot-docker</module>
+		<module>springboot-logger</module>
+		<module>springboot-aoplog</module>
 	</modules>
 	
 	<parent>
