@@ -24,7 +24,7 @@ public class LoggerController {
 		default:
 			break;
 		}
-		return "Logger ->" + returnStr;
+		return "Logger -> " + returnStr;
 	}
 
 }

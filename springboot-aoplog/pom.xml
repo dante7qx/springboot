@@ -14,7 +14,7 @@
 	<name>springboot-aoplog</name>
 	<description>Dante Springboot AOP Log</description>
 
-	<dependencies>
+	<dependencies> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
