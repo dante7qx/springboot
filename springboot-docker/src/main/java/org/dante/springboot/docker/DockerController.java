@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DockerController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DockerController.class);
+	
+	@Value("${hello.msg}")
+	private String hello;
 
 	@GetMapping("/docker")
 	public String docker() {
@@ -29,7 +33,7 @@ public class DockerController {
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
-		return "你好，Docker！";
+		return hello + "Docker！";
 	}
 
 }

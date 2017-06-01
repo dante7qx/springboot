@@ -1,2 +1,3 @@
-server:
-  port: 8801
+spring:
+  profiles:
+    active: ${config.profile:dev}
