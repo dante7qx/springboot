@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 /**
+ * 异步调用
+ * 
  * 默认使用缺省的Executor，TaskExecutor
  * 
  * @author dante
