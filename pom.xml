@@ -27,6 +27,7 @@
 		<module>springboot-docker</module>
 		<module>springboot-logger</module>
 		<module>springboot-aoplog</module>
+		<module>springboot-scheduling</module>
 	</modules>
 	
 	<parent>
