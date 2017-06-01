@@ -3,6 +3,7 @@
 
 # Custom file
 target/
+logs/
 .project
 .classpath
 .DS_Store
