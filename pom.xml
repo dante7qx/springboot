@@ -28,6 +28,7 @@
 		<module>springboot-logger</module>
 		<module>springboot-aoplog</module>
 		<module>springboot-scheduling</module>
+		<module>springboot-async</module>
 	</modules>
 	
 	<parent>
