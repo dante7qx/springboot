@@ -7,7 +7,7 @@ MAINTAINER Dante "ch.sun@hnair.com"
 ENV config.profile uat
 ENV JAVA_OPTS="-Xmx1g -Xms512m"
 
-VOLUME /tmp
+VOLUME /logs
 
 ADD springboot-docker-0.0.1-SNAPSHOT.jar app.jar
 
