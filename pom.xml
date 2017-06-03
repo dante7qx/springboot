@@ -29,6 +29,7 @@
 		<module>springboot-aoplog</module>
 		<module>springboot-scheduling</module>
 		<module>springboot-async</module>
+		<module>springboot-restdocs</module>
 	</modules>
 	
 	<parent>
