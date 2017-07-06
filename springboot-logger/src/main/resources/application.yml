@@ -3,3 +3,5 @@ spring:
     name: dante-springboot-logger
   profiles:
     active: dev
+server:
+  port: 8101

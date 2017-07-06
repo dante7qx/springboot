@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: dante-springboot-mybatis
+  datasource:
+    platform: h2
+server:
+  port: 8100
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+  type-aliases-package: org.dante.springboot.po
+logging:
+  level:
+    org.dante.springboot.dao: DEBUG
+    

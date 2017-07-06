@@ -4,7 +4,7 @@ FROM java:8
 
 MAINTAINER Dante "ch.sun@hnair.com"
 
-ENV config.profile uat
+ENV config_profile uat
 ENV JAVA_OPTS="-Xmx1g -Xms512m"
 
 VOLUME /logs
