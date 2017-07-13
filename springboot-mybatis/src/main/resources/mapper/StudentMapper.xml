@@ -8,7 +8,10 @@
 		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<select id="queryStudents" resultMap="StudentMap">
-		select t.id,t.name,t.age,t.update_date from t_student t order by t.update_date desc, t.age asc
+		select t.id,t.name,t.age,t.update_date from t_student t 
+	</select>
+	<select id="queryStudentById" resultType="StdentPO">
+		select t.id,t.name,t.age,t.update_date from t_student t where id = #{id}
 	</select>
 	<insert id="insertStudent">
 		insert into t_student(id, name, age, update_date) values (#{id}, #{name}, #{age}, #{updateDate})

@@ -8,6 +8,8 @@ public interface StudentMapper {
 	
 	public List<StudentPO> queryStudents();
 	
+	public StudentPO queryStudentById(Long id);
+	
 	public void insertStudent(StudentPO studentPO);
 	
 	public void updateStudent(StudentPO studentPO);

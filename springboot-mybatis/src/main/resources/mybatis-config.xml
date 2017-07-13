@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties>
+        <property name="dialect" value="h2" />
+    </properties>
+	
+	<settings>
+        <!-- 开启驼峰匹配 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    
+    <typeAliases>
+		<typeAlias type="org.dante.springboot.po.StudentPO" alias="StdentPO"/>
+	</typeAliases>
+    
+    <!-- 分页助手 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 数据库方言 -->
+            <property name="dialect" value="h2" />
+            <property name="offsetAsPageNum" value="true" />
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 会去查询出总数 -->
+            <property name="rowBoundsWithCount" value="true" />
+            <property name="pageSizeZero" value="true" />
+            <property name="reasonable" value="true" />
+        </plugin>
+    </plugins>
+</configuration> 

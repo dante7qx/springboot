@@ -1,8 +1,6 @@
 package org.dante.springboot.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.dante.springboot.dao.StudentMapper;
 import org.dante.springboot.po.StudentPO;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -28,21 +25,24 @@ public class StudentController {
 	private StudentMapper studentMapper;
 
 	@PostMapping("/query_page")
-	public Map<String, Object> queryPage() {
-		Map<String, Object> result = new HashMap<>();
-		PageHelper.startPage(1, 3);
+	public PageInfo<StudentPO> queryPage() {
+		PageHelper.orderBy("age desc");
+		PageHelper.startPage(2, 3);
 		List<StudentPO> students = studentMapper.queryStudents();
 		PageInfo<StudentPO> pageInfo = new PageInfo<>(students);
-		Page<StudentPO> page = (Page<StudentPO>) students;
-		result.put("pageInfo", pageInfo);
-		result.put("page", page);
-		return result;
+		return pageInfo;
 	}
 
 	@GetMapping("/query_all")
 	public List<StudentPO> queryStudents() {
 		return studentMapper.queryStudents();
 	}
+	
+	@GetMapping("/query/{id}")
+	public StudentPO queryById(@PathVariable Long id) {
+		return studentMapper.queryStudentById(id);
+	}
+	
 
 	@PutMapping("/insert")
 	public StudentPO insertStudent(@RequestBody StudentPO studentPO) {
