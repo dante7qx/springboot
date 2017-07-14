@@ -1,8 +1,11 @@
 package org.dante.springboot.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TeacherPO {
+public class TeacherPO implements Serializable {
+	private static final long serialVersionUID = 3991721714575978116L;
+	
 	private Long id;
 	private String name;
 	private String post;

@@ -1,4 +1,4 @@
-# Spring boot mybatis
+# Spring Boot Mybatis
 
 1. 添加依赖
 
@@ -54,6 +54,11 @@
      }
      ```
 
-5. 参考文档
+5. 缓存
+	- 添加配置：`<cache eviction="LRU" flushInterval="30000" size="1024" readOnly="true"/>，简写 <cache />`
+	- 注意：由于二级缓存的数据不一定都是存储到内存中，它的存储介质多种多样，所以需要给缓存的对象执行序列化。
+	- 禁用缓存：`useCache="false"`
+
+6. 参考文档
 
    - http://www.mybatis.org/mybatis-3/zh/
