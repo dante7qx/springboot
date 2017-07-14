@@ -31,16 +31,15 @@ public class SqlCostInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        Object target = invocation.getTarget();
-        
-        long startTime = System.currentTimeMillis();
-        StatementHandler statementHandler = (StatementHandler)target;
+//      Object target = invocation.getTarget();
+//      StatementHandler statementHandler = (StatementHandler)target;
+    	long startTime = System.currentTimeMillis();
         try {
             return invocation.proceed();
         } finally {
             long endTime = System.currentTimeMillis();
             long sqlCost = endTime - startTime;
-            
+            /*
             BoundSql boundSql = statementHandler.getBoundSql();
             String sql = boundSql.getSql();
             Object parameterObject = boundSql.getParameterObject();
@@ -48,8 +47,7 @@ public class SqlCostInterceptor implements Interceptor {
             
             // 格式化Sql语句，去除换行符，替换参数
             sql = formatSql(sql, parameterObject, parameterMappingList);
-            
-//          LOGGER.debug("SQL：[ {} ]", sql);
+            */
             LOGGER.debug("执行耗时 ==> {} ms", sqlCost);
         }
     }

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.dante.springboot.dao.CourseMapper">
-	
+
 	<resultMap id="CourseResult" type="CoursePO">
-		<id column="id" property="id"/>
-		<result column="name" property="name"/>
-		<result column="week" property="week"/>
-		<result column="start_time" property="startTime"/>
-		<result column="end_time" property="endTime"/>
-		
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="week" property="week" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
 		<!-- 集合的嵌套查询 -->
-		<collection property="students" column="id" ofType="StudentPO" select="org.dante.springboot.dao.StudentMapper.queryStudentByCourseId"/>
+		<collection property="students" column="id" ofType="StudentPO"
+			select="org.dante.springboot.dao.StudentMapper.queryStudentByCourseId" />
 	</resultMap>
-	
+
 	<resultMap id="CourseResult2" type="CoursePO">
-		<id column="id" property="id"/>
-		<result column="name" property="name"/>
-		<result column="week" property="week"/>
-		<result column="start_time" property="startTime"/>
-		<result column="end_time" property="endTime"/>
-		
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="week" property="week" />
+		<result column="start_time" property="startTime" />
+		<result column="end_time" property="endTime" />
 		<!-- 集合的结果嵌套 -->
-		<collection property="students" ofType="StudentPO" resultMap="CourseStudentResult" columnPrefix="student_" />
+		<collection property="students" ofType="StudentPO"
+			resultMap="CourseStudentResult" columnPrefix="student_" />
 	</resultMap>
-	
+
 	<resultMap id="CourseStudentResult" type="StudentPO">
 		<id column="id" property="id" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
@@ -32,11 +32,12 @@
 	</resultMap>
 
 	<select id="queryCourseById" resultMap="CourseResult">
-		select * from t_course where id = #{id}
+		select * from t_course
+		where id = #{id}
 	</select>
-	
+
 	<select id="queryCourseById2" resultMap="CourseResult2">
-		select 
+		select
 			t.id,
 			t.name,
 			t.week,
@@ -46,9 +47,48 @@
 			t2.name as student_name,
 			t2.age as student_age,
 			t2.update_date as student_update_date
-		from t_course t 
+			from t_course t
 		left join t_student_course t1 on t.id = t1.course_id
 		left join t_student t2 on t1.student_id = t2.id
 		where t.id = #{id}
 	</select>
+
+	<select id="queryCourses" resultType="CoursePO">
+		select t.* from t_course t
+		left join t_student_course t1 on t.id = t1.course_id
+		left join t_student t2 on t1.student_id = t2.id
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="week != null and week.length()>0">
+				and t.week = #{week}
+			</if>
+			<if test="studentName != null">
+				and t2.name like #{studentName}
+			</if>
+			<if test="stuIds != null and !stuIds.isEmpty()">
+				and t2.id in
+				<foreach item="stuId" index="index" collection="stuIds"
+					open="(" separator="," close=")">
+					#{stuId}
+				</foreach>
+			</if>
+			<choose>
+				<when test="name != null">
+					and t.name = #{name}
+				</when>
+				<otherwise>
+					and t2.age = 22
+				</otherwise>
+			</choose>
+		</trim>
+		order by t.week asc, t.start_time asc
+	</select>
+
+	<update id="updateCourse">
+		update t_course
+		<set>
+			<if test="startTime != null">start_time=#{startTime},</if>
+			<if test="endTime != null">end_time=#{endTime},</if>
+		</set>
+		where id=#{id}
+	</update>
 </mapper>
