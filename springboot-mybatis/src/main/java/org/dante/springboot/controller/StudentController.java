@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.dante.springboot.dao.StudentMapper;
 import org.dante.springboot.po.StudentPO;
+import org.dante.springboot.service.TeacherStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ public class StudentController {
 
 	@Autowired
 	private StudentMapper studentMapper;
+	@Autowired
+	private TeacherStudentService teacherStudentService;
 
 	@PostMapping("/query_page")
 	public PageInfo<StudentPO> queryPage() {
@@ -35,12 +38,22 @@ public class StudentController {
 
 	@GetMapping("/query_all")
 	public List<StudentPO> queryStudents() {
+		try {
+			teacherStudentService.presistTeacherStudent();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return studentMapper.queryStudents();
 	}
 	
 	@GetMapping("/query/{id}")
 	public StudentPO queryById(@PathVariable Long id) {
 		return studentMapper.queryStudentById(id);
+	}
+	
+	@GetMapping("/query_with_address/{id}")
+	public StudentPO queryWithAddressById(@PathVariable Long id) {
+		return studentMapper.queryStudentWithAddressById(id);
 	}
 	
 

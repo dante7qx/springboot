@@ -14,7 +14,11 @@
     </settings>
     
     <typeAliases>
-		<typeAlias type="org.dante.springboot.po.StudentPO" alias="StdentPO"/>
+    	<!--  
+		<typeAlias type="org.dante.springboot.po.StudentPO" alias="StudentPO"/>
+		-->
+		<!-- 整个包下的，都使用别名 -->
+		<package name="org.dante.springboot.po"/>
 	</typeAliases>
     
     <!-- 分页助手 -->
@@ -28,5 +32,6 @@
             <property name="pageSizeZero" value="true" />
             <property name="reasonable" value="true" />
         </plugin>
+        <plugin interceptor="org.dante.springboot.plugin.SqlCostInterceptor"></plugin>
     </plugins>
 </configuration> 

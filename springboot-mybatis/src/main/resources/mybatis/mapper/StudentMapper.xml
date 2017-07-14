@@ -1,18 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.dante.springboot.dao.StudentMapper">
-	<resultMap id="StudentMap" type="org.dante.springboot.po.StudentPO">
+
+	<resultMap id="StudentResult" type="StudentPO">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="age" property="age" jdbcType="INTEGER" />
 		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+		<!-- 关联的嵌套查询, 查询记录多时，有性能问题 -->
+		<!--  
+		<association property="address" column="id" javaType="StudentAddressPO" select="org.dante.springboot.dao.StudentAddressMapper.queryStudentAddressById"/>
+		-->
+		<!-- 关联的嵌套结果 -->
+		<association property="address" resultMap="StudentAddressResult"/>
 	</resultMap>
-	<select id="queryStudents" resultMap="StudentMap">
+	
+	<resultMap id="StudentAddressResult" type="StudentAddressPO">
+		<id column="address_id" property="id" />
+		<result column="address_province" property="province" />
+		<result column="address_city" property="city" />
+		<result column="address_area" property="area" />
+		<result column="address_street" property="street" />
+		<result column="address_student_id" property="studentId" />
+	</resultMap>
+	
+	<select id="queryStudents" resultMap="StudentResult">
 		select t.id,t.name,t.age,t.update_date from t_student t 
 	</select>
-	<select id="queryStudentById" resultType="StdentPO">
+	<select id="queryStudentById" resultType="StudentPO">
 		select t.id,t.name,t.age,t.update_date from t_student t where id = #{id}
 	</select>
+	<select id="queryStudentWithAddressById" resultMap="StudentResult">
+		select 
+			t.id,
+			t.name,
+			t.age,
+			t.update_date,
+			t1.id as address_id,
+			t1.province as address_province,
+			t1.city as address_city,
+			t1.area as address_area,
+			t1.street as address_street,
+			t1.student_id as address_student_id
+		from t_student t 
+		left join t_student_address t1 on t.id = t1.student_id
+		where t.id = #{id} order by t.age desc, t1.province asc
+	</select>
+	
+	<select id="queryStudentByCourseId" resultType="StudentPO">
+		select t.* from t_student t where t.id in (select t1.student_id from t_student_course t1 where t1.course_id = #{courseId}) order by t.age desc
+	</select>
+	
 	<insert id="insertStudent">
 		insert into t_student(id, name, age, update_date) values (#{id}, #{name}, #{age}, #{updateDate})
 	</insert>

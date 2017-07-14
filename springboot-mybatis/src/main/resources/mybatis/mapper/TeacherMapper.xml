@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.dante.springboot.dao.TeacherMapper">
+	<select id="queryTeachers" resultType="TeacherPO">
+		select t.id,t.name,t.post,t.update_date from t_teacher t 
+	</select>
+	<select id="queryTeacherById" resultType="TeacherPO">
+		select t.id,t.name,t.post,t.update_date from t_teacher t where id = #{id}
+	</select>
+	<insert id="insertTeacher">
+		insert into t_teacher(id, name, post, update_date) values (#{id}, #{name}, #{post}, #{updateDate})
+	</insert>
+	<update id="updateTeacher">
+		update t_teacher set name = #{name}, post = #{post}, update_date = #{updateDate} where id = #{id}
+	</update>
+	<delete id="deleteTeacher">
+		delete from t_teacher where id = #{id}
+	</delete>
+</mapper>

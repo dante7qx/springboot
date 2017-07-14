@@ -10,6 +10,10 @@ public interface StudentMapper {
 	
 	public StudentPO queryStudentById(Long id);
 	
+	public StudentPO queryStudentWithAddressById(Long id);
+	
+	public List<StudentPO> queryStudentByCourseId(Long courseId);
+	
 	public void insertStudent(StudentPO studentPO);
 	
 	public void updateStudent(StudentPO studentPO);

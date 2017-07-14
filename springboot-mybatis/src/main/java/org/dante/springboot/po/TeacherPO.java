@@ -2,16 +2,11 @@ package org.dante.springboot.po;
 
 import java.util.Date;
 
-public class StudentPO {
-
+public class TeacherPO {
 	private Long id;
 	private String name;
-	private int age;
+	private String post;
 	private Date updateDate;
-	private StudentAddressPO address;
-
-	public StudentPO() {
-	}
 
 	public Long getId() {
 		return id;
@@ -29,12 +24,12 @@ public class StudentPO {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
+	public String getPost() {
+		return post;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setPost(String post) {
+		this.post = post;
 	}
 
 	public Date getUpdateDate() {
@@ -43,14 +38,6 @@ public class StudentPO {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
-	}
-
-	public StudentAddressPO getAddress() {
-		return address;
-	}
-
-	public void setAddress(StudentAddressPO address) {
-		this.address = address;
 	}
 
 }
