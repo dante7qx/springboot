@@ -6,7 +6,7 @@ target/
 logs/
 .project
 .classpath
-.data
+*.data
 .DS_Store
 .springBeans
 .settings/
