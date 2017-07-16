@@ -1,0 +1,31 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: dante-springboot-jwt-server
+  datasource:
+    platform: h2
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: info  
+    org.springframework:
+      data: DEBUG
+      security: DEBUG  
+jwt:
+  header: Authorization
+  secret: mySecret        # 解密的key
+  expiration: 604800      # 过期时间（ms），7天
+  tokenHead: "Bearer "
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
+      register: /auth/register
