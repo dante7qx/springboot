@@ -6,6 +6,7 @@ spring:
   datasource:
     platform: h2
   jpa:
+    open-in-view: true    # 主要注意的是，必须进行事务管理
     generate-ddl: false
     show-sql: true
     hibernate:
@@ -23,9 +24,18 @@ jwt:
   header: Authorization
   secret: mySecret        # 解密的key
   expiration: 604800      # 过期时间（ms），7天
-  tokenHead: "Bearer "
+  tokenHead: "Bearer "   
   route:
     authentication:
       path: /auth
       refresh: /refresh
       register: /auth/register
+endpoints:
+  cors:
+    allowed-origins:
+      - http://localhost:8000
+    allowed-methods:
+      - GET
+      - POST
+    allowed-headers:
+      - Authorization
