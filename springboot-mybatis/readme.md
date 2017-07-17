@@ -62,3 +62,4 @@
 6. 参考文档
 
    - http://www.mybatis.org/mybatis-3/zh/
+   - http://www.jianshu.com/p/e09d2370b796

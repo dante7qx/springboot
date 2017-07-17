@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:org.dante.demo.ldap.SpringbootSwaggerApplication</config>
+		<config>java:org.dante.demo.mybatis.SpringbootSwaggerApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
