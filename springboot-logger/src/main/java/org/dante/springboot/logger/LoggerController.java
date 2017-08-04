@@ -48,6 +48,13 @@ public class LoggerController {
 		return "Logger ->" + returnStr;
 	}
 	
+	/**
+	 * springboot读取jar包中文件
+	 * 
+	 * getClass().getClassLoader().getResourceAsStream("static/xxx.pdf");
+	 * 
+	 * @return
+	 */
 	@GetMapping("/jar")
 	public String jar() {
 		String result = "fail";
