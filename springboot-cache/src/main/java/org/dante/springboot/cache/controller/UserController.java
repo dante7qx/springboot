@@ -26,6 +26,11 @@ public class UserController {
 		return userService.findUser(id);
 	}
 	
+	@GetMapping("/user_account/{account}")
+	public UserPO findByAccount(@PathVariable String account) {
+		return userService.findByAccount(account);
+	}
+	
 	@GetMapping("/user/add")
 	public UserPO addUser() {
 		UserPO userPO = new UserPO("帐号"+Math.random(), "名称"+Math.random(), 32,  BigDecimal.valueOf(87.62));

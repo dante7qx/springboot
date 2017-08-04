@@ -1,7 +1,12 @@
 package org.dante.springboot.logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -41,6 +46,20 @@ public class LoggerController {
 		logger.warn("request id {}", id);
 		logger.error("request id {}", id);
 		return "Logger ->" + returnStr;
+	}
+	
+	@GetMapping("/jar")
+	public String jar() {
+		String result = "fail";
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("static/template.txt");
+		File targetFile = new File("/Users/dante/Documents/Project/spring/springboot/springboot-logger/src/main/java/org/dante/springboot/logger/111.txt");
+		try {
+			FileUtils.copyInputStreamToFile(stream, targetFile);
+			result = "ok";
+		} catch (IOException e) {
+			logger.error("file copy error.", e);
+		}
+		return result;
 	}
 
 	private String getHeader(HttpServletRequest request, String headName) {  

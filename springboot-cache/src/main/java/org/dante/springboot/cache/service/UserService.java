@@ -27,6 +27,11 @@ public class UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Cacheable(key="caches[0].name.concat('_').concat(#account)")
+	public UserPO findByAccount(String account) {
+		return userDAO.findByAccount(account);
+	}
+	
 	@Caching(put = @CachePut(key="caches[0].name.concat('_').concat(#userPO.getId())"), 
 			evict = @CacheEvict(key="caches[0].name"))
 	@Transactional

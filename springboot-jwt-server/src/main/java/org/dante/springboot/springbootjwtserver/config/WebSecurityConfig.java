@@ -85,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
 		// Cache-Control: no-cache, no-store, max-age=0, must-revalidate，禁用缓存
-		http.headers().cacheControl();
+		http.headers().cacheControl().disable();
 	}
 	
 	

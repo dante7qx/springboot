@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 
 public class JwtUserDetailService implements UserDetailsService {
 	
@@ -14,7 +13,6 @@ public class JwtUserDetailService implements UserDetailsService {
 	private UserService userService;
 
 	@Override
-	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		try {
 			UserPO user = userService.findByUserName(userName);
