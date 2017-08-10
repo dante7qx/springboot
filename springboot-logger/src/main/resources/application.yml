@@ -5,3 +5,14 @@ spring:
     active: dev
 server:
   port: 8101
+  
+---
+## 管理端口
+management:
+  port: 10000
+  context-path: /adminmanage
+endpoints:
+  shutdown:
+    path: /logger_shutdown
+    sensitive: false
+    enabled: true ## 关闭服务，curl -X POST http://localhost:10000/adminmanage/logger_shutdown
