@@ -33,6 +33,7 @@
 		<module>springboot-mybatis</module>
 		<module>springboot-mybatis-generator</module>
 		<module>springboot-jwt-server</module>
+		<module>springboot-batch</module>
 	</modules>
 	
 	<parent>
@@ -63,6 +64,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

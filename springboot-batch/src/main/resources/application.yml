@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    platform: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/springbatch
+    username: root
+    password: iamdante
