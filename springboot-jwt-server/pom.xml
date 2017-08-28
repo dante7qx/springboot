@@ -17,6 +17,7 @@
 	<properties>
 		<jjwt.version>0.7.0</jjwt.version>
 		<guava.version>22.0</guava.version>
+		<docker.image.prefix>dante2012</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -58,4 +59,29 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.14</version>
+				<configuration>
+					<!-- 如果要将docker镜像push到DockerHub上去的话，这边的路径要和repo路径一致 -->
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<!-- 以下两行是为了docker push到DockerHub使用的。 -->
+					<serverId>docker-hub</serverId>
+					<registryUrl>https://index.docker.io/v1/</registryUrl>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

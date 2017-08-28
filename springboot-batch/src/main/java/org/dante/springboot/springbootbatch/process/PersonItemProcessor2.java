@@ -4,6 +4,7 @@ import org.dante.springboot.springbootbatch.po.PersonPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.stereotype.Component;
 
 /**
  * 数据处理
@@ -11,16 +12,17 @@ import org.springframework.batch.item.ItemProcessor;
  * @author dante
  *
  */
-public class PersonItemProcessor implements ItemProcessor<PersonPO, PersonPO> {
+@Component
+public class PersonItemProcessor2 implements ItemProcessor<PersonPO, PersonPO> {
 
-	private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
+	private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor2.class);
 	
 	@Override
 	public PersonPO process(PersonPO person) throws Exception {
-		final String firstName = person.getFirstName().toUpperCase();
-        final String lastName = person.getLastName().toUpperCase();
+		final String firstName = "-> *** " + person.getFirstName() + " *** <-";
+        final String lastName = "-> *** " + person.getLastName() + " *** <-";
 
-        // 给姓名添加中括号
+        // 将 firstName 和 lastName 处理为大写
         final PersonPO transformedPerson = new PersonPO(firstName, lastName);
 
         log.info("将 ({}) 转换成 ({})", person, transformedPerson);
