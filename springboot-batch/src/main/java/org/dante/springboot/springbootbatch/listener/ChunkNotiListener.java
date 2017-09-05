@@ -13,7 +13,8 @@ public class ChunkNotiListener implements ChunkListener {
 
 	@Override
 	public void beforeChunk(ChunkContext context) {
-		LOGGER.info("beforeChunk ", context);
+		LOGGER.info("beforeChunk", context.getStepContext().getStepExecutionContext().get("1111"));
+		LOGGER.info("beforeChunk", context);
 	}
 
 	@Override

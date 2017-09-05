@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.dante.springboot.springbootbatch.listener.ChunkNotiListener;
 import org.dante.springboot.springbootbatch.listener.JobCompletionNotificationListener;
+import org.dante.springboot.springbootbatch.listener.Step1Listener;
 import org.dante.springboot.springbootbatch.po.PersonPO;
 import org.dante.springboot.springbootbatch.process.PersonItemProcessor;
 import org.dante.springboot.springbootbatch.process.PersonItemProcessor2;
@@ -17,6 +18,9 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.launch.support.SimpleJobLauncher;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -29,6 +33,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableBatchProcessing
@@ -45,6 +50,22 @@ public class BatchConfiguration {
 	
 	@Value("/Users/dante/Documents/Project/spring/springboot/springboot-batch/src/main/resources/aa")
 	private String deleteFilePath;
+	
+	@Bean
+	public JobRepository jobRepository(DataSource dataSource, PlatformTransactionManager transactionManager) throws Exception {
+		JobRepositoryFactoryBean jobRepositoryFactory = new JobRepositoryFactoryBean();
+		jobRepositoryFactory.setDataSource(dataSource);
+		jobRepositoryFactory.setTransactionManager(transactionManager);
+//		jobRepositoryFactory.setTablePrefix("XX_");
+		return jobRepositoryFactory.getObject();
+	}
+	
+	@Bean
+	public SimpleJobLauncher jobLauncher(DataSource dataSource, PlatformTransactionManager transactionManager) throws Exception {
+		SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
+		jobLauncher.setJobRepository(jobRepository(dataSource, transactionManager));
+		return jobLauncher;
+	}
 
 	/**
 	 * 读取数据
@@ -111,7 +132,7 @@ public class BatchConfiguration {
 		writer.setDataSource(dataSource);
 		return writer;
 	}
-
+	
 	/**
 	 * 定义要执行的 job
 	 * 
@@ -144,6 +165,7 @@ public class BatchConfiguration {
 				.processor(compositePersonItemProcessor())
 				.writer(writer())
 				.listener(new ChunkNotiListener())
+				.listener(new Step1Listener())
 				.build();
 	}
 	

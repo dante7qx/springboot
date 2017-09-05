@@ -34,7 +34,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
 	@Override
 	public void beforeJob(JobExecution jobExecution) {
-		log.info("JOB 开始执行......");
+		log.info(jobExecution.getStartTime() + ", JOB 开始执行......" + jobExecution.getJobId());
 	}
 	
 	@Override

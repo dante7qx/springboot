@@ -9,4 +9,5 @@ public class SpringbootBatchApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootBatchApplication.class, args);
 	}
+	
 }
