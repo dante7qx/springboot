@@ -15,7 +15,7 @@
 	<description>Dante Springboot Swagger</description>
 
 	<properties>
-		<springfox-swagger2.version>2.6.1</springfox-swagger2.version>
+		<springfox-swagger2.version>2.7.0</springfox-swagger2.version>
 	</properties>
 
 	<dependencies>

@@ -1,5 +1,7 @@
 package org.dante.demo.swagger.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,6 +9,8 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.StringVendorExtension;
+import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -27,15 +31,17 @@ public class SwaggerConfig {
 	    }
 	 
 	 private ApiInfo apiInfo() {
-		 Contact contact =  new Contact("但丁", "", "ch.sun@hnair.com");
-		    ApiInfo apiInfo = new ApiInfo(
+		Contact contact =  new Contact("但丁", "", "ch.sun@hnair.com");
+		VendorExtension<String> vendorExtension = new StringVendorExtension("","");
+	    ApiInfo apiInfo = new ApiInfo(
 		      "DANTE REST API",
 		      "使用Swagger进行 REST API 描述.",
 		      "API 版本",
 		      "Terms of service",
 		      contact,
 		      "License of API",
-		      "API license URL");
+		      "API license URL",
+		      Arrays.asList(vendorExtension));
 		    return apiInfo;
 		}
 }
