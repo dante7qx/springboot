@@ -1,0 +1,7 @@
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:server.jks
+    key-store-password: 1234@@qwer
+    key-password: 12,qw,as
+    key-alias: SpiritKey
