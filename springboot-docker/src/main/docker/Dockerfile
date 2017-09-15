@@ -5,7 +5,9 @@ FROM java:8
 MAINTAINER Dante "ch.sun@hnair.com"
 
 ENV config_profile uat
-ENV JAVA_OPTS="-Xmx1g -Xms512m"
+ENV JAVA_OPTS="-Xms1g -Xmx1g"
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 VOLUME /logs
 

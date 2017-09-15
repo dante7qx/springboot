@@ -34,12 +34,14 @@
 		<module>springboot-mybatis-generator</module>
 		<module>springboot-jwt-server</module>
 		<module>springboot-batch</module>
+		<module>springboot-ssl</module>
+		<module>springboot-druid</module>
 	</modules>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.6.RELEASE</version>
+		<version>1.5.7.RELEASE</version>
 	</parent>
 	
 	<dependencies>
