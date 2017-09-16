@@ -36,6 +36,7 @@
 		<module>springboot-batch</module>
 		<module>springboot-ssl</module>
 		<module>springboot-druid</module>
+		<module>springboot-statemachine</module>
 	</modules>
 	
 	<parent>

@@ -1,5 +1,7 @@
 package org.dante.springboot.po;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,4 +23,6 @@ public class PersonPO {
 	private String address;
 	
 	private String updateBy;
+	
+	private Date updateDate;
 }
