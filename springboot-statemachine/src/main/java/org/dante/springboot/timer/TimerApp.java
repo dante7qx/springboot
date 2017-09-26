@@ -1,7 +1,5 @@
-package org.dante.springboot.helloworld;
+package org.dante.springboot.timer;
 
-import org.dante.springboot.eum.Events;
-import org.dante.springboot.eum.States;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,22 +7,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.statemachine.StateMachine;
 
 @SpringBootApplication
-public class HelloWorldApp implements CommandLineRunner {
+public class TimerApp implements CommandLineRunner {
 	
 	@Autowired
-	private StateMachine<States, Events> stateMachine;
-	
+	private StateMachine<String, String> stateMachine;
+
 	public static void main(String[] args) {
-		SpringApplication.run(HelloWorldApp.class, args);
+		SpringApplication.run(TimerApp.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		stateMachine.start();
-		stateMachine.sendEvent(Events.E1);
-	    stateMachine.sendEvent(Events.E2);
-	    stateMachine.sendEvent(Events.E3);
+//		stateMachine.sendEvent("E1");
+		stateMachine.sendEvent("E2");
 	}
-	
-	
 }

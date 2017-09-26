@@ -1,7 +1,5 @@
 package org.dante.springboot.helloworld.config;
 
-import java.util.EnumSet;
-
 import org.dante.springboot.eum.Events;
 import org.dante.springboot.eum.States;
 import org.slf4j.Logger;
@@ -29,12 +27,33 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
 
 	@Override
 	public void configure(StateMachineConfigurationConfigurer<States, Events> config) throws Exception {
-		config.withConfiguration().autoStartup(true).listener(listener());
+		config
+			.withConfiguration()
+			.machineId("SpringbootStateMachine")
+//			.autoStartup(true)
+			.listener(listener());
 	}
 
 	@Override
 	public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
-		states.withStates().initial(States.S0).states(EnumSet.allOf(States.class));
+		states
+			.withStates()
+				.initial(States.S0)
+				.state(States.S0)
+				.state(States.S1)
+				.state(States.S2)
+				.state(States.S3)
+			.and()
+				.withStates()
+					.parent(States.S0)
+					.initial(States.S01)
+					.state(States.S01)
+					.state(States.S02)
+			.and()
+				.withStates()
+					.parent(States.S1)
+					.initial(States.S11)
+					.state(States.S11);
 	}
 
 	@Override
@@ -46,17 +65,17 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
 			.and()
 			.withExternal().source(States.S2).target(States.S3).event(Events.E3).action(action2(), errorAction());
 	}
-
+	
 	@Bean
 	public StateMachineListener<States, Events> listener() {
 		return new StateMachineListenerAdapter<States, Events>() {
 			@Override
 			public void stateChanged(State<States, Events> from, State<States, Events> to) {
-				LOGGER.info("状态从[ {} ] 变成 [ {} ]。", (from != null ? from.getId() : ""), to.getId());
+				LOGGER.info("状态从[ {} ] 变成 [ {} -> 具有子状态集{} ]。", (from != null ? from.getId() : ""), to.getId(), to.isSubmachineState());
 			}
 		};
 	}
-
+	
 	@Bean
     public Guard<States, Events> guard() {
         return new Guard<States, Events>() {
