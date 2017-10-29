@@ -1,0 +1,11 @@
+spring:
+  redis:
+    password: iamdante
+    pool:
+      min-idle: 10
+      max-idle: 50
+      max-active: 200
+      max-wait: 3000  
+    sentinel:
+      master: spiritmaster
+      nodes: 10.71.202.122:26379,10.71.202.122:26380,10.71.202.122:26381  ## 哨兵的配置列表

@@ -1,12 +1,12 @@
-package org.dante.springboot;
+package org.dante.springboot.data;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootRedisApplication {
+public class SpringbootDataRedisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootRedisApplication.class, args);
+		SpringApplication.run(SpringbootDataRedisApplication.class, args);
 	}
 }

@@ -23,7 +23,6 @@
 		<module>springboot-swagger</module>
 		<module>springboot-ldap</module>
 		<module>springboot-cache</module>
-		<module>springboot-redis</module>
 		<module>springboot-docker</module>
 		<module>springboot-logger</module>
 		<module>springboot-aoplog</module>
@@ -37,6 +36,7 @@
 		<module>springboot-ssl</module>
 		<module>springboot-druid</module>
 		<module>springboot-statemachine</module>
+		<module>springboot-data-redis</module>
 	</modules>
 
 	<parent>

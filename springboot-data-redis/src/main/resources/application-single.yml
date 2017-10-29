@@ -1,0 +1,10 @@
+spring:
+  redis:
+    host: 10.71.202.121
+    port: 6379
+    password: iamdante
+    pool:
+      min-idle: 10
+      max-idle: 50
+      max-active: 200
+      max-wait: 3000    
