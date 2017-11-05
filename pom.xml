@@ -37,6 +37,7 @@
 		<module>springboot-druid</module>
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
+		<module>springboot-data-mongo</module>
 	</modules>
 
 	<parent>
@@ -46,6 +47,11 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
