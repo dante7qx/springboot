@@ -19,7 +19,7 @@ public class SpringbootMongoApplicationTests {
 	
 	@Before
 	public void setUp() {
-		userDAO.deleteAll();
+//		userDAO.deleteAll();
 	}
 
 	@Test
@@ -37,6 +37,14 @@ public class SpringbootMongoApplicationTests {
 		u = userDAO.findByUsername("mama");
 		userDAO.delete(u);
 		Assert.assertEquals(1, userDAO.findAll().size());
+	}
+	
+	@Test
+	public void update() {
+		UserPO u = userDAO.findOne(3L);
+		u.setUsername("dante");
+		u.setAge(32);
+		userDAO.save(u);
 	}
 
 }
