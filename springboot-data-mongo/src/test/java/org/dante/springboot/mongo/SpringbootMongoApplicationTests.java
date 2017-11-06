@@ -1,5 +1,8 @@
 package org.dante.springboot.mongo;
 
+import java.sql.Date;
+import java.time.Instant;
+
 import org.dante.springboot.mongo.dao.UserDAO;
 import org.dante.springboot.mongo.po.UserPO;
 import org.junit.Assert;
@@ -10,16 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class SpringbootMongoApplicationTests {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+
 	@Before
 	public void setUp() {
-//		userDAO.deleteAll();
+		userDAO.deleteAll();
 	}
 
 	@Test
@@ -38,13 +44,24 @@ public class SpringbootMongoApplicationTests {
 		userDAO.delete(u);
 		Assert.assertEquals(1, userDAO.findAll().size());
 	}
-	
+
 	@Test
 	public void update() {
 		UserPO u = userDAO.findOne(3L);
 		u.setUsername("dante");
 		u.setAge(32);
 		userDAO.save(u);
+	}
+
+	@Test
+	public void saveBatch() {
+		int count = 5000;
+		long start = Date.from(Instant.now()).getTime();
+		for (int i = 0; i < count; i++) {
+			userDAO.save(new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10)));
+		}
+		long end = Date.from(Instant.now()).getTime();
+		log.info("5000条数据插入，花费时间 {} 毫秒。", end - start);
 	}
 
 }
