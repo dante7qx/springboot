@@ -31,9 +31,9 @@ public class SpringbootMongoApplicationTests {
 	@Test
 	public void insert() {
 		// 创建三个User，并验证User总数
-		userDAO.save(new UserPO(1L, "didi", 30));
-		userDAO.save(new UserPO(2L, "mama", 40));
-		userDAO.save(new UserPO(3L, "kaka", 50));
+		userDAO.save(new UserPO(1L, "didi", 30, "F"));
+		userDAO.save(new UserPO(2L, "mama", 40, "M"));
+		userDAO.save(new UserPO(3L, "kaka", 50, "M"));
 		Assert.assertEquals(3, userDAO.findAll().size());
 		// 删除一个User，再验证User总数
 		UserPO u = userDAO.findOne(1L);
@@ -58,7 +58,7 @@ public class SpringbootMongoApplicationTests {
 		int count = 5000;
 		long start = Date.from(Instant.now()).getTime();
 		for (int i = 0; i < count; i++) {
-			userDAO.save(new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10)));
+			userDAO.save(new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10), (i % 3 == 0 ? "F" : "M")));
 		}
 		long end = Date.from(Instant.now()).getTime();
 		log.info("5000条数据插入，花费时间 {} 毫秒。", end - start);

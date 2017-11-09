@@ -17,4 +17,5 @@ public class UserPO {
 	@Field("name")
     private String username;
     private Integer age;
+    private String gender;
 }
