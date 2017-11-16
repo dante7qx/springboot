@@ -38,7 +38,7 @@
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
-		<module>springboot-disconf</module>
+		<module>springboot-jasypt</module>
 	</modules>
 
 	<parent>

@@ -2,6 +2,8 @@ package org.dante.springboot.mongo;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.dante.springboot.mongo.dao.UserDAO;
 import org.dante.springboot.mongo.po.UserPO;
@@ -25,7 +27,7 @@ public class SpringbootMongoApplicationTests {
 
 	@Before
 	public void setUp() {
-		userDAO.deleteAll();
+//		userDAO.deleteAll();
 	}
 
 	@Test
@@ -44,7 +46,7 @@ public class SpringbootMongoApplicationTests {
 		userDAO.delete(u);
 		Assert.assertEquals(1, userDAO.findAll().size());
 	}
-
+	
 	@Test
 	public void update() {
 		UserPO u = userDAO.findOne(3L);
@@ -54,7 +56,7 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void saveBatch() {
+	public void saveOne() {
 		int count = 5000;
 		long start = Date.from(Instant.now()).getTime();
 		for (int i = 0; i < count; i++) {
@@ -63,5 +65,36 @@ public class SpringbootMongoApplicationTests {
 		long end = Date.from(Instant.now()).getTime();
 		log.info("5000条数据插入，花费时间 {} 毫秒。", end - start);
 	}
+	
+	@Test
+	public void saveBatch() {
+		List<UserPO> users = new ArrayList<>();
+		int count = 5000;
+		long start = Date.from(Instant.now()).getTime();
+		for (int i = 0; i < count; i++) {
+			users.add(new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10), (i % 3 == 0 ? "F" : "M")));
+		}
+		userDAO.insert(users);
+		long end = Date.from(Instant.now()).getTime();
+		log.info("5000条数据插入，花费时间 {} 毫秒。", end - start);
+	}
 
+	@Test
+	public void queryByAge() {
+		List<UserPO> users = userDAO.queryByAge(26);
+		log.info("26岁用户数量 {} , {}" , users.size(), users);
+	}
+	
+	@Test
+	public void queryReturnName() {
+		List<UserPO> users = userDAO.queryReturnName("测试17");
+		log.info("用户 —> {}", users);
+	}
+	
+	@Test
+	public void findByUsername() {
+		UserPO user = userDAO.findByUsername("测试56");
+		log.info("user -> {}.", user);
+	}
+	
 }

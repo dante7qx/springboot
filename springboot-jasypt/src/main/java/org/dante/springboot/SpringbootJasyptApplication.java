@@ -1,14 +1,12 @@
-package org.dante.springboot.disconf;
+package org.dante.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootDisconfApplication {
-	
+public class SpringbootJasyptApplication {
+
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootDisconfApplication.class, args);
+		SpringApplication.run(SpringbootJasyptApplication.class, args);
 	}
-	
-	
 }
