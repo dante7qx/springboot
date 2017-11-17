@@ -15,6 +15,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.version>1.0.0</project.version>
 		<java.version>1.8</java.version>
+		<guava.version>23.0</guava.version>
 	</properties>
 
 	<modules>
@@ -35,6 +36,7 @@
 		<module>springboot-batch</module>
 		<module>springboot-ssl</module>
 		<module>springboot-druid</module>
+		<module>springboot-druid-multi-datasource</module>
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
@@ -52,6 +54,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

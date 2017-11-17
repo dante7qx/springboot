@@ -16,7 +16,6 @@
 
 	<properties>
 		<jjwt.version>0.7.0</jjwt.version>
-		<guava.version>22.0</guava.version>
 		<docker.image.prefix>dante2012</docker.image.prefix>
 	</properties>
 
@@ -39,19 +38,9 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>${jjwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
