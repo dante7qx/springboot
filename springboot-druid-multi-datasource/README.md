@@ -2,7 +2,7 @@
 
 ### 1. 引入Druid
 
-在 Spring Boot 项目中加入`druid-spring-boot-starter`依赖
+在 Spring Boot 项目中加入 `druid-spring-boot-starter` 依赖
 
 ```xml
 <dependency>
@@ -219,3 +219,4 @@ public class ShiroDataSourceConfig {
 
 - https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 - http://www.jianshu.com/p/9f812e651319
+- https://www.cnblogs.com/Alandre/p/6611813.html
