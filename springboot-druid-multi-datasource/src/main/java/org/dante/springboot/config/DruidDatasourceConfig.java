@@ -12,6 +12,11 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 @Configuration
 public class DruidDatasourceConfig {
 
+	/**
+	 * @Primary表示主数据源
+	 * 
+	 * @return
+	 */
 	@Primary
 	@Bean
 	@ConfigurationProperties("spring.datasource.druid.springboot")

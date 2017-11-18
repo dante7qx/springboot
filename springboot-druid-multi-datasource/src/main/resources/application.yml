@@ -1,6 +1,18 @@
 spring:
   datasource:
     druid: 
+      driver-class-name: com.mysql.jdbc.Driver
+      initial-size: 10
+      min-idle: 10
+      max-active: 30
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: select 1
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
       filter:
             stat:
               db-type: mysql
@@ -20,35 +32,10 @@ spring:
         url: jdbc:mysql://localhost/springboot
         username: root
         password: iamdante
-        driver-class-name: com.mysql.jdbc.Driver
-        initial-size: 10
-        min-idle: 10
-        max-active: 30
-        max-wait: 60000
-        min-evictable-idle-time-millis: 300000
-        pool-prepared-statements: false
-        max-pool-prepared-statement-per-connection-size: 20
-        validation-query: select 1
-        test-on-borrow: false
-        test-on-return: false
-        test-while-idle: true
       shiro: 
         url: jdbc:mysql://localhost/shiro
         username: root
         password: iamdante
-        driver-class-name: com.mysql.jdbc.Driver
-        druid:
-          initial-size: 10
-          min-idle: 10
-          max-active: 30
-          max-wait: 60000
-          min-evictable-idle-time-millis: 300000
-          pool-prepared-statements: false
-          max-pool-prepared-statement-per-connection-size: 20
-          validation-query: select 1
-          test-on-borrow: false
-          test-on-return: false
-          test-while-idle: true
   jpa:
     show-sql: true
     properties:
