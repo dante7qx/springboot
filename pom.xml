@@ -41,6 +41,7 @@
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
 		<module>springboot-jasypt</module>
+		<module>springboot-data-jpa</module>
 	</modules>
 
 	<parent>
