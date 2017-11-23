@@ -8,7 +8,6 @@ public class TestNativeSql{
 	public TestNativeSql() {
 	}
 	
-	
 	public TestNativeSql(Integer id, String name) {
 		super();
 		this.id = id;
