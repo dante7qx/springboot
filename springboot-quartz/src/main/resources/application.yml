@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    platform: h2
+  thymeleaf:
+    cache: false
+    mode: HTML
