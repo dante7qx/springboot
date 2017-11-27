@@ -50,9 +50,13 @@ public class SchedulerJobService {
 	public void persistJob(SchedulerDTO schedulerDTO) {
 		SchedulerJobPO oldPO = schedulerJobDAO.findByJobId(schedulerDTO.getJobId());
 		SchedulerJobPO po = convertToPO(schedulerDTO);
-		boolean startJob = po.getStartJob().booleanValue();
+		boolean startJob = po.getStartJob() != null ? po.getStartJob().booleanValue() : false;
 		if(oldPO != null) {
 			po.setId(oldPO.getId());
+			po.setFireTime(oldPO.getFireTime());
+			po.setPreviousFireTime(oldPO.getPreviousFireTime());
+			po.setNextFireTime(oldPO.getNextFireTime());
+			po.setFailReason(oldPO.getFailReason());
 			if(startJob) {
 				spiritSchedulerService.updateJobCron(po.getJobId(), po.getCron(), po.getStartTime());
 			} else {
@@ -79,6 +83,11 @@ public class SchedulerJobService {
 		schedulerJobDAO.save(job);
 	}
 	
+	public SchedulerDTO queryById(Long id) {
+		SchedulerJobPO schedulerJobPO = schedulerJobDAO.findOne(id);
+		return convertToDTO(schedulerJobPO);
+	}
+	
 	@Transactional
 	public void delete(Long id) {
 		SchedulerJobPO po = schedulerJobDAO.findOne(id);
@@ -103,6 +112,7 @@ public class SchedulerJobService {
 		if(schedulerJobPO.getStartTime() == null) {
 			schedulerJobPO.setStartTime(DateUtils.currentDate());
 		}
+		schedulerJobPO.setUpdateDate(DateUtils.currentDate());
 		return schedulerJobPO;
 	}
 	

@@ -29,4 +29,5 @@ public class SchedulerJobPO {
 	private String cron;
 	private Boolean startJob;
 	private String failReason;
+	private Date updateDate;
 }

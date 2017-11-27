@@ -15,6 +15,7 @@ public class SchedulerDTO {
 	private String jobClass;
 	private String jobDesc;
 	private String cron;
+	private Boolean startJob;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date startTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -23,6 +24,7 @@ public class SchedulerDTO {
 	private Date fireTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date nextFireTime;
-	private Boolean startJob;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Date updateDate;
 	
 }

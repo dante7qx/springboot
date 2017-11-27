@@ -29,10 +29,13 @@ var SchedulerPage = {
 		        	return '<a class="bdhref" href="javascript:;" onclick="SchedulerPage.editScheduler('+row['id']+')">'+value+'</a>';
 		        }},
 		        {field:'jobName',title:'任务名称',width:120,halign:'center'},
-		        {field:'jobDesc',title:'任务描述',width:280,halign:'center'},
-		        {field:'fireTime',title:'触发时间',width:80,halign:'center',align:'left'},
-		        {field:'previousFireTime',title:'上次执行时间',width:100,halign:'center',align:'left'},
-		        {field:'nextFireTime',title:'下次执行时间',width:100,halign:'center',align:'left'}
+		        {field:'jobDesc',title:'任务描述',width:200,halign:'center'},
+		        {field:'startJob',title:'触发时间',width:110,halign:'center',align:'center',formatter:function(val) {
+		        	return val ? "启动" : "停止";
+		        }},
+		        {field:'fireTime',title:'触发时间',width:110,halign:'center',align:'left'},
+		        {field:'previousFireTime',title:'上次执行时间',width:110,halign:'center',align:'left'},
+		        {field:'nextFireTime',title:'下次执行时间',width:110,halign:'center',align:'left'}
 		        
 		    ]]
 		});

@@ -12,6 +12,7 @@ create table t_scheduler_job (
 	start_time timestamp,
 	start_job int not null default 1,
 	fail_reason varchar(200000),
+	update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 	primary key(id)
 );
 

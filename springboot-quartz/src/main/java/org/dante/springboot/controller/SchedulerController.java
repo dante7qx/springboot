@@ -42,12 +42,15 @@ public class SchedulerController {
 		return schedulerVOs;
 	}
 	
+	@PostMapping("/query_by_id")
+	public SchedulerDTO queryById(Long id) {
+		return schedulerJobService.queryById(id);
+	}
+	
 	@PostMapping("/update_job")
 	public SchedulerDTO updateJob(SchedulerDTO schedulerDTO) {
 		schedulerJobService.persistJob(schedulerDTO);
 		return schedulerDTO;
 	}
-	
-	
 	
 }

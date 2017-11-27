@@ -4,7 +4,7 @@ var SchedulerDetailPage = {
 		initPage: function(paramSchedulerId) {
 			this.paramSchedulerId = paramSchedulerId;
 			this.initJobIdCombo();
-//			this.loadData();
+			this.loadData();
 		},
 		initJobIdCombo: function() {
 			$('#jobId','#schedulerDetailForm').combobox({
@@ -26,19 +26,14 @@ var SchedulerDetailPage = {
 		},
 		loadDataById: function(editable) {
 			$.ajax({
-				url: ctx+'/sysmgr/scheduler/query_by_id',
+				url: '/scheduler/query_by_id',
 				type: 'post',
 				data: {
 					id: SchedulerDetailPage.paramSchedulerId
 				},
 				success: function(result) {
-					if(result['resultCode'] != COMMON_CONFIG['SUCCESS']) {
-						$.messager.alert('错误','系统错误，请联系系统管理员', 'error');
-						return;
-					}
-					$('#schedulerDetailForm').form('clear').form('load', result['data']);
-					SchedulerDetailPage.loadUpdateInfo(result['data']);
-					spirit.util.isEditForm('schedulerDetailForm', editable);
+					$('#schedulerDetailForm').form('clear').form('load', result);
+					SchedulerDetailPage.loadUpdateInfo(result);
 				}
 			});
 		},
@@ -59,7 +54,7 @@ var SchedulerDetailPage = {
 			    success:function(result){
 			    	SchedulerDetailPage.SUBMIT_FLAG = false;
 			    	var result = eval('(' + result + ')');
-			    	if(result['resultCode'] == COMMON_CONFIG['SUCCESS']) {
+			    	if(result['id'] > 0) {
 			        	$('#schedulerGridlist').datagrid('reload');
 			        	$('#schedulerWindow').window('close');
 			        } else {
