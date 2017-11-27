@@ -51,6 +51,7 @@ public class SchedulerJobService {
 		SchedulerJobPO oldPO = schedulerJobDAO.findByJobId(schedulerDTO.getJobId());
 		SchedulerJobPO po = convertToPO(schedulerDTO);
 		boolean startJob = po.getStartJob() != null ? po.getStartJob().booleanValue() : false;
+		po.setStartJob(startJob);
 		if(oldPO != null) {
 			po.setId(oldPO.getId());
 			po.setFireTime(oldPO.getFireTime());
@@ -59,6 +60,7 @@ public class SchedulerJobService {
 			po.setFailReason(oldPO.getFailReason());
 			if(startJob) {
 				spiritSchedulerService.updateJobCron(po.getJobId(), po.getCron(), po.getStartTime());
+				spiritSchedulerService.resumeJob(po.getJobId());
 			} else {
 				spiritSchedulerService.pauseJob(po.getJobId());
 			}

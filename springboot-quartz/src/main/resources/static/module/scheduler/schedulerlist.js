@@ -30,7 +30,7 @@ var SchedulerPage = {
 		        }},
 		        {field:'jobName',title:'任务名称',width:120,halign:'center'},
 		        {field:'jobDesc',title:'任务描述',width:200,halign:'center'},
-		        {field:'startJob',title:'触发时间',width:110,halign:'center',align:'center',formatter:function(val) {
+		        {field:'startJob',title:'启动状态',width:60,halign:'center',align:'center',formatter:function(val) {
 		        	return val ? "启动" : "停止";
 		        }},
 		        {field:'fireTime',title:'触发时间',width:110,halign:'center',align:'left'},

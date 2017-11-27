@@ -92,7 +92,7 @@ public class SpiritSchedulerService {
 				return;
 			}
 			String oldTime = trigger.getCronExpression();
-			if (! oldTime.equalsIgnoreCase(cron)) {
+			if (!oldTime.equalsIgnoreCase(cron)) {
 				TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 				triggerBuilder.withIdentity(jobId, TRIGGER_GROUP);
 				if(startTime == null || new Date().compareTo(startTime) > 0) {

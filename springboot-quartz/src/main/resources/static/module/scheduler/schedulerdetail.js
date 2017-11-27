@@ -53,13 +53,8 @@ var SchedulerDetailPage = {
 			    url: '/scheduler/update_job',
 			    success:function(result){
 			    	SchedulerDetailPage.SUBMIT_FLAG = false;
-			    	var result = eval('(' + result + ')');
-			    	if(result['id'] > 0) {
-			        	$('#schedulerGridlist').datagrid('reload');
-			        	$('#schedulerWindow').window('close');
-			        } else {
-			        	$.messager.alert('错误','系统错误，请联系系统管理员', 'error');
-			        }
+		        	$('#schedulerGridlist').datagrid('reload');
+		        	$('#schedulerWindow').window('close');
 			    }
 			});
 		},
@@ -88,10 +83,6 @@ var SchedulerDetailPage = {
 							id: $('#id','#schedulerDetailForm').val()
 						},
 						success: function(result) {
-							if(result['resultCode'] != COMMON_CONFIG['SUCCESS']) {
-								$.messager.alert('错误','系统错误，请联系系统管理员', 'error');
-								return;
-							}
 							$('#schedulerWindow').window('close');
 							$('#schedulerGridlist').datagrid('reload');
 						}
