@@ -11,7 +11,7 @@ import org.quartz.JobKey;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@SpiritQuartz(jobId = "hello", jobName = "你好Quartz")
+@SpiritQuartz(jobId = "helloJob", jobName = "你好Quartz")
 public class HelloJob implements SpiritJob {
 
 	@Override

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta content="text/html;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link th:href="@{/easyui/themes/metro-green/easyui.css}" rel="stylesheet"/>
+	<link th:href="@{/easyui/themes/icon.css}" rel="stylesheet"/>
+	<link th:href="@{/application.css}" rel="stylesheet"/>
+	<script th:src="@{/easyui/jquery.min.js}" type="text/javascript"></script>
+	<script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript"></script>
+	<script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript"></script>	
+</head>
+<title th:fragment="title">系统定时任务</title>
+</head>
+<body>
+	<div>
+		<table id="schedulerGridlist"></table>
+	</div>
+	<div id="schedulerGridToolbar">
+		<form id="schedulerQueryForm">
+			<table style="width:100%">
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td class="searchtitle">任务Id</td>
+								<td><input id="queryJobId" name="jobId" type="text" class="easyui-textbox"/></td>
+								<td class="searchtitle">
+									<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="SchedulerPage.search();">查询</a>
+								</td>
+								<td>
+									<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="SchedulerPage.reset();">重置</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td align="right">
+						<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="SchedulerPage.editScheduler('');">新增</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="schedulerWindow" class="easyui-window" modal="true" collapsible="false"
+		minimizable="true" maximizable="true" resizable="false" closed="true"
+		style="height:500px; width: 750px; display: none;"></div>
+	<div id="schedulerUserWindow" class="easyui-window" modal="true" collapsible="false"
+		minimizable="true" maximizable="false" resizable="false" closed="true"
+		style="height:500px; width: 750px; display: none;" title="用户信息">
+		<div class="bdcontent">
+			<table id="schedulerUserGridlist"></table>
+		</div>
+	</div>
+		
+	<script th:src="@{/module/scheduler/schedulerlist.js}" type="text/javascript"></script>
+	<script th:line="javascript">
+		$(function() {
+			SchedulerPage.init();
+		});
+	</script>
+</body>
+</html>
