@@ -35,8 +35,8 @@ var SchedulerPage = {
 		        }},
 		        {field:'fireTime',title:'触发时间',width:110,halign:'center',align:'left'},
 		        {field:'previousFireTime',title:'上次执行时间',width:110,halign:'center',align:'left'},
-		        {field:'nextFireTime',title:'下次执行时间',width:110,halign:'center',align:'left'}
-		        
+		        {field:'nextFireTime',title:'下次执行时间',width:110,halign:'center',align:'left'},
+		        {field:'updateDate',title:'更新时间',width:110,halign:'center',align:'left'}
 		    ]]
 		});
 	},
