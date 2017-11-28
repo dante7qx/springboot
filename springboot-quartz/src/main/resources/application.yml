@@ -9,6 +9,9 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 logging:
   level:
     root: info

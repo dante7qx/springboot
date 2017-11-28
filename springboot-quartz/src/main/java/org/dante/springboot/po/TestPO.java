@@ -21,7 +21,9 @@ public class TestPO {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+//	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updateDate;
 
 }
