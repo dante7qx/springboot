@@ -14,15 +14,14 @@ var SchedulerDetailPage = {
 			    onSelect: function(record) {
 			    	$('#jobName','#schedulerDetailForm').textbox('setValue', record['jobName']);
 			    	$('#jobClass','#schedulerDetailForm').val(record['jobClass']);
+			    	$('#tmpJobId','#schedulerDetailForm').val(record['jobId']);
 			    }
 			});
 		},
 		loadData: function() {
 			if(this.paramSchedulerId) {
 				this.loadDataById(false);
-			} else {
-				$('#schedulerDetailForm').form('clear');
-			}
+			} 
 		},
 		loadDataById: function(editable) {
 			$.ajax({
@@ -64,12 +63,6 @@ var SchedulerDetailPage = {
 				this.loadDataById(true);
 			} else {
 				$('#schedulerDetailForm').form('clear');
-				var nodes = $('#authorityTree').tree('getChecked');
-				if(nodes) {
-					$.each(nodes, function(i, node) {
-						$('#authorityTree').tree('uncheck', node.target);
-					}); 
-				}
 			}
 			SchedulerDetailPage.SUBMIT_FLAG = false;
 		},
@@ -89,19 +82,30 @@ var SchedulerDetailPage = {
 					});
 				}
 			});
-		},
-		edit: function() {
-			spirit.util.controlFormBtn(true, 'schedulerFormBtnContainer');
-			spirit.util.isEditForm('schedulerDetailForm', true);
-		},
-		getSelectedAuthority: function() {
-			var checkNodeIds = [];
-			var nodes = $('#authorityTree').tree('getChecked');
-			if(nodes) {
-				$.each(nodes, function(i, node) {
-					checkNodeIds.push(node['id']);
-				}); 
-			}
-			return checkNodeIds;
 		}
 };
+
+$.extend($.fn.validatebox.defaults.rules, {
+	uniqueJobId: {
+		validator: function(value, param){
+			if(!value) return true;
+			var id = $('#id','#schedulerDetailForm').val();
+			var jobId = $('#tmpJobId','#schedulerDetailForm').val();
+			var result = JSON.parse($.ajax({
+				url: '/scheduler/check_job_exist',
+				type: 'post',
+				async: false,
+				cache: false,
+				data: {
+					id: id,
+					jobId: jobId
+				}
+			}).responseText);
+			if(result) {
+				return false;
+			}
+			return true;
+        },
+        message: '该任务已存在，请重新输入！'
+	}
+});

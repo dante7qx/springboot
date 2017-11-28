@@ -179,6 +179,7 @@ public class DateUtils {
          * SHORT_DATE_PATTERN_YEAR_MONTH 只能用于format
          */
     	SHORT_DATE_PATTERN_YEAR_MONTH("yyyyMM"),
+    	SHORT_DATE_PATTERN_YEAR_MONTH_2("yyyy-MM"),
         SHORT_DATE_PATTERN_LINE("yyyy-MM-dd"),
         SHORT_DATE_PATTERN_SLASH("yyyy/MM/dd"),
         SHORT_DATE_PATTERN_DOUBLE_SLASH("yyyy\\MM\\dd"),
@@ -191,6 +192,7 @@ public class DateUtils {
         LONG_DATE_PATTERN_SLASH("yyyy/MM/dd HH:mm:ss"),
         LONG_DATE_PATTERN_DOUBLE_SLASH("yyyy\\MM\\dd HH:mm:ss"),
         LONG_DATE_PATTERN_NONE("yyyyMMdd HH:mm:ss"),
+        LONG_DATE_MINU_PATTERN_LINE("yyyy-MM-dd HH:mm"),
 
         /**
          * 长时间格式 带毫秒
@@ -206,5 +208,5 @@ public class DateUtils {
             formatter = DateTimeFormatter.ofPattern(pattern);
         }
     }
-	
+    
 }

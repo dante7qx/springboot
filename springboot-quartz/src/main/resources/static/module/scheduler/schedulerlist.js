@@ -33,6 +33,7 @@ var SchedulerPage = {
 		        {field:'startJob',title:'启动状态',width:60,halign:'center',align:'center',formatter:function(val) {
 		        	return val ? "启动" : "停止";
 		        }},
+		        {field:'startTime',title:'启动时间',width:110,halign:'center',align:'left'},
 		        {field:'fireTime',title:'触发时间',width:110,halign:'center',align:'left'},
 		        {field:'previousFireTime',title:'上次执行时间',width:110,halign:'center',align:'left'},
 		        {field:'nextFireTime',title:'下次执行时间',width:110,halign:'center',align:'left'},

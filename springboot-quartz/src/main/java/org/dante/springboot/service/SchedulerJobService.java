@@ -99,11 +99,15 @@ public class SchedulerJobService {
 		}
 	}
 	
-	public boolean checkExistJob(String jobId) {
+	public boolean checkExistJob(Long id, String jobId) {
 		boolean exists = false;
 		SchedulerJobPO schedulerJob = schedulerJobDAO.findByJobId(jobId);
 		if(schedulerJob != null) {
-			exists = true;
+			if(id == null) {
+				exists = true;
+			} else if(!schedulerJob.getId().equals(id)) {
+				exists = true;
+			}
 		}
 		return exists;
 	}

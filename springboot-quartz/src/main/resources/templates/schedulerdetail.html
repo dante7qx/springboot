@@ -8,10 +8,11 @@
 		<form id="schedulerDetailForm" method="post" novalidate="true">
 			<input id="id" name="id" type="hidden"/>
 			<input id="jobClass" name="jobClass" type="hidden"/>
+			<input id="tmpJobId" type="hidden" />
 			<table class="tbcontent">
 				<tr>
 					<td class="tbtitle" width="15%">任务编号</td>
-					<td><input id="jobId" name="jobId" type="text" class="easyui-combobox" style="width:170px;" required="true" /></td>
+					<td><input id="jobId" name="jobId" type="text" class="easyui-combobox" validType="uniqueJobId" style="width:170px;" required="true" /></td>
 				</tr>
 				<tr>
 					<td class="tbtitle">任务名称</td>
@@ -27,7 +28,7 @@
 				</tr>
 				<tr>
 					<td class="tbtitle">启动时间</td>
-					<td><input id="startTime" name="startTime" type="text" class="easyui-datetimebox" style="width: 170px;"/></td>
+					<td><input id="startTime" name="startTime" type="text" class="easyui-datebox" style="width: 170px;"/></td>
 				</tr>
 				<tr>
 					<td class="tbtitle">任务描述</td>

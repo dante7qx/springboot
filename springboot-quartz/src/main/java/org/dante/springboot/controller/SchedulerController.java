@@ -1,7 +1,5 @@
 package org.dante.springboot.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.dante.springboot.dto.SchedulerDTO;
@@ -11,22 +9,13 @@ import org.dante.springboot.service.SchedulerJobService;
 import org.dante.springboot.vo.QueryVO;
 import org.dante.springboot.vo.SchedulerVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/scheduler")
-public class SchedulerController {
-	
-	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class,
-                        new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
-    }
+public class SchedulerController extends BaseController {
 	
 	@Autowired
 	private SchedulerJobService schedulerJobService;
@@ -51,6 +40,13 @@ public class SchedulerController {
 	public SchedulerDTO updateJob(SchedulerDTO schedulerDTO) {
 		schedulerJobService.persistJob(schedulerDTO);
 		return schedulerDTO;
+	}
+	
+	@PostMapping("/check_job_exist")
+	public boolean checkJobExist(SchedulerDTO schedulerDTO) {
+		Long id = schedulerDTO.getId();
+		String jobId = schedulerDTO.getJobId();
+		return schedulerJobService.checkExistJob(id, jobId);
 	}
 	
 }
