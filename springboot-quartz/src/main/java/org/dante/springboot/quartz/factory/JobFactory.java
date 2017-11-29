@@ -21,6 +21,7 @@ public class JobFactory extends SpringBeanJobFactory implements ApplicationConte
 	@Override
 	protected Object createJobInstance(final TriggerFiredBundle bundle) throws Exception {
 		final Object job = super.createJobInstance(bundle);
+		// 将 job 加入 Spring 容器
 		beanFactory.autowireBean(job);
 		return job;
 	}
