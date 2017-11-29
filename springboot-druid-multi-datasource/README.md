@@ -66,6 +66,8 @@ spring:
         url: jdbc:mysql://localhost/shiro
         username: root
         password: iamdante
+mybatis:
+  config-location: classpath:mybatis-config.xml ## Mybatis 配置
 ```
 
 #### JavaConfig
@@ -97,61 +99,79 @@ public class DruidDatasourceConfig {
 ```java
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef="springbootEntityManagerFactory",
-        transactionManagerRef="springbootTransactionManager",
-        basePackages= { "org.dante.springboot.dao.springboot" }) //设置Repository所在位置
+@EnableJpaRepositories(entityManagerFactoryRef = "springbootEntityManagerFactory", transactionManagerRef = "springbootTransactionManager", basePackages = {SpringbootDataSourceConfig.JPA_DAO_PKG}) // 设置Repository所在位置
+@MapperScan(basePackages = SpringbootDataSourceConfig.MYBATIS_MAPPER_PKG, sqlSessionFactoryRef = "springbootSqlSessionFactory")
 public class SpringbootDataSourceConfig {
-
-	@Autowired
-    private JpaProperties jpaProperties;
-
-    @Autowired
-    @Qualifier("springbootDataSource")
-    private DataSource springbootDataSource;
-  
-    /**
-     * 通过LocalContainerEntityManagerFactoryBean来获取EntityManagerFactory实例
-     * @return
-     */
-    @Bean(name = "springbootEntityManagerFactoryBean")
-    public LocalContainerEntityManagerFactoryBean springbootEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(springbootDataSource)
-                .properties(getVendorProperties(springbootDataSource))
-                .packages("org.dante.springboot.po.springboot") //设置实体类所在位置
-                .persistenceUnit("springbootPersistenceUnit")
-                .build();
-    }
-  
-    private Map<String, String> getVendorProperties(DataSource dataSource) {
-        return jpaProperties.getHibernateProperties(dataSource);
-    }
-  
-    /**
-     * EntityManagerFactory类似于Hibernate的SessionFactory,mybatis的SqlSessionFactory
-     * 总之,在执行操作之前,总要获取一个EntityManager,这就类似于Hibernate的Session,
-     * mybatis的sqlSession.
-     *
-     * @param builder
-     * @return
-     */
-    @Bean(name = "springbootEntityManagerFactory")
-    @Primary
-    public EntityManagerFactory springbootEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return this.springbootEntityManagerFactoryBean(builder).getObject();
-    }
-
-    /**
-     * 配置事物管理器
-     * @return
-     */
-    @Bean(name = "springbootTransactionManager")
-    @Primary
-    public PlatformTransactionManager writeTransactionManager(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(springbootEntityManagerFactory(builder));
-    }
+	protected static final String JPA_DAO_PKG = "org.dante.springboot.dao.springboot";
+	protected static final String JPA_PO_PKG = "org.dante.springboot.po.springboot";
+	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.springboot";
+	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.springboot";
+	protected static final String MYBATIS_XML_PKG = "classpath:mapper/springboot/*.xml";
 	
+	@Autowired
+	private JpaProperties jpaProperties;
+	@Autowired
+	@Qualifier("springbootDataSource")
+	private DataSource springbootDataSource;
+	
+	/**
+	 * 通过LocalContainerEntityManagerFactoryBean来获取EntityManagerFactory实例
+	 * 
+	 * @return
+	 */
+	@Bean(name = "springbootEntityManagerFactoryBean")
+	public LocalContainerEntityManagerFactoryBean springbootEntityManagerFactoryBean(
+			EntityManagerFactoryBuilder builder) {
+		return builder.dataSource(springbootDataSource).properties(getVendorProperties(springbootDataSource))
+				.packages(SpringbootDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
+				.persistenceUnit("springbootPersistenceUnit").build();
+		// .getObject();//不要在这里直接获取EntityManagerFactory
+	}
+
+	private Map<String, String> getVendorProperties(DataSource dataSource) {
+		return jpaProperties.getHibernateProperties(dataSource);
+	}
+
+	/**
+	 * EntityManagerFactory类似于Hibernate的SessionFactory,mybatis的SqlSessionFactory
+	 * 总之,在执行操作之前,我们总要获取一个EntityManager,这就类似于Hibernate的Session,
+	 * mybatis的sqlSession.
+	 * 
+	 * @param builder
+	 * @return
+	 */
+	@Bean(name = "springbootEntityManagerFactory")
+	@Primary
+	public EntityManagerFactory springbootEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+		return this.springbootEntityManagerFactoryBean(builder).getObject();
+	}
+  
+	/**
+	 * 配置事物管理器
+	 * 
+	 * @return
+	 */
+	@Bean(name = "springbootTransactionManager")
+	@Primary
+	public PlatformTransactionManager writeTransactionManager(EntityManagerFactoryBuilder builder) {
+		return new JpaTransactionManager(springbootEntityManagerFactory(builder));
+	}
+
+	/**
+	 * Mybatis 配置
+	 * 
+	 */
+	@Bean(name = "springbootSqlSessionFactory")
+    @Primary
+    public SqlSessionFactory springSqlSessionFactory()
+            throws Exception {
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(springbootDataSource);
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources(SpringbootDataSourceConfig.MYBATIS_XML_PKG));
+        sessionFactory.setTypeAliasesPackage(SpringbootDataSourceConfig.MYBATIS_BO_PKG);
+        return sessionFactory.getObject();
+    }
 }
 ```
 
@@ -162,10 +182,15 @@ public class SpringbootDataSourceConfig {
 ```java
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "shiroEntityManagerFactory", transactionManagerRef = "shiroTransactionManager", basePackages = {
-		"org.dante.springboot.dao.shiro" }) // 设置Repository所在位置
+@EnableJpaRepositories(entityManagerFactoryRef = "shiroEntityManagerFactory", transactionManagerRef = "shiroTransactionManager", basePackages = { ShiroDataSourceConfig.JPA_DAO_PKG }) 
+@MapperScan(basePackages = ShiroDataSourceConfig.MYBATIS_MAPPER_PKG, sqlSessionFactoryRef = "shiroSqlSessionFactory")
 public class ShiroDataSourceConfig {
-
+	protected static final String JPA_DAO_PKG = "org.dante.springboot.dao.shiro";
+	protected static final String JPA_PO_PKG = "org.dante.springboot.po.shiro";
+	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.shiro";
+	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.shiro";
+	protected static final String MYBATIS_XML_PKG = "classpath:mapper/shiro/*.xml";
+	
 	@Autowired
 	private JpaProperties jpaProperties;
 
@@ -179,10 +204,12 @@ public class ShiroDataSourceConfig {
 	 * @return
 	 */
 	@Bean(name = "shiroEntityManagerFactoryBean")
+	// @Primary
 	public LocalContainerEntityManagerFactoryBean shiroEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
 		return builder.dataSource(shiroDataSource).properties(getVendorProperties(shiroDataSource))
-				.packages("org.dante.springboot.po.shiro") // 设置实体类所在位置
+				.packages(ShiroDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
 				.persistenceUnit("shiroPersistenceUnit").build();
+		// .getObject();//不要在这里直接获取EntityManagerFactory
 	}
 
 	private Map<String, String> getVendorProperties(DataSource dataSource) {
@@ -191,14 +218,14 @@ public class ShiroDataSourceConfig {
 
 	/**
 	 * EntityManagerFactory类似于Hibernate的SessionFactory,mybatis的SqlSessionFactory
-	 * 总之,在执行操作之前,总要获取一个EntityManager,这就类似于Hibernate的Session,
+	 * 总之,在执行操作之前,我们总要获取一个EntityManager,这就类似于Hibernate的Session,
 	 * mybatis的sqlSession.
 	 * 
 	 * @param builder
 	 * @return
 	 */
 	@Bean(name = "shiroEntityManagerFactory")
-	public EntityManagerFactory shiroEntityManagerFactory(EntityManagerFactoryBuilder builder){
+	public EntityManagerFactory shiroEntityManagerFactory(EntityManagerFactoryBuilder builder) {
 		return this.shiroEntityManagerFactoryBean(builder).getObject();
 	}
 
@@ -212,7 +239,50 @@ public class ShiroDataSourceConfig {
 		return new JpaTransactionManager(shiroEntityManagerFactory(builder));
 	}
 
+	/**
+	 * Mybatis 配置
+	 * 
+	 */
+	@Bean(name = "shiroSqlSessionFactory")
+    public SqlSessionFactory springSqlSessionFactory()
+            throws Exception {
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(shiroDataSource);
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+                .getResources(ShiroDataSourceConfig.MYBATIS_XML_PKG));
+        sessionFactory.setTypeAliasesPackage(ShiroDataSourceConfig.MYBATIS_BO_PKG);
+        return sessionFactory.getObject();
+    }
 }
+```
+
+##### mybatis-config.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="dialect" value="mysql" />
+    </properties>
+	<settings>
+        <!-- 开启驼峰匹配 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- 分页助手 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="h2" />
+            <property name="offsetAsPageNum" value="true" />
+            <property name="rowBoundsWithCount" value="true" />
+            <property name="pageSizeZero" value="true" />
+            <property name="reasonable" value="true" />
+        </plugin>
+        <plugin interceptor="org.dante.springboot.plugin.SqlCostInterceptor"></plugin>
+    </plugins>
+</configuration> 
 ```
 
 ### 3. 参考资料
@@ -220,3 +290,4 @@ public class ShiroDataSourceConfig {
 - https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 - http://www.jianshu.com/p/9f812e651319
 - https://www.cnblogs.com/Alandre/p/6611813.html
+- https://www.bysocket.com/?p=1712
