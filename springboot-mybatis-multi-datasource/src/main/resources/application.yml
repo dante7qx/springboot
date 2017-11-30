@@ -38,8 +38,6 @@ spring:
         password: iamdante
   jackson:
     date-format: yyyy-MM-dd hh:mm:ss
-mybatis:
-  config-location: classpath:mybatis-config.xml
 logging:
   level:
     org.dante.springboot.mapper: debug

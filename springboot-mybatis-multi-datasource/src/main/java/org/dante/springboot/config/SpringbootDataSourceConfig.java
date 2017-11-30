@@ -23,7 +23,8 @@ public class SpringbootDataSourceConfig {
 	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.springboot";
 	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.springboot";
 	protected static final String MYBATIS_XML_PKG = "classpath:mapper/springboot/*.xml";
-
+	protected static final String MYBATIS_CONFIG = "classpath:mybatis-config.xml";
+	
 	@Autowired
 	@Qualifier("springbootDataSource")
 	private DataSource springbootDataSource;
@@ -46,8 +47,9 @@ public class SpringbootDataSourceConfig {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(springbootDataSource);
         sessionFactory.setVfs(SpringBootVFS.class); 
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(SpringbootDataSourceConfig.MYBATIS_XML_PKG));
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sessionFactory.setMapperLocations(resolver.getResources(SpringbootDataSourceConfig.MYBATIS_XML_PKG));
+        sessionFactory.setConfigLocation(resolver.getResource(ShiroDataSourceConfig.MYBATIS_CONFIG));
         sessionFactory.setTypeAliasesPackage(SpringbootDataSourceConfig.MYBATIS_BO_PKG);
         return sessionFactory.getObject();
     }

@@ -22,6 +22,7 @@ public class ShiroDataSourceConfig {
 	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.shiro";
 	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.shiro";
 	protected static final String MYBATIS_XML_PKG = "classpath:mapper/shiro/*.xml";
+	protected static final String MYBATIS_CONFIG = "classpath:mybatis-config.xml";
 	
 	@Autowired
 	@Qualifier("shiroDataSource")
@@ -38,8 +39,9 @@ public class ShiroDataSourceConfig {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(shiroDataSource);
         sessionFactory.setVfs(SpringBootVFS.class); 
-        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(ShiroDataSourceConfig.MYBATIS_XML_PKG));
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sessionFactory.setMapperLocations(resolver.getResources(ShiroDataSourceConfig.MYBATIS_XML_PKG));
+        sessionFactory.setConfigLocation(resolver.getResource(ShiroDataSourceConfig.MYBATIS_CONFIG));
         sessionFactory.setTypeAliasesPackage(ShiroDataSourceConfig.MYBATIS_BO_PKG);
         return sessionFactory.getObject();
     }

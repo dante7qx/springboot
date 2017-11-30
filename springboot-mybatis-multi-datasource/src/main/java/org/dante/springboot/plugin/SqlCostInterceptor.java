@@ -1,4 +1,4 @@
-package org.dante.springboot.plguin;
+package org.dante.springboot.plugin;
 
 import java.lang.reflect.Field;
 import java.sql.Statement;
