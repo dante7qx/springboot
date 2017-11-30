@@ -72,8 +72,6 @@ mybatis:
 
 #### JavaConfig
 
-==注意：从数据源Mybatis的事务不起作用。==
-
 ##### 总数据源配置
 
 ```java

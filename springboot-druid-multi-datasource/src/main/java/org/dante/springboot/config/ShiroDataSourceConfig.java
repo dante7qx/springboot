@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -47,7 +48,6 @@ public class ShiroDataSourceConfig {
 	 * @return
 	 */
 	@Bean(name = "shiroEntityManagerFactoryBean")
-	// @Primary
 	public LocalContainerEntityManagerFactoryBean shiroEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
 		return builder.dataSource(shiroDataSource).properties(getVendorProperties(shiroDataSource))
 				.packages(ShiroDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
@@ -91,6 +91,7 @@ public class ShiroDataSourceConfig {
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(shiroDataSource);
+        sessionFactory.setVfs(SpringBootVFS.class); 
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources(ShiroDataSourceConfig.MYBATIS_XML_PKG));
         sessionFactory.setTypeAliasesPackage(ShiroDataSourceConfig.MYBATIS_BO_PKG);

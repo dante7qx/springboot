@@ -33,6 +33,7 @@
 		<module>springboot-restdocs</module>
 		<module>springboot-mybatis</module>
 		<module>springboot-mybatis-generator</module>
+		<module>springboot-mybatis-multi-datasource</module>
 		<module>springboot-jwt-server</module>
 		<module>springboot-batch</module>
 		<module>springboot-ssl</module>

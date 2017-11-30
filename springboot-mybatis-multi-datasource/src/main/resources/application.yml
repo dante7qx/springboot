@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    druid: 
+      driver-class-name: com.mysql.jdbc.Driver
+      initial-size: 10
+      min-idle: 10
+      max-active: 30
+      max-wait: 60000
+      min-evictable-idle-time-millis: 300000
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: select 1
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      filter:
+            stat:
+              db-type: mysql
+              log-slow-sql: true
+              slow-sql-millis: 2000
+            wall:
+              enabled: true
+              db-type: mysql
+              config:
+                multi-statement-allow: true
+      web-stat-filter:
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        login-username: druid
+        login-password: 123456
+      springboot: 
+        url: jdbc:mysql://localhost/springboot
+        username: root
+        password: iamdante
+      shiro: 
+        url: jdbc:mysql://localhost/shiro
+        username: root
+        password: iamdante
+  jackson:
+    date-format: yyyy-MM-dd hh:mm:ss
+mybatis:
+  config-location: classpath:mybatis-config.xml
+logging:
+  level:
+    org.dante.springboot.mapper: debug
+    org.dante.springboot.plugin.SqlCostInterceptor: debug

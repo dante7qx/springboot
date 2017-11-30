@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.dante.springboot.mapper.springboot.PersonMapper">
+	
+	<select id="queryPersons" resultType="PersonBO">
+		select t.id, t.name, t.age, t.address, t.updateDate from T_Person t order by t.age
+	</select>
+	
+	<insert id="insertPerson">
+		insert into T_Person(Name, Age, Address) values(#{name}, #{age}, #{address}) 
+	</insert>
+</mapper>
