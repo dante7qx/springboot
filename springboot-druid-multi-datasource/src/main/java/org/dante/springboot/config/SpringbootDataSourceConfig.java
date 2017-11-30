@@ -99,7 +99,7 @@ public class SpringbootDataSourceConfig {
         sessionFactory.setVfs(SpringBootVFS.class); 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sessionFactory.setMapperLocations(resolver.getResources(SpringbootDataSourceConfig.MYBATIS_XML_PKG));
-        sessionFactory.setConfigLocation(resolver.getResource(ShiroDataSourceConfig.MYBATIS_CONFIG));
+        sessionFactory.setConfigLocation(resolver.getResource(SpringbootDataSourceConfig.MYBATIS_CONFIG));
         sessionFactory.setTypeAliasesPackage(SpringbootDataSourceConfig.MYBATIS_BO_PKG);
         return sessionFactory.getObject();
     }
