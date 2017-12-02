@@ -9,6 +9,7 @@ import java.util.Map;
 import org.dante.springboot.aoplog.domain.User;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,15 +22,16 @@ public class UserController {
 	static Map<Long, User> users = Collections.synchronizedMap(new HashMap<Long, User>());
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<User> getUserList() {
+	public List<User> getUserList() throws Exception {
 		// 处理"/users/"的GET请求，用来获取用户列表
 		// 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
-		List<User> r = new ArrayList<User>(users.values());
-		return r;
+		List<User> list = new ArrayList<User>(users.values());
+//		throw new Exception("测试异常切面！");
+		return list;
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String postUser(@ModelAttribute User user) {
+	public String postUser(@RequestBody User user) {
 		// 处理"/users/"的POST请求，用来创建User
 		// 除了@ModelAttribute绑定参数之外，还可以通过@RequestParam从页面中传递参数
 		users.put(user.getId(), user);

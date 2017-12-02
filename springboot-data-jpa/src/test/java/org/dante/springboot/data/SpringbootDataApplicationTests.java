@@ -18,14 +18,16 @@ public class SpringbootDataApplicationTests {
 	@Autowired
 	private PersonRepository personRepository;
 	
-	@Test
-	public void contextLoads() {
-	}
 
 	@Test
 	public void test() throws Exception {
 		List<Object[]> objs = personRepository.findTest();
 		List<TestNativeSql> list = JpaEntityConvertUtils.castEntity(objs, TestNativeSql.class);
 		System.out.println(list);
+	}
+	
+	@Test
+	public void findByIdAndAgeOrNameAndAddress() {
+		personRepository.findByIdAndAgeOrNameAndAddress(11, 20, "dante", "大道");
 	}
 }

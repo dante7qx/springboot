@@ -21,4 +21,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer>, JpaSpe
 	
 	@Query(value="select p.id, p.name from T_Person p where p.id = 1", nativeQuery=true)
 	public List<Object[]> findTest();
+	
+	public List<Person> findByIdAndAgeOrNameAndAddress(Integer id, int age, String name, String address);
+	
 }

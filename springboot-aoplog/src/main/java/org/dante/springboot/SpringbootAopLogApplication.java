@@ -11,8 +11,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class SpringbootAopLogApplication {
+	
+	/*
+	@Bean
+    public FilterRegistrationBean signValidateFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        CacheInputStreamFilter cacheInputStreamFilter = new CacheInputStreamFilter();
+        registration.setFilter(cacheInputStreamFilter);
+        registration.addUrlPatterns("/*");
+        registration.setOrder(-11);
+        return registration;
+    }
+    */
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootAopLogApplication.class, args);
 	}
+	
 }
