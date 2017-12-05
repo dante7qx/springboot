@@ -61,7 +61,7 @@ public class SqlCostInterceptor implements Interceptor {
         
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "unused" })
     private String formatSql(String sql, Object parameterObject, List<ParameterMapping> parameterMappingList) {
         // 输入sql字符串空判断
         if (sql == null || sql.length() == 0) {
