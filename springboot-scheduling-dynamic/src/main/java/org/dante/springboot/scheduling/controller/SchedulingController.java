@@ -26,7 +26,7 @@ public class SchedulingController {
 	@GetMapping("/start")
 	public String startJob() {
 		HelloJob helloJobBean = (HelloJob) SpringContextUtils.getBean(HelloJob.class);
-		future = threadPoolTaskScheduler.schedule(helloJobBean, new CronTrigger("0/20 * * * * ?"));
+		future = threadPoolTaskScheduler.schedule(helloJobBean, new CronTrigger("0/5 * * * * ?"));
 		return "startJob";
 	}
 

@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloService {
 	
 	public void sayHello() {
-		log.info("{} -> 开始执行SayHello.", Date.from(Instant.now()));
+		log.info("{} -> {} 开始执行SayHello.", Date.from(Instant.now()), Thread.currentThread().getName());
 	}
 	
 }
