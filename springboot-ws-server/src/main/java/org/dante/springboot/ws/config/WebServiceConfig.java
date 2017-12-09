@@ -11,6 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
+import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -24,8 +25,15 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
 		servlet.setApplicationContext(applicationContext);
+		// 将 wsdl 的 locationUrl 做为转换地址
 		servlet.setTransformWsdlLocations(true);
 		return new ServletRegistrationBean(servlet, "/ws/*");
+	}
+	
+	@Bean
+	public SoapFaultAnnotationExceptionResolver soapFaultAnnotationExceptionResolver() {
+		SoapFaultAnnotationExceptionResolver resolver = new SoapFaultAnnotationExceptionResolver();
+		return resolver;
 	}
 	
 	@Override
@@ -62,5 +70,16 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	public XsdSchema testsSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("schema/tests.xsd"));
 	}
+	
+	/*
+	@Bean
+	public AxiomSoapMessageFactory messageFactory() {
+		AxiomSoapMessageFactory messageFactory = new AxiomSoapMessageFactory();
+		// false, 直接从socket stream读取SOAP body。默认为true
+		messageFactory.setPayloadCaching(false);
+		messageFactory.setSoapVersion(SoapVersion.SOAP_11);
+		return messageFactory;
+	}
+	*/
 	
 }

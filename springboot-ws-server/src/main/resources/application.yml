@@ -1,3 +1,9 @@
 spring:
   application:
     name: dante-springboot-ws
+logging:
+  level:
+    root: INFO
+    org.springframework.ws.client.MessageTracing.sent: TRACE
+    org.springframework.ws.client.MessageTracing.received: DEBUG
+    org.springframework.ws.server.MessageTracing: DEBUG

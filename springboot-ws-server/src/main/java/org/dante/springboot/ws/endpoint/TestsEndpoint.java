@@ -3,10 +3,12 @@ package org.dante.springboot.ws.endpoint;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 import org.dante.springboot.ws.GetTestRequest;
 import org.dante.springboot.ws.GetTestResponse;
@@ -14,6 +16,7 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import org.springframework.ws.soap.SoapHeader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,8 +27,12 @@ public class TestsEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTestRequest")
 	@ResponsePayload
-	public GetTestResponse getCountry(@RequestPayload GetTestRequest request) {
-		log.info("GetCountryRequest ==> {}", request.getName());
+	public GetTestResponse getTest(@RequestPayload GetTestRequest request, SoapHeader header) {
+		Iterator<QName> attributes = header.getAllAttributes();
+		attributes.forEachRemaining(a -> {
+			log.info(a.getLocalPart() + " -- " + a.getNamespaceURI());
+		});
+		log.info("SoapHeader ==> {}, GetTestRequest ==> {}", header.getName(), request.getName());
 		GetTestResponse response = new GetTestResponse();
 		response.setResult(dateToXmlDate(Date.from(Instant.now())));
 		return response;

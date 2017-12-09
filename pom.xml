@@ -46,6 +46,7 @@
 		<module>springboot-jasypt</module>
 		<module>springboot-data-jpa</module>
 		<module>springboot-ws-server</module>
+		<module>springboot-ws-client</module>
 	</modules>
 
 	<parent>

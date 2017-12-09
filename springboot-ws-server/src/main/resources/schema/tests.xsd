@@ -1,6 +1,5 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://org.dante.springboot/ws"
            targetNamespace="http://org.dante.springboot/ws" elementFormDefault="qualified">
-
 	<xs:element name="getTestRequest">
         <xs:complexType>
             <xs:sequence>
@@ -8,7 +7,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
     <xs:element name="getTestResponse">
         <xs:complexType>
             <xs:sequence>
@@ -16,5 +14,4 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>        
-    
 </xs:schema>

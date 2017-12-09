@@ -37,8 +37,16 @@ public class CountryRepository {
 		uk.setCapital("London");
 		uk.setCurrency(Currency.GBP);
 		uk.setPopulation(63705000);
-
+		
 		countries.put(uk.getName(), uk);
+		
+		Country china = new Country();
+		china.setName("China");
+		china.setCapital("北京");
+		china.setCurrency(Currency.GBP);
+		china.setPopulation(96086860);
+		
+		countries.put(china.getName(), china);
 	}
 
 	public Country findCountry(String name) {

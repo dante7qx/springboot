@@ -9,9 +9,62 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>springboot-scheduling</artifactId>
+	<artifactId>springboot-ws-client</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-scheduling</name>
-	<description>Dante Springboot Scheduling</description>
+	<name>springboot-ws-client</name>
+	<description>Dante Springboot Webservice</description>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.13.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaLanguage>WSDL</schemaLanguage>
+					<generatePackage>com.dante.springboot.ws</generatePackage>
+					<generateDirectory>${project.basedir}/target/generated-sources/jaxb</generateDirectory>
+					<schemas>
+						<!-- 
+						<schema> 
+							<url>http://www.webservicex.com/stockquote.asmx?WSDL</url> 
+						</schema> 
+						-->
+						<schema>
+							<fileset>
+								<directory>${basedir}/src/main/resources/wsdl</directory>
+								<includes>
+									<include>*.wsdl</include>
+								</includes>
+							</fileset>
+						</schema>
+					</schemas>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

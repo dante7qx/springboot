@@ -13,12 +13,16 @@
 	<packaging>jar</packaging>
 	<name>springboot-ws-server</name>
 	<description>Dante Springboot WebService Server</description>
+	
+	<properties>
+		<axiom.version>1.2.20</axiom.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
@@ -27,6 +31,26 @@
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-ws-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!--  
+		<dependency>
+			<groupId>org.apache.ws.commons.axiom</groupId>
+			<artifactId>axiom-api</artifactId>
+			<version>${axiom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ws.commons.axiom</groupId>
+			<artifactId>axiom-impl</artifactId>
+			<version>${axiom.version}</version>
+		</dependency>
+		-->
+
+
 	</dependencies>
 
 	<build>
@@ -47,7 +71,7 @@
 					<packageName>org.dante.springboot.ws</packageName>
 					<schemaDirectory>${project.basedir}/src/main/resources/schema/</schemaDirectory>
 					<outputDirectory>${project.basedir}/target/generated-sources/jaxb/</outputDirectory>
-					<clearOutputDir>false</clearOutputDir> 
+					<clearOutputDir>false</clearOutputDir>
 				</configuration>
 			</plugin>
 		</plugins>
