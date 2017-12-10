@@ -429,7 +429,17 @@ public class WSConfig {
 
 #### 5. 安全
 
+​	包含认证、数字签名、加密解密，使用XwsSecurityInterceptor 和 **Wss4jSecurityInterceptor**来实现。这里只介绍**Wss4jSecurityInterceptor**。
 
+```xml
+<dependency>
+    <groupId>org.springframework.ws</groupId>
+    <artifactId>spring-ws-security</artifactId>
+    <version>2.4.2.RELEASE</version>
+</dependency>
+```
+
+待续...
 
 ### 三. 参考资料
 
@@ -438,3 +448,4 @@ public class WSConfig {
 
 
 - http://blog.csdn.net/WOOSHN/article/details/8145763/
+- https://github.com/Bernardo-MG/spring-ws-security-soap-example
