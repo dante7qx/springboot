@@ -439,7 +439,85 @@ public class WSConfig {
 </dependency>
 ```
 
-待续...
+- 服务端
+
+```java
+@Bean
+public Wss4jSecurityInterceptor wss4jSecurityInterceptor() {
+    Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
+    securityInterceptor.setValidationActions("Timestamp UsernameToken");
+    securityInterceptor.setSecurementTimeToLive(3600);
+    securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
+    return securityInterceptor;
+}
+
+@Bean
+public SimplePasswordValidationCallbackHandler securityCallbackHandler(){
+    SimplePasswordValidationCallbackHandler callbackHandler = new SimplePasswordValidationCallbackHandler();
+    Properties users = new Properties();
+    users.setProperty("dante", "123456");
+    callbackHandler.setUsers(users);
+    return callbackHandler;
+}
+
+@Override
+public void addInterceptors(List<EndpointInterceptor> interceptors) {
+    interceptors.add(wss4jSecurityInterceptor());
+}
+```
+
+- 客户端
+
+```java
+@Bean
+public Wss4jSecurityInterceptor securityInterceptor() {
+    Wss4jSecurityInterceptor wss4jSecurityInterceptor = new Wss4jSecurityInterceptor();
+    wss4jSecurityInterceptor.setSecurementActions("Timestamp UsernameToken");
+    wss4jSecurityInterceptor.setSecurementUsername("dante");
+    wss4jSecurityInterceptor.setSecurementPassword("123456");
+    return wss4jSecurityInterceptor;
+}
+
+@Bean("wsCountryClient")
+public CountryClient wsCountryClient(Jaxb2Marshaller marshaller) {
+    CountryClient client = new CountryClient();
+    // DefaultUri在配置和具体调用方法，设置一处即可
+    client.setDefaultUri(DEFAULT_URI + "/xc/countries.wsdl");
+    client.setMarshaller(marshaller);
+    client.setUnmarshaller(marshaller);
+    ClientInterceptor[] interceptors = new ClientInterceptor[] {securityInterceptor()};
+    client.setInterceptors(interceptors);
+    return client;
+}
+```
+
+- 请求XML
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    			xmlns:gs="http://org.dante.springboot/ws">
+   <SOAP-ENV:Header>
+      <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" SOAP-ENV:mustUnderstand="1">
+         <wsse:UsernameToken wsu:Id="UsernameToken-EC9F7473E024359C6A14589178984712">
+            <wsse:Username>dante</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest">123456</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">123456</wsse:Nonce>
+            <wsu:Created>2017-12-10T20:30:18.471Z</wsu:Created>
+         </wsse:UsernameToken>
+         <wsu:Timestamp wsu:Id="TS-EC9F7473E024359C6A14589178984531">
+            <wsu:Created>2016-03-25T14:58:18.452Z</wsu:Created>
+            <wsu:Expires>2016-03-25T15:03:18.452Z</wsu:Expires>
+         </wsu:Timestamp>
+      </wsse:Security>
+   </SOAP-ENV:Header>
+   <SOAP-ENV:Body>
+      <gs:getCountryRequest>
+         <gs:name>Spain</gs:name>
+      </gs:getCountryRequest>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+```
 
 ### 三. 参考资料
 
@@ -448,4 +526,4 @@ public class WSConfig {
 
 
 - http://blog.csdn.net/WOOSHN/article/details/8145763/
-- https://github.com/Bernardo-MG/spring-ws-security-soap-example
+- https://memorynotfound.com/spring-ws-username-password-authentication-wss4j/

@@ -1,6 +1,7 @@
 package org.dante.springboot.ws.config;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.dante.springboot.ws.interceptor.WsInterceptor;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -12,7 +13,7 @@ import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
-import org.springframework.ws.soap.server.endpoint.SoapFaultAnnotationExceptionResolver;
+import org.springframework.ws.soap.security.wss4j2.callback.SimplePasswordValidationCallbackHandler;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -31,29 +32,29 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 		return new ServletRegistrationBean(servlet, "/ws/*");
 	}
 	
+	
 	@Bean
-	public SoapFaultAnnotationExceptionResolver soapFaultAnnotationExceptionResolver() {
-		SoapFaultAnnotationExceptionResolver resolver = new SoapFaultAnnotationExceptionResolver();
-		return resolver;
+	public Wss4jSecurityInterceptor wss4jSecurityInterceptor() {
+		Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
+        securityInterceptor.setValidationActions("Timestamp UsernameToken");
+        securityInterceptor.setSecurementTimeToLive(3600);
+        securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
+        return securityInterceptor;
 	}
 	
 	@Bean
-	Wss4jSecurityInterceptor wss4jSecurityInterceptor() {
-		Wss4jSecurityInterceptor interceptor = new Wss4jSecurityInterceptor();
-		interceptor.setSecurementActions("UsernameToken");
-		interceptor.setSecurementUsername("dante");
-		interceptor.setSecurementPassword("123456");
-		interceptor.setSecurementPasswordType("PasswordText");
-		interceptor.setSecurementUsernameTokenCreated(true);
-		interceptor.setSecurementUsernameTokenNonce(true);
-		return interceptor;
-	}
+    public SimplePasswordValidationCallbackHandler securityCallbackHandler(){
+        SimplePasswordValidationCallbackHandler callbackHandler = new SimplePasswordValidationCallbackHandler();
+        Properties users = new Properties();
+        users.setProperty("dante", "123456");
+        callbackHandler.setUsers(users);
+        return callbackHandler;
+    }
 	
 	@Override
 	public void addInterceptors(List<EndpointInterceptor> interceptors) {
 		interceptors.add(new WsInterceptor());
-		// 安全认证还未研究明白
-//		interceptors.add(wss4jSecurityInterceptor());
+		interceptors.add(wss4jSecurityInterceptor());
 	}	
 
 	@Bean(name = "countries")
