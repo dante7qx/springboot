@@ -13,6 +13,10 @@
 	<packaging>jar</packaging>
 	<name>springboot-logger</name>
 	<description>Dante Springboot Logger</description>
+	
+	<properties>
+		<gemfire.version>8.2.0</gemfire.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -25,5 +29,19 @@
 			<version>2.4</version>
 		</dependency>
 	</dependencies>
+	
+	<reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
