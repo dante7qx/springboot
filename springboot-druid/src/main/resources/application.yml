@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/springboot
+    url: jdbc:mysql://localhost/springboot?characterEncoding=utf8&useSSL=true
     username: root
     password: iamdante
     driver-class-name: com.mysql.jdbc.Driver

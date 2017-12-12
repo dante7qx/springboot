@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: springboot_admin_client
+  boot:
+    admin:
+      url: http://localhost:8900
+management:
+  security:
+    enabled: false
