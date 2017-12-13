@@ -6,4 +6,4 @@ spring:
       url: http://localhost:8900
 management:
   security:
-    enabled: false 
+    enabled: false
