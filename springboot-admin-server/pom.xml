@@ -16,7 +16,7 @@
 
 	<properties>
 		<admin.version>1.5.5</admin.version>
-	</properties> 
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -29,5 +29,14 @@
 			<artifactId>spring-boot-admin-server-ui</artifactId>
 			<version>${admin.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-server-ui-login</artifactId>
+			<version>${admin.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 	</dependencies>
 </project>

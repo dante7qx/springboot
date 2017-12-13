@@ -3,9 +3,12 @@ server:
 spring:
   application:
     name: springboot_admin_server
-  boot:
-    admin:
-      url: http://localhost:8900
 endpoints:
   health:
     sensitive: false
+security:
+  user:
+    name: admin
+    password: admin123
+#management:
+#  context-path: "/actuator"

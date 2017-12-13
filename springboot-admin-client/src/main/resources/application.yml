@@ -1,9 +1,18 @@
+server:
+  address: 127.0.0.1
 spring:
   application:
     name: springboot_admin_client
   boot:
     admin:
       url: http://localhost:8900
+      username: admin
+      password: admin123
+      client:
+#        prefer-ip: true
+        metadata:
+          user.name: admin
+          user.password: admin123
 management:
   security:
     enabled: false
