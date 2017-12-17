@@ -1,0 +1,1 @@
+insert into t_scheduler_job(job_id,job_name,job_class,job_desc,cron,start_job) values ('helloJob','你好Quartz','org.dante.springboot.quartz.job.HelloJob','你好Quartz','0/30 * * * * ?',1);
