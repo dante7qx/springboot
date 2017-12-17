@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
 	updateCheck="true" monitoring="autodetect" dynamicConfig="true">
 
-	<diskStore path="/Users/dante/Documents/Project/spring/springboot/springboot-mybatis/cache" />
+	<diskStore path="/Users/dante/Documents/Project/spring/springboot/springboot-mybatis/ehcache" />
 
 	<!-- 
          defaultCache:默认的缓存配置信息,如果不加特殊说明,则所有对象按照此配置项处理

@@ -14,5 +14,6 @@ spring:
           user.name: admin
           user.password: admin123
 management:
+  port: 58888
   security:
     enabled: false

@@ -10,5 +10,3 @@ security:
   user:
     name: admin
     password: admin123
-#management:
-#  context-path: "/actuator"

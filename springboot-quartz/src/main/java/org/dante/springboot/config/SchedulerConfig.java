@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.dante.springboot.quartz.factory.JobFactory;
-import org.dante.springboot.quartz.listener.SpiritJobListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -36,10 +35,5 @@ public class SchedulerConfig {
         propertiesFactory.afterPropertiesSet();
         return propertiesFactory.getObject();
     }
-	
-	@Bean
-	public SpiritJobListener spiritJobListener() {
-		return new SpiritJobListener();
-	}
 	
 }

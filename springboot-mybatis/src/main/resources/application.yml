@@ -12,6 +12,6 @@ mybatis:
   type-aliases-package: org.dante.springboot.po
 logging:
   level:
+    root: info
     org.dante.springboot.dao: DEBUG
     org.dante.springboot.plugin.SqlCostInterceptor: DEBUG
-    

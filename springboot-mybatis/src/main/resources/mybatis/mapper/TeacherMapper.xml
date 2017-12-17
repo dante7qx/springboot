@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.dante.springboot.dao.TeacherMapper">
-
+	<cache />
 	<!-- 
-		<cache />
 		默认配置：<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
 		映射语句文件中的所有 select 语句将会被缓存。
 		映射语句文件中的所有 insert,update 和 delete 语句会刷新缓存。
@@ -12,7 +11,9 @@
 		缓存会存储列表集合或对象(无论查询方法返回什么)的 1024 个引用。
 		缓存会被视为是 read/write(可读/可写)的缓存,意味着对象检索不是共享的,而 且可以安全地被调用者修改,而不干扰其他调用者或线程所做的潜在修改。
 	 -->
+	 <!--  
 	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	-->
 	
 	<select id="queryTeachers" resultType="TeacherPO">
 		select t.id,t.name,t.post,t.update_date from t_teacher t 

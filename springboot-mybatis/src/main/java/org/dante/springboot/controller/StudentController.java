@@ -30,7 +30,7 @@ public class StudentController {
 	@PostMapping("/query_page")
 	public PageInfo<StudentPO> queryPage() {
 		PageHelper.orderBy("age desc");
-		PageHelper.startPage(2, 3);
+		PageHelper.startPage(1, 3);
 		List<StudentPO> students = studentMapper.queryStudents();
 		PageInfo<StudentPO> pageInfo = new PageInfo<>(students);
 		return pageInfo;

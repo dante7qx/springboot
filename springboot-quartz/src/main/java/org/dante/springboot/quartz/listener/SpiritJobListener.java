@@ -4,27 +4,22 @@ import org.dante.springboot.quartz.util.ExceptionUtils;
 import org.dante.springboot.service.SchedulerJobService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.JobListener;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.quartz.listeners.JobListenerSupport;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpiritJobListener implements JobListener {
+public class SpiritJobListener extends JobListenerSupport implements ApplicationContextAware{
 	
-	@Autowired
 	private SchedulerJobService schedulerJobService;
+	
+	private ApplicationContext ctx;
 
 	@Override
 	public String getName() {
 		return "SpiritJobListener";
-	}
-
-	@Override
-	public void jobToBeExecuted(JobExecutionContext context) {
-	}
-
-	@Override
-	public void jobExecutionVetoed(JobExecutionContext context) {
 	}
 
 	@Override
@@ -34,8 +29,16 @@ public class SpiritJobListener implements JobListener {
 		if(jobException != null) {
 			failReason = ExceptionUtils.getStackMsg(jobException);
 		}
+		if(schedulerJobService == null) {
+			schedulerJobService = (SchedulerJobService) ctx.getBean("schedulerJobService");
+		}
 		schedulerJobService.updateJob(jobId, context.getFireTime(), context.getPreviousFireTime(), context.getNextFireTime(), failReason);
 
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.ctx = applicationContext;
 	}
 
 }
