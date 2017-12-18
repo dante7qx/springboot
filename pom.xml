@@ -49,6 +49,7 @@
 		<module>springboot-ws-client</module>
 		<module>springboot-admin-server</module>
 		<module>springboot-admin-client</module>
+		<module>springboot-poi</module>
 	</modules>
 
 	<parent>
