@@ -47,6 +47,19 @@ public class SpringbootAsyncApplicationTests {
 		}
 	}
 	
+	@Test
+	public void cancelTask(){
+		try {
+			Future<String> ct = asyncTask.doCancel();
+			if(!ct.isDone()) {
+				ct.cancel(true);
+			}
+	        LOGGER.info("All tasks finished."); 
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+	}
+	
 	
 	@Test  
     public void asyncTaskTest() throws InterruptedException, ExecutionException {  

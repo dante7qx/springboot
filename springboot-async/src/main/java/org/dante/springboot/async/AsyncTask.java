@@ -68,4 +68,19 @@ public class AsyncTask {
 
 		return new AsyncResult<>("Task4 执行完成!");
 	}
+	
+	@Async
+	public Future<String> doCancel() throws InterruptedException {
+		LOGGER.info("CancelTask 开始执行...");
+		long start = System.currentTimeMillis();
+		int i = 0;
+		while(i < 10) {
+			Thread.sleep(100);	// 响应中断, 接收 cancel() 方法的请求
+			i++;
+		}
+		long end = System.currentTimeMillis();
+		LOGGER.info("CancelTask 执行完成, 耗时: {} ms.", end - start);
+
+		return new AsyncResult<>("CancelTask 执行完成!");
+	}
 }

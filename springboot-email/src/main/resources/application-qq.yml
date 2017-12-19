@@ -1,0 +1,16 @@
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 307909697@qq.com
+    password: lhazpvoekbffbhji
+    default-encoding: UTF-8
+    protocol: smtps
+    properties:
+      smtp:
+        auth: true
+        starttls: 
+          enable: true
+          required: true
+spirit:
+  email: 
+    from: 307909697@qq.com
