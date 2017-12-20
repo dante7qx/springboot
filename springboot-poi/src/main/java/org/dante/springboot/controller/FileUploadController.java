@@ -1,6 +1,6 @@
 package org.dante.springboot.controller;
 
-import org.dante.springboot.poi.PoiTest;
+import org.dante.springboot.service.PoiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ public class FileUploadController {
 	private final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 		
 	@Autowired
-	private PoiTest poiTest;
+	private PoiService poiService;
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(@RequestParam("file") MultipartFile file) {
+	public String upload(@RequestParam("file") MultipartFile[] files) {
 		String result = "ok";
 		try {
-			poiTest.poiUpload(file);
+			poiService.importExcel(files);
 		} catch (Exception e) {
 			logger.error("文件上传失败！", e);
 			result = "wrong";

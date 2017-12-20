@@ -16,6 +16,8 @@
 
 	<properties>
 		<poi.version>3.17</poi.version>
+		<jquery.version>1.11.3</jquery.version>
+		<commons-io.version>2.6</commons-io.version>
 	</properties>
 
 	<dependencies>
@@ -37,6 +39,16 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
 		</dependency>
 	</dependencies>
 </project>

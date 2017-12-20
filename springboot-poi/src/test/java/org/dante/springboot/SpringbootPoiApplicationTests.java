@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import org.dante.springboot.poi.PoiTest;
+import org.dante.springboot.poi.PoiTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class SpringbootPoiApplicationTests {
 	Map<String, Future<String>> map = new HashMap<String, Future<String>>();
 	
 	@Autowired
-	private PoiTest poiTest;
+	private PoiTask poiTest;
 	
 	@Test
 	public void test() {

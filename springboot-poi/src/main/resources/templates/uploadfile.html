@@ -2,14 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta content="text/html;charset=UTF-8"/>
+<script th:src="@{/webjars/jquery/1.11.3/jquery.min.js}" type="text/javascript"></script>
 <title>文件上传</title>
 </head>
 <body>
 	<div>
-		<form th:action="@{/upload}" enctype="multipart/form-data" method="post">
-			<input type="file" name="file"/><br/>
-			<input type="submit" value="上传1"/>
+		<form id="uploadfrm" enctype="multipart/form-data" method="post">
 		</form>
 	</div>
+	<div style="padding: 20px;">
+		<button onclick="Page.add();">添加</button>
+		<button onclick="Page.upload();">上传</button>
+	</div>
+	<script th:inline="javascript">
+		var Page = {
+			add: function() {
+				var file = $('<input type="file" name="file" onchange="Page.change(this)"/><br/>');
+				$('#uploadfrm').append(file);
+			},
+			upload: function() {
+				var formData = new FormData($("#uploadfrm")[0]);
+				$.ajax({
+	                url: '/upload',
+	                type: 'POST',
+	                data: formData,
+	                async: false,
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                success: function (returnInfo) {
+	               	   alert(111)
+	                },
+	                error: function (returnInfo) {
+	                    alert(222)
+	                }
+	            });
+			},
+			change: function(index){
+			}
+		};
+	</script>
 </body>
 </html>

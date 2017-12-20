@@ -6,9 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableAsync;
 
-@EnableAsync
+/**
+ * 解决使用Spring Boot、Multipartfile上传文件路径错误问题
+ * http://blog.csdn.net/daniel7443/article/details/51620308
+ * 
+ * @author dante
+ *
+ */
 @SpringBootApplication
 public class SpringbootPoiApplication {
 
@@ -16,6 +21,11 @@ public class SpringbootPoiApplication {
 		SpringApplication.run(SpringbootPoiApplication.class, args);
 	}
 
+	/**
+	 * 奇怪问题：
+	 * 
+	 * @return
+	 */
 	@Bean
 	MultipartConfigElement multipartConfigElement() {
 		MultipartConfigFactory factory = new MultipartConfigFactory();
