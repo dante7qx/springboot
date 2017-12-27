@@ -25,6 +25,4 @@ public class DirectExchangeListener {
 	public void receiveMessage2(PubMsg msg) {
 		log.info("DirectExchangeListener 收到消息2 {}", msg);
 	}
-	
-	
 }
