@@ -44,7 +44,7 @@ public class SpringbootMongoApplicationTests {
 
 	@Before
 	public void setUp() {
-		// userDAO.deleteAll();
+		 userDAO.deleteAll();
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class SpringbootMongoApplicationTests {
 
 	@Test
 	public void saveOne() {
-		int count = 1;
+		int count = 50;
 		long start = Date.from(Instant.now()).getTime();
 		for (int i = 0; i < count; i++) {
 			UserPO user = new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10),
@@ -89,7 +89,7 @@ public class SpringbootMongoApplicationTests {
 	@Test
 	public void saveBatch() {
 		List<UserPO> users = new ArrayList<>();
-		int count = 5000;
+		int count = 50;
 		long start = Date.from(Instant.now()).getTime();
 		for (int i = 0; i < count; i++) {
 			users.add(new UserPO(new Long(i), "测试" + i, (int) (Math.random() * 20 + Math.random() * 10),

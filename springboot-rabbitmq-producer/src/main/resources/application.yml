@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: dante
+    password: 123456
+    cache:
+      connection:
+        mode: channel
+      channel:
+        size: 25
+        checkout-timeout: 0
+    virtual-host: /springboot-config
+    publisher-confirms: true
+spirit:
+  rabbitmq:
+    direct-exchange: sbr.direct.exchange
+    fanout-exchange: sbr.fanout.exchange
+    topic-exchange: sbr.topic.exchange
+    direct-routing-key: sbr.direct.routing.key
+    topic-routing-key: sbr.topic.routing.key
+    

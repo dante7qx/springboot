@@ -51,6 +51,8 @@
 		<module>springboot-admin-client</module>
 		<module>springboot-poi</module>
 		<module>springboot-email</module>
+		<module>springboot-rabbitmq-producer</module>
+		<module>springboot-rabbitmq-consumer</module>
 	</modules>
 
 	<parent>

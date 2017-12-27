@@ -4,7 +4,7 @@ spring:
     username: sunchao.0129@163.com
     password: Springboot163
     default-encoding: UTF-8
-    protocol: smtps
+    protocol: smtp
     properties:
       smtp:
         auth: true
