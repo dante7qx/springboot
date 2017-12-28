@@ -8,6 +8,7 @@ spring:
 spirit:
   rabbitmq:
     default-queue: sbr.default.queue
+    ack-queue: sbr.ack.queue
     direct-exchange: sbr.direct.exchange
     fanout-exchange: sbr.fanout.exchange
     topic-exchange: sbr.topic.exchange

@@ -29,6 +29,7 @@ public class RabbitController {
 		switch (flag) {
 		case 0:
 			spiritRabbitPubilsher.sendMessage(spiritRabbitProperties.getDefaultQueue(), pubMsg);
+			spiritRabbitAckPublisher.sendMessage(spiritRabbitProperties.getAckQueue(), pubMsg);
 			break;
 		case 1:
 			spiritRabbitPubilsher.sendMessage(spiritRabbitProperties.getDirectExchange(), spiritRabbitProperties.getDirectRoutingKey(), pubMsg);

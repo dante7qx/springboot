@@ -9,6 +9,7 @@ import lombok.Data;
 public class SpiritRabbitProperties {
 	
 	private String defaultQueue = "sbr.default.queue";
+	private String ackQueue = "sbr.ack.queue";
 	private String topicQueue = "sbr.topic.queue";
 
 	private String directExchange;

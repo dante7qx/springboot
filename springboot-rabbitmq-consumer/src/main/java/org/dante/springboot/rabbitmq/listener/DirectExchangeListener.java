@@ -22,7 +22,7 @@ public class DirectExchangeListener {
 	@RabbitListener(bindings = @QueueBinding(value = @Queue(ignoreDeclarationExceptions="true"),
 			exchange=@Exchange(value="${spirit.rabbitmq.direct-exchange}", durable="true", type=ExchangeTypes.DIRECT),
 			key="${spirit.rabbitmq.direct-routing-key}"))
-	public void receiveMessage2(PubMsg msg) {
-		log.info("DirectExchangeListener 收到消息2 {}", msg);
+	public void receiveMessage3(PubMsg msg) {
+		log.info("DirectExchangeListener 收到消息3 {}", msg);
 	}
 }

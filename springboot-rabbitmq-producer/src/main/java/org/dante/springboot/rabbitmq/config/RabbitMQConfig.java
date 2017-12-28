@@ -1,6 +1,7 @@
 package org.dante.springboot.rabbitmq.config;
 
 import org.dante.springboot.rabbitmq.prop.SpiritRabbitProperties;
+import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -11,6 +12,7 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,11 @@ public class RabbitMQConfig {
 	private SpiritRabbitProperties spiritRabbitProperties;
 
 	@Bean
+	public AmqpAdmin amqpAdmin() {
+		return new RabbitAdmin(connectionFactory);
+	}
+	
+	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public RabbitTemplate rabbitTemplate() {
 		RabbitTemplate template = new RabbitTemplate(connectionFactory);
@@ -50,6 +57,11 @@ public class RabbitMQConfig {
 	@Bean
 	public Queue defaultQueue() {
 		return QueueBuilder.nonDurable(spiritRabbitProperties.getDefaultQueue()).build();
+	}
+	
+	@Bean
+	public Queue ackQueue() {
+		return QueueBuilder.durable(spiritRabbitProperties.getAckQueue()).build();
 	}
 
 	/****************************************************************************/
