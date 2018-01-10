@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket, 广播式</title>
+    <script src="/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+	
+	<div style="margin: 20px;padding: 15px;">
+		<button id="conn">连接</button>
+		<button id="disconn" disabled="disabled">断开</button>
+		<br/>
+		<input type="text" id="msg" style="width: 120px" />
+		<button id="sendBtn">发送消息</button>
+	</div>
+	<div id="retMsg"></div>
+	<div style="margin-top: 15px">
+		<label>状态的变化：</label>
+		<span id="curStatus"></span>
+	</div>
+	
+	<script type="text/javascript">
+		var retryCount = 0;
+		var TopicPage = {
+			stompClient: null,
+			selfDisconn: false,
+			connect: function() {
+				this.selfDisconn = false;
+				// 通过 SocketJS 注册 StompEndpoint
+				var socket = new SockJS('/hello_websocket');
+				this.stompClient = Stomp.over(socket);
+				// Stomp 消息基于帧（frame）
+				this.stompClient.connect({}, function (frame) {
+					TopicPage.connectStatusChange(true);
+					console.log('Connected: ' + frame);
+					TopicPage.stompClient.subscribe('/topic/get_msg_resp', function (returnMsg) {
+			            $('#retMsg').text(JSON.parse(returnMsg.body).respMsg);
+			        });
+					
+					TopicPage.stompClient.subscribe('/topic/status_change', function (msg) {
+						console.log('=============> ' + msg.body);
+						var status = msg.body;
+			            $('#curStatus').text('当前状态：' + status).css('color' , (status == 1 ? 'red' : (status == 2 ? 'blue' : 'green')));
+			        });
+				});
+			},
+			connectStatusChange: function(connected) {
+				$('#conn').prop('disabled', connected);
+				$('#disconn').prop('disabled', !connected);
+			},
+			disconnect: function() {
+				this.selfDisconn = true;
+				if (this.stompClient != null) {
+			        this.stompClient.disconnect();
+			    }
+			    this.connectStatusChange(false);
+			    console.log("Disconnected");
+			},
+			checkConn: function() {
+				setInterval(function() {
+					if(TopicPage.selfDisconn) {
+						return;
+					}
+					// 重连 10 次不成功，将不再尝试
+					if(retryCount == 10) {
+						return;
+					}
+					if(TopicPage.stompClient) {
+						if(!TopicPage.stompClient.connected) {
+							console.log('连接丢失，重新连接！' + retryCount)
+							TopicPage.connect();
+							retryCount++;
+						}
+					}
+				}, 3000);
+			},
+			sendMsg: function() {
+				
+			},
+			registerEvt: function() {
+				this.checkConn();
+				$('#conn').click(function(){
+					TopicPage.connect();
+				});
+				$('#disconn').click(function(){
+					TopicPage.disconnect();
+				});
+				$('#sendBtn').click(function() {
+					TopicPage.stompClient.send("/hello", {}, JSON.stringify({
+                        'name': $('#msg').val()
+                    }));
+				});
+			}
+		};
+		$(function() {
+			TopicPage.registerEvt();
+		});
+	</script>
+</body>
+</html>

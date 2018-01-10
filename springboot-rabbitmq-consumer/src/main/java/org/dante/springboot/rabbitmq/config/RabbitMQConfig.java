@@ -53,6 +53,7 @@ public class RabbitMQConfig {
 					log.error("消息处理失败", e);
 				} finally {
 					 channel.basicAck(message.getMessageProperties().getDeliveryTag(), false); //确认消息成功消费
+//					 channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
 				}
 
 			}

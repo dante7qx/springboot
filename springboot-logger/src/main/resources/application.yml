@@ -16,3 +16,9 @@ endpoints:
     path: /logger_shutdown
     sensitive: false
     enabled: true ## 关闭服务，curl -X POST http://localhost:10000/adminmanage/logger_shutdown
+
+---
+spirit:
+  name: SpiritProp
+  aliPay:
+    appId: 2016011401091406

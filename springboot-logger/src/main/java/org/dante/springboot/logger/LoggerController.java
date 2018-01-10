@@ -7,8 +7,10 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.dante.springboot.prop.SpiritProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoggerController {
 
 	private final static Logger logger = LoggerFactory.getLogger(LoggerController.class);
+	
+	@Autowired
+	private SpiritProperties spiritProperties;
 
 	@GetMapping("/logger/{id}")
 	public String logger(HttpServletRequest request, @PathVariable Integer id) {
@@ -45,6 +50,7 @@ public class LoggerController {
 		logger.info("request id {}", id);
 		logger.warn("request id {}", id);
 		logger.error("request id {}", id);
+		logger.info("appId {}", spiritProperties.getAliPay().getAppId());
 		return "Logger ->" + returnStr;
 	}
 	
