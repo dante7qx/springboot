@@ -266,6 +266,181 @@ public MessageResponse sendMsgResp(MessageRequest request) {
 
 #### 2. 点对点
 
+​	应用程序可以发送针对特定用户的消息，Spring的STOMP支持可以识别以“/user/”为前缀的目标。每个用户必须有自己的 Session 信息。
+
+- 添加 Spring-Security依赖
+
+```xml
+<dependency>
+  	<groupId>org.springframework.boot</groupId>
+  	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+- 服务端实现
+
+```java
+// 添加 /chat_room Endpoint
+registry.addEndpoint("/chat_room").withSockJS(); 
+
+// 配置点对点 queue 的消息代理
+config.enableSimpleBroker("/queue");
+
+// 配置页面映射
+registry.addViewController("/login").setViewName("login");
+registry.addViewController("/chat").setViewName("queue");
+
+// 消息处理
+/**
+* 模拟单聊
+*/
+@MessageMapping("/p2p")
+public void handleChat(Principal principal, String msg) {
+  if (principal.getName().equals("snake")) {
+    simpMessagingTemplate.convertAndSendToUser("dante", "/queue/chat", "snake -> " + msg);
+  } else {
+    simpMessagingTemplate.convertAndSendToUser("snake", "/queue/chat", "dante -> " + msg);
+  }
+}
+```
+
+- Spring-Security 配置
+
+```java
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	/**
+     * 配置访问路径
+     *
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                //设置Spring Security对"/"、"/login"路径不拦截
+                .antMatchers("/","/login","/topic").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")//指定登录页面
+                .defaultSuccessUrl("/chat")//登录成功后跳转的页面
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+    }
+    
+    /**
+     * 指定用户信息
+     *
+     * @param auth
+     * @throws Exception
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //指定用户名和密码及其角色
+        auth.inMemoryAuthentication()
+                .withUser("dante").password("123456").roles("USER")
+                .and()
+                .withUser("snake").password("123456").roles("USER");
+    }
+}
+```
+
+- 客户端（浏览器）
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket, 点对点</title>
+    <script src="/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+	
+	<div style="margin: 20px;padding: 15px;">
+		<button id="conn">连接</button>
+		<button id="disconn" disabled="disabled">断开</button>
+		<br/>
+		<input type="text" id="msg" style="width: 120px" />
+		<button id="sendBtn">发送消息</button>
+	</div>
+	<div id="retMsg"></div>
+	
+	<script type="text/javascript">
+		var retryCount = 0;
+		var TopicPage = {
+			stompClient: null,
+			selfDisconn: false,
+			connect: function() {
+				this.selfDisconn = false;
+				// 通过 SocketJS 注册 StompEndpoint
+				var socket = new SockJS('/chat_room');
+				this.stompClient = Stomp.over(socket);
+				// Stomp 消息基于帧（frame）
+				this.stompClient.connect({}, function (frame) {
+					TopicPage.connectStatusChange(true);
+					console.log('Connected: ' + frame);
+					TopicPage.stompClient.subscribe('/user/queue/chat', function (returnMsg) {
+			            $('#retMsg').append('<div>'+returnMsg.body+'</div>');
+			        });
+				});
+			},
+			connectStatusChange: function(connected) {
+				$('#conn').prop('disabled', connected);
+				$('#disconn').prop('disabled', !connected);
+			},
+			disconnect: function() {
+				this.selfDisconn = true;
+				if (this.stompClient != null) {
+			        this.stompClient.disconnect();
+			    }
+			    this.connectStatusChange(false);
+			    console.log("Disconnected");
+			},
+			checkConn: function() {
+				setInterval(function() {
+					if(TopicPage.selfDisconn) {
+						return;
+					}
+					// 重连 10 次不成功，将不再尝试
+					if(retryCount == 10) {
+						return;
+					}
+					if(TopicPage.stompClient) {
+						if(!TopicPage.stompClient.connected) {
+							console.log('连接丢失，重新连接！' + retryCount)
+							TopicPage.connect();
+							retryCount++;
+						}
+					}
+				}, 3000);
+			},
+			registerEvt: function() {
+				this.checkConn();
+				$('#conn').click(function(){
+					TopicPage.connect();
+				});
+				$('#disconn').click(function(){
+					TopicPage.disconnect();
+				});
+				$('#sendBtn').click(function() {
+					TopicPage.stompClient.send("/p2p", {}, $('#msg').val());
+				});
+			}
+		};
+		$(function() {
+			TopicPage.registerEvt();
+		});
+	</script>
+</body>
+</html>
+```
+
 ### 四. 参考资料
 
 - https://docs.spring.io/spring/docs/5.0.2.RELEASE/spring-framework-reference/web.html#websocket

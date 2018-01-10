@@ -38,6 +38,12 @@
 			<artifactId>sockjs-client</artifactId>
 			<version>${sockjs.version}</version>
 		</dependency>
-
+		
+		<!-- 单聊演示，用户登录 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
 	</dependencies>
 </project>

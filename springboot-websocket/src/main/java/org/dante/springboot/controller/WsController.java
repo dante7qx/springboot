@@ -1,11 +1,14 @@
 package org.dante.springboot.controller;
 
+import java.security.Principal;
 import java.util.Random;
 
 import org.dante.springboot.request.MessageRequest;
 import org.dante.springboot.response.MessageResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class WsController {
+	
+	@Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
 	/**
 	 * 客户端发送请求的URL，通过 @MessageMapping 映射
@@ -49,6 +55,18 @@ public class WsController {
 		}
 		log.info("Status change from {} to {}.", oldStatus, status);
 		return status;
+	}
+	
+	/**
+	 * 模拟单聊
+	 */
+	@MessageMapping("/p2p")
+	public void handleChat(Principal principal, String msg) {
+		 if (principal.getName().equals("snake")) {
+			simpMessagingTemplate.convertAndSendToUser("dante", "/queue/chat", "snake -> " + msg);
+		} else {
+			simpMessagingTemplate.convertAndSendToUser("snake", "/queue/chat", "dante -> " + msg);
+		}
 	}
 	
 }

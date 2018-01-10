@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket, 点对点</title>
+    <script src="/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+	
+	<div style="margin: 20px;padding: 15px;">
+		<button id="conn">连接</button>
+		<button id="disconn" disabled="disabled">断开</button>
+		<br/>
+		<input type="text" id="msg" style="width: 120px" />
+		<button id="sendBtn">发送消息</button>
+	</div>
+	<div id="retMsg"></div>
+	
+	<script type="text/javascript">
+		var retryCount = 0;
+		var TopicPage = {
+			stompClient: null,
+			selfDisconn: false,
+			connect: function() {
+				this.selfDisconn = false;
+				// 通过 SocketJS 注册 StompEndpoint
+				var socket = new SockJS('/chat_room');
+				this.stompClient = Stomp.over(socket);
+				// Stomp 消息基于帧（frame）
+				this.stompClient.connect({}, function (frame) {
+					TopicPage.connectStatusChange(true);
+					console.log('Connected: ' + frame);
+					TopicPage.stompClient.subscribe('/user/queue/chat', function (returnMsg) {
+			            $('#retMsg').append('<div>'+returnMsg.body+'</div>');
+			        });
+				});
+			},
+			connectStatusChange: function(connected) {
+				$('#conn').prop('disabled', connected);
+				$('#disconn').prop('disabled', !connected);
+			},
+			disconnect: function() {
+				this.selfDisconn = true;
+				if (this.stompClient != null) {
+			        this.stompClient.disconnect();
+			    }
+			    this.connectStatusChange(false);
+			    console.log("Disconnected");
+			},
+			checkConn: function() {
+				setInterval(function() {
+					if(TopicPage.selfDisconn) {
+						return;
+					}
+					// 重连 10 次不成功，将不再尝试
+					if(retryCount == 10) {
+						return;
+					}
+					if(TopicPage.stompClient) {
+						if(!TopicPage.stompClient.connected) {
+							console.log('连接丢失，重新连接！' + retryCount)
+							TopicPage.connect();
+							retryCount++;
+						}
+					}
+				}, 3000);
+			},
+			registerEvt: function() {
+				this.checkConn();
+				$('#conn').click(function(){
+					TopicPage.connect();
+				});
+				$('#disconn').click(function(){
+					TopicPage.disconnect();
+				});
+				$('#sendBtn').click(function() {
+					TopicPage.stompClient.send("/p2p", {}, $('#msg').val());
+				});
+			}
+		};
+		$(function() {
+			TopicPage.registerEvt();
+		});
+	</script>
+</body>
+</html>
