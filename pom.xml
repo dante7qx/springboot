@@ -44,6 +44,7 @@
 		<module>springboot-data-mongo</module>
 		<module>springboot-jasypt</module>
 		<module>springboot-data-jpa</module>
+		<module>springboot-jdbc</module>
 		<module>springboot-ws-server</module>
 		<module>springboot-ws-client</module>
 		<module>springboot-admin-server</module>
