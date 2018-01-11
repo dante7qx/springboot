@@ -47,8 +47,9 @@ public class UserService {
 	
 	public void batchInsert(List<UserPO> users) {
 		final String sql = "insert into t_user(name, age) values (?, ?)";
-		List<Object[]> args = users.stream().map(u -> new Object[]{u.getName(), u.getAge()}).collect(Collectors.toList());
-		jdbcTemplate.batchUpdate(sql, args);
+		jdbcTemplate.batchUpdate(sql, users.stream()
+											.map(u -> new Object[]{u.getName(), u.getAge()})
+											.collect(Collectors.toList()));
 	}
 	
 	public void update(UserPO user) {
