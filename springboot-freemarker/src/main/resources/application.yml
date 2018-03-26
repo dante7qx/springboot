@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: dante-springboot-freemarker
+  profiles:
+    active: uat
+  freemarker:
+    suffix: .html
+server:
+  port: 8101
+  
