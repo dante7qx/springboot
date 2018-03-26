@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: dante-springboot-allatori
+  profiles:
+    active: uat
+server:
+  port: 8080

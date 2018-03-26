@@ -55,6 +55,7 @@
 		<module>springboot-rabbitmq-consumer</module>
 		<module>springboot-websocket</module>
 		<module>springboot-freemarker</module>
+		<module>springboot-allatori</module>
 	</modules>
 
 	<parent>
