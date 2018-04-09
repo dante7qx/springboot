@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dante-springboot-kafka-producer
+  kafka:
+    bootstrap-servers:
+    - 10.71.225.22:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 0
+server:
+  port: 8101
+  

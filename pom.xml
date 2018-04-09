@@ -56,6 +56,8 @@
 		<module>springboot-websocket</module>
 		<module>springboot-freemarker</module>
 		<module>springboot-allatori</module>
+		<module>springboot-kafka-producer</module>
+		<module>springboot-kafka-consumer</module>
 	</modules>
 
 	<parent>

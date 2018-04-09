@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dante-springboot-kafka-consumer
+  kafka:
+    bootstrap-servers:
+    - 10.71.225.22:9092
+    consumer:
+      group-id: test-consumer-group
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+  port: 8102
+  
