@@ -58,12 +58,13 @@
 		<module>springboot-allatori</module>
 		<module>springboot-kafka-producer</module>
 		<module>springboot-kafka-consumer</module>
+		<module>springboot-shell</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.9.RELEASE</version>
+		<version>1.5.12.RELEASE</version>
 	</parent>
 
 	<dependencies>
