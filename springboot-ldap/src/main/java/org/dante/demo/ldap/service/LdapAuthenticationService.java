@@ -4,6 +4,7 @@ import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.DirContext;
 
+import org.dante.demo.ldap.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapUtils;
@@ -35,6 +36,25 @@ public class LdapAuthenticationService {
 	}
 	
 	
-	
+	public void authenticateOpenShift(String userName, String password) {
+		DirContext dirContext = null; 
+		try {
+			dirContext = ldapTemplate.getContextSource().getContext(userName, password);
+			System.out.println("111111111111111111111");
+			
+			/*
+			Person p = new Person();
+			p.setCn("sxx");
+			p.setSn("sxx");
+			p.setUserPassword("123456");
+			ldapTemplate.create(p);
+			*/
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			LdapUtils.closeContext(dirContext);
+		}
+	}
 	
 }

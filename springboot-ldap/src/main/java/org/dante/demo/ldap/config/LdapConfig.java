@@ -20,7 +20,9 @@ public class LdapConfig {
 	public LdapContextSource contextSourceTarget() {
 		LdapContextSource ldapContextSource = new LdapContextSource();
 		ldapContextSource.setUrl(ldapUrl);
-		ldapContextSource.setUserDn("dc=HNA,dc=NET");
+//		ldapContextSource.setUserDn("dc=HNA,dc=NET");
+		ldapContextSource.setUserDn("dc=hicaas,dc=com");
+		ldapContextSource.setPassword("Hi_CaaS_20180416");
 		return ldapContextSource;
 	}
 }

@@ -1,2 +1,6 @@
+server:
+  port: 8010
 ldap: 
-  url: ldap://10.72.8.10:389/
+#  url: ldap://10.72.8.10:389/
+#  url: ldap://10.48.2.17:389
+   url: ldap://localhost:389

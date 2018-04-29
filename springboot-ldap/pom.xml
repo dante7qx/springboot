@@ -16,6 +16,7 @@
 
 	<properties>
 		<spring-ldap.version>2.3.1.RELEASE</spring-ldap.version>
+		<apache-ldap.version>1.0.0</apache-ldap.version>
 	</properties>
 
 	<dependencies>
@@ -26,7 +27,11 @@
 		<dependency>
 			<groupId>org.springframework.ldap</groupId>
 			<artifactId>spring-ldap-core</artifactId>
-			<version>${spring-ldap.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.api</groupId>
+			<artifactId>api-all</artifactId>
+			<version>${apache-ldap.version}</version>
 		</dependency>
 	</dependencies>
 </project>

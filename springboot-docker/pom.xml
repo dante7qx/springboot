@@ -15,7 +15,7 @@
 	<description>Dante Springboot Docker</description>
 
 	<properties>
-		<docker.image.prefix>dante2012</docker.image.prefix>
+		<docker.image.prefix>dante</docker.image.prefix>
 	</properties>
 
 	<dependencies>
