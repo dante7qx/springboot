@@ -8,5 +8,8 @@
 			<method access="protected+" />
 		</class>
 	</keep-names>
+	<ignore-classes>
+        <class template="class org.dante.springboot.controller.SayController"/>
+    </ignore-classes>
 	<property name="log-file" value="log.xml" />
 </config>

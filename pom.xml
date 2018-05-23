@@ -59,6 +59,7 @@
 		<module>springboot-kafka-producer</module>
 		<module>springboot-kafka-consumer</module>
 		<module>springboot-shell</module>
+		<module>springboot-k8s</module>
 	</modules>
 
 	<parent>
