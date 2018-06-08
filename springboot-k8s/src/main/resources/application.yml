@@ -3,3 +3,10 @@ spring:
     name: dante-springboot-logger
   profiles:
     active: dev
+feign:
+  hystrix.enabled: true 
+  client:
+    config:
+      default:
+        loggerLevel: full
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000

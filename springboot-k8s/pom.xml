@@ -14,12 +14,50 @@
 	<name>springboot-k8s</name>
 	<description>Dante Springboot Kubernetes</description>
 
+	<properties>
+		<k8s.version>3.1.12</k8s.version>
+		<feign.version>1.4.4.RELEASE</feign.version>
+		<!-- istio sdk -->
+		<snowdrop-istio.version>0.9</snowdrop-istio.version>
+		<javax-validation.version>2.0.1.Final</javax-validation.version>
+		<hibernate-validator.version>6.0.10.Final</hibernate-validator.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
-			<groupId>io.kubernetes</groupId>
-			<artifactId>client-java</artifactId>
-			<version>1.0.0</version>
-			<scope>compile</scope>
+			<groupId>io.fabric8</groupId>
+			<artifactId>kubernetes-client</artifactId>
+			<version>${k8s.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>${feign.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>${feign.version}</version>
+		</dependency>
+		
+		<!--  
+		<dependency>
+			<groupId>me.snowdrop</groupId>
+			<artifactId>istio-model</artifactId>
+			<version>0.9</version>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>me.snowdrop</groupId>
+			<artifactId>istio-client</artifactId>
+			<version>${snowdrop-istio.version}</version>
+		</dependency>
+
+
 	</dependencies>
 </project>

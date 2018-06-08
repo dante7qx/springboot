@@ -21,8 +21,8 @@ public class SpringbootLdapApplicationTests {
 
 	@Test
 	public void authenticate() {
-		String userName = "ch.sun";
-		String password = "qye.832";
+		String userName = "guoqing";
+		String password = "Asdfgh123";
 		ldapAuthenticationService.authenticate(userName, password);
 	}
 

@@ -1,6 +1,10 @@
 package org.dante.springboot.docker;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.NumberFormat;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,7 @@ public class DockerController {
 	private String hello;
 
 	@GetMapping("/docker")
-	public String docker() {
+	public String docker(HttpServletRequest request) throws UnknownHostException {
 		Runtime runtime = Runtime.getRuntime();
 		final NumberFormat format = NumberFormat.getInstance();
 		final long maxMemory = runtime.maxMemory();
@@ -33,7 +37,7 @@ public class DockerController {
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
-		return hello + "Docker！";
+		return hello + "Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
 	}
 
 }
