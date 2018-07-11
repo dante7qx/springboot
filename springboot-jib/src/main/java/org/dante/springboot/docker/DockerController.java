@@ -19,8 +19,6 @@ public class DockerController {
 	
 	@Value("${hello.msg}")
 	private String hello;
-	@Value("${hello.x-info}")
-	private String xInfo;
 
 	@GetMapping("/docker")
 	public String docker(HttpServletRequest request) throws UnknownHostException {
@@ -39,7 +37,7 @@ public class DockerController {
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
-		return hello + "-" + xInfo + " - Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
+		return hello + "Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
 	}
 
 }

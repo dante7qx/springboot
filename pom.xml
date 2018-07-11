@@ -61,6 +61,8 @@
 		<module>springboot-shell</module>
 		<module>springboot-k8s</module>
 		<module>springboot-apollo</module>
+		<module>springboot-elasticsearch</module>
+		<module>springboot-jib</module>
 	</modules>
 
 	<parent>
