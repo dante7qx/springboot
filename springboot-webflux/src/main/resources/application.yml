@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: ${config.profile:dev}
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/mongo_webflux
