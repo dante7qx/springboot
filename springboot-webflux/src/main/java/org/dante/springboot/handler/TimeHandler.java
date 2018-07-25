@@ -55,7 +55,8 @@ public class TimeHandler {
 		return ok()
 				.contentType(MediaType.TEXT_EVENT_STREAM)
 				.body(Flux.interval(Duration.ofSeconds(1L))
-						.map(l -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))), 
+						.map(l -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
+								.concat(" - " + l)), 
 						String.class);
 	}
 }
