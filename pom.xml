@@ -56,7 +56,7 @@
 		<module>springboot-websocket</module>
 		<module>springboot-freemarker</module>
 		<module>springboot-allatori</module>
-		<module>springboot-webflux-annotation</module>
+		<module>springboot-webflux</module>
 	</modules>
 
 	<parent>

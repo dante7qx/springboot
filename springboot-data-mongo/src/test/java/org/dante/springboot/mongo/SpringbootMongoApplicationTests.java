@@ -55,7 +55,7 @@ public class SpringbootMongoApplicationTests {
 		userDAO.save(new UserPO(3L, "kaka", 50, "M", "2017-11-11"));
 		Assert.assertEquals(3, userDAO.findAll().size());
 		// 删除一个User，再验证User总数
-		UserPO u = userDAO.findOne(1L);
+		UserPO u = userDAO.findById(1L).get();
 		userDAO.delete(u);
 		Assert.assertEquals(2, userDAO.findAll().size());
 		// 删除一个User，再验证User总数
@@ -66,7 +66,7 @@ public class SpringbootMongoApplicationTests {
 
 	@Test
 	public void update() {
-		UserPO u = userDAO.findOne(3L);
+		UserPO u = userDAO.findById(1L).get();
 		u.setUsername("dante");
 		u.setAge(32);
 		userDAO.save(u);
