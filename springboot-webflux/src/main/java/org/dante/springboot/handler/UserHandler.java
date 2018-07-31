@@ -22,6 +22,12 @@ public class UserHandler {
 	@Autowired
 	private GithubClient githubClient;
 
+	/**
+	 * 根据 name 获取用户
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public Mono<ServerResponse> getUser(ServerRequest request) {
 		String name = request.pathVariable("name");
 		log.info("PathVariable name = {}", name);
