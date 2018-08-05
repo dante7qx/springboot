@@ -38,8 +38,10 @@ public class DockerController {
 		LOGGER.info("Max memory: " + format.format(maxMemory / mb) + mega);
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
-
-		return hello + "-" + xInfo + " - Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
+		
+		String returnStr = hello + "-" + xInfo + " - Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
+		LOGGER.info("--------- {} ---------", returnStr);
+		return returnStr;
 	}
 
 }
