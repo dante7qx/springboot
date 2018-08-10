@@ -1,6 +1,7 @@
 package org.dante.springboot.docker;
 
 import java.text.NumberFormat;
+import java.time.Instant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,5 +36,10 @@ public class DockerController {
 
 		return hello + "Docker！";
 	}
-
+	
+	@GetMapping("/")
+	public MsgVO msg() {
+		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
+	}
+	
 }
