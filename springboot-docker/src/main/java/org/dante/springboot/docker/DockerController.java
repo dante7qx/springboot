@@ -21,6 +21,8 @@ public class DockerController {
 	private String hello;
 	@Value("${hello.x-info}")
 	private String xInfo;
+	@Value("${hello.zk.cn_address}")
+	private String zkAddress;
 
 	@GetMapping("/docker")
 	public String docker(HttpServletRequest request) throws UnknownHostException {
@@ -41,6 +43,7 @@ public class DockerController {
 		
 		String returnStr = hello + "-" + xInfo + " - Docker！" + InetAddress.getLocalHost().getHostName() + " - " + IPUtils.getIpAddr(request);
 		LOGGER.info("--------- {} ---------", returnStr);
+		LOGGER.info("--------- ZK_Address {} ---------", zkAddress);
 		return returnStr;
 	}
 

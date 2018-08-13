@@ -1,3 +1,2 @@
 hello:
   msg: '${ok.str:[DEV] 你好，}'  
-  x-info: 'X计划'

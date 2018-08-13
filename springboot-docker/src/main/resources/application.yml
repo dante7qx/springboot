@@ -1,3 +1,7 @@
 spring:
   profiles:
     active: ${config.profile:dev}
+hello:
+  x-info: 'X计划'
+  zk:
+    cn_address: 172.0.0.1
