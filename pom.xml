@@ -63,6 +63,7 @@
 		<module>springboot-apollo</module>
 		<module>springboot-elasticsearch</module>
 		<module>springboot-jib</module>
+		<module>springboot-security</module>
 	</modules>
 
 	<parent>
@@ -99,18 +100,4 @@
 		</dependency>
 		-->
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>

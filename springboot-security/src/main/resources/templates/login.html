@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title th:fragment="title">登录</title>
+</head>
+<body>
+	<div th:fragment="content">
+		<p th:text="${#servletContext.contextPath}">Welcome to our grocery store!</p>
+		<form name="loginForm" th:action="@{/login}" method="post">
+			<fieldset>
+				<legend>
+					<span>请先登录</span>
+					<span th:text="${#dates.format(new java.util.Date(),'yyyy-MM-dd HH:mm:ss')}"></span>
+				</legend>
+				<div th:if="${param.error}" class="alert alert-error">
+					<label>用户名或密码错误</label>
+				</div>
+				<div th:if="${param.logout}" class="alert alert-success">
+					<label>你已经注销了</label>
+				</div>
+				<div th:if="${param.expired}" class="alert alert-success">
+					<label>你在其它地方已经登录了</label>
+				</div>
+				<div th:if="${param.invalidSession}" class="alert alert-success">
+					<label>会话失效，请重新登录</label>
+				</div>
+				<label for="username">用户名</label>
+				<input type="text" id="username" name="username"/>
+				<label for="password">密码</label>
+				<input type="password" id="password" name="password"/>
+				<br/>
+				<div th:if="${kaptcha == true}">
+					<label for="kaptcha">验证码</label>
+					<input type="text" id="kaptcha" name="kaptcha" style="width:60px;"/>
+					<img style="width:70px;height:30px;display:inline;top:10px;position: relative;" id="kaptchaImg" th:src="@{/images/kaptcha.jpg}" title="点击更换" onclick="javascript:refreshCaptcha();"/>
+				</div>
+				<div th:if="${session.SPRING_SECURITY_LAST_EXCEPTION}" class="alert alert-success">
+					<label th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">验证失败</label>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn">登录</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</body>
+<script th:src="@{webjars/jquery/1.11.3/jquery.min.js}" type="text/javascript"></script>
+<script th:inline="javascript">
+	var contextPath = [[${#servletContext.contextPath}]];
+    var today = [[${#dates.format(new java.util.Date(),'yyyy-MM-dd HH:mm:ss')}]];
+    function refreshCaptcha() {  
+        $("#kaptchaImg").attr("src",contextPath+"/images/kaptcha.jpg?t=" + Math.random());    
+    }
+    $(function() {
+    	if(top.location != this.location) {
+    		top.location.replace('loginpage');
+    	}
+    });
+</script>
+</html>

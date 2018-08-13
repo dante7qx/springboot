@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1" />
+    <title>一梦如是</title>
+    <link th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{ux/bootstrap/css/navtop.css}" rel="stylesheet"/>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <h3>微服务精灵<small onclick="$('#logoutForm').submit();">注销</small></h3>
+            <form id="logoutForm" th:action="@{/logout}" method="post"></form>
+        </header>
+        <!--顶部菜单-->
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    	<ul class="nav navbar-nav">
+                    		<li th:each="menu,menuStat : ${menus}" class="menu-item">
+                    			<a th:if="${#lists.isEmpty(menu.children)}" href="javascript:;" th:data-title="${menu.text}" th:data-src="@{'/'+${menu.attributes.url}}" th:text="${menu.text}">
+                    				<span th:if="${menuStat.index == 0}" class="sr-only">(current)</span>
+                    			</a>
+                    			<a th:unless="${#lists.isEmpty(menu.children)}" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+                    				aria-haspopup="true" aria-expanded="true" th:text="${menu.text}">
+                    			</a>
+                    			<ul th:unless="${#lists.isEmpty(menu.children)}" class="sub-menu dropdown-menu">
+                    				<li th:if="${#lists.isEmpty(childmenu.children)}" th:each="childmenu : ${menu.children}" class="menu-item">
+                    					<a href="javascript:;" th:data-title="${childmenu.text}" th:data-src="@{'/'+${childmenu.attributes.url}}" th:text="${childmenu.text}"></a>
+                    				</li>
+                    				<li th:unless="${#lists.isEmpty(childmenu.children)}" th:each="childmenu : ${menu.children}" class="menu-item">
+                    					<a href="javascript:;" th:text="${childmenu.text}"></a>
+                    					<ul class="sub-menu sub-menu_h dropdown-menu">
+                    						<li class="menu-item" th:each="submenu : ${childmenu.children}">
+                    							<a href="javascript:;" th:data-title="${submenu.text}" th:data-src="@{'/'+${submenu.attributes.url}}" th:text="${submenu.text}"></a>
+                    						</li>
+<!--                     					<li role="separator" class="divider"></li> -->
+                    					</ul>
+                    				</li>
+                    			</ul>
+                    		</li>
+                    	</ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <!--内容展示区：begin-->
+            <div class="col-sm-12">
+                <ul id="js-tabBar" class="nav nav-tabs"> </ul>
+                <div id="js-iframe-container" class="embed-responsive"></div>
+            </div>
+            <!--内容展示区：end-->
+        </div>
+    </div>
+    <script th:src="@{webjars/jquery/1.11.3/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{ux/bootstrap/js/navtop.js}" type="text/javascript"></script>
+    <script th:line="javascript">
+        $(function() {
+        	MainPage.init();
+        });
+    </script>
+</body>
+
+</html>

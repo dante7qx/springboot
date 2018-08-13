@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<head th:replace="common/common"/>
+<title th:fragment="title">用户信息</title>
+</head>
+<body>
+	<div class="bdcontent">
+		<table id="userGridlist"></table>
+	</div>
+	<div id="userGridToolbar" class="bdgridtoolbar">
+		<form id="userQueryForm">
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td class="searchtitle">姓名</td>
+								<td><input id="queryName" name="name" type="text"/></td>
+								<td class="searchtitle">邮箱</td>
+								<td><input id="queryEmail" name="email" type="text"/></td>
+								<td class="searchtitle">日期</td>
+								<td><input id="queryDate" name="queryDate" class="easyui-datebox" type="text"/></td>
+								<td class="searchtitle">
+									<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="UserPage.search();">查询</a>
+								</td>
+								<td>
+									<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="UserPage.reset();">重置</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td align="right">
+						<a sec:authorize="hasAuthority('sysmgr.user.update')" href="javascript:;" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="UserPage.editUser('');">新增</a>
+						<a sec:authorize="hasAuthority('sysmgr.user.update')" href="javascript:;" class="easyui-linkbutton" iconCls="icon-lock" plain="true" onclick="UserPage.modifyPassword();">修改密码</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="userWindow" class="easyui-window" modal="true" collapsible="false"
+		minimizable="true" maximizable="true" resizable="false" closed="true"
+		style="height:400px; width: 650px; display: none;"></div>
+		
+	<script th:src="@{ux/util/hnasys-util.js}" type="text/javascript"></script>
+	<script th:src="@{module/user/userlist.js}" type="text/javascript"></script>
+	<script th:line="javascript">
+		$(function() {
+			UserPage.loadUserList();
+		});
+	</script>
+</body>
+</html>

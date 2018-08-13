@@ -1,0 +1,57 @@
+.menu-item {
+	position: relative;
+}
+
+.sub-menu_h {
+	top: -2px;
+	left: 100%;
+	display: none;
+}
+
+.left-menu, .left-menu+div {
+	transition: width 0.25s;
+}
+
+.left-menu_shrink {
+	width: 20px;
+	padding: 0;
+}
+
+.left-menu_shrink+div {
+	width: 95%;
+}
+
+.left-menu_shrink>ul {
+	width: 0;
+	overflow: hidden;
+}
+
+.left-menu_shrink .left-menu_arrow-box:after {
+	content: '>';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)
+}
+
+.left-menu_arrow-box {
+	position: absolute;
+	top: 0;
+	right: -5px;
+	bottom: 0;
+	width: 20px;
+	background-color: #e7e7e7;
+}
+
+.left-menu_arrow-box:after {
+	content: '<';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%)
+}
+
+.level2-menu-item>ul {
+	height: 0;
+	overflow: hidden;
+}

@@ -1,0 +1,88 @@
+/**
+与 easyui themes 的样式相对应
+**/
+body {
+	/*
+	font-family: "Microsoft YaHei", tahoma, verdana, sans-serif;
+	font-size: 12px;
+	margin: 0px;
+	*/
+	
+}
+
+.bdcontent {
+	margin: 10px;
+}
+
+a.bdhref:link {
+	color: #337ab7;
+	text-decoration: none;
+}
+
+a.bdhref:visited {
+	color: #337ab7;
+	text-decoration: underline;
+}
+
+a.bdhref:hover {
+	color: #337ab7;
+	text-decoration: underline;
+}
+
+a.bdhref:active {
+	color: #337ab7;
+}
+
+.bdgridtoolbar {
+	padding:5px;
+}
+
+.bdgridtoolbar form > table:NTH-OF-TYPE(1) {
+	width: 100%;
+}
+
+.bdgridtoolbar > table:NTH-OF-TYPE(1) {
+	width: 100%;
+}
+
+table.tbcontent {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tbcontent td {
+	border: 1px solid #D4D4D4;
+	padding: 4px 4px;
+	*padding: 3px 4px
+}
+
+table.tbcontent .tbtitle {
+	text-align: right;
+	background-color: #FFFFFF
+}
+
+.searchtitle {
+	padding:0 3px 0 10px;
+}
+
+.buttonGaps {
+	display: none;
+	margin-left: 7px;
+}
+.buttonBaiscGaps {
+	margin-left: 7px;
+}
+
+.formborder {
+	border: none;
+	background: none;
+}
+
+.read-only {
+	border: none;
+	background: none;
+}
+
+.p-hide, .combo-hide {
+	margin: 0;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title th:fragment="title">首页</title>
+</head>
+<body>
+	<div class="container">
+		你好，<span th:text="${#httpServletRequest.remoteUser}"></span>
+		<br/>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="注销" />
+		</form>
+		<br/>
+		<div sec:authorize="hasAuthority('sysmgr.user.query')">
+		  	<a th:href="@{/user}" target="_blank">用户管理</a>
+		</div>
+		<div sec:authorize="hasAuthority('sysmgr.authority.query')">
+		  	<a th:href="@{/authority}" target="_blank">权限管理</a>
+		</div>
+		<div sec:authorize="hasAuthority('sysmgr.role.query')">
+		  	<a th:href="@{/role}" target="_blank">角色管理</a>
+		</div>
+		<div sec:authorize="hasAuthority('sysmgr.resource.query')">
+		  	<a th:href="@{/menu}" target="_blank">菜单管理</a>
+		</div>
+		
+		<a th:href="@{${userPath}}" target="_blank">测试动态url</a>
+		
+	</div>
+</body>
+</html>

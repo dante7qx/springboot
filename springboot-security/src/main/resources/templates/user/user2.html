@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<script type="text/javascript" th:src="@{webjars/jquery/1.12.4/jquery.min.js}"></script>
+<script th:inline="javascript">
+var UserPage = {
+	contextPath : [[${#servletContext.contextPath}]],
+	getUserList: function() {
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$.ajax({
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
+			url: UserPage.contextPath+'/user/query',
+			contentType: 'application/json',
+			type: 'post',
+			dateType: 'json',
+			data: JSON.stringify({'name': 'dante'}),
+			success: function(result) {
+				if(result && result.length > 0) {
+					$.each(result, function(i, user) {
+						$('#userInfo').append('<span>')
+						.append(user.name + ' -> ' + user.email)
+						.append('<br/>')
+						.append('</span>');
+					});
+				} else {
+					alert('出错了!');
+				}
+			}
+		});
+	}
+};
+$(function() {
+	$.ajaxSetup({
+		complete: function(xhr, textStatus) {
+			if(xhr.status == "401") {
+				window.location = '/login';
+			}
+		}
+	});
+});
+</script>
+<title th:fragment="title">用户信息</title>
+</head>
+<body>
+	<div class="container">
+		<div sec:authorize="hasAuthority('sysmgr.user.query')">
+		  <h3 onclick="UserPage.getUserList();">用户信息</h3>
+		  <div id="userInfo">
+		  </div>
+		</div>
+		<div sec:authorize="hasAuthority('sysmgr.user.update')">
+		  <h3>新增、修改用户</h3>
+		</div>
+		<div sec:authorize="hasAuthority('sysmgr.user.delete')">
+		  <h3>删除用户</h3>
+		</div>
+	</div>
+</body>
+</html>

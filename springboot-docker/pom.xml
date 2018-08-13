@@ -15,7 +15,6 @@
 	<description>Dante Springboot Docker</description>
 
 	<properties>
-		<!-- harbor.caas.dante.com/greendev/spdocker -->
 		<docker.image.prefix>dante</docker.image.prefix>
 	</properties>
 
