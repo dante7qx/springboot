@@ -1,3 +1,3 @@
 spring:
-  datasource:
-    platform: hsqldb
+  profiles:
+    active: mysql

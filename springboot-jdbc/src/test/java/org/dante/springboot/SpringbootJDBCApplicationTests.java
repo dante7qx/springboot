@@ -13,8 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.collect.Lists;
 
+import lombok.extern.slf4j.Slf4j;
+
 import static org.junit.Assert.*;
 
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootJDBCApplicationTests {
@@ -36,7 +39,7 @@ public class SpringbootJDBCApplicationTests {
 		user.setName("沐");
 		user.setAge(25);
 		userService.insertReturnId(user);
-		System.out.println(user);
+		log.info("user ==> {}", user);
 	}
 	
 	@Test
@@ -67,14 +70,14 @@ public class SpringbootJDBCApplicationTests {
 	@Test
 	public void queryUsers() {
 		List<UserPO> users = userService.queryUsers();
-		users.forEach(System.out::println);
+		users.forEach(u -> log.info("user ==> {}", u));
 		assertNotNull(users);
 	}
 	
 	@After
 	public void showUsers() {
 		List<UserPO> users = userService.queryUsers();
-		users.forEach(System.out::println);
+		users.forEach(u -> log.info("user ==> {}", u));
 	}
 	
 }
