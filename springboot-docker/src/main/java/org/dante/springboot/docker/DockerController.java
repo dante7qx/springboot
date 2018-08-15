@@ -3,6 +3,8 @@ package org.dante.springboot.docker;
 import java.text.NumberFormat;
 import java.time.Instant;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,8 +40,16 @@ public class DockerController {
 	}
 	
 	@GetMapping("/")
-	public MsgVO msg() {
+	public MsgVO msg(HttpServletRequest request) {
+		LOGGER.info("---> IP {} 请求.", IPUtils.getIpAddr(request));
 		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
+	}
+	
+	@GetMapping("/healthz")
+	public String healthz(HttpServletRequest request) {
+		String returnStr = "UP - ".concat(IPUtils.getIpAddr(request));
+		LOGGER.info("---> {}", returnStr);
+		return returnStr;
 	}
 	
 }

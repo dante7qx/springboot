@@ -27,7 +27,7 @@
 		<prudent>false</prudent>
 	</appender>
 	
-	<springProfile name="dev">
+	<springProfile name="dev,node1,node2,node3">
 		<root level="INFO">
 			<appender-ref ref="STDOUT" />
 		</root>

@@ -1,3 +1,27 @@
 spring:
   profiles:
-    active: ${config.profile:dev}
+    active: ${config.profile:node1}
+  
+---
+spring:
+  profiles: node1
+server:
+  port: 8101
+hello:
+  msg: '[当前节点 node1] 你好，'
+
+---
+spring:
+  profiles: node2
+server:
+  port: 8102
+hello:
+  msg: '[当前节点 node2] 你好，'
+  
+---
+spring:
+  profiles: node3
+server:
+  port: 8103
+hello:
+  msg: '[当前节点 node3] 你好，'
