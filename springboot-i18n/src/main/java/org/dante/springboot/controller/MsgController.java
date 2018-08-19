@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MsgController {
-	
+
 	@Autowired
 	private I18nMsgService i18nMsgService;
-	
+
 	/**
 	 * Springboot I18N 国际化
 	 * 
@@ -23,7 +23,7 @@ public class MsgController {
 	public String i18n() {
 		return "<h1 align='center'>Springboot i18n 国际化</h1>";
 	}
-	
+
 	/**
 	 * 健康检查
 	 * 
@@ -35,17 +35,15 @@ public class MsgController {
 	}
 
 	/**
-	 * 添加 Header 信息
-	 * Accept-Language : zh-cn, zh, en-us
+	 * 添加 Header 信息 Accept-Language : zh-cn, zh, en-us
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@GetMapping("/msg")
+	@GetMapping(value = "/msg", produces = MediaType.APPLICATION_XML_VALUE)
 	public String msg(HttpServletRequest request) {
-		return i18nMsgService.getMessage("welcome").concat(" - ").concat(i18nMsgService.getMessage("country"));
+		return "<info>".concat(i18nMsgService.getMessage("welcome")).concat(" - ")
+				.concat(i18nMsgService.getMessage("country")).concat("</info>");
 	}
-	
-	
-	
+
 }
