@@ -1,0 +1,6 @@
+server:
+  port: 8100
+spring:
+  messages:
+    basename: i18n/messages
+    

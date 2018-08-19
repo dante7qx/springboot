@@ -57,6 +57,7 @@
 		<module>springboot-freemarker</module>
 		<module>springboot-allatori</module>
 		<module>springboot-webflux</module>
+		<module>springboot-i18n</module>
 	</modules>
 
 	<parent>
