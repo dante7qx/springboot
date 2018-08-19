@@ -42,8 +42,11 @@ public class MsgController {
 	 */
 	@GetMapping(value = "/msg", produces = MediaType.APPLICATION_XML_VALUE)
 	public String msg(HttpServletRequest request) {
-		return "<info>".concat(i18nMsgService.getMessage("welcome")).concat(" - ")
-				.concat(i18nMsgService.getMessage("country")).concat("</info>");
+		return "<i18n>"
+					.concat(i18nMsgService.getMessage("welcome"))
+					.concat(" - ")
+					.concat(i18nMsgService.getMessage("country"))
+					.concat("</i18n>");
 	}
 
 }
