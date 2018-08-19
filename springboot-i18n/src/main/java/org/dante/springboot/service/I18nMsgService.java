@@ -5,6 +5,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
+/**
+ * i18n 国际化服务类
+ * 
+ * @author dante
+ *
+ */
 @Service
 public class I18nMsgService {
 
