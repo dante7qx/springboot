@@ -1,7 +1,5 @@
 package org.dante.demo.ldap.service;
 
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
 import javax.naming.directory.DirContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,32 +7,49 @@ import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapUtils;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class LdapAuthenticationService {
 
 	@Autowired
 	private LdapTemplate ldapTemplate;
 	
+	/**
+	 * 普通 LDAP 认证
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public boolean authenticate(String userName, String password) {
+		boolean authenticate = ldapTemplate.authenticate("", "(cn="+userName+")", password);
+		log.info("===> {} LDAP 认证 {}", userName, authenticate);
+		return authenticate;
+	}
 	
-	public void authenticate(String userName, String password) {
+	/**
+	 * 海航集团域认证
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public boolean authenticateHNA(String userName, String password) {
+		boolean authenticate = false;
 		DirContext dirContext = null; 
 		try {
-			dirContext = ldapTemplate.getContextSource().getContext(userName+"@HNA.NET", password);
-			
-			NamingEnumeration<NameClassPair> list = dirContext.list("ou=海航集团,dc=HNA,dc=NET");
-			while(list.hasMore()) {
-				System.out.println(list.next());
-			}
-			
-			System.out.println(1);
+			userName = userName.concat("@HNA.NET");
+			dirContext = ldapTemplate.getContextSource().getContext(userName, password);
+			authenticate = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("LDAP authenticate error.", e);
 		} finally {
 			LdapUtils.closeContext(dirContext);
 		}
+		log.info("===> {} LDAP 认证 {}", userName, authenticate);
+		return authenticate;
 	}
-	
-	
-	
 	
 }

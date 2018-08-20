@@ -1,2 +1,19 @@
+spring:
+  profiles:
+    active: hna
+    
+---
+spring:
+  profiles: hna
 ldap: 
   url: ldap://10.72.8.10:389/
+  user-dn: dc=HNA,dc=NET
+
+---
+spring:
+  profiles: okd
+ldap: 
+  url: ldap://10.70.39.214:389/
+  base: ou=users,dc=ansible,dc=org
+  user-dn: cn=admin,dc=ansible,dc=org
+  password: generalcom
