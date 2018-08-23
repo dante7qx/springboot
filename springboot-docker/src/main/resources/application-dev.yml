@@ -1,2 +1,3 @@
 hello:
   msg: '[DEV] 你好，'
+  sleep: 10

@@ -34,9 +34,9 @@ public class SpringbootAsyncApplicationTests {
 			map.put("a", task1);
 			Future<String> task2 = map.get("a");
 			while(true) {  
-				System.out.println(task2.isDone());
+				LOGGER.info("任务执行状态: {}", task2.isDone());
 	            if(task2.isDone()) {  
-	            	LOGGER.info("Task2 result: {}", task2.get());  
+	            	LOGGER.info("任务执行结果: {}", task2.get());  
 	                break;  
 	            }  
 	            Thread.sleep(1000);  

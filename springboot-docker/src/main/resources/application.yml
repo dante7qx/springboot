@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ${config.profile:node1}
+    active: ${config.profile:dev}
   
 ---
 spring:
@@ -9,7 +9,6 @@ server:
   port: 8101
 hello:
   msg: '[当前节点 node1] 你好，'
-
 ---
 spring:
   profiles: node2

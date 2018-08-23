@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +16,8 @@ public class DockerController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DockerController.class);
 	
-	@Value("${hello.msg}")
-	private String hello;
+	@Autowired
+	private MsgProp msgProp;
 
 	@GetMapping("/docker")
 	public String docker() {
@@ -36,7 +36,7 @@ public class DockerController {
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
-		return hello + "Docker！";
+		return msgProp.getMsg() + "Docker！";
 	}
 	
 	@GetMapping("/")
@@ -49,6 +49,10 @@ public class DockerController {
 	public String healthz(HttpServletRequest request) {
 		String returnStr = "UP - ".concat(IPUtils.getIpAddr(request));
 		LOGGER.info("---> {}", returnStr);
+		try {
+			Thread.sleep(msgProp.getSleep() * 1000);
+		} catch (InterruptedException e) {
+		}
 		return returnStr;
 	}
 	

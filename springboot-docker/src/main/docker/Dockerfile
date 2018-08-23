@@ -2,14 +2,14 @@
 # Base image
 FROM java:8
 
-MAINTAINER Dante "ch.sun@hnair.com"
+LABEL MAINTAINER="Dante <ch.sun@hnair.com>"
 
-ENV config_profile uat
-ENV JAVA_OPTS="-Xms1g -Xmx1g"
-ENV TZ=Asia/Shanghai
+ENV config_profile dev
+ENV JAVA_OPTS="-Xms1g -Xmx1g" \
+	TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-VOLUME /logs
+VOLUME ["/logs"]
 
 ADD springboot-docker-0.0.1-SNAPSHOT.jar app.jar
 
