@@ -22,9 +22,9 @@ public class SpringbootDockerApplicationTests {
 	@Test
 	public void testKong() {
 		HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Host", "10.71.225.139");
+        requestHeaders.add("Host", "127.0.0.1");
         HttpEntity<String> requestEntity = new HttpEntity<String>(null, requestHeaders);		
-		ResponseEntity<String> resp = restTemplate.exchange("http://10.71.225.139:8000/msg", HttpMethod.GET, requestEntity, String.class);
+		ResponseEntity<String> resp = restTemplate.exchange("http://127.0.0.1:8000/msg", HttpMethod.GET, requestEntity, String.class);
 		String body = resp.getBody();
 		System.out.println("=============> " + body);
 	}

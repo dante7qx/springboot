@@ -81,8 +81,8 @@ public class SpringbootWebFluxApplicationTests {
 	@Test
 	public void test4Kong() {
 		webTestClient.get()
-			.uri("http://10.71.225.139:8000/msg")
-			.header("Host", "10.71.225.139")
+			.uri("http://127.0.0.1:8000/msg")
+			.header("Host", "127.0.0.1")
 			.exchange()
 			.returnResult(String.class)
             .getResponseBody()
