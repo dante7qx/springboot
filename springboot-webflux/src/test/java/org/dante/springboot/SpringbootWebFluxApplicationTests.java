@@ -32,7 +32,7 @@ public class SpringbootWebFluxApplicationTests {
 	
 	@Autowired
 	private WebTestClient webTestClient;
-
+	
 	@Test
 	public void test1PersistAddress() {
 		AddressPO address = new AddressPO(null, "2001", "风之谷-千寻", Date.from(Instant.now()));
@@ -78,5 +78,15 @@ public class SpringbootWebFluxApplicationTests {
 			.expectStatus().isOk();
 	}
 	
+	@Test
+	public void test4Kong() {
+		webTestClient.get()
+			.uri("http://10.71.225.139:8000/msg")
+			.header("Host", "10.71.225.139")
+			.exchange()
+			.returnResult(String.class)
+            .getResponseBody()
+            .subscribe(r -> log.info("================> {}", r));
+	}
 	
 }

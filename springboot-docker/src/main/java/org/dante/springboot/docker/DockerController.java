@@ -40,8 +40,15 @@ public class DockerController {
 	}
 	
 	@GetMapping("/")
-	public MsgVO msg(HttpServletRequest request) {
-		LOGGER.info("---> IP {} 请求.", IPUtils.getIpAddr(request));
+	public MsgVO msg(HttpServletRequest request) throws InterruptedException {
+		handleReqProxy(request);
+		Thread.sleep(1000);
+		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
+	}
+	
+	@GetMapping("/msg")
+	public MsgVO msg2(HttpServletRequest request) throws InterruptedException {
+		handleReqProxy(request);
 		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
 	}
 	
@@ -54,6 +61,17 @@ public class DockerController {
 		} catch (InterruptedException e) {
 		}
 		return returnStr;
+	}
+	
+	private void handleReqProxy(HttpServletRequest request) {
+		String xHeader = request.getHeader("X-DANTE-REQ");
+		String xName = request.getParameter("X-NAME");
+		String kongHeader = request.getHeader("Host");
+		String xcId = request.getHeader("X-Consumer-ID");
+		
+		LOGGER.info("Header Kong Header {}, X-DANTE-REQ {}, Param xName {}", kongHeader, xHeader, xName);
+		LOGGER.info("Basic Auth X-Consumer-ID => {}", xcId);
+		LOGGER.info("---> IP {} 请求.", IPUtils.getIpAddr(request));
 	}
 	
 }
