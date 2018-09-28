@@ -3,6 +3,7 @@ package org.dante.springboot.docker;
 import java.text.NumberFormat;
 import java.time.Instant;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -42,14 +43,24 @@ public class DockerController {
 	@GetMapping("/")
 	public MsgVO msg(HttpServletRequest request) throws InterruptedException {
 		handleReqProxy(request);
-		Thread.sleep(1000);
-		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
+		Cookie[] cookies = request.getCookies();
+		 if (null==cookies) {  
+			 LOGGER.info("没有cookie==============");  
+         } else {  
+             for(Cookie cookie : cookies){  
+                 cookie.setValue(null);  
+                 cookie.setMaxAge(0);// 立即销毁cookie  
+                 cookie.setPath("/");  
+                 LOGGER.info("被删除的cookie名字为:"+cookie.getName());  
+             }  
+         } 
+		return new MsgVO("S_KQS0932", msgProp.getMsg(), Instant.now().toEpochMilli(), "涯");
 	}
 	
 	@GetMapping("/msg")
 	public MsgVO msg2(HttpServletRequest request) throws InterruptedException {
 		handleReqProxy(request);
-		return new MsgVO("S_KQS0932", "卡秋莎", Instant.now().toEpochMilli(), "涯");
+		return new MsgVO("S_KQS0932", msgProp.getMsg(), Instant.now().toEpochMilli(), "涯");
 	}
 	
 	@GetMapping("/healthz")
