@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class SpringbootDockerApplication {
+public class SpringbootJaegerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootDockerApplication.class, args);
+		SpringApplication.run(SpringbootJaegerApplication.class, args);
 	}
 	
 	@Bean

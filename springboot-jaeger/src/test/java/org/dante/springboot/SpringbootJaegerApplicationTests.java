@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class SpringbootDockerApplicationTests {
+public class SpringbootJaegerApplicationTests {
 	
 	@Autowired
 	private RestTemplate restTemplate;

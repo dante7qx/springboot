@@ -69,21 +69,21 @@ public class JaegerController {
 	public List<MsgVO> svc2(HttpServletRequest request) throws InterruptedException {
 		String header = request.getHeader("appName");
 		String[] reqUrl = msgProp.getReqUrl().split(",");
-		MsgVO vo1 = restTemplate.getForObject(reqUrl[0], MsgVO.class, "appName", header.concat(" -> ").concat(appName));
-		MsgVO vo2 = restTemplate.getForObject(reqUrl[1], MsgVO.class, "appName", header.concat(" -> ").concat(appName));
+		MsgVO vo1 = restTemplate.getForObject(reqUrl[0].concat("?appName={appName}"), MsgVO.class, appName.concat(" -> ").concat(header));
+		MsgVO vo2 = restTemplate.getForObject(reqUrl[1].concat("?appName={appName}"), MsgVO.class, appName.concat(" -> ").concat(header));
 		return Arrays.asList(vo1, vo2);
 	}
 	
 	@GetMapping("/svc3")
 	public MsgVO svc3(HttpServletRequest request) throws InterruptedException {
 		String param = request.getParameter("appName");
-		return new MsgVO(param.concat(" -> ").concat(appName), msgProp.getMsg(), Instant.now().toEpochMilli(), "木");
+		return new MsgVO(appName.concat(" -> ").concat(param), msgProp.getMsg(), Instant.now().toEpochMilli(), "木");
 	}
 	
 	@GetMapping("/svc4")
 	public MsgVO svc4(HttpServletRequest request) throws InterruptedException {
 		String param = request.getParameter("appName");
-		return new MsgVO(param.concat(" -> ").concat(appName), msgProp.getMsg(), Instant.now().toEpochMilli(), "辰");
+		return new MsgVO(appName.concat(" -> ").concat(param), msgProp.getMsg(), Instant.now().toEpochMilli(), "辰");
 	}
 	
 	@GetMapping("/healthz")
