@@ -1,0 +1,18 @@
+hello:
+  msg: 'Service 2'
+  sleep: 1
+  req-url: http://127.0.0.1:8803/svc3,http://127.0.0.1:8804/svc4
+server:
+  port: 8802
+spring:
+  application:
+    name: svc2
+opentracing:
+  jaeger:
+    udp-sender:
+      host: 127.0.0.1
+      port: 5775
+    probabilistic-sampler:
+      sampling-rate: 0.8
+    rate-limiting-sampler:
+      max-traces-per-second: 0.6
