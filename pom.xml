@@ -59,6 +59,7 @@
 		<module>springboot-webflux</module>
 		<module>springboot-i18n</module>
 		<module>springboot-jaeger</module>
+		<module>springboot-ftp</module>
 	</modules>
 
 	<parent>

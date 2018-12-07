@@ -15,9 +15,11 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>${LOG_HOME}/springboot-docker/%d{yyyy-MM-dd}.log</FileNamePattern>
-			<MaxHistory>90</MaxHistory>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/${POD_NAME:-pod}_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+            <MaxFileSize>500KB</MaxFileSize>
+            <TotalSizeCap>20GB</TotalSizeCap>
 		</rollingPolicy>
 		<encoder>
 			<charset>utf-8</charset>
@@ -27,7 +29,7 @@
 		<prudent>false</prudent>
 	</appender>
 	
-	<springProfile name="dev,node1,node2,node3">
+	<springProfile name="dev">
 		<root level="INFO">
 			<appender-ref ref="STDOUT" />
 		</root>
@@ -44,7 +46,7 @@
 		</logger>
 	</springProfile>
 
-	<springProfile name="uat,prod">
+	<springProfile name="node1,node2,node3uat,prod">
 		<root level="WARN">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />

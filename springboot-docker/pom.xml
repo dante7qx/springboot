@@ -16,7 +16,7 @@
 	<description>Dante Springboot Docker</description>
 
 	<properties>
-		<docker.image.prefix>harbor.xiaohehe.com/spiritdev</docker.image.prefix>
+		<docker.image.prefix>harbor.air.haihangyun.com/spiritprd</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -49,7 +49,8 @@
 				<version>0.4.14</version>
 				<configuration>
 					<!-- 如果要将docker镜像push到DockerHub上去的话，这边的路径要和repo路径一致 -->
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+<!-- 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName> -->
+					<imageName>${docker.image.prefix}/log-test:v2</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<resources>
 						<resource>
