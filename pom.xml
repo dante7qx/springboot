@@ -60,6 +60,7 @@
 		<module>springboot-i18n</module>
 		<module>springboot-jaeger</module>
 		<module>springboot-ftp</module>
+		<module>springboot-flyway</module>
 	</modules>
 
 	<parent>
