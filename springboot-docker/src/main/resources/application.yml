@@ -9,6 +9,8 @@ server:
   port: 8101
 hello:
   msg: '[当前节点 node1] 你好，'
+  host: 192.168.1.2
+  port: 8289
 ---
 spring:
   profiles: node2

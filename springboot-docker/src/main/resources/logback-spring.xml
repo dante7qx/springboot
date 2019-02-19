@@ -46,7 +46,7 @@
 		</logger>
 	</springProfile>
 
-	<springProfile name="node1,node2,node3uat,prod">
+	<springProfile name="node1,node2,node3,uat,prod">
 		<root level="WARN">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />
