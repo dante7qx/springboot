@@ -2,7 +2,9 @@ package org.dante.springboot;
 
 import java.util.List;
 
+import org.dante.springboot.dao.HobbyDAO;
 import org.dante.springboot.dao.PersonDAO;
+import org.dante.springboot.po.HobbyPO;
 import org.dante.springboot.po.PersonPO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +21,21 @@ public class SpringbootDruidApplicationTests {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpringbootDruidApplicationTests.class);
 	
 	@Autowired
-	private PersonDAO personDAO;
+	protected PersonDAO personDAO;
+	@Autowired
+	protected HobbyDAO hobbyDAO;
 	
 	@Test
-	public void findAll() {
+	public void findPersons() {
 		List<PersonPO> persons = personDAO.findAll();
 		LOGGER.info(persons.toString());
 	}
+	
+	@Test
+	public void findHobbys() {
+		List<HobbyPO> hobbys = hobbyDAO.findAll();
+		LOGGER.info(hobbys.toString());
+	}
+	
 
 }

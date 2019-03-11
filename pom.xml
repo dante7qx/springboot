@@ -34,6 +34,8 @@
 		<module>springboot-mybatis</module>
 		<module>springboot-mybatis-generator</module>
 		<module>springboot-mybatis-multi-datasource</module>
+		<module>springboot-mybatis-plus</module>
+		<module>springboot-mybatis-plus-generator</module>
 		<module>springboot-jwt-server</module>
 		<module>springboot-batch</module>
 		<module>springboot-ssl</module>
