@@ -41,6 +41,7 @@
 		<module>springboot-ssl</module>
 		<module>springboot-druid</module>
 		<module>springboot-druid-multi-datasource</module>
+		<module>springboot-hikaricp</module>
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
