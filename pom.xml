@@ -64,6 +64,7 @@
 		<module>springboot-jaeger</module>
 		<module>springboot-ftp</module>
 		<module>springboot-flyway</module>
+		<module>springboot-sharding-jdbc</module>
 	</modules>
 
 	<parent>
