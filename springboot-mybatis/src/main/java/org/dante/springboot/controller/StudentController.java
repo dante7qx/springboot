@@ -51,6 +51,11 @@ public class StudentController {
 		return studentMapper.queryStudentById(id);
 	}
 	
+	@GetMapping("/select/{id}")
+	public StudentPO selectById(@PathVariable Long id) {
+		return studentMapper.selectStudentById(id).orElseThrow(() -> new IllegalArgumentException("This Student does not exit!"));
+	}
+	
 	@GetMapping("/query_with_address/{id}")
 	public StudentPO queryWithAddressById(@PathVariable Long id) {
 		return studentMapper.queryStudentWithAddressById(id);
