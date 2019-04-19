@@ -16,7 +16,7 @@ public class SpringbootEmailApplicationTests {
 	
 	@Test
 	public void sendEmail() {
-		mailService.sendSimpleMail("ch.sun@haihangyun.com", "测试邮件", "来自Springboot 163 的问候！");
+		mailService.sendSimpleMail("307909697@qq.com", "测试邮件", "来自Springboot 163 的问候！");
 	}
 
 }
