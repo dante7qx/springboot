@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,7 +39,12 @@ public class DockerController {
 		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
-		return msgProp.getMsg() + "Docker！";
+		return msgProp.getMsg() + "Docker，你现在位于腾讯 Gaia 平台！";
+	}
+	
+	@PostMapping("/docker")
+	public String dockerPost(@RequestBody MsgVO msg) {
+		return msg.toString();
 	}
 	
 	@GetMapping("/")

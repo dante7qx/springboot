@@ -13,6 +13,6 @@ import lombok.Data;
 public class MsgProp {
 	private String msg;
 	private int sleep = 1;
-	private String host;
+	private String host = "127.0.0.1";
 	private Integer port = 8080;
 }
