@@ -1,8 +1,5 @@
 package org.dante.springboot;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,12 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
@@ -31,18 +25,12 @@ public class SpringbootDockerApplicationTests {
 	@Autowired
     private WebApplicationContext webApplicationContext;
 	
-	private MockMvc mockMvc;
+	protected MockMvc mockMvc;
 	
 	@Before
     public void init(){
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
-	
-	@Test
-	public void docker() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/docker").contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().string(containsString("Docker")));
-	 }
 	
 	@Test
 	public void testKong() {
