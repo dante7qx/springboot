@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: ${config.profile:dev}
+server:
+  tomcat:
+    basedir: logs
+    accesslog:
+      enabled: true
+      directory: tomcat
+#      pattern: common
+      request-attributes-enabled: true
+      
