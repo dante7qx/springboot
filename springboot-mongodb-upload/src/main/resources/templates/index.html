@@ -1,0 +1,12 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MongoDB 存储文件上传</title>
+</head>
+<body>
+	<h1>Home Page</h1>
+	<div th:if="${message != null}" th:text="${message}">Message</div>
+	<br/>
+	<a href="/photos/upload">Upload new Photo</a>
+</body>
+</html>

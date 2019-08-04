@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,9 @@ public class DockerController {
 	@Autowired
 	private MsgProp msgProp;
 
+	@Value("${hello.msg}")
+	private String ss;
+	
 	@GetMapping("/docker")
 	public String docker() {
 		Runtime runtime = Runtime.getRuntime();
@@ -41,6 +45,12 @@ public class DockerController {
 
 		return msgProp.getMsg() + "Docker，你现在位于腾讯 Gaia 平台！";
 	}
+	
+	@GetMapping("/prop")
+	public String propertiesUtil() {
+		return PropertiesUtils.getString("hello.msg");
+	}
+	
 	
 	@PostMapping("/docker")
 	public String dockerPost(@RequestBody MsgVO msg) {

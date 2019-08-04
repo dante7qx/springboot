@@ -45,6 +45,7 @@
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
+		<module>springboot-mongodb-upload</module>
 		<module>springboot-jasypt</module>
 		<module>springboot-data-jpa</module>
 		<module>springboot-jdbc</module>
@@ -64,6 +65,7 @@
 		<module>springboot-jaeger</module>
 		<module>springboot-ftp</module>
 		<module>springboot-flyway</module>
+		<module>springboot-tomcatlog</module>
 		<module>springboot-sharding-jdbc</module>
 		<module>springboot-sharding-proxy</module>
 	</modules>

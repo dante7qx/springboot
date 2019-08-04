@@ -1,0 +1,10 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+	<h1>您的图片</h1>
+	标题: <span th:text="${title}">name</span>
+	<br/>
+	<img alt="sample" th:src="*{'data:image/png;base64,'+image}" width="200"/>
+	<br/> <br/>
+	<a href="/">回到首页</a>	
+</body>
+</html>

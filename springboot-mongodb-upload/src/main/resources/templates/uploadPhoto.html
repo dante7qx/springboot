@@ -1,0 +1,15 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<h1>MongoDB 存储文件上传</h1>
+<form method="POST" action="/photos/add" enctype="multipart/form-data">
+	标题:<input type="text" name="title" />
+	<br/>
+	图片:<input type="file" name="image" accept="image/*" />
+	<br/>
+	<br/>
+    <input type="submit" value="上传" />
+</form>
+
+</body>
+</html>

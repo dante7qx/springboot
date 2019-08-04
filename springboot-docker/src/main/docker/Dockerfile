@@ -4,13 +4,14 @@ FROM java:8
 
 LABEL MAINTAINER="Dante <ch.sun@hnair.com>"
 
-ENV JAVA_OPTS="-Xms512m -Xmx512m" \
+ENV JAVA_OPTS="-Xms512m -Xmx512m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m" \
 	TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# 只需要设置 ENV TZ=Asia/Shanghai 就可以修改时区
+# RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 VOLUME ["/logs"]
 
-ADD springboot-docker-0.0.1-SNAPSHOT.jar app.jar
+COPY springboot-docker-0.0.1-SNAPSHOT.jar app.jar
 
 # 使 app.jar 具有文件修改时间（默认情况下，Docker创建所有容器文件处于“未修改”状态）
 RUN sh -c 'touch /app.jar'
@@ -21,3 +22,4 @@ RUN sh -c 'touch /app.jar'
 EXPOSE 8080
 
 ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+# ENTRYPOINT [ "java", "-jar", "app.jar", "-XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=128m -Xms1024m -Xmx1024m -Xmn256m -Xss256k", "-Djava.security.egd=file:/dev/./urandom" ]
