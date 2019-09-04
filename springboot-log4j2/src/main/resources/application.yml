@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dante-springboot-log4j2
+  profiles:
+    active: prod
+server:
+  port: 8101
+  
+---
+spirit:
+  name: SpiritProp
+  aliPay:
+    appId: 2016011401091406

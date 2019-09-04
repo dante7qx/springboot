@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	1. status表示log4j2本身的日志信息打印级别，和下面的level，不是一个概念
+	   TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+	2. Log4j2 组件本身日志级别，指的是如果 Log4j2 本身出错，打印出的日志级别配置。
+ -->
+<Configuration status="OFF" monitorInterval="30">
+	<Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p -&#45;&#45; [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+        <Property name="LOG_FILE_PATH">logs</Property>
+    </Properties>
+
+	<Appenders>
+		<Console name="LogToConsole" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}"/> 
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--> 
+			<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+		</Console>
+		
+		<Console name="BusinessLogToConsole" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}"/> 
+		</Console>
+		
+		<RollingFile name="LogToFile" fileName="${LOG_FILE_PATH}/${env:MY_POD_NAME}.log"
+			filePattern="${LOG_FILE_PATH}/${env:MY_POD_NAME}-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+                <SizeBasedTriggeringPolicy size="2MB" />
+                <!-- 每天创建一个日志文件 -->
+                <TimeBasedTriggeringPolicy interval="1" />
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了50 -->
+            <!--  计数器的最大值。一旦达到这个值，旧的档案将在随后的rollover中被删除 -->
+            <DefaultRolloverStrategy max="50"/>
+            <Filters>
+            	<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--> 
+				<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<Logger name="org.dante.springboot" level="INFO" additivity="false">
+			<AppenderRef ref="BusinessLogToConsole" />
+			<AppenderRef ref="LogToFile" />
+		</Logger>
+		<Logger name="org.apache.catalina" level="INFO" />
+		<Logger name="org.springframework" level="INFO" />
+		
+		<Root level="INFO">
+			<AppenderRef ref="LogToConsole" />
+			<AppenderRef ref="LogToFile" />
+		</Root>
+	</Loggers>
+</Configuration>

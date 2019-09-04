@@ -25,6 +25,7 @@
 		<module>springboot-cache</module>
 		<module>springboot-docker</module>
 		<module>springboot-logger</module>
+		<module>springboot-log4j2</module>
 		<module>springboot-aoplog</module>
 		<module>springboot-scheduling</module>
 		<module>springboot-scheduling-dynamic</module>
