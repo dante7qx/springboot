@@ -2,7 +2,6 @@ package org.dante.springboot.tomcatlog;
 
 import java.text.NumberFormat;
 import java.time.Instant;
-import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.val;
 
 @RestController
 public class DockerController {
