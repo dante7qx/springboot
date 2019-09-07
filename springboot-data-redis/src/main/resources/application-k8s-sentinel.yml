@@ -1,0 +1,13 @@
+spring:
+  redis:
+    jedis:
+      pool:
+        min-idle: 10
+        max-idle: 50
+        max-active: 200
+        max-wait: 3000  
+    sentinel:
+      master: ${sentinel_master:mymaster}
+      nodes: ${sentinel_node:127.0.0.1:26379}
+      
+## sentinel master 是 mymaster

@@ -1,0 +1,44 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-redis
+  namespace: dante
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-redis
+  template:
+    metadata:
+      labels:
+        app: web-redis
+    spec:
+      containers:
+      - name: web-redis
+        image: ccb-web-redis:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: api
+          containerPort: 8080
+        env:
+        - name: spring_profiles_active
+          value: k8s-sentinel
+        - name: sentinel_master
+          value: mymaster
+        - name: sentinel_node
+          value: "rfs-redisfailover:26379"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web-redis
+  namespace: dante
+spec:
+  selector:
+    app: web-redis
+  ports:
+  - port: 8080
+    targetPort: 8080 
+    
+### kubectl port-forward deployment/web-redis 8080:8080 -n dante
