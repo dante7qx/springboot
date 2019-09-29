@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserPO findOne(Long id) throws Exception {
-		return userDAO.findOne(id);
+		return userDAO.getOne(id);
 	}
 
 }

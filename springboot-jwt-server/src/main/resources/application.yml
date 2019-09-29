@@ -22,7 +22,7 @@ logging:
       security: DEBUG  
 jwt:
   header: Authorization
-  secret: mySecret        # 解密的key
+  secret: c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFESXBtUjJIZEhmNTljN3l4VXQ1MERIR3Yrd1N5YklHMXVrNTVOUnJ3Kzg5UEtKZFJNUnZkcVBmcmZFWmFNcjJhREJSM0Rza2FuUkVTcHVvM29INy9IdjQ5WVo3ek04N1gyNnQ0c2ZrZUF2T0dVQlhBU0E4NzE2OWl0cS9OMTJRbUJhRWcxSVdXaWhXNlJ2bE12Vm5jMXZLaTdzekZmUncxbE9jZURPTi9UUW9MOGpMaWxsKzhVV0lrbVQxUTVRQUJyZ1dEMDFKcFE1bTBnMCtIcFVQVUpKUzhONGxiaUFWc2pxSGU1STF2ckIrejBUUldxalFtS0ZhdHBNU3QydVZFbkVTbE5sRUozRHhrS2dPTXB2YUxFVE4xVjA1YjZWdmcwNmR0VGw5blA3Z255UUlkZWJBOERqUUE2K0J2Q3JEVFFrZzRsQ3hIS0FaZlg4L0wxREdodkIgZGFudGVAYm9nb24K        # 解密的key
   expiration: 604800      # 过期时间（ms），7天
   tokenHead: "Bearer "   
   route:
@@ -30,12 +30,12 @@ jwt:
       path: /auth
       refresh: /refresh
       register: /auth/register
-endpoints:
-  cors:
-    allowed-origins:
-      - http://localhost:8000
-    allowed-methods:
-      - GET
-      - POST
-    allowed-headers:
-      - Authorization
+management:
+  endpoints:
+    web: 
+      cors:
+        allowed-headers:
+        - Authorization
+        allowed-methods:
+        - GET
+        - POST

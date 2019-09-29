@@ -1,6 +1,7 @@
 package org.dante.springboot.springbootjwtserver.security;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class JwtTokenUtil implements Serializable {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
 	
@@ -31,12 +35,14 @@ public class JwtTokenUtil implements Serializable {
     private Long expiration;
     
     public String getUsernameFromToken(String token) {
-        String username;
+        String username = null;
         try {
             final Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
+            if(claims != null) {
+            	username = claims.getSubject();
+            }
         } catch (Exception e) {
-            username = null;
+            log.error(e.getLocalizedMessage(), e);
         }
         return username;
     }
@@ -74,7 +80,7 @@ public class JwtTokenUtil implements Serializable {
         Claims claims;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret)))
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
@@ -89,8 +95,7 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+        return getExpirationDateFromToken(token).before(new Date());
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
@@ -98,10 +103,11 @@ public class JwtTokenUtil implements Serializable {
     }
     
     String generateToken(Map<String, Object> claims) {
+    	
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret)), SignatureAlgorithm.HS512)
                 .compact();
     }
 

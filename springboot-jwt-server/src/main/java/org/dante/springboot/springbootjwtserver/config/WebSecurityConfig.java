@@ -3,10 +3,13 @@ package org.dante.springboot.springbootjwtserver.config;
 import org.dante.springboot.springbootjwtserver.filter.JwtAuthenticationTokenFilter;
 import org.dante.springboot.springbootjwtserver.security.JwtEntryPoint;
 import org.dante.springboot.springbootjwtserver.security.JwtUserDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,15 +22,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
+	@Autowired
+	private JwtEntryPoint jwtEntryPoint;
+	
 	@Bean
+	@Override
 	public JwtUserDetailService userDetailsService() {
 		return new JwtUserDetailService();
 	}
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		return passwordEncoder;
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
@@ -38,15 +44,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		return authenticationProvider;
 	}
 	
+	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 	@Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
         return new JwtAuthenticationTokenFilter();
     }
-
-	@Bean
-	public JwtEntryPoint jwtEntryPoint() {
-		return new JwtEntryPoint();
-	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -60,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			// 由于使用的是JWT，我们这里不需要csrf
 			csrf().disable() 
 			// 认证错误，返回401
-			.exceptionHandling().authenticationEntryPoint(jwtEntryPoint())
+			.exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
 			.and()
 			// 基于token，所以不需要session
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
