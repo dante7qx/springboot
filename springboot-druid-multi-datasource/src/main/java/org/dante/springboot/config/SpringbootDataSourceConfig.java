@@ -11,6 +11,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -39,6 +41,10 @@ public class SpringbootDataSourceConfig {
 	
 	@Autowired
 	private JpaProperties jpaProperties;
+	
+	@Autowired
+	private HibernateProperties hibernateProperties;
+	
 	@Autowired
 	@Qualifier("springbootDataSource")
 	private DataSource springbootDataSource;
@@ -51,15 +57,19 @@ public class SpringbootDataSourceConfig {
 	@Bean(name = "springbootEntityManagerFactoryBean")
 	public LocalContainerEntityManagerFactoryBean springbootEntityManagerFactoryBean(
 			EntityManagerFactoryBuilder builder) {
-		return builder.dataSource(springbootDataSource).properties(getVendorProperties(springbootDataSource))
+		Map<String, Object> properties = hibernateProperties.determineHibernateProperties(jpaProperties.getProperties(), new HibernateSettings());
+//		return builder.dataSource(springbootDataSource).properties(getVendorProperties(springbootDataSource))
+		return builder.dataSource(springbootDataSource).properties(properties)
 				.packages(SpringbootDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
 				.persistenceUnit("springbootPersistenceUnit").build();
 		// .getObject();//不要在这里直接获取EntityManagerFactory
 	}
 
+	/** Springboot 1.X
 	private Map<String, String> getVendorProperties(DataSource dataSource) {
 		return jpaProperties.getHibernateProperties(dataSource);
 	}
+	*/
 
 	/**
 	 * EntityManagerFactory类似于Hibernate的SessionFactory,mybatis的SqlSessionFactory

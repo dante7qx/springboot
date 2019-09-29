@@ -13,18 +13,11 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 @Configuration
 public class SpiritMongoConfig {
 
-//	@Autowired
-//	private MongoDbFactory mongoDbFactory;
-	
-	/*
+	@Autowired
+	private MongoDbFactory mongoDbFactory;
+
 	@Bean
-	MongoDbFactory MongoDbFactory() {
-		return new SimpleMongoDbFactory(new MongoClient("localhost"), "springboot");
-	}
-	*/
-	
-	@Bean
-	MongoTemplate mongoTemplate(@Autowired MongoDbFactory mongoDbFactory) {
+	MongoTemplate mongoTemplate() {
 		MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory),
 				new MongoMappingContext());
 		converter.setTypeMapper(new DefaultMongoTypeMapper(null));

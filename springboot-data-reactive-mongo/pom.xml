@@ -8,36 +8,26 @@
 		<artifactId>springboot-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
-	<artifactId>springboot-ssl</artifactId>
+
+	<artifactId>springboot-data-reactive-mongo</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-ssl</name>
-	<description>Dante Springboot SSL</description>
+	<name>springboot-data-reactive-mongo</name>
+	<description>Dante Springboot Data Reactive Mongo</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		-->
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>

@@ -4,9 +4,13 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://dante:123456@localhost:27017/springboot
+      uri: mongodb://dante:123456@localhost:27017/reactive_mongo
       authentication-database: admin    
 logging:
   level:
     root: INFO
     org.springframework.data.mongodb: DEBUG
+
+## 现在执行 mongo 命令    
+## use reactive_mongo
+## db.createUser({user:"dante",pwd:"123456",roles:[{role:"readWrite",db:"reactive_mongo"}],mechanisms:["SCRAM-SHA-1"]})

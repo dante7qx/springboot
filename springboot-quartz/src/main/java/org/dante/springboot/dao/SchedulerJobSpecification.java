@@ -14,9 +14,16 @@ import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Lists;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SchedulerJobSpecification {
+	
 	public static Specification<SchedulerJobPO> querySpecification(Map<String, Object> filter) {
 		return new Specification<SchedulerJobPO>() {
+			private static final long serialVersionUID = -4352990957019645478L;
+
 			@Override
 			public Predicate toPredicate(Root<SchedulerJobPO> root, CriteriaQuery<? extends Object> query, CriteriaBuilder cb) {
 				List<Predicate> predicates = Lists.newArrayList();

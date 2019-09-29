@@ -48,7 +48,7 @@ public class UserService {
 	@Transactional
 	public void delete(Long id) {
 		logger.info("删除缓存：{}", id);
-		userDAO.delete(id);
+		userDAO.deleteById(id);
 	}
 	
 	
@@ -71,7 +71,7 @@ public class UserService {
 	@Cacheable(key="caches[0].name.concat('_').concat(#id)")
 	public UserPO findUser(Long id) {
 		logger.info("没有从缓存中读取指定 [{}] 的用户。。。。。。。。。。。。。", id);
-		return userDAO.findOne(id);
+		return userDAO.getOne(id);
 	}
 	
 }

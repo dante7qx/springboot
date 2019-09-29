@@ -11,6 +11,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +40,9 @@ public class ShiroDataSourceConfig {
 	
 	@Autowired
 	private JpaProperties jpaProperties;
+	
+	@Autowired
+	private HibernateProperties hibernateProperties;
 
 	@Autowired
 	@Qualifier("shiroDataSource")
@@ -50,16 +55,26 @@ public class ShiroDataSourceConfig {
 	 */
 	@Bean(name = "shiroEntityManagerFactoryBean")
 	public LocalContainerEntityManagerFactoryBean shiroEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
-		return builder.dataSource(shiroDataSource).properties(getVendorProperties(shiroDataSource))
+		Map<String, Object> properties = hibernateProperties.determineHibernateProperties(jpaProperties.getProperties(), new HibernateSettings());
+//		return builder.dataSource(shiroDataSource).properties(getVendorProperties(shiroDataSource))
+		return builder.dataSource(shiroDataSource).properties(properties)
 				.packages(ShiroDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
 				.persistenceUnit("shiroPersistenceUnit").build();
 		// .getObject();//不要在这里直接获取EntityManagerFactory
 	}
 
+	/**
+	 * Springboot 1.X
+	 * 
+	 * @param dataSource
+	 * @return
+	 */
+	/*
 	private Map<String, String> getVendorProperties(DataSource dataSource) {
 		return jpaProperties.getHibernateProperties(dataSource);
 	}
-
+	*/
+	
 	/**
 	 * EntityManagerFactory类似于Hibernate的SessionFactory,mybatis的SqlSessionFactory
 	 * 总之,在执行操作之前,我们总要获取一个EntityManager,这就类似于Hibernate的Session,

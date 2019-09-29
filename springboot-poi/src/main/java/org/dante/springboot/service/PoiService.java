@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.dante.springboot.poi.PoiTask;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.MultipartProperties;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

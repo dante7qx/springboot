@@ -27,11 +27,20 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	/**
 	 * 缓存管理器
 	 */
+	/*
 	@Bean
 	public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
 		RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
 		return cacheManager;
 	}
+	*/
+	
+	@Bean
+	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+		RedisCacheManager cacheManager = RedisCacheManager.create(redisConnectionFactory);
+		return cacheManager;
+	}
+	
 
 	@Bean
 	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory redisConnectionFactory) {

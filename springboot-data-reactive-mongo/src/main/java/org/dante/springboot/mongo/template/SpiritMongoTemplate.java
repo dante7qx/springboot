@@ -20,6 +20,7 @@ public abstract class SpiritMongoTemplate<T> {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
+	
 	public Page<T> queryPage(PageReq pageReq, Class<T> clazz) {
 		int pageNo = pageReq.getPageNo();
 		int pageSize = pageReq.getPageSize();
@@ -44,7 +45,8 @@ public abstract class SpiritMongoTemplate<T> {
 		}
 		Long count = mongoTemplate.count(query, clazz);
 		List<T> list = mongoTemplate.find(query.with(pageable), clazz);
-		return new PageImpl<>(list, pageable, count);
+		Page<T> resp = new PageImpl<T>(list, pageable, count);
+		return resp;
 	}
 	
 	/**
@@ -77,7 +79,9 @@ public abstract class SpiritMongoTemplate<T> {
 				sort = new Sort(buildDirection(dir), col);
 				continue;
 			}
-			sort.and(new Sort(buildDirection(dir), col));
+			if (sort != null) {
+				sort.and(new Sort(buildDirection(dir), col));
+			}
 		}
 		return sort;
 	}
