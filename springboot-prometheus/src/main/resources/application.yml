@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: springboot-prometheus
+  profiles:
+    active: ${config.profile:node1}
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+      jmx:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /metrics
+---
+spring:
+  profiles: node1
+server:
+  port: 7101
+---
+spring:
+  profiles: node2
+server:
+  port: 7102
+---
+spring:
+  profiles: node3
+server: 
+  port: 7103
