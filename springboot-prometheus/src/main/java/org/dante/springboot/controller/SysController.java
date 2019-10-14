@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
 public class SysController {
 
 	@GetMapping("/sys")
-	public String docker() {
+	public Mono<String> docker() {
 		Runtime runtime = Runtime.getRuntime();
 		final NumberFormat format = NumberFormat.getInstance();
 		final long maxMemory = runtime.maxMemory();
@@ -31,7 +32,7 @@ public class SysController {
 		log.info(sb.toString().replace("<br>", "/n"));
 		log.info("=================================================================\n");
 
-		return sb.toString();
+		return Mono.just(sb.toString());
 	}
 
 }
