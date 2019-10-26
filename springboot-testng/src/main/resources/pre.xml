@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="PreConfigTest">
+    <test name="pre">
+        <classes>
+            <class name="org.dante.springboot.pre.PreConfig"></class>
+            <class name="org.dante.springboot.pre.HealthTests"></class>
+        </classes>
+    </test>
+    
+	<listeners>
+        <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter"/>
+    </listeners>
+</suite>

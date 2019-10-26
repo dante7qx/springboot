@@ -71,6 +71,8 @@
 		<module>springboot-flyway</module>
 		<module>springboot-tomcatlog</module>
 		<module>springboot-prometheus</module>
+		<module>springboot-testng</module>
+		<module>springboot-testng-api</module>
 		<module>springboot-sharding-jdbc</module>
 		<module>springboot-sharding-proxy</module>
 	</modules>

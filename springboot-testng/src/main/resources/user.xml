@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--
+parallel: TestNG 并行运行 Test Suite class
+thread-count: 并行运行时的最大线程数
+verbose: 在控制台上执行的日志记录数量
+-->
+<suite name="UserAPITest" parallel="classes">
+
+    <test name="user" thread-count="5" verbose="2">
+    	<parameter name="arguments" value="世界，你好"></parameter>
+        <classes>
+            <class name="org.dante.springboot.business.UserTests"></class>
+        </classes>
+    </test>
+</suite>

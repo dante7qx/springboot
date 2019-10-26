@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: springboot-testng-api
+server:
+  port: 7901
