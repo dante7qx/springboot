@@ -9,6 +9,8 @@ package org.dante.springboot;
  * - https://github.com/alanhou7/AutoTest
  * - https://www.journaldev.com/21326/testng-maven-surefire-plugin-configurations
  * - https://www.journaldev.com/21304/testng-xml
+ * - https://cloud.tencent.com/developer/article/1441879 （ExtentReport测试报告）
+ * - https://wiki.jenkins.io/display/JENKINS/testng-plugin
  * 
  * OkHttp
  * - https://github.com/square/okhttp

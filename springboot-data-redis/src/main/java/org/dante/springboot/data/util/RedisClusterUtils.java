@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class JedisClusterUtils {
+public class RedisClusterUtils {
 
 	@Autowired  
     private RedisTemplate<String, Object> redisTemplate; 

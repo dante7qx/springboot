@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.dante.springboot.data.util.JedisClusterUtils;
+import org.dante.springboot.data.util.RedisClusterUtils;
 import org.dante.springboot.data.vo.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +31,7 @@ public class SpringbootDataRedisApplicationTests {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
-	private JedisClusterUtils jedisClusterUtils;
+	private RedisClusterUtils jedisClusterUtils;
 
 	@Test
 	public void saveString() {
