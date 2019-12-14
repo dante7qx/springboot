@@ -11,7 +11,9 @@ public class HealthController {
 
 	@GetMapping("/health")
 	public String health() {
-		log.info("Health check...");
+		if(log.isDebugEnabled()) {
+			log.debug("Health check...");
+		}
 		return "up";
 	}
 
