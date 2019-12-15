@@ -64,7 +64,7 @@ public abstract class SpiritMongoTemplate<T> {
 	 */
 	private Sort buildSorter(String sortCol, String sortDir) {
 		if (StringUtils.isEmpty(sortCol)) {
-			return new Sort(Direction.DESC, "id");
+			return Sort.by(Sort.Direction.DESC, "id");
 		}
 		Sort sort = null;
 		String[] sortColArr = sortCol.trim().split(",");
@@ -74,10 +74,10 @@ public abstract class SpiritMongoTemplate<T> {
 			String col = sortColArr[i].trim();
 			String dir = sortDirArr[i];
 			if (i == 0) {
-				sort = new Sort(buildDirection(dir), col);
+				sort = Sort.by(buildDirection(dir), col);
 				continue;
 			}
-			sort.and(new Sort(buildDirection(dir), col));
+			sort.and(Sort.by(buildDirection(dir), col));
 		}
 		return sort;
 	}
