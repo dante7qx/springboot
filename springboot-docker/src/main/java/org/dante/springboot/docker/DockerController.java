@@ -37,10 +37,10 @@ public class DockerController {
 		final String mega = " MB";
 
 		LOGGER.info("========================== Memory Info ==========================");
-		LOGGER.info("Free memory: " + format.format(freeMemory / mb) + mega);
-		LOGGER.info("Allocated memory: " + format.format(allocatedMemory / mb) + mega);
-		LOGGER.info("Max memory: " + format.format(maxMemory / mb) + mega);
-		LOGGER.info("Total free memory: " + format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
+		LOGGER.info("Free memory: {}", format.format(freeMemory / mb) + mega);
+		LOGGER.info("Allocated memory: {}", format.format(allocatedMemory / mb) + mega);
+		LOGGER.info("Max memory: {}", format.format(maxMemory / mb) + mega);
+		LOGGER.info("Total free memory: {}", format.format((freeMemory + (maxMemory - allocatedMemory)) / mb) + mega);
 		LOGGER.info("=================================================================\n");
 
 		return msgProp.getMsg() + "Docker，你现在位于腾讯 Gaia 平台！";

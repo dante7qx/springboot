@@ -108,7 +108,7 @@ public class SpringbootMongoApplicationTests {
 
 	@Test
 	public void queryByAgePage() {
-		Sort sortAge = new Sort(Direction.DESC, "id");
+		Sort sortAge = Sort.by(Sort.Direction.DESC, "id");
 		Pageable pageable = PageRequest.of(1, 5, sortAge);
 		Page<UserPO> resp = userDAO.findByAge(23, pageable);
 		resp.getContent().forEach(x -> log.info(x.toString()));
@@ -130,7 +130,7 @@ public class SpringbootMongoApplicationTests {
 	public void findPage() {
 		int page = 1;
 		int pageSize = 20;
-		Sort sortAge = new Sort(Direction.ASC, "age");
+		Sort sortAge = Sort.by(Direction.ASC, "age");
 		Pageable pageable = PageRequest.of(page, pageSize, sortAge);
 		Page<UserPO> pageResult = userDAO.findAll(pageable);
 		log.info(pageResult.toString());

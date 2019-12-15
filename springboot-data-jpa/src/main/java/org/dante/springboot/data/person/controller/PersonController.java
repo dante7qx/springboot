@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -88,19 +87,19 @@ public class PersonController {
 	
 	@RequestMapping("/sort")
 	public List<Person> sort() {
-		List<Person> list = personRepository.findAll(new Sort(Direction.ASC, "age"));
+		List<Person> list = personRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
 		return list;
 	}
 	
 	@RequestMapping("/page")
 	public Page<Person> page(int page, int pageSize) {
-		Page<Person> pages = personRepository.findAll(new PageRequest(page, pageSize));
+		Page<Person> pages = personRepository.findAll(PageRequest.of(page, pageSize));
 		return pages;
 	}
 	
 	@RequestMapping("/auto")
 	public Page<Person> autoSearch(Person person) {
-		Page<Person> pages = customPersonRepository.findByAuto(person, new PageRequest(0, 4));
+		Page<Person> pages = customPersonRepository.findByAuto(person, PageRequest.of(0, 4));
 		return pages;
 	}
 	

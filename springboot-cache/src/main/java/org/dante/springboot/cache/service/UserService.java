@@ -65,7 +65,7 @@ public class UserService {
 	@Cacheable(key="caches[0].name")
 	public List<UserPO> findUsers() {
 		logger.info("没有从缓存中读取所有用户。。。。。。。。。。。。。");
-		return userDAO.findAll(new Sort(Sort.Direction.DESC, "updateDate"));
+		return userDAO.findAll(Sort.by(Sort.Direction.DESC, "updateDate"));
 	}
 	
 	@Cacheable(key="caches[0].name.concat('_').concat(#id)")
