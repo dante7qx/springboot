@@ -5,6 +5,8 @@
 	</contextListener>
 	
 	<property name="LOG_HOME" value="logs" /> 
+	<property name="ES_LOG" value="/Users/dante/Documents/Technique/ELK/elk-logs"/>
+	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
 	
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -28,6 +30,37 @@
 		<append>false</append>
 		<prudent>false</prudent>
 	</appender>
+	<!-- 
+		使用ELK日志收集，参考
+		   1. https://juejin.im/post/5c78c66c6fb9a049e702cf3e
+		   2. http://itmuch.com/spring-cloud/sleuth-elk/ 
+	 -->
+	<appender name="LOGSTASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${ES_LOG}/${POD_NAME:-pod}.json</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}${POD_NAME:-pod}.json.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "logLevel": "%level",
+                        "serviceName": "${springAppName:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "rest": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
 	
 	<springProfile name="dev">
 		<root level="INFO">
@@ -50,20 +83,25 @@
 		<root level="WARN">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />
+			<appender-ref ref="LOGSTASH" />
 		</root>
 	
 		<logger name="org.apache" level="INFO" additivity="false">
 			<appender-ref ref="FILE" />
+			<appender-ref ref="LOGSTASH" />
 		</logger>
 		<logger name="org.hibernate" level="INFO" additivity="false">
 			<appender-ref ref="FILE" />
+			<appender-ref ref="LOGSTASH" />
 		</logger>
 		<logger name="org.springframework" level="INFO" additivity="false">
 			<appender-ref ref="FILE" />
+			<appender-ref ref="LOGSTASH" />
 		</logger>
 		<logger name="org.dante.springboot" level="INFO" additivity="false">
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />
+			<appender-ref ref="LOGSTASH" />
 		</logger>
 	</springProfile>
 

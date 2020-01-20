@@ -17,28 +17,35 @@
 
 	<properties>
 		<docker.image.prefix>dante</docker.image.prefix>
+		<logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<exclusions>  
-                <exclusion>  
-                    <groupId>org.springframework.boot</groupId>  
-                    <artifactId>spring-boot-starter-tomcat</artifactId>  
-                </exclusion>
-            </exclusions>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>  
-            <groupId>org.springframework.boot</groupId>  
-            <artifactId>spring-boot-starter-jetty</artifactId>  
-        </dependency> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		<!-- ELK日志收集 -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>${logstash-logback-encoder.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -49,7 +56,7 @@
 				<version>0.4.14</version>
 				<configuration>
 					<!-- 如果要将docker镜像push到DockerHub上去的话，这边的路径要和repo路径一致 -->
-<!-- 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName> -->
+					<!-- <imageName>${docker.image.prefix}/${project.artifactId}</imageName> -->
 					<imageName>${docker.image.prefix}/boot-docker:v1</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<resources>

@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  *     https://blog.lqdev.cn/2018/08/22/springboot/chapter-twenty-three/
  * log4j2 的详细配置：
  *     https://blog.51cto.com/1197822/2157668
+ *     https://gsealy.cn/posts/81f201e1/
  * 
  * @author dante
  *

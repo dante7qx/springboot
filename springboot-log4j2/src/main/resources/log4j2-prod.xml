@@ -23,8 +23,8 @@
 			<PatternLayout pattern="${LOG_PATTERN}"/> 
 		</Console>
 		
-		<RollingFile name="LogToFile" fileName="${LOG_FILE_PATH}/${env:MY_POD_NAME}.log"
-			filePattern="${LOG_FILE_PATH}/${env:MY_POD_NAME}-%d{yyyy-MM-dd}-%i.log">
+		<RollingFile name="LogToFile" fileName="${LOG_FILE_PATH}/${env:MY_POD_NAME:sp4j2}.log"
+			filePattern="${LOG_FILE_PATH}/${env:MY_POD_NAME:sp4j2}-%d{yyyy-MM-dd}-%i.log">
 			<PatternLayout>
 				<Pattern>${LOG_PATTERN}</Pattern>
 			</PatternLayout>
