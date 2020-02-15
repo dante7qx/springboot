@@ -76,12 +76,13 @@
 		<module>springboot-testng-api</module>
 		<module>springboot-sharding-jdbc</module>
 		<module>springboot-sharding-proxy</module>
+		<module>springboot-mock</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
+		<version>2.2.4.RELEASE</version>
 	</parent>
 
 	<dependencies>
