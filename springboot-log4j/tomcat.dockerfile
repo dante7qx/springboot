@@ -1,27 +1,29 @@
-FROM dante2012/tomcat:8.5.46
+FROM dante2012/tomcat:8.5.51-centos-oraclejdk 
 
 LABEL MAINTAINER="dante <dantefreedom@gmail.com>"
 
 ENV CATALINA_OPTS="-Xms512m -Xmx512m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m"
 
+ARG apUser=spirit
+ARG logHome=/home/ap/logs
+
 COPY target/springboot-log4j-0.0.1-SNAPSHOT.war webapps/ROOT.war
 
 RUN set -eux; \
-    groupadd -r spirit --gid=1000; \
-    useradd -r -g spirit --uid=1000 spirit; \
-    mkdir -p /home/ap/logs; \
-	chown -R spirit:spirit /home/ap/logs; \
-    chown -R spirit:spirit .; \
-    chmod 777 logs temp work
-##    ; \
-##	unzip -oq webapps/ROOT.war -d webapps/ROOT; \
-##	rm -rf webapps/ROOT.war
+    groupadd -r ${apUser} --gid=1000; \
+    useradd -r -g ${apUser} --uid=1000 ${apUser}; \
+    mkdir -p ${logHome}; \
+	chown -R ${apUser}:${apUser} ${logHome}; \
+    chown -R ${apUser}:${apUser} .; \
+    chmod 777 logs temp work ; \    
+	unzip -oq webapps/ROOT.war -d webapps/ROOT; \
+	rm -rf webapps/ROOT.war
 
-USER spirit
+USER ${apUser}
 
 EXPOSE 8080
 
-VOLUME ["/home/ap/logs"]
+VOLUME ["${logHome}"]
 
 COPY docker-entrypoint.sh /
 

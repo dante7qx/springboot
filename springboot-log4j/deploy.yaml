@@ -1,0 +1,56 @@
+# https://kubernetes.io/blog/2019/07/18/api-deprecations-in-1-16/
+#apiVersion: extensions/v1beta1 k8s 1.16 不在支持
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spboot-log4j
+  namespace: dante
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spboot-log4j
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: spboot-log4j
+        version: v1
+    spec:
+      containers:
+      - name: spboot-log4j
+        image: spirit/spboot-log4j:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: api
+          containerPort: 8080
+        env:
+        - name: server_port
+          value: "8080"
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+         - name: ap-log
+           mountPath: /home/ap/logs
+      volumes:
+      - name: ap-log
+        hostPath:
+          path: /Users/dante/Documents/Project/java-world/springboot/springboot-log4j/volume
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: spboot-log4j
+  namespace: dante
+spec:
+  type: NodePort
+  selector:
+    app: spboot-log4j
+    version: v1
+  ports:
+  - port: 8080
+    targetPort: 8080 
+    nodePort: 32000

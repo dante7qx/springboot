@@ -1,0 +1,40 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: spboot-clearlog
+  namespace: dante
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/2 * * * *"
+  startingDeadlineSeconds: 60 ## job存活时间 默认不设置为永久
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cleanlog
+            image: busybox:1.31
+            env:
+            - name: TZ
+              value: "Asia/Shanghai" 
+            volumeMounts:
+            - name: clear-logs
+              mountPath: /data/logs
+#            command: ["/bin/sh"]
+#            args: ["-c","find /data/logs/ -type f -mtime +1 -name '*.log' | xargs rm -rf; date >> /data/logs/x.log"]
+            command:
+             - /bin/sh
+            args:
+             - -c
+             - find /data/logs/ -type f -mtime +1 -name '*.log' | xargs rm -rf; sleep 30; date >> /data/logs/x.log
+          volumes:
+          - name: clear-logs
+            hostPath:
+              path: /Users/dante/Documents/Project/java-world/springboot/springboot-log4j/volume
+          restartPolicy: OnFailure
+  successfulJobsHistoryLimit: 1
+  
+## 参考文档
+## https://blog.csdn.net/luanpeng825485697/article/details/85612987
+## http://www.cecdns.com/post/59053.html
+## https://cloud.tencent.com/developer/article/1475552

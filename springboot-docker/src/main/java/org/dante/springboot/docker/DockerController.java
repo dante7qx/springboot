@@ -51,10 +51,14 @@ public class DockerController {
 		return PropertiesUtils.getString("hello.msg");
 	}
 	
-	
 	@PostMapping("/docker")
 	public String dockerPost(@RequestBody MsgVO msg) {
 		return msg.toString();
+	}
+	
+	@GetMapping("/ip")
+	public String ip(HttpServletRequest request) {
+		return IPUtils.getIpAddr(request).concat(" <==> ").concat(IPUtils2.getIpFromRequest(request));
 	}
 	
 	@GetMapping("/")

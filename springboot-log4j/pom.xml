@@ -11,11 +11,12 @@
 	</parent>
 
 	<artifactId>springboot-log4j</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>springboot-log4j</name>
 	<description>Dante Springboot Log4j</description>
 
 	<properties>
+		<log4j.home>/Users/dante/Documents/Project/java-world/springboot/springboot-log4j/logs</log4j.home>
 	</properties>
 
 	<dependencies>
@@ -50,7 +51,24 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>false</executable>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+	      <resource>
+	        <directory>src/main/resources</directory>
+	        <filtering>true</filtering>
+	      </resource>
+    	</resources>
+	</build>
 
 
 </project>
