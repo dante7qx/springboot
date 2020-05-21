@@ -21,12 +21,12 @@ spec:
             - name: clear-logs
               mountPath: /data/logs
 #            command: ["/bin/sh"]
-#            args: ["-c","find /data/logs/ -type f -mtime +1 -name '*.log' | xargs rm -rf; date >> /data/logs/x.log"]
+#            args: ["-c","find /data/logs/ -type f -mtime +1 -name '*.log*' | xargs rm -rf; date >> /data/logs/x.log"]
             command:
              - /bin/sh
             args:
              - -c
-             - find /data/logs/ -type f -mtime +1 -name '*.log' | xargs rm -rf; sleep 30; date >> /data/logs/x.log
+             - find /data/logs/ -type f -mtime +1 -name '*.log*' | xargs rm -rf; sleep 30; date >> /data/logs/x.log
           volumes:
           - name: clear-logs
             hostPath:

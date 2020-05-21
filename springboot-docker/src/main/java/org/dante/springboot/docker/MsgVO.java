@@ -12,6 +12,6 @@ public class MsgVO {
 	private long createTime;
 	private String reve_to;
 	
-	public MsgVO() {}
+	public MsgVO() {} 
 	
 }

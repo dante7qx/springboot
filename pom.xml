@@ -77,6 +77,7 @@
 		<module>springboot-sharding-jdbc</module>
 		<module>springboot-sharding-proxy</module>
 		<module>springboot-mock</module>
+		<module>springboot-zookeeper</module>
 	</modules>
 
 	<parent>

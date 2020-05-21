@@ -50,7 +50,7 @@
 
 - 3. 执行命令
 
-```
+```bash
 mvn package -Dmaven.test.skip=true docker:build 
 docker push dante2012/springboot-docker
 

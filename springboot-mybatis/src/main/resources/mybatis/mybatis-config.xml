@@ -21,17 +21,26 @@
 		<package name="org.dante.springboot.po"/>
 	</typeAliases>
     
-    <!-- 分页助手 -->
+    <!-- 分页帮助文档：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/README_zh.md -->
     <plugins>
+    	<!-- 分页助手 4.2.1 -->
+    	<!--  
         <plugin interceptor="com.github.pagehelper.PageHelper">
-            <!-- 数据库方言 -->
             <property name="dialect" value="h2" />
             <property name="offsetAsPageNum" value="true" />
-            <!-- 设置为true时，使用RowBounds分页会进行count查询 会去查询出总数 -->
             <property name="rowBoundsWithCount" value="true" />
             <property name="pageSizeZero" value="true" />
             <property name="reasonable" value="true" />
         </plugin>
+        -->
+        <!-- 分页助手 5.1.x -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+	        <property name="helperDialect" value="h2"/>
+	        <property name="offsetAsPageNum" value="true" />
+            <property name="rowBoundsWithCount" value="true" />
+            <property name="pageSizeZero" value="true" />
+            <property name="reasonable" value="true" />
+		</plugin>
         <plugin interceptor="org.dante.springboot.plugin.SqlCostInterceptor"></plugin>
     </plugins>
 </configuration> 
