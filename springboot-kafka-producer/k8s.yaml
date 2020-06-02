@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sp-kafka-producer
+  namespace: dante
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: sp-kafka-producer
+  template:
+    metadata:
+      labels:
+        app: sp-kafka-producer
+    spec:
+      containers:
+      - name: kafka-producer
+        image: spirit/kafka-producer:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: kafka-producer
+          containerPort: 8080
+        env: 
+        - name: spring_kafka_bootstrap_servers
+          value: kafka-headless-svc-1:9092
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 10242Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sp-kafka-producer
+  namespace: dante
+  labels:
+    app: sp-kafka-producer
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    name: http-web
+    targetPort: 8080
+    nodePort: 30010
+    protocol: TCP
+  selector:
+    app: sp-kafka-producer

@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers:
+    - 172.20.10.2:30092
+#    - 192.168.1.2:30092
+#    - 192.168.1.2:30192
+#    - 192.168.1.2:30292
+    producer:
+      retries: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      
+        
