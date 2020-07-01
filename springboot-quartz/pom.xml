@@ -15,7 +15,7 @@
 	<description>Dante Springboot Quartz</description>
 
 	<properties>
-		<quartz.version>2.3.0</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 		<!-- Thymeleaf 3 -->
 		<thymeleaf.version>3.0.8.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
