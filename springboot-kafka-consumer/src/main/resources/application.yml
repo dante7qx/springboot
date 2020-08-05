@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    bootstrap-servers:
+     - 172.20.10.2:30092
+#    - 192.168.1.2:30092
+#    - 192.168.1.2:30192
+#    - 192.168.1.2:30292
+    consumer:
+      group-id: 0
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "org.dante.springboot.kafka.vo"

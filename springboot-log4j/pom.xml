@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>springboot-log4j</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>springboot-log4j</name>
 	<description>Dante Springboot Log4j</description>
 

@@ -1,7 +1,6 @@
 spring:
   profiles:
     active: ${config.profile:dev}
-  
 ---
 spring:
   profiles: node1

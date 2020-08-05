@@ -62,6 +62,8 @@
 		<module>springboot-email</module>
 		<module>springboot-rabbitmq-producer</module>
 		<module>springboot-rabbitmq-consumer</module>
+		<module>springboot-kafka-producer</module>
+		<module>springboot-kafka-consumer</module>
 		<module>springboot-websocket</module>
 		<module>springboot-freemarker</module>
 		<module>springboot-allatori</module>
@@ -78,12 +80,13 @@
 		<module>springboot-sharding-proxy</module>
 		<module>springboot-mock</module>
 		<module>springboot-zookeeper</module>
+		<module>springboot-qrcode</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.5.RELEASE</version>
+		<version>2.2.9.RELEASE</version>
 	</parent>
 
 	<dependencies>

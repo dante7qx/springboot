@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sp-kafka-consumer
+  namespace: dante
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: sp-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: sp-kafka-consumer
+    spec:
+      containers:
+      - name: kafka-consumer
+        image: spirit/kafka-consumer:v1
+        imagePullPolicy: IfNotPresent
+        env: 
+        - name: spring_kafka_bootstrap_servers
+          value: kafka-headless-svc-1:9092
+        resources:
+          requests:
+            cpu: 128m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 10242Mi
