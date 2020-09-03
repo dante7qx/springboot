@@ -22,6 +22,8 @@ public interface StudentMapper {
 	
 	public void deleteStudent(Long id);
 	
+	public List<StudentPO> queryStudentInAddress(List<String> citys);
+	
 	/**
 	 * Mybatis3.5 特性
 	 * 
@@ -31,4 +33,7 @@ public interface StudentMapper {
 	 */
 	@Select("select * from t_student where id = #{id}")
 	public Optional<StudentPO> selectStudentById(Long id);
+	
+	@Select("select * from t_student where name like concat('%', #{name}, '%')")
+	public List<StudentPO> queryStudentLikeName(String name);
 }

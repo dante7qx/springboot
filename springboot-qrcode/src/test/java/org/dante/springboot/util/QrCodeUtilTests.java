@@ -41,4 +41,20 @@ public class QrCodeUtilTests {
 		}
 	}
 	
+	@Test
+	public void sign() {
+		StringBuilder strToSign = new StringBuilder();
+		strToSign.append("C-Timestamp:").append(Instant.now().toEpochMilli()).append("\n")
+				.append("C-App-Id").append("234567890").append("\n")
+				.append("C-Business-Id").append("M1321").append("\n");
+		String appSecret = "HA7832IU&W";
+		try {
+			System.out.println(SignUtil.sign(appSecret, strToSign.toString()));
+		} catch (Exception e) {
+			log.error("sign error.", e);
+		}
+		
+		
+	}
+	
 }

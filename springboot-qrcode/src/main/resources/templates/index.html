@@ -9,7 +9,8 @@
 	<div align="center">
 		<div>
 			<textarea id="content" rows="8" cols="40"></textarea>
-			<input type="button" value="生成二维码" onclick="QrCodePage.generatorCode()">
+			<input type="button" value="生成二维码" onclick="QrCodePage.generatorCode(1)">
+			<input type="button" value="生成二维码Logo" onclick="QrCodePage.generatorCode(2)">
 		</div>
 		<div>
 			<img id="qrCode" alt="二维码" draggable="false">
@@ -21,17 +22,17 @@
 		}
 		
 		var QrCodePage = {
-			generatorCode: function() {
+			generatorCode: function(type) {
 				let params = {"content": document.querySelector('#content').value}
 				var codeInit = {
 					method: 'POST',
 					body: JSON.stringify(params), 
 				};
-				var codeReq = new Request('/generator_code', codeInit);
+				let url = type == 1 ? '/generator_code' : '/generator_logo_code';
+				var codeReq = new Request(url, codeInit);
 				fetch(codeReq).then(function(response) {
 					return response.text();
-				})
-				.then(function(result) {
+				}).then(function(result) {
 					document.querySelector('#qrCode').style.display = "";
 				    document.querySelector('#qrCode').src="data:image/jpg;base64,"+result;
 				}) .then(function(exception) {

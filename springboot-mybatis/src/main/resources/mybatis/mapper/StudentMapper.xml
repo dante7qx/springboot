@@ -51,6 +51,17 @@
 		select t.* from t_student t where t.id in (select t1.student_id from t_student_course t1 where t1.course_id = #{courseId}) order by t.age desc
 	</select>
 	
+	<select id="queryStudentInAddress" resultType="StudentPO">
+		select t.* from t_student t 
+			left join t_student_address t1 on t.id = t1.student_id
+			where t1.city in 
+			<foreach item="city" index="index" collection="list"
+		        open="(" separator="," close=")">
+		          #{city}
+			</foreach>
+			order by t.age desc
+	</select>
+	
 	<insert id="insertStudent">
 		insert into t_student(id, name, age, update_date) values (#{id}, #{name}, #{age}, #{updateDate})
 	</insert>

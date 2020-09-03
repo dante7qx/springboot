@@ -41,7 +41,6 @@ public class StudentController {
 		try {
 			teacherStudentService.presistTeacherStudent();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return studentMapper.queryStudents();
 	}
@@ -49,6 +48,11 @@ public class StudentController {
 	@GetMapping("/query/{id}")
 	public StudentPO queryById(@PathVariable Long id) {
 		return studentMapper.queryStudentById(id);
+	}
+	
+	@GetMapping("/query_like_name/{name}")
+	public List<StudentPO> queryWithName(@PathVariable String name) {
+		return studentMapper.queryStudentLikeName(name);
 	}
 	
 	@GetMapping("/select/{id}")

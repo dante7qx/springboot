@@ -3,6 +3,9 @@ spring:
     name: dante-springboot-mybatis
   datasource:
     platform: h2
+    schema: classpath:schema-h2.sql
+    data: classpath:data-h2.sql
+    initialization-mode: always
 server:
   port: 8100
 mybatis:

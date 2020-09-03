@@ -90,4 +90,25 @@ public class QrCodeController {
         return code;
     }
 
+    @PostMapping("/generator_logo_code")
+    @ResponseBody
+    public String createLogoQRCode(@RequestBody String content) throws Exception {
+    	ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    	String code = "";
+        try {
+            String logoPath = Thread.currentThread().getContextClassLoader().getResource("").getPath()
+                    + "static" + File.separator + "cat.jpg";
+            log.info("二维码内容：{}, Logo {}", content, logoPath);
+            QrCodeUtil.encode(content, logoPath, bos, true);
+            code = Base64.getEncoder().encodeToString(bos.toByteArray());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (bos != null) {
+            	bos.flush();
+            	bos.close();
+            }
+        }
+        return code;
+    }
 }

@@ -81,6 +81,7 @@
 		<module>springboot-mock</module>
 		<module>springboot-zookeeper</module>
 		<module>springboot-qrcode</module>
+		<module>springboot-retrofit</module>
 	</modules>
 
 	<parent>
