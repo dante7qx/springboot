@@ -1,0 +1,10 @@
+profiles.active: prod
+spring:
+  profiles:
+    include: mq, redis
+server:
+  port: 8080
+spirit:
+  name: 生产环境
+  ali-pay:
+    app-id: PRD123456

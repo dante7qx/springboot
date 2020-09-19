@@ -1,0 +1,10 @@
+profiles.active: test
+spring:
+  profiles:
+    include: mq, redis
+server:
+  port: 8082
+spirit:
+  name: 测试环境
+  ali-pay:
+    app-id: TEST123456

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件上传加、解密</title>
+</head>
+<body>
+	<h1>文件上传加、解密</h1>
+	<div>
+		<form th:action="@{/upload}" enctype="multipart/form-data" method="post">
+			类型：<input type="text" name="type"/><br/>
+			<input type="file" name="file"/><br/>
+			<input type="submit" value="上传"/>
+		</form>
+	</div>
+</body>
+</html>

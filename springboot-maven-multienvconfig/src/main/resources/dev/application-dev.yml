@@ -1,0 +1,10 @@
+profiles.active: dev
+spring:
+  profiles:
+    include: mq, redis
+server:
+  port: 8081
+spirit:
+  name: 开发环境
+  ali-pay:
+    app-id: DEV123456

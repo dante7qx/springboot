@@ -1,0 +1,2 @@
+spirit:
+  redis-url: prod-redis-url

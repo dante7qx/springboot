@@ -1,0 +1,2 @@
+spirit:
+  redis-url: dev-redis-url

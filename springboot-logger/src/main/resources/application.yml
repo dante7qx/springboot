@@ -9,13 +9,17 @@ server:
 ---
 ## 管理端口
 management:
-  port: 10000
-  context-path: /adminmanage
-endpoints:
-  shutdown:
-    path: /logger_shutdown
-    sensitive: false
-    enabled: true ## 关闭服务，curl -X POST http://localhost:10000/adminmanage/logger_shutdown
+  server:
+    port: 10000
+    servlet:
+      context-path: /adminmanage
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      path-mapping:
+        shutdown: /logger_shutdown ## 关闭服务，curl -X POST http://localhost:10000/adminmanage/logger_shutdown
 
 ---
 spirit:

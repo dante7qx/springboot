@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: springboot-mvn-multi-config
+  profiles:
+    active: ${profiles.active}
+    include: common
+    
+## application.yml文件可以放在以下目录，且加载顺序优先级排序为：
+# 项目根目录中config目录下
+# 项目根目录下
+# 项目resources目录中config目录下
+# 项目的resources目录下
+
+# 被引用的（spring.profiles.include）配置文件必须要优先加载
+# 因为对环境的配置放在resources目录下，依照加载顺序，公共配置必须要放在根目录或者resources/config目录下
+
+# 开发时要指定环境，在 pom.xml 中修改 activeByDefault=true，然后编译：mvn clean compile 
+
+# 打包时指定环境
+# mvn clean package -Pdev -Dmaven.test.skip=true
