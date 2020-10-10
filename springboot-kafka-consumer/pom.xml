@@ -16,7 +16,6 @@
 	<description>Dante Springboot Kafka Consumer</description>
 
 	<properties>
-		<spring-kafka.version>2.3.8.RELEASE</spring-kafka.version>
 	</properties>
 
 	<dependencies>

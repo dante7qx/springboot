@@ -17,7 +17,7 @@
 
 	<properties>
 		<docker.image.prefix>dante-spirit</docker.image.prefix>
-		<opentracing.version>0.2.1</opentracing.version>
+		<opentracing.version>3.2.0</opentracing.version>
 	</properties>
 
 	<dependencies>

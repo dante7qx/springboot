@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: springboot-xxl-job-executor
+server:
+  port: 8800
+
+logging:
+  level:
+    root: info
+    org.dante.springboot: info
+  file:
+    name: /Users/dante/Documents/Project/java-world/springboot/springboot-xxl-job/logs/springboot-xxl-job-executor.log
+    
+xxl:
+  job: 
+    accessToken: 
+    admin:
+      addresses: http://127.0.0.1:8600/xxl-job-admin
+    executor:
+      appname: ${spring.application.name}
+      ip: docker.for.mac.host.internal
+      port: 9800
+      logpath: /Users/dante/Documents/Project/java-world/springboot/springboot-xxl-job/logs/xxl-job/jobhandler
+      logretentiondays: 3
+      
+      
+      

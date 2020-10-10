@@ -3,10 +3,19 @@ server:
 spring:
   application:
     name: springboot_admin_server
-endpoints:
-  health:
-    sensitive: false
-security:
-  user:
-    name: admin
-    password: admin123
+  security:
+    user:
+      name: dante
+      password: 123456      
+          
+          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+        
+      

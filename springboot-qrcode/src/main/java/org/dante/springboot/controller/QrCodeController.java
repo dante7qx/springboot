@@ -28,7 +28,7 @@ public class QrCodeController {
 	 * @throws Exception
 	 */
     @GetMapping("/create_common_qrcode")
-    public void createCommonQRCode(HttpServletResponse response, String url) throws Exception {
+    public void createCommonQRCode(String url, HttpServletResponse response) throws Exception {
         ServletOutputStream stream = null;
         try {
             stream = response.getOutputStream();

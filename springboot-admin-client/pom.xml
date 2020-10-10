@@ -15,11 +15,15 @@
 	<description>Dante Springboot Admin Client</description>
 
 	<properties>
-		<admin.version>1.5.5</admin.version>
+		<admin.version>2.3.0</admin.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>

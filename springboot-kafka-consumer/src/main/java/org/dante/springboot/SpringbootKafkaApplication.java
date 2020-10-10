@@ -24,7 +24,7 @@ public class SpringbootKafkaApplication {
      * @param message
      */
 	
-    @KafkaListener(topics = {"SPIRIT_P_M"})
+    @KafkaListener(topicPattern = "SPIRIT_P_M.*")
     public void receiveMessage(ConsumerRecord<?, ?> record){
     	Optional<?> message = Optional.ofNullable(record.value());
     	if (message.isPresent()) {

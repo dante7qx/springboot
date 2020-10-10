@@ -6,12 +6,3 @@ server:
 spring:
   application:
     name: svc4
-opentracing:
-  jaeger:
-    udp-sender:
-      host: 127.0.0.1
-      port: 5775
-    probabilistic-sampler:
-      sampling-rate: 0.8
-    rate-limiting-sampler:
-      max-traces-per-second: 0.6

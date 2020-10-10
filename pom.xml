@@ -21,7 +21,6 @@
 	</properties>
 
 	<modules>
-		<module>springboot-integration</module>
 		<module>springboot-swagger</module>
 		<module>springboot-ldap</module>
 		<module>springboot-cache</module>
@@ -84,6 +83,7 @@
 		<module>springboot-retrofit</module>
 		<module>springboot-fileupload</module>
 		<module>springboot-maven-multienvconfig</module>
+		<module>springboot-xxl-job</module>
 	</modules>
 
 	<parent>

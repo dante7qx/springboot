@@ -1,19 +1,24 @@
-server:
-  address: 127.0.0.1
 spring:
   application:
     name: springboot_admin_client
   boot:
     admin:
-      url: http://localhost:8900
-      username: admin
-      password: admin123
       client:
+        username: dante
+        password: 123456
+        url: http://localhost:8900
+        instance:
+          service-base-url: http://localhost:8900
 #        prefer-ip: true
-        metadata:
-          user.name: admin
-          user.password: admin123
+          metadata:
+            user.name: dante
+            user.password: 123456
+
 management:
-  port: 58888
-  security:
-    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

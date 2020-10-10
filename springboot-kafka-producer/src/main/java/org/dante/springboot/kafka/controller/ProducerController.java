@@ -21,10 +21,29 @@ public class ProducerController {
 	
 	@GetMapping("/send/{msg}")
 	public PubMsg send(@PathVariable String msg) {
-		PubMsg pubMsg = buildMsg(msg);
-		log.info("kafka的消息={}", pubMsg);
-		kafkaProducer.sendMsg("SPIRIT_P_M", pubMsg);
-		return pubMsg;
+		String topic = "topic.spirit.msg";
+		for (int i = 0; i < 100; i++) {
+			PubMsg pubMsg = buildMsg(msg + "-" + i);
+			log.info("kafka的分区消息={}", pubMsg);
+			
+			kafkaProducer.sendMsg(topic, pubMsg);
+		}
+		return buildMsg(msg);
+	}
+	
+	@GetMapping("/psend/{msg}")
+	public PubMsg psend(@PathVariable String msg) {
+		String topic = "SPIRIT_P_M_";
+		for (int i = 0; i < 100; i++) {
+			PubMsg pubMsg = buildMsg(msg + "-" + i);
+			log.info("kafka的多主题消息={}", pubMsg);
+			
+			if( i % 5 == 0) {
+				topic = topic.concat(String.valueOf(i));
+			}
+			kafkaProducer.sendMsg(topic, pubMsg);
+		}
+		return buildMsg(msg);
 	}
 	
 	private PubMsg buildMsg(String msgId) {

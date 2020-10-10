@@ -1,27 +1,24 @@
 package org.dante.springboot.mongo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
-import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
-import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
-import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
+import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
+
+@EnableReactiveMongoRepositories
 @Configuration
-public class SpiritMongoConfig {
-
-	@Autowired
-	private MongoDbFactory mongoDbFactory;
-
-	@Bean
-	MongoTemplate mongoTemplate() {
-		MappingMongoConverter converter = new MappingMongoConverter(new DefaultDbRefResolver(mongoDbFactory),
-				new MongoMappingContext());
-		converter.setTypeMapper(new DefaultMongoTypeMapper(null));
-		return new MongoTemplate(mongoDbFactory, converter);
-
-	}
+public class SpiritMongoConfig extends AbstractReactiveMongoConfiguration {
+ 
+    @Bean
+    public MongoClient mongoClient() {
+        return MongoClients.create();
+    }
+ 
+    @Override
+    protected String getDatabaseName() {
+        return "reactive";
+    }
 }
