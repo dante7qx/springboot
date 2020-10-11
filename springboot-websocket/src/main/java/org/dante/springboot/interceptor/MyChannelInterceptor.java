@@ -2,36 +2,35 @@ package org.dante.springboot.interceptor;
 
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.support.ChannelInterceptorAdapter;
+import org.springframework.messaging.support.ChannelInterceptor;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MyChannelInterceptor extends ChannelInterceptorAdapter {
-	
+public class MyChannelInterceptor implements ChannelInterceptor {
+
 	@Override
 	public boolean preReceive(MessageChannel channel) {
-		log.info("preReceive --> {} ", channel);
-		return super.preReceive(channel);
+		log.info("preReceive --> {} ", channel.toString());
+		return ChannelInterceptor.super.preReceive(channel);
 	}
-	
+
 	@Override
-	public void afterReceiveCompletion(Message<?> message, MessageChannel channel, Exception ex) {
-		log.info("afterReceiveCompletion --> {} ", message);
-		super.afterReceiveCompletion(message, channel, ex);
+	public Message<?> postReceive(Message<?> message, MessageChannel channel) {
+		log.info("postReceive --> {} ", message);
+		return ChannelInterceptor.super.postReceive(message, channel);
 	}
-	
+
 	@Override
 	public Message<?> preSend(Message<?> message, MessageChannel channel) {
 		log.info("preSend --> {} ", message);
-		return super.preSend(message, channel);
+		return ChannelInterceptor.super.preSend(message, channel);
 	}
-	
+
 	@Override
-	public void afterSendCompletion(Message<?> message, MessageChannel channel, boolean sent, Exception ex) {
-		log.info("afterSendCompletion --> {} ", message);
-		super.afterSendCompletion(message, channel, sent, ex);
+	public void postSend(Message<?> message, MessageChannel channel, boolean sent) {
+		log.info("postSend --> {} ", message);
+		ChannelInterceptor.super.postSend(message, channel, sent);
 	}
-	
-	
+
 }
