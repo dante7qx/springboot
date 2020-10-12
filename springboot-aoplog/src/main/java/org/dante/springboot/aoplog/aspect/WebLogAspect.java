@@ -24,8 +24,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -46,7 +44,6 @@ import javassist.bytecode.MethodInfo;
 @Component
 public class WebLogAspect {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
-	private ObjectMapper mapper = new ObjectMapper();
 	
 	ThreadLocal<Long> startTime = new ThreadLocal<>();
 	
@@ -65,7 +62,7 @@ public class WebLogAspect {
         String clazzName = clazz.getName();    
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
-        Map<String,Object > nameAndArgs = this.getFieldsName(this.getClass(), clazzName, methodName, args);   
+        this.getFieldsName(this.getClass(), clazzName, methodName, args);   
         
         final String method = request.getMethod();
         /*
@@ -111,6 +108,7 @@ public class WebLogAspect {
 		}
     }  
 	
+	@SuppressWarnings("rawtypes")
 	private Map<String,Object> getFieldsName(Class cls, String clazzName, String methodName, Object[] args) throws Exception {   
         Map<String,Object > map=new HashMap<String,Object>(); 
 

@@ -17,8 +17,11 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 
 @Configuration
 @EnableCaching
@@ -42,6 +45,13 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	}
 	
 
+	/**
+	 * enableDefaultTyping方法过期
+	 * 参考：https://blog.csdn.net/zzhongcy/article/details/105813105
+	 * 
+	 * @param redisConnectionFactory
+	 * @return
+	 */
 	@Bean
 	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 		RedisTemplate<String, String> template = new RedisTemplate<String, String>();
@@ -51,7 +61,8 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 		Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);  
         ObjectMapper om = new ObjectMapper();  
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);  
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);  
+        // 指定序列化输入的类型，就是将数据库里的数据安装一定类型存储到redis缓存中。
+        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, DefaultTyping.NON_FINAL, JsonTypeInfo.As.WRAPPER_ARRAY);
         jackson2JsonRedisSerializer.setObjectMapper(om);  
         template.setValueSerializer(jackson2JsonRedisSerializer); 
         // Redis key 序列化

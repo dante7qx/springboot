@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -121,7 +120,7 @@ public class RequestParamterUtils {
         }
             
         Map<String,Object> map = new HashMap<String,Object>();
-        Enumeration paramNames = request.getParameterNames();
+        Enumeration<String> paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
             String paramName = (String)paramNames.nextElement();
             String[] paramValues = request.getParameterValues(paramName);
