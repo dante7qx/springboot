@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -111,6 +110,7 @@ public class RequestParamterUtils {
 	 * @param request
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Map<String,Object> getRequestParams(HttpServletRequest request) {
 		
 		String contentType = request.getContentType();//获取请求的content-type
