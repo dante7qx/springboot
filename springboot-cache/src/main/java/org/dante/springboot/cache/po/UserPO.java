@@ -1,5 +1,6 @@
 package org.dante.springboot.cache.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
@@ -12,7 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user")
-public class UserPO {
+public class UserPO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -24,7 +28,7 @@ public class UserPO {
 
 	public UserPO() {
 	}
-
+	
 	public UserPO(String account, String name, int age, BigDecimal balance) {
 		this.account = account;
 		this.name = name;

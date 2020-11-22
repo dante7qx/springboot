@@ -24,54 +24,42 @@ spring:
 RedisCacheConfig.java
 
 ```java
-package org.dante.springboot.cache.config;
-
-import java.lang.reflect.Method;
-
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.interceptor.CacheErrorHandler;
-import org.springframework.cache.interceptor.CacheResolver;
-import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Configuration
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport {
 
 	/**
 	 * 缓存管理器
+	 * 
+	 * @param redisConnectionFactory
+	 * @return
 	 */
 	@Bean
-	public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
-		CacheManager cacheManager = new RedisCacheManager(redisTemplate);
-		return cacheManager;
-	}
-	@Bean
-	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisTemplate<String, String> template = new RedisTemplate<String, String>();
-		template.setConnectionFactory(redisConnectionFactory);
-		Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);  
+	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+		RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();  
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);  
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);  
-        jackson2JsonRedisSerializer.setObjectMapper(om);  
-        template.setValueSerializer(jackson2JsonRedisSerializer);  
-        template.setKeySerializer(new StringRedisSerializer());
-        template.afterPropertiesSet();  
-		return template;
+		om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+		jackson2JsonRedisSerializer.setObjectMapper(om);  
+		
+		// 配置序列化（解决乱码的问题）
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .disableCachingNullValues();
+		
+		RedisCacheManager cacheManager = RedisCacheManager.builder(redisConnectionFactory)
+				.cacheDefaults(config)
+				.build();
+		
+        return cacheManager;
 	}
+	
+	/**
+	 * 缓存 Key 的生成策略，该参数与key是互斥的
+	 * 
+	 */
 	@Override
 	public KeyGenerator keyGenerator() {
 		return new KeyGenerator() {
@@ -87,19 +75,21 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	           }
 	       };
 	}
+
+	/**
+	 * 缓存解析器
+	 */
 	@Override
 	public CacheResolver cacheResolver() {
-		// TODO Auto-generated method stub
 		return super.cacheResolver();
 	}
+
 	@Override
 	public CacheErrorHandler errorHandler() {
-		// TODO Auto-generated method stub
 		return super.errorHandler();
 	}
 
 }
-
 ```
 - 3 启用注解
 
@@ -190,7 +180,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
       userDAO.delete(id);
   }
   ```
-  ​
+  
 
 - 5 缓存的 Key
 

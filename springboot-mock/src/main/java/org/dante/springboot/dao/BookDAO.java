@@ -15,4 +15,8 @@ public class BookDAO {
 	public BookVO queryByTitle(String title) {
 		return null;
 	}
+	
+	public BookVO queryById(Long id) {
+		return null;
+	}
 }

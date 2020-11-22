@@ -18,10 +18,16 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/title/{title}")
+	@GetMapping("/query_by_title/{title}")
 	public BookVO queryBookByTitle(@PathVariable String title) {
 		log.info("queryBookByTitle {}", title);
 		return bookService.queryByTitle(title);
+	}
+	
+	@GetMapping("/query_by_id/{id}")
+	public BookVO queryBookById(@PathVariable Long id) {
+		log.info("queryBookById {}", id);
+		return bookService.queryById(id);
 	}
 	
 	

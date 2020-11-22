@@ -2,15 +2,16 @@ server:
   port: 8199
 spring:
   redis:
-    database: 2
+    database: 0
     host: localhost
     password: null
     port: 6379
-    pool:
-      min-idle: 0
-      max-idle: 8
-      max-active: 8
-      max-wait: 1
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: 1
   datasource:
     platform: h2
   jpa:

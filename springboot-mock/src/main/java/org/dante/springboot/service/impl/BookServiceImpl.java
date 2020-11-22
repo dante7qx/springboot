@@ -17,4 +17,9 @@ public class BookServiceImpl implements BookService {
 		return bookDAO.queryByTitle(title);
 	}
 
+	@Override
+	public BookVO queryById(Long id) {
+		return bookDAO.queryById(id);
+	}
+
 }

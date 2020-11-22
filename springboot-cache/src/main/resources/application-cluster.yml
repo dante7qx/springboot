@@ -3,11 +3,12 @@ server:
 spring:
   redis:
     host: 127.0.0.1
-    pool:
-      min-idle: 10
-      max-idle: 50
-      max-active: 200
-      max-wait: 3000
+    lettuce:
+      pool:
+        min-idle: 10
+        max-idle: 50
+        max-active: 200
+        max-wait: 3000
     cluster:
       nodes:
       - 127.0.0.1:7000

@@ -84,6 +84,7 @@
 		<module>springboot-fileupload</module>
 		<module>springboot-maven-multienvconfig</module>
 		<module>springboot-xxl-job</module>
+		<module>springboot-richtext</module>
 	</modules>
 
 	<parent>

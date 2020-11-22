@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.dante.springboot.cache.po.UserPO;
 import org.dante.springboot.cache.service.UserService;
+import org.dante.springboot.cache.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/{id}")
-	public UserPO findById(@PathVariable Long id) {
+	public UserVO findById(@PathVariable Long id) {
 		return userService.findUser(id);
 	}
 	
@@ -38,11 +39,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/update/{id}")
-	public UserPO updateUser(@PathVariable Long id) {
-		UserPO userPO = userService.findUser(id);
-		userPO.setAccount("更新帐号"+Math.random());
-		userPO.setName("更新名称"+Math.random());
-		return userService.update(userPO);
+	public UserVO updateUser(@PathVariable Long id) {
+		UserVO userVO = userService.findUser(id);
+		userVO.setAccount("更新帐号"+Math.random());
+		userVO.setName("更新名称"+Math.random());
+		return userService.update(userVO);
 	}
 	
 	@GetMapping("/user/del/{id}")

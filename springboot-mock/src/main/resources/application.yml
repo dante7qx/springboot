@@ -1,6 +1,6 @@
 spring:
   application:
-    name: springboot-testng-api
+    name: springboot-Mockito
 server:
   port: 7901
 
