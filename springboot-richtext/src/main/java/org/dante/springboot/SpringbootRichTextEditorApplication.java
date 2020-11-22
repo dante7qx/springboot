@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 1. Markdown 编辑器，
  * 参考：
  *   https://nhn.github.io/tui.editor/latest/ToastUIEditor
+ *   https://github.com/nhn/tui.editor
  * 
  * @author dante
  *
