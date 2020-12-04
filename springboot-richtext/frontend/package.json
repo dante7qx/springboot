@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@toast-ui/editor": "^2.5.0",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
+    "@toast-ui/editor-plugin-color-syntax": "^1.0.1",
     "element-ui": "^2.14.1",
     "less": "^3.12.2",
     "vue": "^2.5.2",

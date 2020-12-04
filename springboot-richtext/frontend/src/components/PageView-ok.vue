@@ -17,7 +17,6 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 hljs.registerLanguage('java', java)
 hljs.registerLanguage('xml', xml)
 
-var viewer;
 export default {
   data () {
     return {
@@ -26,7 +25,6 @@ export default {
   		serviceTitle: '',
  	    docContent: ''
   	  },
-  	  navTree: [],
   	  htmlData: ''
     }
   },
@@ -46,7 +44,7 @@ export default {
 	  });
     },
     initEditor() {
-      viewer = new Viewer({
+      const viewer = new Viewer({
         el: document.querySelector('#viewer'),
 	    previewStyle: 'vertical',
 	    height: '700px',
@@ -54,53 +52,6 @@ export default {
 	    plugins: [[codeSyntaxHighlight, { hljs }]]
       })
     },
-    getTitle(content) {
-	  let nav = [];
-	  let tempArr = [];
-	  content.replace(/(#+)[^#][^\n]*?(?:\n)/g, function(match, m1, m2) {
-	    let title = match.replace('\n', '');
-	    let level = m1.length;
-	    
-	    tempArr.push({
-	      title: title.replace(/^#+\s+/, '').replace(/\([^)]*?\)/, ''),
-	      level: level,
-	      children: [],
-	    });
-	    nav = tempArr.filter(item => item.level <= 3);
-	    let index = 0;
-	    return nav = nav.map(item => {
-	      item.index = index++;
-	      return item;
-	    });
-	  });
-	  return nav;
-	}
-    buildNavTree() {
-	  let navTree = [];
-	  let childNodeIndex = 0;
-	  titleArr = this.getTitle(md)
-	  for(let i = 0; i < titleArr.length - 1; i++) {
-	    let nodeI = titleArr[i];
-	    if(nodeI.level == 1) {
-	      if(i > 0) {
-	        nodeI.index = navTree[0].index + 1;
-	      }
-	      navTree.push(nodeI)
-	    }    
-	    for (let j = i+1; j < titleArr.length; j++) {
-	      let nodeJ = titleArr[j];
-	      if(nodeI.level == nodeJ.level) {
-	        childNodeIndex = 0;
-	        break;
-	      }
-	      if(nodeI.level == nodeJ.level - 1) {
-	        nodeJ.index = childNodeIndex++;
-	        nodeI.children.push(nodeJ)
-	      }
-	    }
-	  }
-	  return navTree;
-	}
   },
   mounted () {
     this.initServiceDoc()

@@ -15,12 +15,12 @@ export default new Router({
       component: PubService
     },
     {
+      path: '/pageedit/:id',
       name: 'PageEdit',
-      path: '/pageEdit/:id',
       component: PageEdit
     },
     {
-      path: '/pageView/:id',
+      path: '/pageview/:id',
       name: 'PageView',
       component: PageView
     },
