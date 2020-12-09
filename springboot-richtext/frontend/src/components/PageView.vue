@@ -1,15 +1,24 @@
 <template>
   <el-container class="viewer">
     <el-aside width="200px">
-      <el-tree :data="docTree" :props="defaultProps" default-expand-all></el-tree>
+      <el-tree :data="docTree" 
+        :props="defaultProps" 
+        default-expand-all 
+        :expand-on-click-node="false"
+        @node-click="docNavHandler">
+      </el-tree>
     </el-aside>
-    <el-main>
-      <div id="viewer"></div>
-    </el-main>
+    <el-container>
+      <el-main>
+        <div id="viewer"></div>
+        <div id="docEditor" style="display: none;"></div>
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
 <script>
+import Editor from '@toast-ui/editor'
 import Viewer from '@toast-ui/editor/dist/toastui-editor-viewer'
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 import hljs from 'highlight.js/lib/highlight'
@@ -23,7 +32,6 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 hljs.registerLanguage('java', java)
 hljs.registerLanguage('xml', xml)
 
-var viewer;
 export default {
   data () {
     return {
@@ -37,8 +45,7 @@ export default {
         children: 'children',
         label: 'title'
       },
-      htmlData: '',
-      data: []
+      htmlData: ''
     }
   },
   methods: {
@@ -52,19 +59,32 @@ export default {
       }).then(function(result) {
         that.serviceDoc = JSON.parse(result)
         that.docTree = that.buildNavTree()
-        that.initEditor()
+        that.initViewer()
       }) .then(function(e) {
         if(e != null) console.log("err: " + e)
       });
     },
-    initEditor() {
-      viewer = new Viewer({
+    initViewer() {
+      const editor = new Editor({
+        el: document.querySelector('#docEditor'),
+        initialValue: this.serviceDoc.docContent
+      })
+      this.htmlData = editor.getHtml()
+      this.filterHtml(this.htmlData)
+      const viewer = new Viewer({
         el: document.querySelector('#viewer'),
         previewStyle: 'vertical',
-        height: '700px',
-        initialValue: this.serviceDoc.docContent,
+        initialValue: this.htmlData,
         plugins: [[codeSyntaxHighlight, { hljs }]]
       })
+    },
+    filterHtml(htmlContent) {
+      let i = -1
+      let filterHtmlContent = htmlContent.replace(/<[hH]([1-3])>/g, function(match, m1, m2) {
+        i++;
+        return match.replace(match, '<h' + m1 + ' id="index-'+m1+'-' + i +'">')
+      })
+      this.htmlData = filterHtmlContent
     },
     getTitle(content) {
       let nav = [];
@@ -88,29 +108,25 @@ export default {
     },
     buildNavTree() {
       let navTree = [];
-      let childNodeIndex = 0;
       let titleArr = this.getTitle(this.serviceDoc.docContent)
       for(let i = 0; i < titleArr.length - 1; i++) {
         let nodeI = titleArr[i];
         if(nodeI.level == 1) {
-          if(i > 0) {
-            nodeI.index = navTree[0].index + 1;
-          }
           navTree.push(nodeI)
         }    
         for (let j = i+1; j < titleArr.length; j++) {
           let nodeJ = titleArr[j];
-          if(nodeI.level == nodeJ.level) {
-            childNodeIndex = 0;
-            break;
-          }
           if(nodeI.level == nodeJ.level - 1) {
-            nodeJ.index = childNodeIndex++;
             nodeI.children.push(nodeJ)
           }
         }
       }
       return navTree;
+    },
+    docNavHandler(data) {
+      let selector = '#index-' + data.level + '-' + data.index
+      console.log(selector)
+      document.querySelector(selector).scrollIntoView()  
     }
   },
   mounted () {
@@ -121,7 +137,7 @@ export default {
 
 <style scoped>
 .viewer {
-  margin: 10px;
+  margin: 0px;
   border: 1px solid #eee;
 }
 .el-aside {
@@ -132,6 +148,10 @@ export default {
 .el-tree {
   background-color: #D3DCE6;
   color: #333;
-  margin-top: 10px;
+  margin-top: 15px;
+}
+.el-main {
+  overflow: auto;
+  height: 100vh;
 }
 </style>
