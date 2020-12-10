@@ -1,6 +1,9 @@
 package org.dante.springboot.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,19 +42,36 @@ public class PubServiceDocController {
 	}
 	
 	@PostMapping("/fetch_remote")
-	public String fetchRemoteMdContent(@RequestBody Map<String, Object> params) {
+	public String fetchRemoteMdContent(@RequestBody Map<String, String> params) {
+		StringBuilder sb = new StringBuilder();
+		String url = params.get("url");
+		try {
+			URL urlObj = new URL(url);
+			@Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(urlObj.openStream()));
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+			}
+		} catch (IOException e) {
+			log.error("fetchRemoteMdContent -> {}", url, e);
+		}
+		return sb.toString();
+		
+	}
+	
+	@PostMapping("/fetch_remote2")
+	public String fetchRemoteMdContent2(@RequestBody Map<String, String> params) {
 		String mdContent = "";
-		String url = params.get("url").toString();
+		String url = params.get("url");
 		try {
 			File file = new File("/Users/dante/Documents/Project/java-world/springboot/springboot-richtext/tmp.md");
 			FileUtils.copyURLToFile(new URL(url), file);
 			mdContent = FileUtils.readFileToString(file, Charset.forName("UTF-8"));
 			FileUtils.forceDelete(file);
 		} catch (Exception e) {
-			log.error("fetchRemoteMdContent -> {}", url, e);
+			log.error("fetchRemoteMdContent2 -> {}", url, e);
 		}
-		
 		return mdContent;
 	}
-	
 }
