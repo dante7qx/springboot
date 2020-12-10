@@ -51,32 +51,19 @@ export default {
   methods: {
     initServiceDoc() {
       const that = this
-      let id = this.$route.params.id
-      let act = this.$route.params.act
-      fetch(`/api/doc/find_by_id/${id}`)
-        .then(function(response) {
-          return response.text();
-        }).then(function(result) {
-          that.serviceDoc = JSON.parse(result)
-          that.docTree = that.buildNavTree()
-          that.initViewer()
-        }).then(function(e) {
-          if(e != null) console.log("err: " + e)
-        });
-     
-      let mdUrl = 'http://localhost:8700/dante/dante-gitlab-cms/-/raw/master/%E4%BA%A7%E5%93%81%E8%AF%B4%E6%98%8E/%E4%BA%A7%E5%93%81%E7%AE%80%E4%BB%8B.md?inline=false'
+      // let mdUrl = 'http://localhost:8700/dante/dante-gitlab-cms/-/raw/master/%E4%BA%A7%E5%93%81%E8%AF%B4%E6%98%8E/%E4%BA%A7%E5%93%81%E7%AE%80%E4%BB%8B.md?inline=false'
+      let mdUrl = 'https://raw.githubusercontent.com/AlibabaCloudDocs/ecs/master/intl.zh-CN/%E4%BA%A7%E5%93%81%E7%AE%80%E4%BB%8B/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS.md'
       fetch('/api/doc/fetch_remote/', {
-          body: JSON.stringify({"uri": mdUrl}),
-          headers: {
-            'content-type': 'application/json'
-          },
-          method: 'POST'
-        })
-        .then(function(response) {
+        body: JSON.stringify({"url": mdUrl}),
+        headers: {
+          'content-type': 'application/json'
+        },
+        method: 'POST'
+      }).then(function(response) {
           return response.text();
         }).then(function(result) {
           that.serviceDoc.docContent = result
-          that.docTree = that.buildNavTree()
+          // that.docTree = that.buildNavTree()
           that.initViewer()
         }).then(function(e) {
           if(e != null) console.log("err: " + e)

@@ -8,6 +8,7 @@
         <div class="bottom clearfix">
           <router-link tag="a" target="_blank" to="/pageview/1"><el-button type="primary" plain>查看</el-button></router-link>
           <router-link tag="a" target="_blank" to="/pageedit/1"><el-button type="success" plain>编辑</el-button></router-link>
+          <router-link tag="a" target="_blank" to="/pagegitlab"><el-button type="danger" plain>Gitlab</el-button></router-link>
         </div>
       </div>
     </el-card>

@@ -14,6 +14,10 @@
 	<packaging>jar</packaging>
 	<name>springboot-richtext</name>
 	<description>Dante Springboot Rich Text Editor</description>
+	
+	<properties>
+		<commons-io.version>2.8.0</commons-io.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -37,6 +41,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
 		</dependency>
 	</dependencies>
 
