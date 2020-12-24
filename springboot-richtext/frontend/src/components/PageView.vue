@@ -63,24 +63,6 @@ export default {
         }).then(function(e) {
           if(e != null) console.log("err: " + e)
         });
-     
-      let mdUrl = 'http://localhost:8700/dante/dante-gitlab-cms/-/raw/master/%E4%BA%A7%E5%93%81%E8%AF%B4%E6%98%8E/%E4%BA%A7%E5%93%81%E7%AE%80%E4%BB%8B.md?inline=false'
-      fetch('/api/doc/fetch_remote/', {
-          body: JSON.stringify({"uri": mdUrl}),
-          headers: {
-            'content-type': 'application/json'
-          },
-          method: 'POST'
-        })
-        .then(function(response) {
-          return response.text();
-        }).then(function(result) {
-          that.serviceDoc.docContent = result
-          that.docTree = that.buildNavTree()
-          that.initViewer()
-        }).then(function(e) {
-          if(e != null) console.log("err: " + e)
-        })
     },
     initViewer() {
       const editor = new Editor({
@@ -134,9 +116,12 @@ export default {
         }    
         for (let j = i+1; j < titleArr.length; j++) {
           let nodeJ = titleArr[j];
+          if(nodeI.level == nodeJ.level) {
+            break;
+          }
           if(nodeI.level == nodeJ.level - 1) {
             nodeI.children.push(nodeJ)
-          }
+          } 
         }
       }
       return navTree;

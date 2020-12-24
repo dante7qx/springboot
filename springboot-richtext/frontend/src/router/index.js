@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import PubService from '@/components/PubService.vue'
 import PageEdit from '@/components/PageEdit.vue'
 import PageView from '@/components/PageView.vue'
-import PageGitlab from '@/components/PageGitlab.vue'
+import PageGit from '@/components/PageGit.vue'
+import PageGitEdit from '@/components/PageGitEdit.vue'
 
 
 Vue.use(Router)
@@ -11,24 +12,24 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'PubService',
+      path: '/online',
       component: PubService
     },
     {
       path: '/pageedit/:id',
-      name: 'PageEdit',
       component: PageEdit
     },
     {
       path: '/pageview/:id',
-      name: 'PageView',
       component: PageView
     },
     {
-      path: '/pagegitlab',
-      name: 'PageGitlab',
-      component: PageGitlab
+      path: '/pagegit',
+      component: PageGit
+    },
+    {
+      path: '/pagegitedit',
+      component: PageGitEdit
     }
   ]
 })

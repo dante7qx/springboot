@@ -121,6 +121,9 @@ export default {
         }    
         for (let j = i+1; j < titleArr.length; j++) {
           let nodeJ = titleArr[j];
+          if(nodeI.level == nodeJ.level) {
+            break;
+          }
           if(nodeI.level == nodeJ.level - 1) {
             nodeI.children.push(nodeJ)
           }
