@@ -41,10 +41,10 @@ public class PropertiesUtils {
 	public static String getString(String key, String defaultValue) {
 		try {
 			String value = env.getProperty(key);
-			if (StringUtils.isEmpty(value)) {
-				return defaultValue;
+			if (StringUtils.hasLength(value)) {
+				return value;
 			}
-			return value;
+			return defaultValue;
 		} catch (MissingResourceException e) {
 			return defaultValue;
 		}
@@ -69,10 +69,10 @@ public class PropertiesUtils {
 	 */
 	public static int getInt(String key, int defaultValue) {
 		String value = env.getProperty(key);
-		if (StringUtils.isEmpty(value)) {
-			return defaultValue;
+		if (StringUtils.hasLength(value)) {
+			return Integer.parseInt(value);
 		}
-		return Integer.parseInt(value);
+		return defaultValue;
 	}
 
 	/**
@@ -84,10 +84,10 @@ public class PropertiesUtils {
 	 */
 	public static boolean getBoolean(String key, boolean defaultValue) {
 		String value = env.getProperty(key);
-		if (StringUtils.isEmpty(value)) {
-			return defaultValue;
+		if (StringUtils.hasLength(value)) {
+			return new Boolean(value);
 		}
-		return new Boolean(value);
+		return defaultValue;
 	}
 	
 }

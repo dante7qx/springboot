@@ -1,0 +1,10 @@
+server:
+  port: 8200
+
+resilience4j:
+  ratelimiter:
+    instances:
+      productRateLimiter: 
+        limitForPeriod: 3   ## 每10秒内可用3个
+        limitRefreshPeriod: 10s
+        timeoutDuration: 0

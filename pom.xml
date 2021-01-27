@@ -85,12 +85,15 @@
 		<module>springboot-maven-multienvconfig</module>
 		<module>springboot-xxl-job</module>
 		<module>springboot-richtext</module>
+		<module>springboot-resilience4j-common</module>
+		<module>springboot-resilience4j-server</module>
+		<module>springboot-resilience4j-client</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.0</version>
+		<version>2.4.1</version>
 	</parent>
 
 	<dependencies>
@@ -119,18 +122,5 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 
 </project>

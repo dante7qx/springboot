@@ -1,0 +1,49 @@
+server:
+  port: 8201
+  tomcat: 
+    connection-timeout: 10s ## 在上一次连接的服务关闭前，服务器等待客户端发出请求的最长时间
+
+product:
+  service:
+    endpoint: http://localhost:8200/api/product
+    
+resilience4j:
+  retry:
+    instances:
+      ratingRetryService: 
+        max-attempts: 3 ## 最多重试3次
+        wait-duration: 2s ## 每次重试调用前，等待2秒
+        retry-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+        ignore-exceptions:
+          - org.springframework.web.client.HttpClientErrorException
+      ratingCircuitBreakService: 
+        max-attempts: 2 ## 最多重试3次
+        wait-duration: 1s ## 每次重试调用前，等待2秒
+        retry-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+        ignore-exceptions:
+          - org.springframework.web.client.HttpClientErrorException
+  bulkhead:
+    instances:
+      ratingBulkheadService: 
+        max-concurrent-calls: 5 ## 隔板最大的信号量
+        max-wait-duration: 10ms
+  timelimiter:
+    instances:
+      ratingTimeoutService: 
+        timeout-duration: 3s        ## 3秒超时
+        cancel-running-future: true ## 超时后取消正在执行的线程任务
+  circuitbreaker:
+    configs:
+      default: 
+        sliding-window-type: count-based
+        sliding-window-size: 100
+        permitted-number-of-calls-in-half-open-state: 10  ## 在半开状态时，允许调用的数量
+        wait-duration-in-open-state: 10ms                 ## 从打开状态转变为半开状态等待的时间
+        failure-rate-threshold: 60                        ## 失败率阀值，百分比
+        record-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+    instances: 
+      ratingCircuitBreakService: 
+        base-config: default

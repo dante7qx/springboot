@@ -1,2 +1,3 @@
 server:
-  context-path: /api
+  servlet:
+    context-path: /api
