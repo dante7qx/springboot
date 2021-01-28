@@ -8,7 +8,7 @@
 
 ### 二. 原理说明
 
-容错是指系统在部分组件（一个或多个）发生故障时仍能正常运作的能力。要具有这个能力，通常要包含断路器（CircuitBreaker）、并发调用隔离（Bulkhead）、限流（RateLimiter）、重试（Retry）、超时（TimeLimiter 或 Timeout）机制。
+容错是指系统在部分组件（一个或多个）发生故障时仍能正常运作的能力。要具有这个能力，通常要包含断路器（CircuitBreaker）、并发调用隔离（Bulkhead）、限流（RateLimiter）、重试（Retry）、超时（Timeout）机制。
 
 - **断路器 — CircuitBreaker**
 

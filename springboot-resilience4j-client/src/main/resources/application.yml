@@ -47,3 +47,14 @@ resilience4j:
     instances: 
       ratingCircuitBreakService: 
         base-config: default
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
