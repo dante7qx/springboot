@@ -1,7 +1,7 @@
 server:
   port: 8201
   tomcat: 
-    connection-timeout: 10s ## 在上一次连接的服务关闭前，服务器等待客户端发出请求的最长时间
+    connection-timeout: 60s ## 在上一次连接的服务关闭前，服务器等待客户端发出请求的最长时间
 
 product:
   service:
