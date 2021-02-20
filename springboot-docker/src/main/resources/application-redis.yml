@@ -1,0 +1,2 @@
+hello:
+  cache-name: Redis分布式缓存

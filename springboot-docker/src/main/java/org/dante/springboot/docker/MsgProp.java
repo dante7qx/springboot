@@ -15,4 +15,5 @@ public class MsgProp {
 	private int sleep = 1;
 	private String host = "127.0.0.1";
 	private Integer port = 8080;
+	private String cacheName = "未知";
 }

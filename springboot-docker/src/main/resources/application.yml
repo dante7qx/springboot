@@ -1,22 +1,31 @@
+## 2.4版本后，外部文件始终会覆盖打包的文件，之前不会覆盖
+
 spring:
   profiles:
-    active: ${config.profile:dev}
+    active: node1
 ---
 spring:
-  profiles: node1
+  profiles:
+    group: 
+      node1: redis
 server:
   port: 8101
 hello:
   msg: '[当前节点 node1] 你好，'
   host: 192.168.1.2
   port: 8289
+  
 ---
 spring:
-  profiles: node2
+  config:
+    activate:
+      on-profile: node2
 server:
   port: 8102
 hello:
   msg: '[当前节点 node2] 你好，'
+  host: 192.168.1.2
+  port: 8289
   
 ---
 spring:
@@ -25,3 +34,5 @@ server:
   port: 8103
 hello:
   msg: '[当前节点 node3] 你好，'
+  host: 192.168.1.2
+  port: 8289

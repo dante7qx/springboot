@@ -1,3 +1,5 @@
+server:
+  port: 8080
 hello:
   msg: '[DEV] 你好，'
   sleep: 2

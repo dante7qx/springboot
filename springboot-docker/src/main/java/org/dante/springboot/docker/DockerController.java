@@ -75,7 +75,7 @@ public class DockerController {
                  LOGGER.info("被删除的cookie名字为:"+cookie.getName());  
              }  
          } 
-		return new MsgVO("S_KQS0932", msgProp.getMsg(), Instant.now().toEpochMilli(), "涯");
+		return new MsgVO("S_KQS0932", msgProp.getMsg(), Instant.now().toEpochMilli(), msgProp.getCacheName());
 	}
 	
 	@GetMapping("/msg")
