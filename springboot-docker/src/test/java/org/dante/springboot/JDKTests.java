@@ -2,7 +2,9 @@ package org.dante.springboot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
 
@@ -32,6 +34,13 @@ public class JDKTests {
 		List<String> list = new ArrayList<>(Arrays.asList(arr));
 		list.add("Grovvy");
 		log.info("{}", list);
+	}
+	
+	@Test
+	public void random() {
+		for (int i = 0; i < 10; i++) {
+			log.info("当前数字 ==> {}", ThreadLocalRandom.current().nextInt(1,  10));
+		}
 	}
 	
 }

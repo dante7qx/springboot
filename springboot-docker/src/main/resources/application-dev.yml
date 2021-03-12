@@ -1,3 +1,5 @@
 hello:
   msg: '[DEV] 你好，'
   sleep: 2
+  host: 127.0.0.1
+  port: 8000
