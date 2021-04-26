@@ -17,7 +17,7 @@
 	<properties>
 		<poi.version>3.17</poi.version>
 		<jquery.version>1.11.3</jquery.version>
-		<commons-io.version>2.6</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 	</properties>
 
 	<dependencies>
