@@ -3,6 +3,12 @@
 spring:
   profiles:
     active: node1
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
 ---
 spring:
   profiles:
