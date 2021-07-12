@@ -1,5 +1,6 @@
 package org.dante.springboot.listener;
 
+import java.time.Instant;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -19,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class StateReader {
 	
 	@Resource
-    ApplicationAvailability applicationAvailability;
+    private ApplicationAvailability applicationAvailability;
 	
 	
 	@RequestMapping(value="/get")
     public String state() {
         return "livenessState : " + applicationAvailability.getLivenessState()
                + "<br>readinessState : " + applicationAvailability.getReadinessState()
-               + "<br>" + new Date();
+               + "<br>" + Instant.now();
     }
 }

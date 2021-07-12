@@ -18,6 +18,7 @@ logs/
 
 # BlueJ files
 *.ctxt
+*.gz
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
