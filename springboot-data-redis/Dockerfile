@@ -1,6 +1,6 @@
 FROM dante2012/java:jre8
 
-LABEL MAINTAINER="dante <sunchao@ccbft.com>"
+LABEL MAINTAINER="dante <sunchao.0129@163.com>"
 
 ENV JAVA_OPTS="-Xms512m -Xmx1024m -XX:MetaspaceSize=64m -XX:MaxMetaspaceSize=128m" 
 
