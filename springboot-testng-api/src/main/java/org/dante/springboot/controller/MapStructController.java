@@ -1,4 +1,4 @@
-package org.dante.springboot;
+package org.dante.springboot.controller;
 
 import java.time.Instant;
 import java.util.Date;
@@ -7,25 +7,25 @@ import java.util.UUID;
 import org.dante.springboot.converter.MsgConvertMapper;
 import org.dante.springboot.vo.MsgDTO;
 import org.dante.springboot.vo.MsgPO;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class SpringbootApi4TestNgApplicationTests {
+@RestController
+public class MapStructController {
 	
 	@Autowired
 	private MsgConvertMapper msgConvertMapper;
 	
-	@Test
-	public void testMsgConvert() {
+	@GetMapping("/mapstruct/{msg}")
+	public MsgDTO getMsg(@PathVariable String msg) {
 		MsgPO po = new MsgPO();
 		po.setMsgId(UUID.randomUUID().toString().replace("-", ""));
-		po.setMsg("测试消息");
+		po.setMsg(msg);
 		po.setSendTime(Date.from(Instant.now()));
 		
 		MsgDTO dto = msgConvertMapper.toDTO(po);
@@ -34,6 +34,7 @@ public class SpringbootApi4TestNgApplicationTests {
 		
 		MsgPO poConvert = msgConvertMapper.toPO(dto);
 		log.info("MsgPO: {}", poConvert);
+		return dto;
 	}
 	
 }

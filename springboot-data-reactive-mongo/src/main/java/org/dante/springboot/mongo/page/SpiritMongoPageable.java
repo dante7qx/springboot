@@ -76,4 +76,9 @@ public class SpiritMongoPageable implements Serializable, Pageable {
     public Pageable previousOrFirst() {
         return null;
     }
+
+	@Override
+	public Pageable withPage(int pageNumber) {
+		return null;
+	}
 }

@@ -1,10 +1,11 @@
 server:
   port: 8101
 spring:
-  datasource:
-    platform: h2
-    schema: classpath:schema.sql
-    data: classpath:data.sql
+  sql:
+    init:
+      platform: h2
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
   jpa:
     show-sql: true
     hibernate:
