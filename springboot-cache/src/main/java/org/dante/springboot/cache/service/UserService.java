@@ -34,13 +34,16 @@ public class UserService {
 		return userDAO.findByAccount(account);
 	}
 	
-	@Caching(put = @CachePut(key="caches[0].name.concat('_').concat(#userPO.getId())"), 
+	@Caching(put = @CachePut(key="caches[0].name.concat('_').concat(#userVO.getId())"), 
 			evict = @CacheEvict(key="caches[0].name"))
 	@Transactional
-	public UserPO insert(UserPO userPO) {
+	public UserVO insert(UserVO userVO) {
+		UserPO userPO = new UserPO();
+		BeanUtils.copyProperties(userVO, userPO);
 		UserPO u = userDAO.save(userPO);
-		logger.info("添加缓存：{}", u);
-		return u;
+		BeanUtils.copyProperties(u, userVO);
+		logger.info("添加缓存：{}", userVO);
+		return userVO;
 	}
 	
 	@Caching(evict={

@@ -33,9 +33,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/add")
-	public UserPO addUser() {
-		UserPO userPO = new UserPO("帐号"+Math.random(), "名称"+Math.random(), 32,  BigDecimal.valueOf(87.62));
-		return userService.insert(userPO);
+	public UserVO addUser() {
+		UserVO vo = new UserVO("帐号"+Math.random(), "名称"+Math.random(), 32,  BigDecimal.valueOf(87.62));
+		return userService.insert(vo);
 	}
 	
 	@GetMapping("/user/update/{id}")

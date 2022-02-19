@@ -12,8 +12,11 @@ spring:
         max-idle: 8
         max-active: 8
         max-wait: 1
-  datasource:
-    platform: h2
+  sql:
+    init:
+      platform: h2
+      schema-locations: classpath:schema-h2.sql
+      data-locations: classpath:data-h2.sql
   jpa:
     generate-ddl: false
     show-sql: true
