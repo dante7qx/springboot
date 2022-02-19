@@ -2,8 +2,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/springboot
     username: root
-    password: ENC@[mNgu1RPW6ajny8neNrucdB75zfXsI8p1]
-    driver-class-name: com.mysql.jdbc.Driver
+    password: ENC@[d76D3nSSUlGjbqbzOEu6ZhN59j1UfDwU]
+    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       initial-size: 10
       min-idle: 10
@@ -48,4 +48,4 @@ jasypt:
       prefix: "ENC@["
       suffix: "]"
 spirit:
-  pwd: ENC@[mNgu1RPW6ajny8neNrucdB75zfXsI8p1]
+  pwd: ENC@[d76D3nSSUlGjbqbzOEu6ZhN59j1UfDwU]

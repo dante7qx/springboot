@@ -5,23 +5,20 @@ import java.util.List;
 import org.dante.springboot.dao.PersonDAO;
 import org.dante.springboot.po.PersonPO;
 import org.jasypt.encryption.StringEncryptor;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootJasyptApplicationTests {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpringbootJasyptApplicationTests.class);
 	
 	@Autowired
-	private PersonDAO personDAO;
+	private PersonDAO personDAO; 
 	@Autowired
 	@Qualifier("spiritEncryptorBean")
     private StringEncryptor stringEncryptor;
@@ -35,7 +32,7 @@ public class SpringbootJasyptApplicationTests {
 	@Test
     public void encryptPwd() {
         String encrypt = stringEncryptor.encrypt("iamdante");
-        LOGGER.info(encrypt); 
+        LOGGER.info("====> {}", encrypt); 
         String decrypt = stringEncryptor.decrypt(encrypt);
         LOGGER.info(decrypt);
     }

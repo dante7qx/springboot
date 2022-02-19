@@ -10,12 +10,10 @@ import java.util.Set;
 
 import org.dante.springboot.data.util.RedisClusterUtils;
 import org.dante.springboot.data.vo.Person;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -23,7 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
 public class SpringbootDataRedisApplicationTests {

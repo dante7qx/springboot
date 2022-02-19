@@ -24,7 +24,7 @@ public class HobbyPO {
 	private String hobby;
 	private String updateBy;
 	private Boolean isDelete;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PersonId")
 	private PersonPO person;
 	private Date updateDate;
