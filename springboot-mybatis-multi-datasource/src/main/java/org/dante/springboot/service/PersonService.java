@@ -19,12 +19,14 @@ public class PersonService {
 		p1.setName("p1");
 		p1.setAge(20);
 		p1.setAddress("p1 地址");
+		p1.setUpdateBy("多数据源");
 		personMapper.insertPerson(p1);
 		
 		PersonBO p2 = new PersonBO();
-//		p2.setName("p2");
+		p2.setName("p2");
 		p2.setAge(20);
 		p2.setAddress("p2 地址");
+		p2.setUpdateBy("多数据源");
 		personMapper.insertPerson(p2);
 	}
 	

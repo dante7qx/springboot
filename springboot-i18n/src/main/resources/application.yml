@@ -2,4 +2,6 @@ server:
   port: 8100
 spring:
   messages:
-    basename: i18n/message
+    basename: i18n/messages
+    
+## 自动配置创建默认 ResourceBundleMessageSource 实例并使用命名空间 spring.messages.* 中的其他属性值对其进行自定义。

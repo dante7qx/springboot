@@ -16,7 +16,7 @@
 	<description>Dante Springboot Resilience4j 轻量级熔断框架</description>
 
 	<properties>
-		<resilience4j.version>1.6.1</resilience4j.version>
+		<resilience4j.version>1.7.1</resilience4j.version>
 	</properties>
 
 	<dependencies>

@@ -51,7 +51,7 @@ public class LoggerController {
 	
 	private String getHeader(HttpServletRequest request, String headName) {  
 	    String value = request.getHeader(headName);  
-	    return !StringUtils.isEmpty(value) && !"unknown".equalsIgnoreCase(value) ? value : "";  
+	    return !StringUtils.hasLength(value) && !"unknown".equalsIgnoreCase(value) ? value : "";  
 	}  
 
 }

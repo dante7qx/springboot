@@ -15,10 +15,11 @@
 	<description>Dante Springboot Quartz</description>
 
 	<properties>
-		<!-- Thymeleaf 3 -->
+		<!-- Thymeleaf 3 
 		<thymeleaf.version>3.0.8.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
 		<thymeleaf-extras-java8time.version>3.0.1.RELEASE</thymeleaf-extras-java8time.version>
+		-->
 	</properties>
 
 	<dependencies>

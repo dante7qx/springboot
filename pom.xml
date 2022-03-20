@@ -58,6 +58,7 @@
 		<module>springboot-admin-server</module>
 		<module>springboot-admin-client</module>
 		<module>springboot-poi</module>
+		<module>springboot-office</module>
 		<module>springboot-email</module>
 		<module>springboot-rabbitmq-producer</module>
 		<module>springboot-rabbitmq-consumer</module>
@@ -85,9 +86,12 @@
 		<module>springboot-maven-multienvconfig</module>
 		<module>springboot-xxl-job</module>
 		<module>springboot-richtext</module>
+		<module>springboot-easyexcel</module>
 		<module>springboot-resilience4j-common</module>
 		<module>springboot-resilience4j-server</module>
 		<module>springboot-resilience4j-client</module>
+		<module>springboot-flowable</module>
+		<module>springboot-flowable-design</module>
 	</modules>
 
 	<parent>

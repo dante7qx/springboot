@@ -1,7 +1,7 @@
 spring:
   datasource:
     druid: 
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       initial-size: 10
       min-idle: 10
       max-active: 30
@@ -32,8 +32,8 @@ spring:
         url: jdbc:mysql://localhost/springboot
         username: root
         password: iamdante
-      shiro: 
-        url: jdbc:mysql://localhost/shiro
+      springboot2: 
+        url: jdbc:mysql://localhost/springboot2
         username: root
         password: iamdante
   jpa:

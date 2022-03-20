@@ -1,0 +1,42 @@
+server:
+  port: 8900
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:mysql://localhost/springboot_flowable_design?characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: iamdante
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: springboot-flowable-design-hikaricp
+      data-source-properties: 
+        nullCatalogMeansCurrent: true
+flowable:
+  database-schema-update: true
+  common:
+    app:
+      idm-url: /idm
+  idm:
+    app:
+      admin:
+        user-id: admin
+        password: test
+#        first-name: 管理员
+#        last-name: 超级
+  modeler:
+    app:
+      rest-enabled: true
+  activity-font-name: 宋体
+  label-font-name: 宋体
+  annotation-font-name: 宋体
+  
+logging: 
+  level: 
+    org:
+      flowable: 
+        engine.impl.persistence.entity.*: debug
+        task.service.impl.persistence.entity.*: debug

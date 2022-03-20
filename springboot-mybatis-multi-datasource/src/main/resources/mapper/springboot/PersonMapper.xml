@@ -3,10 +3,10 @@
 <mapper namespace="org.dante.springboot.mapper.springboot.PersonMapper">
 	
 	<select id="queryPersons" resultType="PersonBO">
-		select t.id, t.name, t.age, t.address, t.updateDate from T_Person t order by t.age
+		select t.id, t.name, t.age, t.address, t.updateBy, t.updateDate from T_Person t order by t.age
 	</select>
 	
 	<insert id="insertPerson">
-		insert into T_Person(Name, Age, Address) values(#{name}, #{age}, #{address}) 
+		insert into T_Person(Name, Age, Address, UpdateBy, UpdateDate) values(#{name}, #{age}, #{address}, #{updateBy}, now()) 
 	</insert>
 </mapper>

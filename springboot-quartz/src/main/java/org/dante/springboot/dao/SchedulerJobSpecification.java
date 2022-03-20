@@ -28,7 +28,7 @@ public class SchedulerJobSpecification {
 			public Predicate toPredicate(Root<SchedulerJobPO> root, CriteriaQuery<? extends Object> query, CriteriaBuilder cb) {
 				List<Predicate> predicates = Lists.newArrayList();
 				String jobId = (String) filter.get("jobId");
-				if (!StringUtils.isEmpty(jobId)) {
+				if (StringUtils.hasLength(jobId)) {
 					Predicate jobIdLike = cb.like(root.get("jobId").as(String.class), "%" + jobId.trim() + "%");
 					predicates.add(jobIdLike);
 				}

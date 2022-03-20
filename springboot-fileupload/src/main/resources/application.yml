@@ -1,11 +1,11 @@
 spring:
   application:
     name: dante-springboot-fileupload
-#  servlet:
-#    multipart:
-#      enabled: true
-#      max-file-size: 6000000
-#      max-request-size: 10000000
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
     
 server:
   port: 8101

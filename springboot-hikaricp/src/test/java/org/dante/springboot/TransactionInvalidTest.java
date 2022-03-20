@@ -2,7 +2,7 @@ package org.dante.springboot;
 
 import org.dante.springboot.po.PersonPO;
 import org.dante.springboot.service.IPersonService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TransactionInvalidTest extends SpringbootHikariCPApplicationTests {

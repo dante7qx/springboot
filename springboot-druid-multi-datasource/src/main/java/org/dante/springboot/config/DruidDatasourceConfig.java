@@ -15,7 +15,7 @@ public class DruidDatasourceConfig {
 
 	@Bean
 	@Primary
-	@Qualifier("primaryDataSource")
+	@Qualifier("springbootDataSource")
 	@ConfigurationProperties("spring.datasource.druid.springboot")
 	public DataSource springbootDataSource(){
 	    return DruidDataSourceBuilder.create().build();
@@ -23,8 +23,8 @@ public class DruidDatasourceConfig {
 	
 	@Bean
     @Primary
-    @Qualifier("shiroDataSource")
-	@ConfigurationProperties("spring.datasource.druid.shiro")
+    @Qualifier("springboot2DataSource")
+	@ConfigurationProperties("spring.datasource.druid.springboot2")
 	public DataSource shiroDataSource(){
 	    return DruidDataSourceBuilder.create().build();
 	}

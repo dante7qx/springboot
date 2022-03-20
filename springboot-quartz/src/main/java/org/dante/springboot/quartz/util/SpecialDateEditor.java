@@ -10,7 +10,7 @@ public class SpecialDateEditor extends PropertyEditorSupport {
 
 	@Override  
     public void setAsText(String text) {  
-		if(StringUtils.isEmpty(text)) {
+		if(! StringUtils.hasLength(text)) {
 			setValue(null); 
 			return;
 		}

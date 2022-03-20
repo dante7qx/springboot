@@ -2,10 +2,10 @@ package org.dante.springboot.controller;
 
 import java.util.List;
 
-import org.dante.springboot.bo.shiro.UserBO;
-import org.dante.springboot.dao.shiro.UserDAO;
-import org.dante.springboot.mapper.shiro.UserMapper;
-import org.dante.springboot.po.shiro.UserPO;
+import org.dante.springboot.bo.springboot2.UserBO;
+import org.dante.springboot.dao.springboot2.UserDAO;
+import org.dante.springboot.mapper.springboot2.UserMapper;
+import org.dante.springboot.po.springboot2.UserPO;
 import org.dante.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

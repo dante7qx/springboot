@@ -68,6 +68,7 @@ public class ProductService {
 		return BaseResponse.of(productDTO, ResponseType.SUCCESS, Strings.EMPTY);
 	}
 	
+	@SuppressWarnings("unused")
 	private BaseResponse<ProductDTO> getProductByIdFallback(int productId, Throwable throwable) {
 		return BaseResponse.of(null, ResponseType.FAILURE, "当前用户较多，请稍后再试。");
 	}

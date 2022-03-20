@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 参考：
- * https://blog.csdn.net/linxingliang/article/details/52350238
+ * 参考：https://howtodoinjava.com/spring-boot2/rest/i18n-internationalization/
  * 
  * @author dante
  *

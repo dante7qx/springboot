@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.dante.springboot</groupId>
+		<artifactId>springboot-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>springboot-office</artifactId>
+	<packaging>jar</packaging>
+	<name>springboot-office</name>
+	<description>Dante Springboot Office</description>
+
+	<properties>
+		<iceblue-spire.version>4.11.3</iceblue-spire.version>
+		<aspose.version>22.3</aspose.version>
+		<document4j.version>1.1.7</document4j.version>
+		<opensagres-poi2pdf.version>2.0.3</opensagres-poi2pdf.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+		
+		<!-- Document4j -->
+		<dependency>
+            <groupId>com.documents4j</groupId>
+            <artifactId>documents4j-local</artifactId>
+            <version>${document4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.documents4j</groupId>
+            <artifactId>documents4j-transformer-msoffice-word</artifactId>
+            <version>${document4j.version}</version>
+        </dependency>
+        
+		<!-- POI-XWPF -->		
+		<dependency>
+		    <groupId>fr.opensagres.xdocreport</groupId>
+		    <artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
+		    <version>${opensagres-poi2pdf.version}</version>
+		</dependency>
+		
+				
+		<!-- http://www.e-iceblue.cn/ -->
+		<dependency>
+			<groupId>e-iceblue</groupId>
+			<artifactId>spire.doc</artifactId>
+			<version>${iceblue-spire.version}</version>
+		</dependency>
+		
+		<!-- https://www.aspose.app/ -->
+		<dependency> 
+			<groupId>com.aspose</groupId>
+			<artifactId>aspose-words</artifactId>
+			<version>${aspose.version}</version>
+			<classifier>jdk17</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.aspose</groupId>
+			<artifactId>aspose-words</artifactId>
+			<version>${aspose.version}</version>
+			<classifier>javadoc</classifier>
+		</dependency>
+		
+	</dependencies> 
+
+	<repositories>
+		<!-- http://www.e-iceblue.cn/ -->
+		<repository>
+			<id>com.e-iceblue</id>
+			<url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+		</repository>
+		
+		<!-- https://www.aspose.app/ -->
+		<repository>
+			<id>AsposeJavaAPI</id>
+			<name>Aspose Java API</name>
+			<url>https://repository.aspose.com/repo/</url>
+		</repository>
+	</repositories>
+	
+	
+</project>

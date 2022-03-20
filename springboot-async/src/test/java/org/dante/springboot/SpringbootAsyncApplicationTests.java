@@ -4,17 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.dante.springboot.async.AsyncTask;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootAsyncApplicationTests {
 
@@ -25,21 +23,19 @@ public class SpringbootAsyncApplicationTests {
 	
 	Map<String, Future<String>> map = new HashMap<String, Future<String>>();
 	
-	
-	
 	@Test
 	public void executeTask(){
 		try {
 			Future<String> task1 = asyncTask.doTask1();
 			map.put("a", task1);
 			Future<String> task2 = map.get("a");
-			while(true) {  
+			for(;;) {  
 				LOGGER.info("任务执行状态: {}", task2.isDone());
 	            if(task2.isDone()) {  
 	            	LOGGER.info("任务执行结果: {}", task2.get());  
 	                break;  
 	            }  
-	            Thread.sleep(1000);  
+	            TimeUnit.SECONDS.sleep(1L);
 	        } 
 	        LOGGER.info("All tasks finished."); 
 		} catch (Exception e) {

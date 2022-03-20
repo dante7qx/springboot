@@ -1,5 +1,10 @@
 spring:
-  datasource:
+  sql:
+    init:
+      platform: h2
+      schema-locations: classpath:schema-h2.sql
+      data-locations: classpath:data-h2.sql
+  datasource: 
     platform: h2
   thymeleaf:
     cache: false

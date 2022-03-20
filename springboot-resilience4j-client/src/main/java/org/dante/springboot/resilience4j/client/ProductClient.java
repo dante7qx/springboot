@@ -114,6 +114,7 @@ public class ProductClient {
 	 * @param throwable
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private ProductRatingDTO getDefault(int productId, Throwable throwable) {
 		log.info("==> 进入回调方法.");
 		return ProductRatingDTO.of(0, Collections.emptyList());
@@ -126,6 +127,7 @@ public class ProductClient {
 	 * @param throwable
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private CompletionStage<ProductRatingDTO> getDefaultTimeout(int productId, Throwable throwable){
 		log.info("[超时模拟 {} ]，进入回调方法.");
         return CompletableFuture.supplyAsync(() -> ProductRatingDTO.of(0, Collections.emptyList()));
@@ -138,6 +140,7 @@ public class ProductClient {
 	 * @param throwable
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private CompletionStage<ProductRatingDTO> getDefaultProductRating(int productId,
 			HttpClientErrorException throwable) {
 		retryCount = 0;

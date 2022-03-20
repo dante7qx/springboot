@@ -20,7 +20,7 @@ public class FileUploadController {
 	
 	private static final String FOLDER = "/Users/dante/Documents/Project/java-world/springboot/springboot-fileupload/upload/";
 
-	@PostMapping(value = "/uploadEncode")
+	@PostMapping(value = "/upload")
 	public String uploadEncode(@RequestParam("photos") MultipartFile[] photos, @RequestParam Map<String, String> params,
 			HttpServletRequest request) {
 		log.info("=================> 附件个数 {}", photos.length);

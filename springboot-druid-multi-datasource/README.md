@@ -62,8 +62,8 @@ spring:
         url: jdbc:mysql://localhost/springboot
         username: root
         password: iamdante
-      shiro: ## shiro数据源，继承 spring.datasource.druid.* 配置，相同则覆盖
-        url: jdbc:mysql://localhost/shiro
+      spingboot2: ## spingboot2数据源，继承 spring.datasource.druid.* 配置，相同则覆盖
+        url: jdbc:mysql://localhost/spingboot2
         username: root
         password: iamdante
 mybatis:
@@ -87,8 +87,8 @@ public class DruidDatasourceConfig {
 	    return DruidDataSourceBuilder.create().build();
 	}
 	@Bean
-	@ConfigurationProperties("spring.datasource.druid.shiro")
-	public DataSource shiroDataSource(){
+	@ConfigurationProperties("spring.datasource.druid.spingboot2")
+	public DataSource spingboot2DataSource(){
 	    return DruidDataSourceBuilder.create().build();
 	}
 }
@@ -179,40 +179,40 @@ public class SpringbootDataSourceConfig {
 }
 ```
 
-##### shiro数据源
+##### spingboot2数据源
 
-​	注意 @Primary 的使用，shiro不是主数据源，EntityManagerFactory、PlatformTransactionManager不要配置@Primary 。
+​	注意 @Primary 的使用，spingboot2不是主数据源，EntityManagerFactory、PlatformTransactionManager不要配置@Primary 。
 
 ```java
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "shiroEntityManagerFactory", transactionManagerRef = "shiroTransactionManager", basePackages = { ShiroDataSourceConfig.JPA_DAO_PKG }) 
-@MapperScan(basePackages = ShiroDataSourceConfig.MYBATIS_MAPPER_PKG, sqlSessionFactoryRef = "shiroSqlSessionFactory")
-public class ShiroDataSourceConfig {
-	protected static final String JPA_DAO_PKG = "org.dante.springboot.dao.shiro";
-	protected static final String JPA_PO_PKG = "org.dante.springboot.po.shiro";
-	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.shiro";
-	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.shiro";
-	protected static final String MYBATIS_XML_PKG = "classpath:mapper/shiro/*.xml";
+@EnableJpaRepositories(entityManagerFactoryRef = "spingboot2EntityManagerFactory", transactionManagerRef = "spingboot2TransactionManager", basePackages = { spingboot2DataSourceConfig.JPA_DAO_PKG }) 
+@MapperScan(basePackages = spingboot2DataSourceConfig.MYBATIS_MAPPER_PKG, sqlSessionFactoryRef = "spingboot2SqlSessionFactory")
+public class spingboot2DataSourceConfig {
+	protected static final String JPA_DAO_PKG = "org.dante.springboot.dao.spingboot2";
+	protected static final String JPA_PO_PKG = "org.dante.springboot.po.spingboot2";
+	protected static final String MYBATIS_BO_PKG = "org.dante.springboot.bo.spingboot2";
+	protected static final String MYBATIS_MAPPER_PKG = "org.dante.springboot.mapper.spingboot2";
+	protected static final String MYBATIS_XML_PKG = "classpath:mapper/spingboot2/*.xml";
 	
 	@Autowired
 	private JpaProperties jpaProperties;
 
 	@Autowired
-	@Qualifier("shiroDataSource")
-	private DataSource shiroDataSource;
+	@Qualifier("spingboot2DataSource")
+	private DataSource spingboot2DataSource;
 
 	/**
 	 * 通过LocalContainerEntityManagerFactoryBean来获取EntityManagerFactory实例
 	 * 
 	 * @return
 	 */
-	@Bean(name = "shiroEntityManagerFactoryBean")
+	@Bean(name = "spingboot2EntityManagerFactoryBean")
 	// @Primary
-	public LocalContainerEntityManagerFactoryBean shiroEntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
-		return builder.dataSource(shiroDataSource).properties(getVendorProperties(shiroDataSource))
-				.packages(ShiroDataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
-				.persistenceUnit("shiroPersistenceUnit").build();
+	public LocalContainerEntityManagerFactoryBean spingboot2EntityManagerFactoryBean(EntityManagerFactoryBuilder builder) {
+		return builder.dataSource(spingboot2DataSource).properties(getVendorProperties(spingboot2DataSource))
+				.packages(spingboot2DataSourceConfig.JPA_PO_PKG) // 设置实体类所在位置
+				.persistenceUnit("spingboot2PersistenceUnit").build();
 		// .getObject();//不要在这里直接获取EntityManagerFactory
 	}
 
@@ -228,9 +228,9 @@ public class ShiroDataSourceConfig {
 	 * @param builder
 	 * @return
 	 */
-	@Bean(name = "shiroEntityManagerFactory")
-	public EntityManagerFactory shiroEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-		return this.shiroEntityManagerFactoryBean(builder).getObject();
+	@Bean(name = "spingboot2EntityManagerFactory")
+	public EntityManagerFactory spingboot2EntityManagerFactory(EntityManagerFactoryBuilder builder) {
+		return this.spingboot2EntityManagerFactoryBean(builder).getObject();
 	}
 
 	/**
@@ -238,25 +238,25 @@ public class ShiroDataSourceConfig {
 	 * 
 	 * @return
 	 */
-	@Bean(name = "shiroTransactionManager")
+	@Bean(name = "spingboot2TransactionManager")
 	public PlatformTransactionManager writeTransactionManager(EntityManagerFactoryBuilder builder) {
-		return new JpaTransactionManager(shiroEntityManagerFactory(builder));
+		return new JpaTransactionManager(spingboot2EntityManagerFactory(builder));
 	}
 
 	/**
 	 * Mybatis 配置
 	 * 
 	 */
-	@Bean(name = "shiroSqlSessionFactory")
+	@Bean(name = "spingboot2SqlSessionFactory")
     public SqlSessionFactory springSqlSessionFactory()
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(shiroDataSource);
+        sessionFactory.setDataSource(spingboot2DataSource);
         sessionFactory.setVfs(SpringBootVFS.class);
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources(ShiroDataSourceConfig.MYBATIS_XML_PKG));
-        sessionFactory.setConfigLocation(resolver.getResource(ShiroDataSourceConfig.MYBATIS_CONFIG));
-        sessionFactory.setTypeAliasesPackage(ShiroDataSourceConfig.MYBATIS_BO_PKG);
+        sessionFactory.setMapperLocations(resolver.getResources(spingboot2DataSourceConfig.MYBATIS_XML_PKG));
+        sessionFactory.setConfigLocation(resolver.getResource(spingboot2DataSourceConfig.MYBATIS_CONFIG));
+        sessionFactory.setTypeAliasesPackage(spingboot2DataSourceConfig.MYBATIS_BO_PKG);
         return sessionFactory.getObject();
     }
 }
@@ -297,3 +297,5 @@ public class ShiroDataSourceConfig {
 - http://www.jianshu.com/p/9f812e651319
 - https://www.cnblogs.com/Alandre/p/6611813.html
 - https://www.bysocket.com/?p=1712
+- https://blog.csdn.net/zzhongcy/article/details/105684327 (springboot2.x)
+- https://github.com/spring-projects/spring-data-examples/blob/main/jpa/multiple-datasources/README.md

@@ -86,13 +86,13 @@ public class SchedulerJobService {
 	}
 	
 	public SchedulerDTO queryById(Long id) {
-		SchedulerJobPO schedulerJobPO = schedulerJobDAO.getOne(id);
+		SchedulerJobPO schedulerJobPO = schedulerJobDAO.getById(id);
 		return convertToDTO(schedulerJobPO);
 	}
 	
 	@Transactional
 	public void delete(Long id) {
-		SchedulerJobPO po = schedulerJobDAO.getOne(id);
+		SchedulerJobPO po = schedulerJobDAO.getById(id);
 		if(po != null) {
 			schedulerJobDAO.deleteById(id);
 			spiritSchedulerService.removeJob(po.getJobId());

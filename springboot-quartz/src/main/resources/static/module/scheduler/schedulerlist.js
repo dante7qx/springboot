@@ -72,7 +72,7 @@ var SchedulerPage = {
 					url: ctx+'/sysmgr/scheduler/delete_by_id',
 					type: 'post',
 					data: {
-						id: checkRow[0]['id'],
+						id: checkRow[0]['id']
 					},
 					success: function(result) {
 						if(result['resultCode'] != COMMON_CONFIG['SUCCESS']) {

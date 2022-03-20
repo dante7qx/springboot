@@ -18,7 +18,7 @@ import lombok.Data;
 public class TestPO {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
