@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "pebble.suffix",
+    "type": "java.lang.String",
+    "description": "A description for 'pebble.suffix'"
+  },
+  {
+    "name": "pebble.prefix",
+    "type": "java.lang.String",
+    "description": "A description for 'pebble.prefix'"
+  },
+  {
+    "name": "pebble.cache",
+    "type": "java.lang.String",
+    "description": "A description for 'pebble.cache'"
+  }
+]}
