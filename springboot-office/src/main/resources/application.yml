@@ -1,5 +1,7 @@
 server:
   port: 8801
-spring:
-  freemarker:
-    suffix: .ftlh
+
+pebble: 
+  prefix: /templates/pebble/
+  suffix: .pebble
+  cache: false

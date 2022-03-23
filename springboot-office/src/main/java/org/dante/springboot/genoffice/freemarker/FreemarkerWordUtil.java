@@ -1,6 +1,8 @@
 package org.dante.springboot.genoffice.freemarker;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URLEncoder;
@@ -9,6 +11,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.util.StringUtils;
+
+import freemarker.core.XMLOutputFormat;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -22,32 +27,37 @@ import freemarker.template.Template;
  * @param response 响应流
  */
 public class FreemarkerWordUtil {
-	public static void createWord(Map<String, Object> dataMap, String templateName, String filePath, String fileName, HttpServletResponse response){
-	    
+
+	private static final String DIR = "/Users/dante/Documents/Project/java-world/springboot/springboot-office/src/main/resources/templates/xml/";
+	
+	
+	
+	public static void createWord(Map<String, Object> dataMap, String templateName, String filePath, String fileName, HttpServletResponse response) throws IOException{
 	    // 创建配置实例
 	    Configuration configuration = new Configuration(Configuration.VERSION_2_3_31);
-	    // 设置编码
 	    configuration.setDefaultEncoding(StandardCharsets.UTF_8.name());
+	    configuration.setOutputFormat(XMLOutputFormat.INSTANCE);
+	    configuration.setClassicCompatible(true);
 	    // ftl模板文件
-	    configuration.setClassForTemplateLoading(FreemarkerWordUtil.class, filePath);
-
-	    try {
+	    configuration.setDirectoryForTemplateLoading(StringUtils.hasText(filePath) ?  new File(DIR.concat(filePath)) : new File(DIR));
 	    
+	    Writer out = null;
+	    try {
 	        // 获取模板
-	        Template template = configuration.getTemplate(templateName);
+	        Template template = configuration.getTemplate(templateName, StandardCharsets.UTF_8.name());
 	        response.setHeader("Content-disposition",
 	                "attachment;filename=" + URLEncoder.encode(fileName + ".doc", StandardCharsets.UTF_8.name()));
 	        // 定义输出类型
 	        response.setContentType("application/msword");
-	        Writer out = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()));
+	        out = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()));
 	        // 生成文件
 	        template.process(dataMap, out);
-
-	        out.flush();
-	        out.close();
+	        
 	    } catch (Exception e){
-	    
 	        e.printStackTrace();
-	    }
+	    } finally {
+	    	out.flush();
+	        out.close();
+		}
 	}
 }

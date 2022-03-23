@@ -20,6 +20,8 @@
 		<aspose.version>22.3</aspose.version>
 		<document4j.version>1.1.7</document4j.version>
 		<opensagres-poi2pdf.version>2.0.3</opensagres-poi2pdf.version>
+		<poi-tl.version>1.11.1</poi-tl.version>
+		<pebble.version>3.1.5</pebble.version>
 	</properties>
 
 	<dependencies>
@@ -36,6 +38,20 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		
+		<!-- Poi-tl -->
+		<dependency>
+		  <groupId>com.deepoove</groupId>
+		  <artifactId>poi-tl</artifactId>
+		  <version>${poi-tl.version}</version>
+		</dependency>
+		
+		<!-- Pebble -->
+		<dependency>
+			<groupId>io.pebbletemplates</groupId>
+			<artifactId>pebble-spring-boot-starter</artifactId>
+			<version>${pebble.version}</version>
+		</dependency>
+		
 		
 		<!-- Document4j -->
 		<dependency>
@@ -48,6 +64,7 @@
             <artifactId>documents4j-transformer-msoffice-word</artifactId>
             <version>${document4j.version}</version>
         </dependency>
+        
         
 		<!-- POI-XWPF -->		
 		<dependency>
