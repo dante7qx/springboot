@@ -6,6 +6,8 @@ spring:
       platform: h2
       schema-locations: classpath:schema-h2.sql
       data-locations: classpath:data-h2.sql
+  main:
+    allow-circular-references: true ## SpringBoot 2.6.x不推荐使用循环依赖，方式一（粗暴）：可通过设置为 true 允许循环引用。
 server:
   port: 8100
 mybatis:
@@ -16,5 +18,9 @@ mybatis:
 logging:
   level:
     root: info
-    org.dante.springboot.dao: DEBUG
-    org.dante.springboot.plugin.SqlCostInterceptor: DEBUG
+    org: 
+      dante: 
+        springboot: 
+          dao: DEBUG
+          plugin:  
+            SqlCostInterceptor: DEBUG

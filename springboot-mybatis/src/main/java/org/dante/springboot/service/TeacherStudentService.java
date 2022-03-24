@@ -14,10 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TeacherStudentService {
 	
+	private final StudentMapper studentMapper;
+	private final TeacherMapper teacherMapper;
+	
 	@Autowired
-	private StudentMapper studentMapper;
-	@Autowired
-	private TeacherMapper teacherMapper;
+	public TeacherStudentService(StudentMapper studentMapper, TeacherMapper teacherMapper) {
+		this.studentMapper = studentMapper;
+		this.teacherMapper = teacherMapper;
+		
+	}
 	
 	@Transactional
 	public void presistTeacherStudent() {
