@@ -9,8 +9,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		
-		registry.addRedirectViewController("/thy", "thymeleaf/index");
+		registry.addViewController("/pdf").setViewName("pdf/test_pdf");
 	}
 	
 }

@@ -1,7 +1,2 @@
 server:
   port: 8801
-
-pebble: 
-  prefix: /templates/pebble/
-  suffix: .pebble
-  cache: false
