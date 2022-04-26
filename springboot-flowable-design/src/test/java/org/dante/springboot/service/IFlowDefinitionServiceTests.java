@@ -21,7 +21,7 @@ public class IFlowDefinitionServiceTests extends SpringbootFlowableDesignApplica
 	private IFlowDefinitionService flowDefinitionService;
 	
 	private static final String processDefinitionId = "leave-approval-delegate-1:1:fc9f0d36-a33c-11ec-835d-12ed173e639b";
-	private static final String deploymentId = "c49afebc-a391-11ec-9c05-ceba0f5d6d2d";
+	private static final String deploymentId = "bdbe4c71-c50b-11ec-a88b-8e0180fdd0ac";
 	
 	
 	@Test

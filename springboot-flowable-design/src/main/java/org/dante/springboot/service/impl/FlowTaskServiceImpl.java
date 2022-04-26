@@ -35,7 +35,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 		taskService.addComment(taskId, task.getProcessInstanceId(), flowTaskVO.getCommentType(), flowTaskVO.getCommentValue());
 		DelegationState delegationState = task.getDelegationState();
 		// 判断是否为委派的任务
-		if(DelegationState.PENDING.compareTo(delegationState) == 0) {
+		if(delegationState != null && DelegationState.PENDING.compareTo(delegationState) == 0) {
 			taskService.resolveTask(taskId, flowTaskVO.getParams());
 		} else {
 			taskService.setAssignee(taskId, flowTaskVO.getCurrentUserId());
