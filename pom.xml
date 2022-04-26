@@ -92,7 +92,6 @@
 		<module>springboot-resilience4j-common</module>
 		<module>springboot-resilience4j-server</module>
 		<module>springboot-resilience4j-client</module>
-		<module>springboot-flowable</module>
 		<module>springboot-flowable-design</module>
 	</modules>
 
