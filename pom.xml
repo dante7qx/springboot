@@ -23,6 +23,7 @@
 	</properties>
 
 	<modules>
+        <module>springboot-empty-shelf</module>
 		<module>springboot-swagger</module>
 		<module>springboot-ldap</module>
 		<module>springboot-cache</module>

@@ -29,9 +29,6 @@ public class StartFlowInstanceVO implements Serializable {
 	/** 业务表的标识，可以使用Id 或者组合（bizTableName_bizId）**/
 	private String bussinessKey;
 	
-	/** 用户操作，保存草稿、直接提交 **/
-	private String operType;
-	
 	/** 流程变量，根据流程定义进行设置 **/
 	private Map<String, Object> params;
 	

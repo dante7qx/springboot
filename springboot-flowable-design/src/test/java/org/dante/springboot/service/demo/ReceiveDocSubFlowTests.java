@@ -38,7 +38,6 @@ public class ReceiveDocSubFlowTests extends SpringbootFlowableDesignApplicationT
 		vo.setProcessDefKey("PARALLEL_GATEWAY_FLOW");
 		
 		vo.setBussinessKey(UUID.randomUUID().toString().toLowerCase());
-		vo.setOperType(FlowEnum.FLOW_OPER_APPL.code());
 		vo.setCommentType(LeaveEnum.TJ.code());
 		vo.setCommentValue(LeaveEnum.TJ.value());
 		vo.setStarterId(startUserId);
