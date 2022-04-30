@@ -96,6 +96,7 @@
 		<module>springboot-resilience4j-client</module>
 		<module>springboot-flowable-design</module>
 		<module>springboot-liteflow</module>
+        <module>springboot-jimureport</module>
 	</modules>
 
 	<parent>
@@ -131,7 +132,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>cn.hutool</groupId>
-		    <artifactId>hutool-all</artifactId>
+    		<artifactId>hutool-all</artifactId>
 		    <version>${hutool.version}</version>
 		</dependency>
 	</dependencies>
