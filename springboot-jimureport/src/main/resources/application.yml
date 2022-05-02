@@ -10,8 +10,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 jeecg: 
   uploadType: local
-  path :
+  path:
     upload: /Users/dante/Documents/Project/java-world/springboot/springboot-jimureport/upload
 logging:
   level:
-    org.jeecg.modules.jmreport : info
+    "[org.jeecg.modules.jmreport]": info

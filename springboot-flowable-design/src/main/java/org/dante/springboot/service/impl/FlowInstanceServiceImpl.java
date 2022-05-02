@@ -20,6 +20,11 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 
 	@Override
 	public ProcessInstance startProcessInstance(StartFlowInstanceVO vo) throws Exception {
+		return this.startProcessInstance(vo, true);
+	}
+	
+	@Override
+	public ProcessInstance startProcessInstance(StartFlowInstanceVO vo, boolean autoCompleteTask) throws Exception {
 		Assert.hasText(vo.getProcessDefKey(), "流程定义Key不能为空！");
 		Assert.hasText(vo.getBussinessKey(), "业务标识不能为空！");
 		Assert.hasText(vo.getStarterId(), "发起人不能为空！");
@@ -54,7 +59,9 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 				}
 			}
 			// 提交操作，完成当前任务
-			taskService.complete(task.getId(), vo.getParams());
+			if(autoCompleteTask) {
+				taskService.complete(task.getId(), vo.getParams());
+			}
 		} catch (Exception e) {
 			identityService.setAuthenticatedUserId(null);
 		}

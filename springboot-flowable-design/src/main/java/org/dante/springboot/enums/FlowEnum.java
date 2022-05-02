@@ -13,8 +13,10 @@ public enum FlowEnum {
 	FLOW_CANDIDATE_USER_LIST("userList", "多实例候选人"),
 	
 	/** 流程条件常量 **/
+	FLOW_ARG_AUTO_SKIP("_FLOWABLE_SKIP_EXPRESSION_ENABLED", ""),
 	FLOW_COMMAND("command", "流程任务完成条件Key"),
 	FLOW_FINISHED("FINISHED", "流程结束标识"),
+	
 	FLOW_ARG_AGREE("agree", "审批是否同意标志"),
 	
 	FLOW_TURN_TODO("TURN_TODO", "转办"),
