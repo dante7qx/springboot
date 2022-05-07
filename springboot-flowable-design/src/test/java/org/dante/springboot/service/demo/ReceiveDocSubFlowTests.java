@@ -68,7 +68,6 @@ public class ReceiveDocSubFlowTests extends SpringbootFlowableDesignApplicationT
 //		flowTaskVO.addParams("turnIssue", Boolean.TRUE);
 		// reIssued
 		flowTaskVO.setCommentValue("同意");
-		
 		flowTaskService.complete(flowTaskVO.getTaskId(), flowTaskVO);
 	}
 	

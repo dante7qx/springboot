@@ -18,6 +18,7 @@ public enum FlowEnum {
 	FLOW_FINISHED("FINISHED", "流程结束标识"),
 	
 	FLOW_ARG_AGREE("agree", "审批是否同意标志"),
+	FLOW_ARG_SUB_TASK("trigerSubTask", "审批是否同意标志"),
 	
 	FLOW_TURN_TODO("TURN_TODO", "转办"),
 	FLOW_DELEGATE("DELEGATE", "委派"),
