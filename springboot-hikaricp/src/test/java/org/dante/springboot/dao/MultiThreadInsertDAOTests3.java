@@ -1,13 +1,9 @@
 package org.dante.springboot.dao;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.dante.springboot.SpringbootHikariCPApplicationTests;
@@ -15,7 +11,8 @@ import org.dante.springboot.po.MultiThreadInsertPO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
+
+import com.google.common.collect.Lists;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.StopWatch;
@@ -24,13 +21,13 @@ import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MultiThreadInsertDAOTests extends SpringbootHikariCPApplicationTests {
+public class MultiThreadInsertDAOTests3 extends SpringbootHikariCPApplicationTests {
 
 	@Autowired
 	private MultiThreadInsertDAO multiThreadInsertDAO;
 
 	private static int dataSize = 100000;
-	private static List<MultiThreadInsertPO> list = new LinkedList<>();
+	private static List<MultiThreadInsertPO> list = Lists.newLinkedList();
 
 	@BeforeEach
 	public void init() {
@@ -50,51 +47,17 @@ public class MultiThreadInsertDAOTests extends SpringbootHikariCPApplicationTest
 		StopWatch stopWatch = new StopWatch("多线程批量导入【" + dataSize + "】条数据");
 		stopWatch.start();
 		
+		List<CompletableFuture<List<MultiThreadInsertPO>>> futures = Lists.newArrayList();
 		int nThreads = Runtime.getRuntime().availableProcessors();
 		ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
-		List<Future<Integer>> futures = new ArrayList<Future<Integer>>(nThreads);
-
 		for (int i = 0; i < nThreads; i++) {
 			final List<MultiThreadInsertPO> groupList = list.subList(dataSize / nThreads * i, dataSize / nThreads * (i + 1));
-			Callable<Integer> task = () -> {
-				multiThreadInsertDAO.saveAll(groupList);
-				return 1;
-			};
-			futures.add(executorService.submit(task));
+			futures.add(CompletableFuture.supplyAsync(() -> groupList).thenApplyAsync(s -> multiThreadInsertDAO.saveAll(s), executorService));
 		}
-		executorService.shutdown();
-		if (!CollectionUtils.isEmpty(futures)) {  
-    		futures.forEach(f -> {
-    			for(;;) { 
-    				try {
-	    				if(f.isDone()) {
-	    					f.get();
-	    					break; 
-	    				}
-	    				TimeUnit.MILLISECONDS.sleep(2L);
-    				} catch (InterruptedException | ExecutionException e) {
-						e.printStackTrace();
-					}
-    			}
-    		});
-	    }
+		CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));
+		// 调用join方法等待完成
+		allOf.join();
 		
-		stopWatch.stop();
-		// 打印出耗时
-		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
-	}
-	
-	public void singleCRUD() {
-		StopWatch stopWatch = new StopWatch("单体数据的CRUD");
-		stopWatch.start();
-		MultiThreadInsertPO po = new MultiThreadInsertPO();
-		po.setUid(IdUtil.nanoId(32));
-		po.setName("测试数据");
-		po.setCreateTime(DateUtil.date());
-		po.setUpdateTime(DateUtil.date());
-		MultiThreadInsertPO savedPO = multiThreadInsertDAO.save(po);
-		log.info("MultiThreadInsertPO -> {}", savedPO);
-		multiThreadInsertDAO.deleteById(savedPO.getId());
 		stopWatch.stop();
 		// 打印出耗时
 		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
