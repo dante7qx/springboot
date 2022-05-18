@@ -11,9 +11,8 @@ import org.dante.springboot.mongo.page.SpiritMongoPageable;
 import org.dante.springboot.mongo.po.UserPO;
 import org.dante.springboot.mongo.service.UserService;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -26,13 +25,11 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 @Slf4j
+@SpringBootTest
 public class SpringbootMongoApplicationTests {
 
 	@Autowired
@@ -42,13 +39,13 @@ public class SpringbootMongoApplicationTests {
 	@Autowired
 	private UserService userService;
 
-	@Before
+//	@BeforeAll
 	public void setUp() {
 		 userDAO.deleteAll();
 	}
 
 	@Test
-	public void insert() {
+	public void insert() { 
 		// 创建三个User，并验证User总数
 		userDAO.save(new UserPO(1L, "didi", 30, "F", "2017-11-11"));
 		userDAO.save(new UserPO(2L, "mama", 40, "M", "2017-11-11"));

@@ -1,4 +1,4 @@
-package org.dante.springboot.service;
+package org.dante.springboot.service.demo;
 
 import java.util.List;
 import java.util.Map;

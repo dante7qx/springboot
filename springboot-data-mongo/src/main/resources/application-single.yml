@@ -4,7 +4,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://dante:123456@localhost:27017/springboot
+      uri: mongodb://root:iamdante@localhost:27017/springboot
       authentication-database: admin    
 logging:
   level:
