@@ -25,6 +25,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.baidu.aip</groupId>
 			<artifactId>java-sdk</artifactId>
 			<version>${baidu-aip.version}</version>
@@ -34,6 +38,11 @@
 	                <artifactId>slf4j-simple</artifactId>
 	            </exclusion>
 	        </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
