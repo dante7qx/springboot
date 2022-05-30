@@ -1,10 +1,13 @@
 package org.dante.springboot.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -39,10 +42,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //指定用户名和密码及其角色
+        //指定用户名和密码及其角色（密码：123）
         auth.inMemoryAuthentication()
-                .withUser("dante").password("123456").roles("USER")
+        	.passwordEncoder(passwordEncoder())
+                .withUser("dante").password("$2a$10$T9Pb5YaTodn5PEmc/xxvbey3VoNEaWByLNjbGl773DxgRENFpqeri").roles("USER")
                 .and()
-                .withUser("snake").password("123456").roles("USER");
+                .withUser("snake").password("$2a$10$T9Pb5YaTodn5PEmc/xxvbey3VoNEaWByLNjbGl773DxgRENFpqeri").roles("USER");
     }
+    
+    @Bean
+    PasswordEncoder passwordEncoder() {
+    	return new BCryptPasswordEncoder();
+    }
+    
 }

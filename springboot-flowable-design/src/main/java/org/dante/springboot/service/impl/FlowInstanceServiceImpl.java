@@ -11,6 +11,7 @@ import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Maps;
 
@@ -19,6 +20,11 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 
 	@Override
 	public ProcessInstance startProcessInstance(StartFlowInstanceVO vo) throws Exception {
+		return this.startProcessInstance(vo, true);
+	}
+	
+	@Override
+	public ProcessInstance startProcessInstance(StartFlowInstanceVO vo, boolean autoCompleteTask) throws Exception {
 		Assert.hasText(vo.getProcessDefKey(), "流程定义Key不能为空！");
 		Assert.hasText(vo.getBussinessKey(), "业务标识不能为空！");
 		Assert.hasText(vo.getStarterId(), "发起人不能为空！");
@@ -44,10 +50,16 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 			// 起始任务
 			Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
 			// 设置审批意见
-			taskService.addComment(task.getId(), processInstance.getId(), vo.getCommentType(), vo.getCommentValue());
-			
-			if (FlowEnum.FLOW_OPER_APPL.code().equalsIgnoreCase(vo.getOperType())) {
-				// 提交操作，完成当前任务
+			if (StringUtils.hasText(vo.getCommentValue())) {
+				if (StringUtils.hasText(vo.getCommentType())) {
+					taskService.addComment(task.getId(), processInstance.getId(), vo.getCommentType(),
+							vo.getCommentValue());
+				} else {
+					taskService.addComment(task.getId(), processInstance.getId(), vo.getCommentValue());
+				}
+			}
+			// 提交操作，完成当前任务
+			if(autoCompleteTask) {
 				taskService.complete(task.getId(), vo.getParams());
 			}
 		} catch (Exception e) {

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>人脸识别</title>
+<style type="text/css">
+.appContainer {
+	margin: 15px;
+	padding: 10px;
+}
+#camera{
+    float: left;
+    margin: 20px;
+}
+#contentHolder{
+    width: 300px;
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btn{
+    margin: 0 auto;
+    border: 1px solid #f0f0f0;
+    background: #5CACEE;
+    color: #FFF;
+    width: 150px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    cursor: pointer;
+    display: inline-block;
+    /*禁止选择*/
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+#imgBoxxx{
+    width: 200px;
+    margin: 60px 20px 20px;
+}
+#userList {
+	margin-left: 30px;
+	display: inline-block;
+}
+#userList h3 {
+	cursor: pointer;
+}
+table {
+	width: 700px;
+	border: 1px solid #000;
+}
+.checkResult {
+	width: 680px;
+    height: 300px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+	<div class="appContainer">
+		<div id="camera">
+			<h3>注册</h3>
+			<div>
+				<label>用户名</label>
+				<input id="userName" type="text" maxlength="24" required="required"/>
+			</div>
+		    <div id="contentHolder">
+		        <video id="video" width="300" height="300" autoplay></video>
+		        <canvas style="display:none;" id="canvas" width="300" height="300"></canvas>
+		    </div>
+	    	<div class="btn" onclick="FaceAIPage.startSysCamera()">开启摄像头</div>
+	    	<div id="btn_snap" class="btn">拍照</div>
+	    	<br>
+	    	<div class="btn" onclick="FaceAIPage.register()">注册</div>
+	    	<div class="btn" onclick="FaceAIPage.checkFace()">识别（先拍照）</div>
+		</div>
+		<div id="userList">
+			<h3 onclick="FaceAIPage.getUserList()">用户列表</h3>
+			<table id="userTable">
+				<tr>
+					<td>用户标识</td>
+				</tr>
+			</table>
+			<h3>识别结果</h3>
+			<div id="checkResult" class="checkResult"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+var FaceAIPage = {
+	imgBase64: '',
+	init() {
+		var pzBtn = document.getElementById("btn_snap");
+		var canvas = document.getElementById("canvas"), context = canvas.getContext("2d");
+		pzBtn.addEventListener("click", function () {
+			// 点击，canvas画图
+			context.drawImage(video, 0, 0, 300, 300);
+			// 获取图片base64链接
+			FaceAIPage.imgBase64 = canvas.toDataURL('image/png');
+			/**
+			// 定义一个img
+			var img = new Image();
+			//设置属性和src
+			img.id = "imgBoxxx";
+			img.src = image;
+			//将图片添加到页面中
+			document.body.appendChild(img);
+			*/
+			// console.log(FaceAIPage.dataURLtoFile(image, 'user.png'))
+		});
+	},
+	// 开启摄像头
+	startSysCamera() {
+		var canvas = document.getElementById("canvas"),
+		context = canvas.getContext("2d"),
+		video = document.getElementById("video");
+		alert('该页面会调用您的摄像头')
+		// 旧版本浏览器可能根本不支持mediaDevices，我们首先设置一个空对象
+		if (navigator.mediaDevices === undefined) {
+			navigator.mediaDevices = {};
+		}
+		// 一些浏览器实现了部分mediaDevices，我们不能只分配一个对象
+		// 使用getUserMedia，因为它会覆盖现有的属性。
+		// 这里，如果缺少getUserMedia属性，就添加它。
+		if (navigator.mediaDevices.getUserMedia === undefined) {
+			navigator.mediaDevices.getUserMedia = function (constraints) {
+			    // 首先获取现存的getUserMedia(如果存在)
+			    var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+			    // 有些浏览器不支持，会返回错误信息
+			    // 保持接口一致
+			    if (!getUserMedia) {
+			        return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+			    }
+			    //否则，使用Promise将调用包装到旧的navigator.getUserMedia
+			    return new Promise(function (resolve, reject) {
+			        getUserMedia.call(navigator, constraints, resolve, reject);
+			    });
+			}
+		}
+		var constraints = { audio: false, video: {width: 720, height:720} }
+		navigator.mediaDevices.getUserMedia(constraints)
+			.then(function (stream) {
+			    var video = document.querySelector('video');
+			    // 旧的浏览器可能没有srcObject
+			    if ("srcObject" in video) {
+			        video.srcObject = stream;
+			    } else {
+			        //避免在新的浏览器中使用它，因为它正在被弃用。
+			        video.src = window.URL.createObjectURL(stream);
+			    }
+			    video.onloadedmetadata = function (e) {
+			        video.play();
+			    };
+			})
+			.catch(function (err) {
+			    console.log(err.name + ": " + err.message);
+			});
+	},
+	// base64转文件
+	dataURLtoFile(dataurl, filename) {
+		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+	    while (n--) {
+	        u8arr[n] = bstr.charCodeAt(n);
+	    }
+	    return new File([u8arr], filename, {type: mime});
+	},
+	register() {
+		const userName = document.getElementById("userName").value;
+		if(!userName) {
+			alert('用户名不能为空！');
+			return false;
+		} else if(!FaceAIPage.imgBase64) {
+			alert('人脸图像不能为空！');
+			return false;
+		}
+		var param = {
+			userName: userName,
+			imgBase64: FaceAIPage.imgBase64
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		fetch('/baidu/face/register', {
+			method: 'post',
+			headers: headers,
+			body: JSON.stringify(param)
+		}).then(function(response) {
+		    return response.json();
+		}).then(function(data) {
+		    if(data.errorMsg) {
+		    	alert(data.errorMsg)
+		    } else {
+		    	alert('注册成功');
+		    	FaceAIPage.getUserList();
+		    }
+		});
+	},
+	getUserList() {
+		fetch('/baidu/face/user_list', {
+			method: 'post'
+		}).then(function(response) {
+		    return response.json();
+		}).then(function(data) {
+		    if(data.errorMsg) {
+		    	alert(data.errorMsg)
+		    } else {
+		    	let userTable = document.getElementById("userTable");
+		    	data.data.forEach(u => {
+		    		var tr = document.createElement("tr");
+		    		userTable.appendChild(tr);
+		    		var td = document.createElement("td");
+		    		tr.appendChild(td);
+		    		td.innerHTML = "<label>用户ID&nbsp;&nbsp;</label><a href='javascript:void(0)' onclick='FaceAIPage.userFace(this)'>" + u + "</a><br>";
+		    	});
+		    }
+		});
+	},
+	userFace(obj) {
+		const userId = obj.innerHTML;
+		fetch('/baidu/face/user_face/' + userId, {
+			method: 'post'
+		}).then(function(response) {
+		    return response.json();
+		}).then(function(data) {
+		    if(data.errorMsg) {
+		    	alert(data.errorMsg)
+		    } else {
+		    	data.data.forEach(u => {
+		    		obj.parentNode.append("FaceToken: " + u.face_token + ", CTime: " + u.ctime);
+		    	});
+		    }
+		});
+	},
+	checkFace() {
+		if(!FaceAIPage.imgBase64) {
+			alert('请先拍照！');
+			return false;
+		}
+		var param = {
+			image: FaceAIPage.imgBase64
+		};
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		fetch('/baidu/face/check', {
+			method: 'post',
+			headers: headers,
+			body: JSON.stringify(param)
+		}).then(function(response) {
+		    return response.text()
+		}).then(function(data) {
+			document.getElementById("checkResult").innerHTML = data;
+		}).catch(error => {
+		  	console.error('Error:', error);
+		});
+	}
+};
+
+window.onload = FaceAIPage.init;
+
+</script>
+</html>

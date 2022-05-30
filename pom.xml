@@ -16,6 +16,7 @@
 		<project.version>1.0.0</project.version>
 		<java.version>1.8</java.version>
 		<guava.version>31.1-jre</guava.version>
+		<hutool.version>5.8.0</hutool.version>
 		<!-- maven的插件版本的问题,造成与IDE的不兼容 -->
 		<!--
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -23,9 +24,11 @@
 	</properties>
 
 	<modules>
+        <module>springboot-empty-shelf</module>
 		<module>springboot-swagger</module>
 		<module>springboot-ldap</module>
 		<module>springboot-cache</module>
+		<module>springboot-caffeine</module>
 		<module>springboot-docker</module>
 		<module>springboot-logger</module>
 		<module>springboot-log4j2</module>
@@ -92,14 +95,17 @@
 		<module>springboot-resilience4j-common</module>
 		<module>springboot-resilience4j-server</module>
 		<module>springboot-resilience4j-client</module>
-		<module>springboot-flowable</module>
 		<module>springboot-flowable-design</module>
+		<module>springboot-liteflow</module>
+        <module>springboot-jimureport</module>
+        <!-- AI 相关 -->
+        <module>springboot-ai-baidu</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.4</version>
+		<version>2.6.8</version>
 	</parent>
 
 	<dependencies>
@@ -126,6 +132,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+		    <groupId>cn.hutool</groupId>
+    		<artifactId>hutool-all</artifactId>
+		    <version>${hutool.version}</version>
 		</dependency>
 	</dependencies>
 

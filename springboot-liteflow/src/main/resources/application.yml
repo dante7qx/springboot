@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: dante-springboot-liteflow
+server:
+  port: 8901
+  
+  
+## LiteFlow 配置
+liteflow:
+  enable: true
+  print-banner: true
+  rule-source: bizflow/**/*.xml

@@ -1,0 +1,5 @@
+server:
+  port: 8911
+spring:
+  application:
+    name: dante-springboot-caffeine

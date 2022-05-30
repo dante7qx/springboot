@@ -1,0 +1,11 @@
+server:
+  port: 8102
+spring:
+  thymeleaf:
+    cache: false
+    
+face:
+  baidu:
+    app-id: 26257658
+    api-key: MNm2dB0PDf3zG8RgSmiPORar
+    secret-key: ETExN1HdeXUABzU1OnGKxtMjjoPscZXl

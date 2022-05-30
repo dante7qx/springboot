@@ -1,0 +1,17 @@
+server:
+  port: 8920
+spring:
+  application:
+    name: dante-springboot-jimureport
+  datasource:
+    url: jdbc:mysql://${MYSQL-HOST:127.0.0.1}:${MYSQL-PORT:3306}/${MYSQL-DB:springboot_jimureport}?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: iamdante
+    driver-class-name: com.mysql.cj.jdbc.Driver
+jeecg: 
+  uploadType: local
+  path:
+    upload: /Users/dante/Documents/Project/java-world/springboot/springboot-jimureport/upload
+logging:
+  level:
+    "[org.jeecg.modules.jmreport]": info

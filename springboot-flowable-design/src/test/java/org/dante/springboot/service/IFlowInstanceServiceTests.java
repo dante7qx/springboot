@@ -27,7 +27,6 @@ public class IFlowInstanceServiceTests extends SpringbootFlowableDesignApplicati
 		StartFlowInstanceVO vo = new StartFlowInstanceVO();
 		vo.setProcessDefKey(FlowEnum.FLOW_DEF_KEY_LEAVE_DELEGATE.code());
 		vo.setBussinessKey(UUID.randomUUID().toString().toLowerCase());
-		vo.setOperType(FlowEnum.FLOW_OPER_APPL.code());
 		vo.setCommentType(LeaveEnum.TJ.code());
 		vo.setCommentValue(LeaveEnum.TJ.value());
 		vo.setStarterId(startUserId);
@@ -46,7 +45,5 @@ public class IFlowInstanceServiceTests extends SpringbootFlowableDesignApplicati
 		String processInstanceId = "d7101d0b-a393-11ec-889a-ceba0f5d6d2d";
 		flowInstanceService.deleteProcessInstance(processInstanceId);
 	}
-	
-	
 
 }

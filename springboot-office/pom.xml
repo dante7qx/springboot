@@ -21,7 +21,11 @@
 		<document4j.version>1.1.7</document4j.version>
 		<opensagres-poi2pdf.version>2.0.3</opensagres-poi2pdf.version>
 		<poi-tl.version>1.11.1</poi-tl.version>
-		<pebble.version>3.1.5</pebble.version>
+		<jsoup.version>1.14.3</jsoup.version>
+		<flying-saucer-pdf.version>9.1.22</flying-saucer-pdf.version>
+		<itext-asian.version>5.2.0</itext-asian.version>
+		<xmlworker-tool.version>5.5.13.3</xmlworker-tool.version>
+		<nanoid.version>2.0.0</nanoid.version>
 	</properties>
 
 	<dependencies>
@@ -30,59 +34,51 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-freemarker</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		
+
 		<!-- Poi-tl -->
 		<dependency>
-		  <groupId>com.deepoove</groupId>
-		  <artifactId>poi-tl</artifactId>
-		  <version>${poi-tl.version}</version>
+			<groupId>com.deepoove</groupId>
+			<artifactId>poi-tl</artifactId>
+			<version>${poi-tl.version}</version>
 		</dependency>
-		
-		<!-- Pebble -->
-		<dependency>
-			<groupId>io.pebbletemplates</groupId>
-			<artifactId>pebble-spring-boot-starter</artifactId>
-			<version>${pebble.version}</version>
-		</dependency>
-		
-		
+
 		<!-- Document4j -->
 		<dependency>
-            <groupId>com.documents4j</groupId>
-            <artifactId>documents4j-local</artifactId>
-            <version>${document4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.documents4j</groupId>
-            <artifactId>documents4j-transformer-msoffice-word</artifactId>
-            <version>${document4j.version}</version>
-        </dependency>
-        
-        
-		<!-- POI-XWPF -->		
-		<dependency>
-		    <groupId>fr.opensagres.xdocreport</groupId>
-		    <artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
-		    <version>${opensagres-poi2pdf.version}</version>
+			<groupId>com.documents4j</groupId>
+			<artifactId>documents4j-local</artifactId>
+			<version>${document4j.version}</version>
 		</dependency>
-		
-				
+		<dependency>
+			<groupId>com.documents4j</groupId>
+			<artifactId>documents4j-transformer-msoffice-word</artifactId>
+			<version>${document4j.version}</version>
+		</dependency>
+
+
+		<!-- POI-XWPF -->
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
+			<version>${opensagres-poi2pdf.version}</version>
+		</dependency>
+
+
 		<!-- http://www.e-iceblue.cn/ -->
 		<dependency>
 			<groupId>e-iceblue</groupId>
 			<artifactId>spire.doc</artifactId>
 			<version>${iceblue-spire.version}</version>
 		</dependency>
-		
+
 		<!-- https://www.aspose.app/ -->
-		<dependency> 
+		<dependency>
 			<groupId>com.aspose</groupId>
 			<artifactId>aspose-words</artifactId>
 			<version>${aspose.version}</version>
@@ -94,8 +90,33 @@
 			<version>${aspose.version}</version>
 			<classifier>javadoc</classifier>
 		</dependency>
+
+		<!-- To PDF -->
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf-itext5</artifactId>
+			<version>${flying-saucer-pdf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-asian</artifactId>
+			<version>${itext-asian.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.itextpdf.tool</groupId>
+		    <artifactId>xmlworker</artifactId>
+		    <version>${xmlworker-tool.version}</version>
+		</dependency>
 		
-	</dependencies> 
+		<!-- To PDF -->
+
+		<!-- nano id vs uuid -->
+		<dependency>
+			<groupId>com.aventrix.jnanoid</groupId>
+			<artifactId>jnanoid</artifactId>
+			<version>${nanoid.version}</version>
+		</dependency>
+	</dependencies>
 
 	<repositories>
 		<!-- http://www.e-iceblue.cn/ -->
@@ -103,7 +124,7 @@
 			<id>com.e-iceblue</id>
 			<url>https://repo.e-iceblue.cn/repository/maven-public/</url>
 		</repository>
-		
+
 		<!-- https://www.aspose.app/ -->
 		<repository>
 			<id>AsposeJavaAPI</id>
@@ -111,6 +132,6 @@
 			<url>https://repository.aspose.com/repo/</url>
 		</repository>
 	</repositories>
-	
-	
+
+
 </project>
