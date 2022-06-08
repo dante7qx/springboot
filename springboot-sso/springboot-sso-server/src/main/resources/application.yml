@@ -1,0 +1,17 @@
+server:
+  port: 9000
+spring:
+  thymeleaf:
+    cache: false
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 1
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+
+sa-token:
+  # -------------- SSO-模式一相关配置  (非模式一不需要配置) 
+  cookie:
+    domain: dante.com # 配置Cookie作用域

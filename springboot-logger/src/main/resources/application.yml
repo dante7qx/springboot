@@ -1,8 +1,9 @@
 spring:
   application:
     name: dante-springboot-logger
-  profiles:
-    active: dev
+  config:
+    activate:
+      on-profile: dev
 server:
   port: 8101
   
@@ -11,8 +12,7 @@ server:
 management:
   server:
     port: 10000
-    servlet:
-      context-path: /adminmanage
+    base-path: /adminmanage
   endpoint:
     shutdown:
       enabled: true

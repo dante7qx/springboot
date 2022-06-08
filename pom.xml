@@ -100,6 +100,8 @@
         <module>springboot-jimureport</module>
         <!-- AI 相关 -->
         <module>springboot-ai-baidu</module>
+        <!-- SSO -->
+        <module>springboot-sso</module>
 	</modules>
 
 	<parent>
@@ -110,9 +112,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+		    <groupId>cn.hutool</groupId>
+    		<artifactId>hutool-all</artifactId>
+		    <version>${hutool.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -134,9 +136,9 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-		    <groupId>cn.hutool</groupId>
-    		<artifactId>hutool-all</artifactId>
-		    <version>${hutool.version}</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

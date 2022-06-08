@@ -16,7 +16,7 @@
 	<description>Dante Springboot LiteFlow 业务编排组合引擎</description>
 
 	<properties>
-		<liteflow.version>2.6.13</liteflow.version>
+		<liteflow.version>2.6.14</liteflow.version>
 	</properties>
 
 	<dependencies>

@@ -2,7 +2,10 @@
 
 spring:
   profiles:
-    active: node1
+    active: node3
+#  config:
+#    activate:
+#      on-profile: node2
 management:
   endpoint:
     health:
@@ -14,6 +17,9 @@ spring:
   profiles:
     group: 
       node1: redis
+#  config:
+#    activate:
+#      on-profile: node2
 server:
   port: 8101
 hello:
@@ -35,7 +41,9 @@ hello:
   
 ---
 spring:
-  profiles: node3
+  config:
+    activate:
+      on-profile: node3
 server:
   port: 8103
 hello:

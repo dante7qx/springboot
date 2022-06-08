@@ -11,7 +11,7 @@
 
 	<artifactId>springboot-mybatis</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-logger</name>
+	<name>springboot-mybatis</name>
 	<description>Dante Springboot Mybatis</description>
 
 	<properties>
