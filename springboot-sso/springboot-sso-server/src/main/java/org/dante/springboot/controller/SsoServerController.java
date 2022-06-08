@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.sso.SaSsoHandle;
@@ -35,13 +36,18 @@ public class SsoServerController {
      */
     @Autowired
     private void configSso(SaSsoConfig sso) {
+//        // 配置：未登录时返回的View 
+//        sso.setNotLoginView(() -> {
+//            String msg = "当前会话在SSO-Server端尚未登录，请先访问"
+//                    + "<a href='/sso/doLogin?name=sa&pwd=123456' target='_blank'> doLogin登录 </a>"
+//                    + "进行登录之后，刷新页面开始授权";
+//            return msg;
+//        });
+        
         // 配置：未登录时返回的View 
-        sso.setNotLoginView(() -> {
-            String msg = "当前会话在SSO-Server端尚未登录，请先访问"
-                    + "<a href='/sso/doLogin?name=sa&pwd=123456' target='_blank'> doLogin登录 </a>"
-                    + "进行登录之后，刷新页面开始授权";
-            return msg;
-        });
+		sso.setNotLoginView(() -> {
+			return new ModelAndView("sa-login.html");
+		});
 
         // 配置：登录处理函数 
         sso.setDoLoginHandle((name, pwd) -> {
