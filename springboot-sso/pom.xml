@@ -20,6 +20,8 @@
 	
 	<modules>
 		<module>springboot-sso-server</module>
+		<module>springboot-sso-client1</module>
+		<module>springboot-sso-client2</module>
 	</modules>
 	
 	<dependencyManagement>
