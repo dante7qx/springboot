@@ -1,0 +1,23 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: springboot-postgresql
+  datasource: 
+    url: jdbc:postgresql://localhost:5432/test
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: iamdante
+  sql:
+    init:
+      platform: postgresql
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      mode: ALWAYS
+  jpa: 
+    open-in-view: true
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true

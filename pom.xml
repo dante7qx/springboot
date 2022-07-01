@@ -98,6 +98,7 @@
 		<module>springboot-flowable-design</module>
 		<module>springboot-liteflow</module>
         <module>springboot-jimureport</module>
+		<module>springboot-postgresql</module>
         <!-- AI 相关 -->
         <module>springboot-ai-baidu</module>
         <!-- SSO -->

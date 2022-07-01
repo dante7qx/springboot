@@ -19,7 +19,7 @@ import org.springframework.util.CollectionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ReceiveDocSubFlowTests extends SpringbootFlowableDesignApplicationTests {
+public class SubFlowTests extends SpringbootFlowableDesignApplicationTests {
 	
 	@Autowired
 	private IFlowInstanceService flowInstanceService;
