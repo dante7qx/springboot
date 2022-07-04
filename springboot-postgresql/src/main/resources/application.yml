@@ -4,7 +4,7 @@ spring:
   application:
     name: springboot-postgresql
   datasource: 
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/test?useUnicode=true&characterEncoding=UTF-8
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: iamdante
@@ -13,11 +13,10 @@ spring:
       platform: postgresql
       schema-locations: classpath:db/schema.sql
       data-locations: classpath:db/data.sql
-      mode: ALWAYS
-  jpa: 
-    open-in-view: true
-    properties: 
-      hibernate: 
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-    show-sql: true
+      mode: never
+mybatis-plus:
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml
+  type-aliases-package: org.dante.springboot.po
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

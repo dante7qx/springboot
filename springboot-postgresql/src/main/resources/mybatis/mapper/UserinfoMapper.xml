@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.dao.UserinfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.dante.springboot.po.Userinfo">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="age" property="age" />
+    </resultMap>
+    
+    <select id="selectLastUserBorrowRecord" resultType="org.dante.springboot.vo.UserBorrowRecord">
+    	select
+    		u.id as userId,
+			u.name as userName,
+			u.age as userAge,
+			b.book_name as bookName,
+			b.book_no as bookNo,
+			t.borrow_time as borrowTime
+		from
+			(select row_number () over (partition by user_id order by borrow_time desc) rowid, * from t_borrow_record) t
+			inner join t_userinfo u on u.id = t.user_id
+			inner join t_bookinfo b on b.id = t.book_id
+		where
+			t.rowid = 1
+    </select>
+	
+</mapper>
