@@ -12,6 +12,6 @@ public class Say extends NodeComponent {
 	public void process() throws Exception {
 		log.info("=============================================================== 业务【Say】 ===============================================================");
 		HelloContext helloContext = this.getContextBean(HelloContext.class);
-		helloContext.setAction("say1");
+		helloContext.setAction("say");
 	}
 }
