@@ -99,6 +99,7 @@
 		<module>springboot-liteflow</module>
         <module>springboot-jimureport</module>
 		<module>springboot-postgresql</module>
+		<module>springboot-camel</module>
         <!-- AI 相关 -->
         <module>springboot-ai-baidu</module>
         <!-- SSO -->

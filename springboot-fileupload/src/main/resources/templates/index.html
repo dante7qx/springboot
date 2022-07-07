@@ -6,14 +6,15 @@
 </head>
 <body>
 	<h1>文件上传加、解密</h1>
-	<div>
+	<div style="padding: 5px;">
 		<form th:action="@{/upload}" enctype="multipart/form-data" method="post">
-			类型：<input type="text" name="type"/><br/>
-			<input type="hidden" name="businessId" /><br/>
-			<input type="file" name="photos"/><br/>
-			<input type="file" name="photos"/><br/>
+			<label>类型：</label><input type="text" name="type"/>
+			<input type="hidden" name="businessId" /><br/><br/>
+			<input type="file" name="photos"/><br/><br/>
+			<input type="file" name="photos"/><br/><br/>
 			<input type="submit" value="上传"/>
 		</form>
 	</div>
+	<h1><a th:href="@{/advanced}" target="_blank">进阶应用</a></h1>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package org.dante.springboot.controller.helloliteflow;
+package org.dante.springboot.controller;
 
 import org.dante.springboot.service.helloliteflow.HelloLiteFlowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/helloliteflow")
-public class HelloLiteFlowController {
+@RequestMapping("/liteflow")
+public class LiteFlowController {
 	
 	private final HelloLiteFlowService helloLiteFlowService;
 
 	@Autowired
-	public HelloLiteFlowController(HelloLiteFlowService helloLiteFlowService) {
+	public LiteFlowController(HelloLiteFlowService helloLiteFlowService) {
 		this.helloLiteFlowService = helloLiteFlowService;
 	}
 	
-	@GetMapping
-	public void sayHelloLiteFlow() {
+	@GetMapping("/hello")
+	public void sayHelloLiteFlow() throws Exception {
 		helloLiteFlowService.sayHelloLiteFlow();
 	}
 	

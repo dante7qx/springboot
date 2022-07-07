@@ -10,24 +10,19 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>springboot-liteflow</artifactId>
+	<artifactId>springboot-camel</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-liteflow</name>
-	<description>Dante Springboot LiteFlow 业务编排组合引擎</description>
+	<name>springboot-camel</name>
+	<description>Dante Springboot Camel 企业级数据集成和处理</description>
 
 	<properties>
-		<liteflow.version>2.8.0</liteflow.version>
+		<dependency.version>dependency.version</dependency.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yomahub</groupId>
-			<artifactId>liteflow-spring-boot-starter</artifactId>
-			<version>${liteflow.version}</version>
 		</dependency>
 	</dependencies>
 

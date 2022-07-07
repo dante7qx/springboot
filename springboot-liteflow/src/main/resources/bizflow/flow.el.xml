@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow>
+	<!-- 串行编排（THEN必须大写） -->
     <chain name="helloLiteFlowChain">
-        <then value="hello,liteflow"/>
+        THEN(say, hello, liteflow)
     </chain>
 </flow>

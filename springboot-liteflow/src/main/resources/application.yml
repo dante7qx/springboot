@@ -8,5 +8,5 @@ server:
 ## LiteFlow 配置
 liteflow:
   enable: true
-  print-banner: true
-  rule-source: bizflow/**/*.xml
+  print-banner: false
+  rule-source: bizflow/**/*.el.xml

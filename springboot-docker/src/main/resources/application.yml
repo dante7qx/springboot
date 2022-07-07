@@ -2,7 +2,7 @@
 
 spring:
   profiles:
-    active: node3
+    active: node2
 #  config:
 #    activate:
 #      on-profile: node2

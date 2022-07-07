@@ -1,17 +1,17 @@
-package org.dante.springboot.slot.helloliteflow;
+package org.dante.springboot.context;
 
 import java.util.Date;
-
-import com.yomahub.liteflow.entity.data.AbsSlot;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class HelloSlot extends AbsSlot {
+public class HelloContext  {
 	
 	private String msgId;
 	private Date msgDate;
+	private String reqArg;
+	private String action;
 	
 }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>分片上传</title>
+	<link rel="stylesheet" th:href="@{/css/theme-chalk.css}">
+	<link rel="stylesheet" th:href="@{/css/upload.css}">
+</head>
+<body>
+	<h2>分片上传</h2>
+	<div id="app" class="upload-container">
+		<div class="total-progress">
+		    <div class="btns">
+		        <el-button-group>
+			          <el-button :disabled="changeDisabled">
+				            <i class="el-icon-upload2 el-icon--left" size="mini"></i>选择文件
+				            <input
+				              v-if="!changeDisabled"
+				              type="file"
+				              :multiple="multiple"
+				              class="select-file-input"
+				              :accept="accept"
+				              οnclick="f.outerHTML=f.outerHTML"
+				              @change="handleFileChange"
+				            />
+			          </el-button>
+			          <el-button :disabled="uploadDisabled" @click="handleUpload"><i class="el-icon-upload el-icon--left" size="mini"></i>上传</el-button>
+			          <el-button :disabled="pauseDisabled" @click="handlePause"><i class="el-icon-video-pause el-icon--left" size="mini"></i>暂停</el-button>
+			          <el-button :disabled="resumeDisabled" @click="handleResume"><i class="el-icon-video-play el-icon--left" size="mini"></i>恢复</el-button>
+			          <el-button :disabled="clearDisabled" @click="clearFiles"><i class="el-icon-video-play el-icon--left" size="mini"></i>清空</el-button>
+		        </el-button-group>
+		        <slot name="header"></slot>
+		     </div>
+	     </div>
+	</div>
+</body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/js/element-ui.js}"></script>
+<script type="text/javascript">
+new Vue({
+  el: '#app',
+  props: {
+	  disabled: {
+	      type: Boolean,
+	      required: true,
+	      default: 0
+	  }
+  },
+  data() {
+    return { 
+   	  message: '你好',
+   	  
+   	}
+  },
+  
+  methods: {
+	  changeDisabled() {
+		  
+	  },
+	  uploadDisabled() {
+		  
+	  },
+	  handleUpload() {
+		  
+	  },
+	  pauseDisabled() {
+		  
+	  },
+	  handlePause() {
+		  
+	  },
+	  handlePause() {
+			  
+  	  },
+	  handlePause() {
+			  
+	  },
+	  resumeDisabled() {
+		  
+	  },
+	  handleResume() {
+		  
+	  },
+	  clearDisabled() {
+		  
+	  },
+	  clearFiles() {
+		  
+	  },
+	  
+  }
+})
+</script>
+</html>
