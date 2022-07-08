@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class SpringbootEmptyShelfApplication {
+public class SpringbootCamelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootEmptyShelfApplication.class, args);
+		SpringApplication.run(SpringbootCamelApplication.class, args);
 	}
 }
