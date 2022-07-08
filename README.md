@@ -1,7 +1,6 @@
-# Spring Boot 2.5.0
+# Spring Boot 2.7.x
 ## 一. 更新记录
 
-https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5-Release-Notes
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7-Release-Notes
 
-https://mp.weixin.qq.com/s/FQ_G0RGrzAa-A9zwY_hivQ
-
+## 二. 采用JDK17

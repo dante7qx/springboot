@@ -16,19 +16,11 @@
 	<description>Dante Springboot Camel 企业级数据集成和处理</description>
 
 	<properties>
-		<spring-boot.version>2.7.1</spring-boot.version>
 		<camel.version>3.18.0</camel.version> 
 	</properties>
 	
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 			<dependency>
 				<groupId>org.apache.camel.springboot</groupId>
 				<artifactId>camel-spring-boot-bom</artifactId>
