@@ -1,3 +1,9 @@
 camel:
   springboot:
+    name: dante-springboot-camel
     main-run-controller: true
+    
+management: 
+  endpoint:
+    health:
+      show-details: always

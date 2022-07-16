@@ -48,7 +48,10 @@ public class DockerController {
 	
 	@GetMapping("/prop")
 	public String propertiesUtil() {
-		return PropertiesUtils.getString("hello.msg");
+		String msg = PropertiesUtils.getString("hello.msg");
+		LOGGER.warn(msg);
+		LOGGER.error(msg);
+		return msg;
 	}
 	
 	@PostMapping("/docker")

@@ -8,8 +8,9 @@ public class HelloRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from("file:/Users/dante/Desktop/a")
-        	.to("file:/Users/dante/Desktop/b");
+		from("file:/Users/dante/Desktop/c")
+			.log("从文件夹C移动到文件夹D")
+        	.to("file:/Users/dante/Desktop/d");
 	}
 
 }

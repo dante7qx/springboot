@@ -1,9 +1,7 @@
-server:
-  port: 8803
 spirit: 
   ftp:
-    server-address: 127.0.0.1 ## 10.70.209.51
-    server-port: 2221 ## 21
+    server-address: 127.0.0.1 
+    server-port: 21
     ftp-user: dante
-    ftp-password: 12345 ## Spirit@2018 
-    base-path: /home/ftp/
+    ftp-password: iamdante
+    base-path: /dante

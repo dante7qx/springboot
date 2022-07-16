@@ -29,8 +29,8 @@ public class FtpClientFactory {
 	        }
 			
 			ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
-			ftp.makeDirectory(ftpProperties.getBasePath());
-			ftp.changeWorkingDirectory(ftpProperties.getBasePath());
+//			ftp.makeDirectory(ftpProperties.getBasePath());
+//			ftp.changeWorkingDirectory(ftpProperties.getBasePath());
 		} catch (IOException e) {
 			log.error("连接 Ftp Server 失败.", e);
 			release(ftp);

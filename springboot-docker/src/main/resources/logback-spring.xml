@@ -36,7 +36,10 @@
 		   2. http://itmuch.com/spring-cloud/sleuth-elk/ 
 	 -->
 	<appender name="LOGSTASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--  
         <file>${ES_LOG}/${POD_NAME:-pod}.json</file>
+        -->
+        <file>${LOG_HOME}/${POD_NAME:-pod}.json</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_FILE}${POD_NAME:-pod}.json.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <maxHistory>7</maxHistory>
@@ -65,6 +68,7 @@
 	<springProfile name="dev">
 		<root level="INFO">
 			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
 		</root>
 		<!-- hibernate -->
 		<!--  
@@ -76,6 +80,7 @@
 		-->
 		<logger name="org.dante.springboot" level="DEBUG" additivity="false">
 			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
 		</logger>
 	</springProfile>
 
@@ -85,7 +90,6 @@
 			<appender-ref ref="FILE" />
 			<appender-ref ref="LOGSTASH" />
 		</root>
-	
 		<logger name="org.apache" level="INFO" additivity="false">
 			<appender-ref ref="FILE" />
 			<appender-ref ref="LOGSTASH" />

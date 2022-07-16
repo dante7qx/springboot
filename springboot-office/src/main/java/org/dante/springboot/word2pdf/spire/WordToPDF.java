@@ -25,9 +25,9 @@ public class WordToPDF {
         Document doc = new Document();
 
         //加载Word
-        doc.loadFromFile(Consts.WORD_DIR.concat("系统建设方案.docx"));
+        doc.loadFromFile(Consts.WORD_DIR.concat("测试.docx"));
 
         //保存为PDF格式
-        doc.saveToFile(Consts.WORD_DIR.concat("spire/系统建设方案.pdf"),FileFormat.PDF);
+        doc.saveToFile(Consts.WORD_DIR.concat("spire/测试.pdf"),FileFormat.PDF);
     }
 }

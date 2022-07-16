@@ -2,22 +2,16 @@ package org.dante.springboot;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.dante.springboot.ftp.factory.FtpClientFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class SpringbootFTPApplicationTests {
 	
 	@Autowired
@@ -30,6 +24,8 @@ public class SpringbootFTPApplicationTests {
 		try {
 			boolean storeFile = ftpClient.storeFile("test.txt", new FileInputStream(file));
 			System.out.println("=============> Upload: " + storeFile);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			ftpClientFactory.release(ftpClient);
 		}
@@ -38,7 +34,8 @@ public class SpringbootFTPApplicationTests {
 	@Test
 	public void list() throws IOException {
 		FTPClient ftpClient = ftpClientFactory.getInstance();
-		FTPFile[] listFiles = ftpClient.listFiles("/home/ftp/");
+//		FTPFile[] listFiles = ftpClient.listFiles("dante");
+		FTPFile[] listFiles = ftpClient.listDirectories();
 		for (FTPFile ftpFile : listFiles) {
 			System.out.println("===========> " + ftpFile.getName());
 		}

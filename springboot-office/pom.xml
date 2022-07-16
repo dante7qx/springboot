@@ -27,6 +27,7 @@
 		<itext-asian.version>5.2.0</itext-asian.version>
 		<xmlworker-tool.version>5.5.13.3</xmlworker-tool.version>
 		<nanoid.version>2.0.0</nanoid.version>
+		<poi.version>5.2.0</poi.version>
 	</properties>
 
 	<dependencies>
@@ -62,14 +63,33 @@
 			<version>${document4j.version}</version>
 		</dependency>
 
-
 		<!-- POI-XWPF -->
 		<dependency>
 			<groupId>fr.opensagres.xdocreport</groupId>
 			<artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
 			<version>${opensagres-poi2pdf.version}</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>fr.opensagres.xdocreport</groupId>
+		    <artifactId>fr.opensagres.poi.xwpf.converter.pdf-gae</artifactId>
+		    <version>${opensagres-poi2pdf.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.apache.xmlbeans</groupId>
+		    <artifactId>xmlbeans</artifactId>
+		    <version>5.1.0</version>
+		</dependency>
+		<!-- POI-XWPF -->
 
 		<!-- http://www.e-iceblue.cn/ -->
 		<dependency>

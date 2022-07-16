@@ -16,16 +16,12 @@
 	<description>Dante Springboot FTP</description>
 
 	<properties>
-		<commons-net.version>3.6</commons-net.version>
+		<commons-net.version>3.8.0</commons-net.version>
+		<jsch.version>0.1.55</jsch.version>
 		<mock-ftp.version>2.7.1</mock-ftp.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>commons-net</groupId>
-			<artifactId>commons-net</artifactId>
-			<version>${commons-net.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -34,6 +30,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<!-- ftp -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>${commons-net.version}</version>
+		</dependency>
+		<!-- sftp -->
+		<dependency>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jsch</artifactId>
+		    <version>${jsch.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mockftpserver</groupId>

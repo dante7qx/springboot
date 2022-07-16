@@ -3,6 +3,7 @@ package org.dante.springboot.word2pdf.poixwpf;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -21,8 +22,8 @@ import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
  */
 public class WordToPDF {
 
-
 	public static void main(String[] args) {
+		/*
 		long startTime = System.currentTimeMillis();
 
 		String filepath = Consts.WORD_DIR + "系统建设方案.docx";
@@ -43,7 +44,31 @@ public class WordToPDF {
 		}
 
 		System.out.println("生成系统建设方案.pdf，用时 " + (System.currentTimeMillis() - startTime) + " 毫秒。");
-
+		*/
+		wordToPdf2(Consts.WORD_DIR + "系统建设方案.docx", Consts.WORD_DIR + "poixwpf");
 	}
+	
+	public static String wordToPdf2(String filePath, String cachePath) {
+        FileInputStream fileInputStream = null;
+        FileOutputStream  fileOutputStream = null;
+        String outPath = "";
+        try {
+            File file = new File(filePath);
+            // 读取docx文件
+            fileInputStream = new FileInputStream(file);
+            XWPFDocument xwpfDocument = new XWPFDocument(fileInputStream);
+            PdfOptions pdfOptions = PdfOptions.create();
+            // 输出路径
+            outPath = cachePath + File.separator + file.getName() + ".pdf";
+            fileOutputStream = new FileOutputStream(outPath);
+            // 调用转换
+            PdfConverter.getInstance().convert(xwpfDocument,fileOutputStream,pdfOptions);
+            fileInputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outPath;
+    }
 
 }
