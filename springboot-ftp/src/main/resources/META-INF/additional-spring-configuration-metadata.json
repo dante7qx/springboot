@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "spirit.ftp.server-address",
+    "type": "java.lang.String",
+    "description": "A description for 'spirit.ftp.server-address'"
+  },
+  {
+    "name": "spirit.ftp.server-port",
+    "type": "java.lang.String",
+    "description": "A description for 'spirit.ftp.server-port'"
+  },
+  {
+    "name": "spirit.ftp.ftp-user",
+    "type": "java.lang.String",
+    "description": "A description for 'spirit.ftp.ftp-user'"
+  },
+  {
+    "name": "spirit.ftp.ftp-password",
+    "type": "java.lang.String",
+    "description": "A description for 'spirit.ftp.ftp-password'"
+  },
+  {
+    "name": "spirit.ftp.base-path",
+    "type": "java.lang.String",
+    "description": "A description for 'spirit.ftp.base-path'"
+  }
+]}
