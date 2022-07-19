@@ -7,11 +7,16 @@ spring:
 #    activate:
 #      on-profile: node2
 management:
-  endpoint:
+  endpoints: 
+    web:
+      base-path: /manage
+      exposure:
+        include:  
+        - "*"
+  endpoint: 
     health:
-      probes:
-        enabled: true
       show-details: always
+      
 ---
 spring:
   profiles:

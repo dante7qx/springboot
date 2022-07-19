@@ -16,6 +16,7 @@
 	<description>Dante Springboot Camel 企业级数据集成和处理</description>
 
 	<properties>
+		<java.version>17</java.version>
 		<camel.version>3.18.0</camel.version> 
 	</properties>
 	
