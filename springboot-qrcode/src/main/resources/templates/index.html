@@ -17,7 +17,10 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		var ctx = "";
 		window.onload = function() {
+			var pathName = window.document.location.pathname;
+			ctx = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 			document.querySelector('#qrCode').style.display = "none";
 		}
 		
@@ -29,7 +32,7 @@
 					body: JSON.stringify(params), 
 				};
 				let url = type == 1 ? '/generator_code' : '/generator_logo_code';
-				var codeReq = new Request(url, codeInit);
+				var codeReq = new Request(ctx + url, codeInit);
 				fetch(codeReq).then(function(response) {
 					return response.text();
 				}).then(function(result) {
