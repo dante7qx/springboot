@@ -16,7 +16,7 @@ spring:
       data-source-properties: 
         nullCatalogMeansCurrent: true
 flowable:
-  database-schema-update: true
+  database-schema-update: false
   common:
     app:
       idm-url: /idm
