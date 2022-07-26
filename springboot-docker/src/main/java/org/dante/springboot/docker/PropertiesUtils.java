@@ -85,7 +85,7 @@ public class PropertiesUtils {
 	public static boolean getBoolean(String key, boolean defaultValue) {
 		String value = env.getProperty(key);
 		if (StringUtils.hasLength(value)) {
-			return new Boolean(value);
+			return Boolean.parseBoolean(value);
 		}
 		return defaultValue;
 	}

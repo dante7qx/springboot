@@ -1,7 +1,6 @@
 package org.dante.springboot.listener;
 
 import java.time.Instant;
-import java.util.Date;
 
 import javax.annotation.Resource;
 
