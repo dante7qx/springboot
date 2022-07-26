@@ -6,7 +6,7 @@
 
 	<groupId>org.dante.springboot</groupId>
 	<artifactId>springboot-testng</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>springboot-testng</name>
 	<description>Dante Springboot TestNg</description>
