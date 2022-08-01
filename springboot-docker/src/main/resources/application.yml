@@ -6,6 +6,16 @@ spring:
 #  config:
 #    activate:
 #      on-profile: node2
+server:
+  undertow:
+    accesslog:
+      enabled: true
+      dir: logs/undertow
+    url-charset: UTF-8
+    max-http-post-size: -1B
+    threads:
+      io: 8
+      worker: 64
 management:
   endpoints: 
     web:
@@ -16,7 +26,6 @@ management:
   endpoint: 
     health:
       show-details: always
-      
 ---
 spring:
   profiles:

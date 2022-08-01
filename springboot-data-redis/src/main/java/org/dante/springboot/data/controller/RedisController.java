@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.dante.springboot.data.util.RedisClusterUtils;
 import org.dante.springboot.data.vo.Person;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ public class RedisController {
 
 	@Autowired
 	private RedisClusterUtils redisClusterUtils;
+	@Autowired
+    private RedissonClient redissonClient;
 	
 	@GetMapping("get/{key}")
 	public String getKey(@PathVariable String key) {
@@ -61,5 +64,13 @@ public class RedisController {
 		}
 		return storePersons;
 	}
+	
+	/** Redisson 分布式锁 */
+	@GetMapping("/lock/add/{str}")
+    public String add(@PathVariable String str) {
+		
+        redissonClient.getBucket("demo").set(str);
+        return redissonClient.<String>getBucket("demo").get();
+    }
 
 }
