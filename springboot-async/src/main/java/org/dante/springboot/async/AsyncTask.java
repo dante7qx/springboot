@@ -21,7 +21,7 @@ public class AsyncTask {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AsyncTask.class);
 
-	@Async
+	@Async("spiritExecutor")
 	public Future<String> doTask1() throws InterruptedException {
 		LOGGER.info("Task1 开始执行...");
 		long start = System.currentTimeMillis();
@@ -33,7 +33,7 @@ public class AsyncTask {
 		return new AsyncResult<>("Task1 执行完成!");
 	}
 
-	@Async
+	@Async("spiritExecutor")
 	public Future<String> doTask2() throws InterruptedException {
 		LOGGER.info("Task2 开始执行...");
 		long start = System.currentTimeMillis();
@@ -57,7 +57,7 @@ public class AsyncTask {
 		return new AsyncResult<>("Task3 执行完成!");
 	}
 
-	@Async("myAsync")
+	@Async("spiritExecutor")
 	public Future<String> doTask4() throws InterruptedException {
 		LOGGER.info("Task4 开始执行...");
 		long start = System.currentTimeMillis();
@@ -69,13 +69,16 @@ public class AsyncTask {
 		return new AsyncResult<>("Task4 执行完成!");
 	}
 	
-	@Async
+	@Async("spiritExecutor")
 	public Future<String> doCancel() throws InterruptedException {
 		LOGGER.info("CancelTask 开始执行...");
 		long start = System.currentTimeMillis();
 		int i = 0;
-		while(i < 10) {
-			Thread.sleep(100);	// 响应中断, 接收 cancel() 方法的请求
+		int count = 10;
+		int sleep = 100;
+		while(i < count) {
+			// 响应中断, 接收 cancel() 方法的请求
+			Thread.sleep(sleep);	
 			i++;
 		}
 		long end = System.currentTimeMillis();
@@ -83,4 +86,5 @@ public class AsyncTask {
 
 		return new AsyncResult<>("CancelTask 执行完成!");
 	}
+	
 }
