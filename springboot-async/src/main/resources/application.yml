@@ -3,3 +3,5 @@ spring:
     name: dante-springboot-async
   profiles:
     active: dev
+server:
+  port: 8111
