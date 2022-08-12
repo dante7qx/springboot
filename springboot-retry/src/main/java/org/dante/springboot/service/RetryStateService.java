@@ -20,8 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class RetryStateService {
 
-	@CircuitBreaker(openTimeout = 3000L, resetTimeout = 7000L, maxAttempts = 5 // 最大重试次数
-	)
+	@CircuitBreaker(openTimeout = 3000L, resetTimeout = 7000L, maxAttempts = 5) // 最大重试次数
 	public String retryAnnotationState() {
 		log.warn("业务执行失败！！！" + LocalTime.now());
 		throw new RuntimeException("timeout");
