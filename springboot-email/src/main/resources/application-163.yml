@@ -1,16 +1,16 @@
 spring:
   mail:
     host: smtp.163.com
-    username: sunchao.0129@163.com
-    password: Springboot163
+    username: "sunchao.0129@163.com"
+    password: NWSONKUQNOKZFRRB
     default-encoding: UTF-8
-    protocol: smtp
+    protocol: smtps
     properties:
-      smtp:
-        auth: true
-        starttls: 
-          enable: true
-          required: true
-spirit:
-  email: 
-    from: sunchao.0129@163.com
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          starttls: 
+            enable: true
+            required: true

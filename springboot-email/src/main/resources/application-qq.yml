@@ -11,6 +11,3 @@ spring:
         starttls: 
           enable: true
           required: true
-spirit:
-  email: 
-    from: 307909697@qq.com
