@@ -103,6 +103,7 @@
 		<module>springboot-camel</module>
         <module>springboot-retry</module>
         <module>springboot-async-flow</module>
+        <module>springboot-db-doc</module>
         <!-- AI 相关 -->
         <module>springboot-ai-baidu</module>
         <!-- SSO -->
