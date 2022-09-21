@@ -1,6 +1,7 @@
-package org.dante.springboot.service;
+package org.dante.springboot.service.spring;
 
 import org.dante.springboot.SpringbootRetryApplicationTests;
+import org.dante.springboot.service.RetryAnnotationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

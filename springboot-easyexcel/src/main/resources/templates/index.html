@@ -2,44 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>二维码</title>
+<title>阿里EasyExcel</title>
 </head>
 <body>
-	<h2 align="center">二维码</h2>
-	<div align="center">
-		<div>
-			<textarea id="content" rows="8" cols="40"></textarea>
-			<input type="button" value="生成二维码" onclick="QrCodePage.generatorCode(1)">
-			<input type="button" value="生成二维码Logo" onclick="QrCodePage.generatorCode(2)">
-		</div>
-		<div>
-			<img id="qrCode" alt="二维码" draggable="false" style="width: 200px; height: 200px;">
-		</div>
-	</div>
-	<script type="text/javascript">
-		window.onload = function() {
-			document.querySelector('#qrCode').style.display = "none";
-		}
-		
-		var QrCodePage = {
-			generatorCode: function(type) {
-				let params = {"content": document.querySelector('#content').value}
-				var codeInit = {
-					method: 'POST',
-					body: JSON.stringify(params), 
-				};
-				let url = type == 1 ? '/generator_code' : '/generator_logo_code';
-				var codeReq = new Request(url, codeInit);
-				fetch(codeReq).then(function(response) {
-					return response.text();
-				}).then(function(result) {
-					document.querySelector('#qrCode').style.display = "";
-				    document.querySelector('#qrCode').src="data:image/jpg;base64,"+result;
-				}) .then(function(exception) {
-					console.log(exception)
-				});
-			}		
-		};
-	</script>
+	<h2 align="center">阿里 EasyExcel</h2>
+	
 </body>
 </html>

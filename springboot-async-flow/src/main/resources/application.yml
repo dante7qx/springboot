@@ -1,0 +1,11 @@
+server:
+  port: 8108
+spring:
+  thymeleaf:
+    cache: false
+  gobrs:
+    async:
+      rules: 
+        - name: "test"
+          content: "AService->BService->CService,FService->HService"
+      task-interrupt: true  ## 局部异常是否打断主流程

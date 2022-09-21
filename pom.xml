@@ -101,7 +101,8 @@
         <module>springboot-jimureport</module>
 		<module>springboot-postgresql</module>
 		<module>springboot-camel</module>
-		<module>springboot-retry</module>
+        <module>springboot-retry</module>
+        <module>springboot-async-flow</module>
         <!-- AI 相关 -->
         <module>springboot-ai-baidu</module>
         <!-- SSO -->

@@ -17,17 +17,19 @@
 
 	<properties>
 		<iceblue-spire.version>4.11.3</iceblue-spire.version>
-		<aspose.version>22.3</aspose.version>
+		<aspose.version>15.8.0</aspose.version>
 		<document4j.version>1.1.7</document4j.version>
 		<opensagres-poi2pdf.version>2.0.3</opensagres-poi2pdf.version>
-		<!-- <poi-tl.version>1.6.0</poi-tl.version> --> 
 		<poi-tl.version>1.11.1</poi-tl.version>
 		<jsoup.version>1.14.3</jsoup.version>
 		<flying-saucer-pdf.version>9.1.22</flying-saucer-pdf.version>
-		<itext-asian.version>5.2.0</itext-asian.version>
 		<xmlworker-tool.version>5.5.13.3</xmlworker-tool.version>
 		<nanoid.version>2.0.0</nanoid.version>
 		<poi.version>5.2.0</poi.version>
+		
+		<!-- itext -->
+		<itextpdf.version>5.5.13.3</itextpdf.version>
+		<itext-asian.version>5.2.0</itext-asian.version>
 	</properties>
 
 	<dependencies>
@@ -91,25 +93,11 @@
 		</dependency>
 		<!-- POI-XWPF -->
 
-		<!-- http://www.e-iceblue.cn/ -->
-		<dependency>
-			<groupId>e-iceblue</groupId>
-			<artifactId>spire.doc</artifactId>
-			<version>${iceblue-spire.version}</version>
-		</dependency>
-
 		<!-- https://www.aspose.app/ -->
 		<dependency>
-			<groupId>com.aspose</groupId>
-			<artifactId>aspose-words</artifactId>
-			<version>${aspose.version}</version>
-			<classifier>jdk17</classifier>
-		</dependency>
-		<dependency>
-			<groupId>com.aspose</groupId>
-			<artifactId>aspose-words</artifactId>
-			<version>${aspose.version}</version>
-			<classifier>javadoc</classifier>
+		  <groupId>com.risun</groupId>
+		  <artifactId>aspose-word</artifactId>
+		  <version>${aspose.version}</version>
 		</dependency>
 
 		<!-- To PDF -->
@@ -117,6 +105,11 @@
 			<groupId>org.xhtmlrenderer</groupId>
 			<artifactId>flying-saucer-pdf-itext5</artifactId>
 			<version>${flying-saucer-pdf.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>${itextpdf.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -128,31 +121,55 @@
 		    <artifactId>xmlworker</artifactId>
 		    <version>${xmlworker-tool.version}</version>
 		</dependency>
-		
 		<!-- To PDF -->
-
+		
 		<!-- nano id vs uuid -->
 		<dependency>
 			<groupId>com.aventrix.jnanoid</groupId>
 			<artifactId>jnanoid</artifactId>
 			<version>${nanoid.version}</version>
 		</dependency>
+		
 	</dependencies>
 
-	<repositories>
-		<!-- http://www.e-iceblue.cn/ -->
+	<!-- <repositories>
+		http://www.e-iceblue.cn/
 		<repository>
 			<id>com.e-iceblue</id>
 			<url>https://repo.e-iceblue.cn/repository/maven-public/</url>
 		</repository>
 
-		<!-- https://www.aspose.app/ -->
+		https://www.aspose.app/
 		<repository>
 			<id>AsposeJavaAPI</id>
 			<name>Aspose Java API</name>
 			<url>https://repository.aspose.com/repo/</url>
 		</repository>
+	</repositories> -->
+	
+	<!-- 在公司时打开 -->
+	<repositories>
+		<repository>
+			<id>maven-risun</id>
+			<name>maven-risun</name>
+			<url>http://116.176.33.76:9100/repository/maven-risun/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 	</repositories>
-
+	<pluginRepositories>
+        <pluginRepository>
+            <id>maven-risun</id>
+			<name>maven-risun</name>
+            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

@@ -1,4 +1,4 @@
-package org.dante.springboot.service;
+package org.dante.springboot.service.guava;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,6 +10,7 @@ import com.github.rholder.retry.RetryerBuilder;
 import com.github.rholder.retry.StopStrategies;
 import com.github.rholder.retry.WaitStrategies;
 
+import org.dante.springboot.service.MockService;
 import org.dante.springboot.vo.Response;
 import org.junit.jupiter.api.Test;
 

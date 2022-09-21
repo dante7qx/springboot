@@ -1,12 +1,16 @@
 package org.dante.springboot.word2pdf.spire;
 
-import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import com.aspose.words.Document;
+import com.aspose.words.License;
+import com.aspose.words.SaveFormat;
 
 import org.dante.springboot.word2pdf.Consts;
-
-import com.spire.doc.Document;
-import com.spire.doc.FileFormat;
-import com.spire.license.LicenseProvider;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  * 冰蓝科技
@@ -18,16 +22,46 @@ import com.spire.license.LicenseProvider;
  */
 public class WordToPDF {
 	
-	public static void main(String[] args) {
-		LicenseProvider.setLicenseFile(new File(Consts.WORD_DIR.concat("spire/").concat("license.elic.xml")));
-		
+	public static void main(String[] args) throws IOException {
+		if (!getLicense()) {
+			return;
+		}
         //实例化Document类的对象
-        Document doc = new Document();
-
-        //加载Word
-        doc.loadFromFile(Consts.WORD_DIR.concat("测试.docx"));
-
-        //保存为PDF格式
-        doc.saveToFile(Consts.WORD_DIR.concat("spire/测试.pdf"),FileFormat.PDF);
+        Document doc = null;
+        FileOutputStream os = null;
+        try {
+        	doc = new Document(Consts.WORD_DIR.concat("测试.docx"));
+        	os = new FileOutputStream(Consts.WORD_DIR.concat("spire/测试.pdf"));
+            doc.save(os, SaveFormat.PDF);
+        } catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+        	os.close();
+        }
+        
+    }
+	
+	public static boolean getLicense() {
+        boolean result = false;
+        InputStream is = null;
+        try {
+            Resource resource = new ClassPathResource("license.xml");
+            is = resource.getInputStream();
+            //InputStream is = Word2PdfAsposeUtil.class.getClassLoader().getResourceAsStream("license.xml"); // license.xml应放在..\WebRoot\WEB-INF\classes路径下
+            License aposeLic = new License();
+            aposeLic.setLicense(is);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }
