@@ -25,7 +25,7 @@
 		<flying-saucer-pdf.version>9.1.22</flying-saucer-pdf.version>
 		<xmlworker-tool.version>5.5.13.3</xmlworker-tool.version>
 		<nanoid.version>2.0.0</nanoid.version>
-		<poi.version>5.2.0</poi.version>
+		<poi.version>5.2.1</poi.version>
 		
 		<!-- itext -->
 		<itextpdf.version>5.5.13.3</itextpdf.version>
