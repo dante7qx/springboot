@@ -37,26 +37,24 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 		// 判断是否为委派的任务
 		if(delegationState != null && DelegationState.PENDING.compareTo(delegationState) == 0) {
 			taskService.resolveTask(taskId, flowTaskVO.getParams());
+			taskService.complete(taskId, flowTaskVO.getParams());
 		} else {
 			taskService.setAssignee(taskId, flowTaskVO.getCurrentUserId());
 			taskService.complete(taskId, flowTaskVO.getParams());
 		}
-		
 	}
 	
 	@Override
 	public void assignOtherUser(String taskId, String currentUserId, String acceptUserId, boolean keepMyTodo,
 			String reason) {
 		if(keepMyTodo) {
-			taskService.setOwner(taskId, currentUserId);
 			taskService.delegateTask(taskId, acceptUserId);
 			taskService.setVariable(taskId, FlowEnum.FLOW_DELEGATE.code(), reason);
 		} else {
-			taskService.setOwner(taskId, currentUserId);
 			taskService.setAssignee(taskId, acceptUserId);
 			taskService.setVariable(taskId, FlowEnum.FLOW_TURN_TODO.code(), reason);
-			
 		}
+		taskService.setOwner(taskId, currentUserId);
 	}
 
 	@Override

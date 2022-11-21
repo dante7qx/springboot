@@ -111,7 +111,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 #### Flowable文档
 
-- 
+- https://tkjohn.github.io/flowable-userguide/
 
 #### Springboot 集成
 

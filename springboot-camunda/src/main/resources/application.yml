@@ -1,0 +1,23 @@
+server:
+  port: 8141
+camunda: 
+  bpm:
+    database:
+      type: mysql
+      schema-update: false
+    admin-user:
+      id: demo
+      password: demo
+      firstName: Demo
+    filter:
+      create: All tasks
+    history-level: full
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot_camunda?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+    username: root
+    password: iamdante
+logging:
+  level:
+    org.camunda: debug

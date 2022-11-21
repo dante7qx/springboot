@@ -45,8 +45,11 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 			// 设置任务的处理人（流程的发起人 initiator）
 			vo.addParams(FlowEnum.FLOW_INITIATOR.code(), vo.getStarterId());
 			processInstance = runtimeService.createProcessInstanceBuilder()
-					.processDefinitionId(processDefinition.getId()).name(processDefinition.getName())
-					.businessKey(vo.getBussinessKey()).variables(vo.getParams()).start();
+					.processDefinitionId(processDefinition.getId())
+					.name(processDefinition.getName())
+					.businessKey(vo.getBussinessKey())
+					.variables(vo.getParams())
+					.start();
 			// 起始任务
 			Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
 			// 设置审批意见
@@ -65,7 +68,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 		} catch (Exception e) {
 			identityService.setAuthenticatedUserId(null);
 		}
-
+		
 		return processInstance;
 	}
 

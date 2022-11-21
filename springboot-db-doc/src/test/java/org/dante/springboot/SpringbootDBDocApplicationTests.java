@@ -22,8 +22,8 @@ import cn.smallbun.screw.core.process.ProcessConfig;
 public class SpringbootDBDocApplicationTests {
 
 	@Autowired
-    private DataSource dataSource;
-	
+	private DataSource dataSource;
+
 	@Test
 	public void contextLoads() throws SQLException {
 		// 生成文件配置
@@ -41,11 +41,9 @@ public class SpringbootDBDocApplicationTests {
 		Configuration config = Configuration
 				.builder()
 				.version("1.0.0")
-				.description("略阳党建数据库设计文档")
-				.dataSource(dataSource)
-				.engineConfig(engineConfig)
-				.produceConfig(getProcessConfig())
-				.build();
+//				.description("略阳党建数据库设计文档")
+				.description("睿阳RSP框架数据库设计文档")
+				.dataSource(dataSource).engineConfig(engineConfig).produceConfig(getProcessConfig()).build();
 
 		// 执行生成
 		new DocumentationExecute(config).execute();
@@ -60,7 +58,7 @@ public class SpringbootDBDocApplicationTests {
 		// 忽略表名
 		List<String> ignoreTableName = Arrays.asList("aa", "test_group");
 		// 忽略表前缀，如忽略a开头的数据库表
-		List<String> ignorePrefix = Arrays.asList("a", "s");
+		List<String> ignorePrefix = Arrays.asList("a");
 		// 忽略表后缀
 		List<String> ignoreSuffix = Arrays.asList("_test", "czb_");
 
