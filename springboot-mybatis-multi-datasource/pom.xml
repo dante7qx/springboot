@@ -17,7 +17,7 @@
 	<properties>
 		<druid.version>1.2.8</druid.version>
 		<mybatis.version>2.2.2</mybatis.version> 
-		<pagehelper.version>5.3.0</pagehelper.version> 
+		<pagehelper.version>5.3.1</pagehelper.version> 
 	</properties>
 
 	<dependencies>
