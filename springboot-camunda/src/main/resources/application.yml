@@ -6,9 +6,9 @@ camunda:
       type: mysql
       schema-update: false
     admin-user:
-      id: demo
-      password: demo
-      firstName: Demo
+      id: dante
+      first-name: 但
+      last-name: 丁
     filter:
       create: All tasks
     history-level: full

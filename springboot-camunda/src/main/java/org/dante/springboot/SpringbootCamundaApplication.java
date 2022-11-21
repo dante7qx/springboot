@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * EasyExcel是一个基于Java的简单、省内存的读写Excel的开源项目。在尽可能节约内存的情况下支持读写百M的Excel。
+ * Springboot Camunda 流程引擎
  * 
- * https://www.yuque.com/easyexcel/doc/easyexcel
+ * 编辑器部署：http://localhost:8141/engine-rest
  * 
  * @author dante
  *

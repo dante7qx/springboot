@@ -79,6 +79,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 				.deleteWithRelatedData();
 	}
 
+	@SuppressWarnings("unused")
 	private Map<String, Object> buildFlowVariable(Map<String, Object> bizParams) {
 		Map<String, Object> variables = Maps.newHashMap();
 		// 流程发起人
