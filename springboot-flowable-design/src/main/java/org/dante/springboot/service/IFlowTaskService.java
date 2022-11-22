@@ -1,6 +1,7 @@
 package org.dante.springboot.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.dante.springboot.vo.FlowTaskVO;
 import org.flowable.task.api.Task;
@@ -61,5 +62,21 @@ public interface IFlowTaskService {
 	 * String reason
 	 */
 	public void turnTodo(String taskId, String currentUserId, String acceptUserId, String reason);
+	
+	/**
+     * 获取流程变量
+     * 
+     * @param taskId
+     * @return
+     */
+	public Map<String, Object> processVariablesByTaskId(String taskId);
+    
+    /**
+     * 获取流程变量
+     * 
+     * @param procInsId
+     * @return
+     */
+	public Map<String, Object> processVariablesByProcInsId(String procInsId);
 	
 }

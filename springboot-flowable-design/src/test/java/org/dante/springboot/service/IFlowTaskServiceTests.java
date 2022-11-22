@@ -1,6 +1,7 @@
 package org.dante.springboot.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.dante.springboot.SpringbootFlowableDesignApplicationTests;
 import org.dante.springboot.enums.FlowEnum;
@@ -73,5 +74,15 @@ public class IFlowTaskServiceTests extends SpringbootFlowableDesignApplicationTe
 		flowTaskService.complete(flowTaskVO.getTaskId(), flowTaskVO);
 	}
 	
+	@Test
+	public void processVariablesByTaskId() {
+		Map<String, Object> vars = flowTaskService.processVariablesByTaskId("123");
+		log.info("流程变量 =========> {}", vars);
+	}
 	
+	@Test
+	public void processVariablesByProcInsId() {
+		Map<String, Object> vars = flowTaskService.processVariablesByProcInsId("123");
+		log.info("流程变量 =========> {}", vars);
+	}
 }
