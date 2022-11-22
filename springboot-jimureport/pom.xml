@@ -16,7 +16,7 @@
 	<description>Dante Springboot 积木报表</description>
 
 	<properties>
-		<jimureport.version>1.5.0-beta</jimureport.version>
+		<jimureport.version>1.5.4</jimureport.version>
 	</properties>
 
 	<dependencies>

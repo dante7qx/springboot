@@ -8,5 +8,15 @@
     "name": "jeecg.path.upload",
     "type": "java.lang.String",
     "description": "A description for 'jeecg.path.upload'"
+  },
+  {
+    "name": "jeecg.jmreport.custom-pre-path",
+    "type": "java.lang.String",
+    "description": "A description for 'jeecg.jmreport.custom-pre-path'"
+  },
+  {
+    "name": "jeecg.jmreport.autoSave",
+    "type": "java.lang.String",
+    "description": "A description for 'jeecg.jmreport.autoSave'"
   }
 ]}

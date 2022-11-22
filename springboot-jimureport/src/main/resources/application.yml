@@ -8,7 +8,22 @@ spring:
     username: root
     password: iamdante
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: spirit-jimureport-pool
+      #设置数据库超时时间
+      connection-timeout: 100000
+      #池中维护的最小连接数
+      minimum-idle: 5
+      #池中最大连接数
+      maximum-pool-size: 15
+      #连接最长闲置时间
+      idle-timeout: 30000
+      #池中连接最长生命周期
+      max-lifetime: 30000
 jeecg: 
+  jmreport: 
+    autoSave: true
   uploadType: local
   path:
     upload: /Users/dante/Documents/Project/java-world/springboot/springboot-jimureport/upload
