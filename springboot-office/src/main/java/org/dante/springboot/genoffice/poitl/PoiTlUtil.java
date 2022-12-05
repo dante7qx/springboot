@@ -9,9 +9,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.dante.springboot.genoffice.poitl.plugin.TreeTablePolicy;
 import org.springframework.util.StringUtils;
 
 import com.deepoove.poi.XWPFTemplate;
+import com.deepoove.poi.config.Configure;
 import com.deepoove.poi.util.PoitlIOUtils;
 
 /**
@@ -30,10 +32,16 @@ public class PoiTlUtil {
 				"attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
 		// 定义输出类型
 		response.setContentType("application/octet-stream");
+		
+		// 添加插件
+		Configure config = Configure.builder()
+				.bind("normTable", new TreeTablePolicy())
+				.build();
 
 		String templatePath = StringUtils.hasText(filePath) ? templateDir.concat(filePath).concat(templateName) : templateDir.concat(templateName);
-		XWPFTemplate template = XWPFTemplate.compile(templatePath).render(dataMap);
+		XWPFTemplate template = XWPFTemplate.compile(templatePath, config).render(dataMap);
 		
+
 		OutputStream out = null;
 		try {
 			out = response.getOutputStream();

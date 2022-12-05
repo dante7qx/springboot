@@ -1,5 +1,7 @@
 package org.dante.springboot.service;
 
+import java.util.List;
+
 import org.dante.springboot.vo.StartFlowInstanceVO;
 import org.flowable.engine.runtime.ProcessInstance;
 
@@ -34,7 +36,14 @@ public interface IFlowInstanceService {
 	 * @param processInstanceId
 	 * @throws Exception
 	 */
-	public void deleteProcessInstance(String processInstanceId) throws Exception;;
+	public void deleteProcessInstance(String processInstanceId) throws Exception;
 	
+	/**
+	 * 获取流程参与人员
+	 * 
+	 * @param processInstanceId
+	 * @return
+	 */
+	public List<String> getFlowParticipateUser(String processInstanceId);
 	
 }

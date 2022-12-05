@@ -79,4 +79,8 @@ public interface IFlowTaskService {
      */
 	public Map<String, Object> processVariablesByProcInsId(String procInsId);
 	
+	public static void main(String[] args) {
+		String xx = "部门负责人11";
+		System.out.println(xx.replaceAll("部门负责人", ""));
+	}
 }

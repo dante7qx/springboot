@@ -1,6 +1,9 @@
 package org.dante.springboot.service.impl;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.dante.springboot.enums.FlowEnum;
 import org.dante.springboot.service.FlowServiceFactory;
@@ -8,6 +11,7 @@ import org.dante.springboot.service.IFlowInstanceService;
 import org.dante.springboot.vo.StartFlowInstanceVO;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.identitylink.api.history.HistoricIdentityLink;
 import org.flowable.task.api.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -75,10 +79,24 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
 	@Override
 	public void deleteProcessInstance(String processInstanceId) throws Exception {
 		runtimeService.deleteProcessInstance(processInstanceId, "流程实例" + processInstanceId + "删除");
-		historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId)
-				.deleteWithRelatedData();
+		historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).deleteWithRelatedData();
 	}
-
+	
+	/**
+	 * 获取流程的参与人员
+	 * 
+	 * @param processInstanceId
+	 * @return
+	 */
+	@Override
+	public List<String> getFlowParticipateUser(String processInstanceId) {
+		List<String> userIds = historyService.getHistoricIdentityLinksForProcessInstance(processInstanceId).stream()
+				.sorted(Comparator.comparing(HistoricIdentityLink::getCreateTime).reversed())
+				.map(HistoricIdentityLink::getUserId)
+				.collect(Collectors.toList());
+		return userIds;
+	}
+	
 	@SuppressWarnings("unused")
 	private Map<String, Object> buildFlowVariable(Map<String, Object> bizParams) {
 		Map<String, Object> variables = Maps.newHashMap();

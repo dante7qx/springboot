@@ -10,8 +10,11 @@ import org.dante.springboot.service.IFlowTaskService;
 import org.dante.springboot.vo.ArgVO;
 import org.dante.springboot.vo.FlowTaskVO;
 import org.dante.springboot.vo.StartFlowInstanceVO;
+import org.flowable.engine.IdentityService;
 import org.flowable.engine.ManagementService;
+import org.flowable.engine.RepositoryService;
 import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +33,13 @@ public class SpringbootFlowableDesignApplicationTests {
 	@Autowired
 	protected IFlowTaskService flowTaskService;
 	@Autowired
+	protected RepositoryService repositoryService;
+	@Autowired
 	protected RuntimeService runtimeService;
+	@Autowired
+	protected TaskService taskService;
+	@Autowired
+	protected IdentityService identityService;
 	@Autowired
 	protected ManagementService managementService;
 	
@@ -48,7 +57,7 @@ public class SpringbootFlowableDesignApplicationTests {
 		vo.setBussinessKey(IdUtil.objectId());
 		vo.setStarterId("dante");
 		// 设置自动跳过
-		vo.addParams(FlowEnum.FLOW_ARG_AUTO_SKIP.code(), Boolean.TRUE);
+		vo.addParams(FlowEnum.FLOW_ARG_AUTO_SKIP.code(), Boolean.FALSE);
 		if(!CollectionUtils.isEmpty(variableMap)) {
 			vo.setParams(variableMap);
 		}

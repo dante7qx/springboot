@@ -15,4 +15,5 @@ public class ArgVO implements Serializable {
 	
 	private String activityId;
 	private String approval;
+	
 }

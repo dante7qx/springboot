@@ -8,16 +8,21 @@ import com.google.common.collect.Maps;
 
 import org.dante.springboot.enums.FlowEnum;
 import org.dante.springboot.service.FlowServiceFactory;
+import org.dante.springboot.service.IFlowInstanceService;
 import org.dante.springboot.service.IFlowTaskService;
 import org.dante.springboot.vo.FlowTaskVO;
 import org.flowable.task.api.DelegationState;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 @Service
 public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTaskService {
+	
+	@Autowired
+	private IFlowInstanceService flowInstanceService;
 
 	@Override
 	public List<Task> todoList(String userId) {
@@ -37,6 +42,14 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 	@Override
 	public void complete(String taskId, FlowTaskVO flowTaskVO) {
 		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+		
+		// 驳回到上一个节点
+		Boolean agree = (Boolean) flowTaskVO.getParams().get(FlowEnum.FLOW_ARG_AGREE.code());
+		if(agree != null && !agree.booleanValue()) {
+			List<String> participateUsers = flowInstanceService.getFlowParticipateUser(task.getProcessInstanceId());
+			flowTaskVO.addParams(FlowEnum.FLOW_CANDIDATE.code(), participateUsers.get(1));
+		}
+		
 		taskService.addComment(taskId, task.getProcessInstanceId(), flowTaskVO.getCommentType(), flowTaskVO.getCommentValue());
 		DelegationState delegationState = task.getDelegationState();
 		// 判断是否为委派的任务
