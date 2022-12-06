@@ -16,7 +16,7 @@
 	<description>Dante Springboot FTP</description>
 
 	<properties>
-		<commons-net.version>3.8.0</commons-net.version>
+		<commons-net.version>3.9.0</commons-net.version>
 		<jsch.version>0.1.55</jsch.version>
 		<mock-ftp.version>2.7.1</mock-ftp.version>
 	</properties>
