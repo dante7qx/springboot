@@ -16,18 +16,56 @@
 	<description>Dante Springboot 操作 SVN</description>
 
 	<properties>
-		<svnkit.version>1.10.9</svnkit.version> 
+		<svnkit.version>1.10.9</svnkit.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		
 		<dependency>
-		    <groupId>org.tmatesoft.svnkit</groupId>
-		    <artifactId>svnkit</artifactId>
-		    <version>${svnkit.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.tmatesoft.svnkit</groupId>
+			<artifactId>svnkit</artifactId>
+			<version>${svnkit.version}</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+			    <groupId>com.github.shalousun</groupId>
+			    <artifactId>smart-doc-maven-plugin</artifactId>
+			    <version>2.6.2</version>
+			    <configuration>
+			    	<configFile>./src/main/resources/smart-doc.json</configFile>
+			    	<projectName>睿阳科技项目源码监控</projectName>
+			    </configuration>
+    		</plugin>
+		</plugins>
+	</build>
+	
 </project>

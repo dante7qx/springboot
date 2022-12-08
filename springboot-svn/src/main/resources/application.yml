@@ -1,2 +1,7 @@
 server:
   port: 8101
+  cross-origin: "http://localhost:8080"
+spring:
+  jackson:
+    time-zone:
+      "GMT+8"

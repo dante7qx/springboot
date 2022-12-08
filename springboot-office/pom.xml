@@ -99,6 +99,11 @@
 		  <artifactId>aspose-word</artifactId>
 		  <version>${aspose.version}</version>
 		</dependency>
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-doc-free</artifactId>
+		  <version>5.2.0</version>
+		</dependency>
 
 		<!-- To PDF -->
 		<dependency>

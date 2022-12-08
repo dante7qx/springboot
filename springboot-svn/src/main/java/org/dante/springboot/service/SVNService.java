@@ -36,7 +36,7 @@ public class SVNService {
 	public static void main(String[] args) throws Exception {
 		SVNService svn = new SVNService("sunchao", "sunchao4321", "svn://116.176.33.76:8443/java/tsccs_ibs");
         System.out.println(System.currentTimeMillis());
-        int count = svn.getAddLinesByDateRangeAndAuthorName(DateUtil.parseDate("2022-11-27"), DateUtil.parseDate("2022-12-01"), "zhangjing");
+        int count = svn.getAddLinesByDateRangeAndAuthorName(DateUtil.parseDate("2022-11-27"), DateUtil.parseDate("2022-11-28"), "zhangjing");
         System.out.println("总行数：" + count);
         System.out.println(System.currentTimeMillis());
 
@@ -69,7 +69,7 @@ public class SVNService {
     }
  
     public int getAddLinesByDateRangeAndAuthorName(Date startDate, Date endDate,String authorName) throws Exception {
-        int count=0;
+        int count = 0;
         List<SVNLogEntry> SVNLogEntryList = getLogFromSvnRepository(startDate, endDate, authorName);
         for (SVNLogEntry svnLogEntry : SVNLogEntryList) {
             long revision = svnLogEntry.getRevision();
@@ -89,6 +89,7 @@ public class SVNService {
         for (SVNLogEntry svnLogEntry : svnLogEntries) {
             String author = svnLogEntry.getAuthor();
             if (author!=null&&author.equals(authorName)) {
+            	System.out.println(DateUtil.formatDateTime(svnLogEntry.getDate()) + " ==> " + svnLogEntry.getMessage() + " ==> " + svnLogEntry.getRevision());
                 list.add(svnLogEntry);
             }
         }
@@ -123,7 +124,7 @@ public class SVNService {
  
     public int getTotalAddLinesFromLogContent(String logContent) {
         int totalAddLine=0;
-        System.out.println(logContent);
+//        System.out.println(logContent);
         for (String s : logContent.split("\n")) {
             for (char c : s.toCharArray()) {
                 if(c=='+'){

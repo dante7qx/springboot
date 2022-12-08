@@ -16,7 +16,7 @@
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<FileNamePattern>${LOG_HOME}/${BIZ_NAME:-biz}_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<FileNamePattern>${LOG_HOME}/${BIZ_NAME:-svn}_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
 			<MaxHistory>30</MaxHistory>
             <MaxFileSize>500KB</MaxFileSize>
             <TotalSizeCap>20GB</TotalSizeCap>
@@ -32,49 +32,12 @@
 	<springProfile name="default">
 		<root level="INFO">
 			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
 		</root>
 		<logger name="org.dante.springboot" level="DEBUG" additivity="false">
 			<appender-ref ref="STDOUT" />
+			<appender-ref ref="FILE" />
 		</logger>
 	</springProfile>
 	
-	<springProfile name="dev">
-		<root level="INFO">
-			<appender-ref ref="STDOUT" />
-			<appender-ref ref="FILE" />
-		</root>
-		<!-- hibernate -->
-		<!--  
-		<logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
-		<logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
-		<logger name="org.hibernate.SQL" level="DEBUG" />
-		<logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
-		<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
-		-->
-		<logger name="org.dante.springboot" level="DEBUG" additivity="false">
-			<appender-ref ref="STDOUT" />
-			<appender-ref ref="FILE" />
-		</logger>
-	</springProfile>
-
-	<springProfile name="prod">
-		<root level="WARN">
-			<appender-ref ref="STDOUT" />
-			<appender-ref ref="FILE" />
-		</root>
-		<logger name="org.apache" level="INFO" additivity="false">
-			<appender-ref ref="FILE" />
-		</logger>
-		<logger name="org.hibernate" level="INFO" additivity="false">
-			<appender-ref ref="FILE" />
-		</logger>
-		<logger name="org.springframework" level="INFO" additivity="false">
-			<appender-ref ref="FILE" />
-		</logger>
-		<logger name="org.dante.springboot" level="INFO" additivity="false">
-			<appender-ref ref="STDOUT" />
-			<appender-ref ref="FILE" />
-		</logger>
-	</springProfile>
-
 </configuration>
