@@ -30,8 +30,8 @@ public class WordToPDF {
         Document doc = null;
         FileOutputStream os = null;
         try {
-        	doc = new Document(Consts.WORD_DIR.concat("测试.docx"));
-        	os = new FileOutputStream(Consts.WORD_DIR.concat("spire/测试.pdf"));
+        	doc = new Document(Consts.WORD_DIR.concat("合并文档.docx"));
+        	os = new FileOutputStream(Consts.WORD_DIR.concat("spire/合并文档.pdf"));
             doc.save(os, SaveFormat.PDF);
         } catch (Exception e) {
 			e.printStackTrace();

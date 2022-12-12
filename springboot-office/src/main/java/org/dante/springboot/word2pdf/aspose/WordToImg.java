@@ -4,9 +4,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
@@ -33,6 +40,28 @@ public class WordToImg {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/** 
+	 * 删除 Spire 体验版版权声明
+	 * 
+	 * @param docFilePath
+	 */
+	public static void restWord(String docFilePath) {
+	    try (FileInputStream in = new FileInputStream(docFilePath)) {
+	        XWPFDocument doc = new XWPFDocument(OPCPackage.open(in));
+	        List<XWPFParagraph> paragraphs = doc.getParagraphs();
+	        if (paragraphs.size() < 1) return;
+	        XWPFParagraph firstParagraph = paragraphs.get(0);
+	        if (firstParagraph.getText().contains("Spire.Doc")) {
+	            doc.removeBodyElement(doc.getPosOfParagraph(firstParagraph));
+	        }
+	        OutputStream out = new FileOutputStream(docFilePath);
+	        doc.write(out);
+	        out.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {

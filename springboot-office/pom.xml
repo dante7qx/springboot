@@ -99,10 +99,38 @@
 		  <artifactId>aspose-word</artifactId>
 		  <version>${aspose.version}</version>
 		</dependency>
+		
+		<!--  
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-doc</artifactId>
+		  <version>10.11.6</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-pdf</artifactId>
+		  <version>8.11.8</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-xls</artifactId>
+		  <version>12.11.8</version>
+		</dependency>
+		-->
 		<dependency>
 		  <groupId>com.risun</groupId>
 		  <artifactId>spire-doc-free</artifactId>
 		  <version>5.2.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-pdf-free</artifactId>
+		  <version>5.1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>spire-xls-free</artifactId>
+		  <version>5.1.0</version>
 		</dependency>
 
 		<!-- To PDF -->
@@ -137,21 +165,6 @@
 		
 	</dependencies>
 
-	<!-- <repositories>
-		http://www.e-iceblue.cn/
-		<repository>
-			<id>com.e-iceblue</id>
-			<url>https://repo.e-iceblue.cn/repository/maven-public/</url>
-		</repository>
-
-		https://www.aspose.app/
-		<repository>
-			<id>AsposeJavaAPI</id>
-			<name>Aspose Java API</name>
-			<url>https://repository.aspose.com/repo/</url>
-		</repository>
-	</repositories> -->
-	
 	<!-- 在公司时打开 -->
 	<repositories>
 		<repository>

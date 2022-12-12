@@ -17,9 +17,9 @@ public class WordToPDF {
 	
 	public static void main(String[] args) throws Exception{
         
-		Document wpd = new Document(Consts.WORD_DIR + "系统建设方案.docx");
+		Document wpd = new Document(Consts.WORD_DIR + "合并文档.docx");
 
 	     // Convert DOC to PDF
-		wpd.save(Consts.WORD_DIR + "aspose/系统建设方案.pdf", SaveFormat.PDF);
+		wpd.save(Consts.WORD_DIR + "aspose/合并文档.pdf", SaveFormat.PDF);
     }
 }
