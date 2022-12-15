@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  thymeleaf:
+    cache: false
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 1
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+
+sa-token:
+  sso: 
+    # Ticket有效期 (单位: 秒)，默认五分钟 
+    ticket-timeout: 300
+    # 所有允许的授权回调地址
+    allow-url: "*"
+    # 是否打开单点注销功能
+    is-slo: true

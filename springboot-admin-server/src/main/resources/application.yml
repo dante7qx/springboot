@@ -2,7 +2,7 @@ server:
   port: 8900
 spring:
   application:
-    name: springboot_admin_server
+    name: sba_server
   security:
     user:
       name: dante

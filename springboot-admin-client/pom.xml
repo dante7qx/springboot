@@ -15,7 +15,8 @@
 	<description>Dante Springboot Admin Client</description>
 
 	<properties>
-		<admin.version>2.3.0</admin.version>
+		<java.version>17</java.version>
+		<admin.version>2.7.9</admin.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
 	</properties>
 

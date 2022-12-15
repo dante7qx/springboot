@@ -12,6 +12,6 @@ spring:
     port: 6379
 
 sa-token:
-  # -------------- SSO-模式一相关配置  (非模式一不需要配置) 
+  # -------------- SSO-模式一(前端同域 + 后端同 Redis)相关配置  (非模式一不需要配置) 
   cookie:
     domain: dante.com # 配置Cookie作用域

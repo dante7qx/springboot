@@ -1,7 +1,7 @@
 package org.dante.springboot.controller;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.dev33.satoken.sso.SaSsoManager;
@@ -18,14 +18,15 @@ import cn.dev33.satoken.util.SaResult;
 public class SsoClientController {
 	
 	// SSO-Client端：首页 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
-        String authUrl = SaSsoManager.getConfig().getAuthUrl();
-        String solUrl = SaSsoManager.getConfig().getSloUrl();
-        String str = "<h2>Sa-Token SSO-Client1 应用端</h2>" + 
-                    "<p>当前会话是否登录：" + StpUtil.isLogin() + "</p>" + 
-                    "<p><a href=\"javascript:location.href='" + authUrl + "?mode=simple&redirect=' + encodeURIComponent(location.href);\">登录</a> " + 
-                    "<a href=\"javascript:location.href='" + solUrl + "?back=' + encodeURIComponent(location.href);\">注销</a> </p>";
+        String authUrl = SaSsoManager.getConfig().splicingAuthUrl();
+        String solUrl = SaSsoManager.getConfig().splicingSloUrl();
+        
+        String str = "<h2>Sa-Token SSO-Client 1 应用端</h2>" + 
+                "<p>当前会话是否登录：" + StpUtil.isLogin() + "</p>" + 
+                "<p><a href=\"javascript:location.href='" + authUrl + "?mode=simple&redirect=' + encodeURIComponent(location.href);\">登录</a> " + 
+                "<a href=\"javascript:location.href='" + solUrl + "?back=' + encodeURIComponent(location.href);\">注销</a> </p>";
         return str;
     }
 

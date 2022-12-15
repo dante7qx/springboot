@@ -19,29 +19,44 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-		    <groupId>cn.dev33</groupId>
-		    <artifactId>sa-token-spring-boot-starter</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>cn.dev33</groupId>
-		    <artifactId>sa-token-sso</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.dev33</groupId>
+			<artifactId>sa-token-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.dev33</groupId>
+			<artifactId>sa-token-sso</artifactId>
 		</dependency>
 		<!-- Sa-Token 整合redis (使用jackson序列化方式) -->
 		<dependency>
-		    <groupId>cn.dev33</groupId>
-		    <artifactId>sa-token-dao-redis-jackson</artifactId>
+			<groupId>cn.dev33</groupId>
+			<artifactId>sa-token-dao-redis-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
 		</dependency>
 		<!-- Sa-Token插件：权限缓存与业务缓存分离 -->
 		<dependency>
-		    <groupId>cn.dev33</groupId>
-		    <artifactId>sa-token-alone-redis</artifactId>
+			<groupId>cn.dev33</groupId>
+			<artifactId>sa-token-alone-redis</artifactId>
 		</dependency>
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+
 	</dependencies>
 
 </project>

@@ -3,11 +3,10 @@ package org.dante.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.dev33.satoken.config.SaSsoConfig;
-import cn.dev33.satoken.sso.SaSsoHandle;
+import cn.dev33.satoken.sso.SaSsoProcessor;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 
@@ -20,15 +19,12 @@ import cn.dev33.satoken.util.SaResult;
 @RestController
 public class SsoServerController {
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
 	/*
      * SSO-Server端：处理所有SSO相关请求 (下面的章节我们会详细列出开放的接口) 
      */
     @RequestMapping("/sso/*")
     public Object ssoRequest() {
-        return SaSsoHandle.serverRequest();
+    	return SaSsoProcessor.instance.serverDister();
     }
 
     /**
@@ -36,14 +32,6 @@ public class SsoServerController {
      */
     @Autowired
     private void configSso(SaSsoConfig sso) {
-//        // 配置：未登录时返回的View 
-//        sso.setNotLoginView(() -> {
-//            String msg = "当前会话在SSO-Server端尚未登录，请先访问"
-//                    + "<a href='/sso/doLogin?name=sa&pwd=123456' target='_blank'> doLogin登录 </a>"
-//                    + "进行登录之后，刷新页面开始授权";
-//            return msg;
-//        });
-        
         // 配置：未登录时返回的View 
 		sso.setNotLoginView(() -> {
 			return new ModelAndView("sa-login.html");
@@ -59,20 +47,7 @@ public class SsoServerController {
             return SaResult.error("登录失败！");
         });
 
-        // 配置 Http 请求处理器 （在模式三的单点注销功能下用到，如不需要可以注释掉） 
-        /*
-        sso.setSendHttp(url -> {
-            try {
-                // 发起 http 请求 
-                System.out.println("发起请求：" + url);
-//                restTemplate.getForEntity(url, null)
-                return OkHttps.sync(url).get().getBody().toString();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        });
-        */
+        
     }
 	
 }

@@ -15,13 +15,17 @@
 	<description>Dante Springboot SSO</description>
 	
 	<properties>
-		<sa-token.version>1.30.0</sa-token.version>
+		<sa-token.version>1.33.0</sa-token.version>
 	</properties>
 	
 	<modules>
 		<module>springboot-sso-server</module>
 		<module>springboot-sso-client1</module>
 		<module>springboot-sso-client2</module>
+		
+		<module>springboot-sso2-server</module>
+		<module>springboot-sso2-client1</module>
+		<module>springboot-sso2-client2</module>
 	</modules>
 	
 	<dependencyManagement>

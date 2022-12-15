@@ -15,7 +15,8 @@
 	<description>Dante Springboot Admin Server</description>
 
 	<properties>
-		<admin.version>2.3.0</admin.version>
+		<java.version>17</java.version>
+		<admin.version>2.7.9</admin.version>
 	</properties>
 
 	<dependencies>
@@ -28,16 +29,11 @@
 			<artifactId>spring-boot-admin-server</artifactId>
 			<version>${admin.version}</version>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui</artifactId>
 			<version>${admin.version}</version>
-		</dependency>
-		<!--  
-		<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-server-ui-login</artifactId>
-			<version>1.5.7</version>
 		</dependency>
 		-->
 		<dependency>

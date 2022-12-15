@@ -3,17 +3,28 @@ server:
 spring:
   thymeleaf:
     cache: false
-  redis:
-    # Redis数据库索引（默认为0）
-    database: 1
-    # Redis服务器地址
-    host: 127.0.0.1
-    # Redis服务器连接端口
-    port: 6379
+#  redis:
+#    # Redis数据库索引（默认为0）
+#    database: 1
+#    # Redis服务器地址
+#    host: 127.0.0.1
+#    # Redis服务器连接端口
+#    port: 6379
 
 sa-token:
   sso: 
     # SSO-Server端-单点登录授权地址 
     auth-url: http://x.dante.com:9000/sso/auth
     # SSO-Server端-单点注销地址
-    slo-url: http://sso.stp.com:9000/sso/logout
+    slo-url: http://x.dante.com:9000/sso/signout
+  alone-redis: 
+    # Redis数据库索引
+    database: 1
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 
+    # 连接超时时间
+    timeout: 10s
