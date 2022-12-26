@@ -34,9 +34,9 @@ public class SVNService {
 	
 	
 	public static void main(String[] args) throws Exception {
-		SVNService svn = new SVNService("sunchao", "sunchao4321", "svn://116.176.33.76:8443/java/tsccs_ibs");
+		SVNService svn = new SVNService("sunchao", "sunchao4321", "svn://116.176.33.76:8443/java/weiyuan-parent");
         System.out.println(System.currentTimeMillis());
-        int count = svn.getAddLinesByDateRangeAndAuthorName(DateUtil.parseDate("2022-11-27"), DateUtil.parseDate("2022-11-28"), "zhangjing");
+        int count = svn.getAddLinesByDateRangeAndAuthorName(DateUtil.parseDate("2022-12-19"), DateUtil.parseDate("2022-12-23"), "zhangjing");
         System.out.println("总行数：" + count);
         System.out.println(System.currentTimeMillis());
 
@@ -88,10 +88,10 @@ public class SVNService {
         List<SVNLogEntry> list = new ArrayList<>();
         for (SVNLogEntry svnLogEntry : svnLogEntries) {
             String author = svnLogEntry.getAuthor();
-            if (author!=null&&author.equals(authorName)) {
+//            if (author!=null&&author.equals(authorName)) {
             	System.out.println(DateUtil.formatDateTime(svnLogEntry.getDate()) + " ==> " + svnLogEntry.getMessage() + " ==> " + svnLogEntry.getRevision());
                 list.add(svnLogEntry);
-            }
+//            }
         }
         return list;
     }
