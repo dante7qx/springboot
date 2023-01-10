@@ -20,6 +20,14 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * CompletableFuture 使用总结
+ * 
+ * https://www.cnblogs.com/zjdxr-up/p/17009219.html
+ * 
+ * @author dante
+ *
+ */
 @Slf4j
 public class MultiThreadInsertDAOTests3 extends SpringbootHikariCPApplicationTests {
 

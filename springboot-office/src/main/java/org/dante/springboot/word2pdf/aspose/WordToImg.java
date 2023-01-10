@@ -65,7 +65,7 @@ public class WordToImg {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		WordToImg.changeDocToImg(new FileInputStream("/Users/dante/Documents/Project/java-world/springboot/springboot-office/src/main/java/org/dante/springboot/word2pdf/测试.docx"), "Word2Image");
+		WordToImg.changeDocToImg(new FileInputStream("/Users/dante/Desktop/电子印章测试高压.doc"), "Word2Image");
 	}
 	
 }

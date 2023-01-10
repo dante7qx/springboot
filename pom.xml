@@ -106,11 +106,14 @@
         <module>springboot-retry</module>
         <module>springboot-async-flow</module>
         <module>springboot-db-doc</module>
-        <!-- AI 相关 -->
-        <module>springboot-ai-baidu</module>
-        <!-- SSO -->
-        <module>springboot-sso</module>
         <module>springboot-svn</module>
+        <module>springboot-ai-baidu</module>
+        <module>springboot-sso</module>
+        <module>springboot-aj-report</module>
+        <module>springboot-snmp</module>
+        <module>springboot-rmi-api</module>
+        <module>springboot-rmi-server</module>
+        <module>springboot-rmi-client</module>
 	</modules>
 
 	<parent>
