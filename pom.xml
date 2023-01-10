@@ -109,7 +109,6 @@
         <module>springboot-svn</module>
         <module>springboot-ai-baidu</module>
         <module>springboot-sso</module>
-        <module>springboot-aj-report</module>
         <module>springboot-snmp</module>
         <module>springboot-rmi-api</module>
         <module>springboot-rmi-server</module>
