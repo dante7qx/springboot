@@ -19,6 +19,7 @@ public class SpringbootJasyptApplicationTests {
 	
 	@Autowired
 	private PersonDAO personDAO; 
+	
 	@Autowired
 	@Qualifier("spiritEncryptorBean")
     private StringEncryptor stringEncryptor;

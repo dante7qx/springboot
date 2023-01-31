@@ -15,8 +15,8 @@
 	<description>Dante Springboot Jasypt</description>
 
 	<properties>
-		<druid.version>1.2.8</druid.version>
-		<jasypt.version>3.0.4</jasypt.version>
+		<druid.version>1.2.15</druid.version>
+		<jasypt.version>3.0.5</jasypt.version>
 	</properties>
 
 	<dependencies>
@@ -25,6 +25,12 @@
 			<artifactId>jasypt-spring-boot-starter</artifactId>
 			<version>${jasypt.version}</version>
 		</dependency>
+		<!--  
+		<dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -42,10 +48,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies> 
 

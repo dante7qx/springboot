@@ -113,6 +113,9 @@
         <module>springboot-rmi-api</module>
         <module>springboot-rmi-server</module>
         <module>springboot-rmi-client</module>
+        <module>springboot-jnetpcap</module>
+        <module>springboot-disruptor</module>
+        <module>springboot-less-jar</module>
 	</modules>
 
 	<parent>

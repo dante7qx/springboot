@@ -44,6 +44,7 @@ spring:
 jasypt:
   encryptor:
     bean: spiritEncryptorBean
+    password: 123456
     property:
       prefix: "ENC@["
       suffix: "]"
