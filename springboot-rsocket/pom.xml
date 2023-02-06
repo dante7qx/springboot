@@ -10,10 +10,10 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>springboot-empty-shelf</artifactId>
+	<artifactId>springboot-rsocket</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-empty-shelf</name>
-	<description>Dante Springboot 空架子</description>
+	<name>springboot-rsocket</name>
+	<description>Dante Springboot 二进制的点对点通信协议(7层)</description>
 
 	<properties>
 		<dependency.version>dependency.version</dependency.version>
@@ -22,7 +22,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 			<exclusions>
 				<exclusion>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -33,6 +33,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-rsocket</artifactId>
 		</dependency>
 	</dependencies>
 

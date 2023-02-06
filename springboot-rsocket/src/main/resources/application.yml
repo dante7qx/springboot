@@ -1,0 +1,8 @@
+server:
+  port: 8100
+spring:
+  rsocket:
+    server:
+      port: 6565
+      transport: websocket
+      mapping-path: /rsocket
