@@ -21,5 +21,6 @@ GraphQL 是一种协议和一种查询语言。2012年，GraphQL由Facebook内�
 
 ### 四.  参考资料 
 
+- https://www.baeldung.com/spring-graphql
 - https://www.jianshu.com/p/4ede220b713e
 - https://github.com/helloworlde/spring-boot-graphql-demo

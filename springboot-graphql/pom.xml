@@ -35,9 +35,9 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
-	        <groupId>com.graphql-java</groupId>
-	        <artifactId>graphql-java</artifactId>
-	    </dependency> 
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-graphql</artifactId>
+		</dependency>
 	    <dependency>
 		    <groupId>com.alibaba.fastjson2</groupId>
 		    <artifactId>fastjson2</artifactId>
