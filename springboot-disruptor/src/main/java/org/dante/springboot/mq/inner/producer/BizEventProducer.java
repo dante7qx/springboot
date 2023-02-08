@@ -2,7 +2,7 @@ package org.dante.springboot.mq.inner.producer;
 
 import org.dante.springboot.mq.inner.event.BizEvent;
 
-import com.lmax.disruptor.EventTranslatorTwoArg;
+import com.lmax.disruptor.EventTranslatorOneArg;
 import com.lmax.disruptor.RingBuffer;
 
 /**
@@ -22,11 +22,9 @@ public class BizEventProducer<T> {
 
 	public void onData(BizEvent<T> bizEvent) {
 		if (bizEvent != null) {
-			ringBuffer
-				.publishEvent((EventTranslatorTwoArg<BizEvent<T>, String, T>) (event, sequence, type, payload) -> {
-					event.setType(type);
-					event.setPayload(payload);
-				}, bizEvent.getType(), bizEvent.getPayload());
+			ringBuffer.publishEvent((EventTranslatorOneArg<BizEvent<T>, T>) (event, sequence, payload) -> {
+				event.setPayload(payload);
+			}, bizEvent.getPayload());
 		}
 
 	}

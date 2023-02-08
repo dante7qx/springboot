@@ -20,12 +20,12 @@ public class TestTogetherInnerMQServiceTest extends SpringbootDisruptorApplicati
 	@Qualifier("testInnerMQService")
 	private InnerMQService<Order> innerMQService;
 	
-	private static int EVENT_COUNT = 5;
+	private static int EVENT_COUNT = 10;
 	
 	@Test
 	public void testInnerMQ() throws Exception  {
 		sendMsgAndRecevice();
-		ThreadUtil.sleep(5, TimeUnit.SECONDS);
+		ThreadUtil.sleep(15, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -49,7 +49,6 @@ public class TestTogetherInnerMQServiceTest extends SpringbootDisruptorApplicati
 			order.setPrice(7999D);
 			
 			BizEvent<Order> event = new BizEvent<>();
-			event.setType("Email");
 			event.setPayload(order);
 			
 			log.info("==================================================");

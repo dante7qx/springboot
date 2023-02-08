@@ -13,10 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BizEvent<T> {
 	
-	/** 消息业务类型 */
-	private String type;
-	
 	/** 消息体*/
 	private T payload;
+	
+	/**
+	 * 清理业务数据
+	 */
+	public void clear() {
+		payload = null;
+	}
 
 }

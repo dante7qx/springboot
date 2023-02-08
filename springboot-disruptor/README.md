@@ -15,7 +15,7 @@ disruptor事件的消费模式，包括独立消费和共同消费两种。
 ### 四. 其他实现
 
 - Guava - EventBus（https://juejin.cn/post/6864940197269667853）
-- Spring Event（https://www.baeldung.com/spring-events）
+- Spring Event（https://www.baeldung.com/spring-events、https://developer.aliyun.com/article/829271）
 
 ### 五.  参考资料 
 
