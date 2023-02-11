@@ -118,6 +118,7 @@
         <module>springboot-less-jar</module>
         <module>springboot-rsocket</module>
         <module>springboot-graphql</module>
+        <module>springboot-special-tool</module>
 	</modules>
 
 	<parent>

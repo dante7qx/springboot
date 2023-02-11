@@ -1,8 +1,9 @@
-package org.dante.springboot.wordfliter;
+package org.dante.springboot;
 
 import java.util.concurrent.TimeUnit;
 
 import org.dante.springboot.docker.MsgVO;
+import org.dante.springboot.wordfliter.SensitiveWordFilter;
 import org.junit.jupiter.api.Test;
 
 import cn.hutool.core.date.StopWatch;
@@ -13,7 +14,7 @@ import cn.hutool.json.JSONUtil;
 public class WordFilterTests {
 
 	@Test
-	public void test() {
+	public void testWordFilter() {
 		StopWatch watch = StopWatch.create("敏感词过滤");
 		watch.start();
 		SensitiveWordFilter.loadWordFromFile("SensitiveWordList.txt");
