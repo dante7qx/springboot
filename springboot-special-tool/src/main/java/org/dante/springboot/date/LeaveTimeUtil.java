@@ -198,7 +198,7 @@ public class LeaveTimeUtil {
 	 * @param segArr
 	 * @return
 	 */
-	private static long calOneDayMin(String[] segArr) {
+	public static long calOneDayMin(String[] segArr) {
 		String asStr = segArr[0];
 		String aeStr = segArr[1];
 		String psStr = segArr[2];
@@ -288,6 +288,32 @@ public class LeaveTimeUtil {
 		long min = leaveTime % oneDayMin % 60;
 		display.append(day > 0 ? day + "天" : "").append(hour > 0 ? hour + "小时" : "").append(min > 0 ? min + "分钟" : "");
 		return StrUtil.isNotEmpty(display) ? display.toString() : "非工作时间，不用请假！";
+	}
+	
+	/**
+	 * 请假时长（分钟）转为天数
+	 * 
+	 * @param leaveTime
+	 * @param oneDayMin
+	 * @return
+	 */
+	public static float leaveTime2Day(long leaveTime, long oneDayMin) {
+		float leaveDay = 0f;
+		long day = leaveTime / oneDayMin;
+		long hour = leaveTime % oneDayMin / 60;
+		long min = leaveTime % oneDayMin % 60;
+		
+		if(day == 0) {
+			return 0f;
+		} 
+		if(hour > 0) {
+			leaveDay = Float.valueOf(day + "." + hour);
+		} else if(min > 0) {
+			leaveDay = Float.valueOf(day + ".1");
+		} else {
+			leaveDay = Float.valueOf(day);
+		}
+		return leaveDay;
 	}
 	
 }

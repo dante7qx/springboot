@@ -16,7 +16,10 @@ public class LeaveTimeUtilTests {
 	
 	@Test
 	public void calculateLeaveTime() {
-		log.info("请假时长 --> {}", LeaveTimeUtil.calculateLeaveTime(schedule, startTime, endTime));
+		long leaveTime = LeaveTimeUtil.calculateLeaveTime(schedule, startTime, endTime);
+		long calOneDayMin = LeaveTimeUtil.calOneDayMin(schedule.split(","));
+		float leaveDay = LeaveTimeUtil.leaveTime2Day(leaveTime, calOneDayMin);
+		log.info("请假时长 --> {} - {}", leaveTime, leaveDay);
 	}
 	
 	@Test
