@@ -9,6 +9,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.dante.springboot.SpringbootFlowableDesignApplicationTests;
 import org.dante.springboot.vo.FlowDefVO;
+import org.flowable.engine.repository.ProcessDefinition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -80,5 +81,15 @@ public class IFlowDefinitionServiceTests extends SpringbootFlowableDesignApplica
 		}
 	}
 	
-	
+	@Test
+	public void distinctProccessDef() {
+		List<ProcessDefinition> processDefs = repositoryService.createProcessDefinitionQuery()
+			.latestVersion()
+			.orderByProcessDefinitionCategory()
+			.desc()
+			.active()
+			.list();
+		log.info("==> {}", processDefs);
+	}
+
 }
