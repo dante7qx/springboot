@@ -34,11 +34,18 @@ public class ProductListener {
 	@Order
 	@EventListener(BizEvent.class)
 	@Async("spiritExecutor")
-	public void msgNotify(BizEvent<Product> event) {
+	public void msgNotify(BizEvent<?> event) {
 		ThreadUtil.sleep(3, TimeUnit.SECONDS);
 		log.info("监听事件 --> {}", event);
-		Product product = (Product) event.getSource();
-		notifyService.notify(product);
+		Object source = event.getSource();
+		if(source instanceof Product) {
+			Product product = (Product) source;
+			notifyService.notify(product);
+		} else if(source instanceof Product2) {
+			Product2 product2 = (Product2) source;
+			log.info("收到事件消息 ==> {}", product2);
+		}
+		
 	}
 
 }

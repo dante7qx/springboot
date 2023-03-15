@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LeaveTimeUtilTests {
 	
 	String schedule = "08:00,12:00,14:00,18:00";
-	Date startTime = DateUtil.parseDateTime("2023-02-07 07:40:00");
-	Date endTime = DateUtil.parseDateTime("2023-02-10 08:22:00");
+	Date startTime = DateUtil.parseDateTime("2023-02-07 09:00:00");
+	Date endTime = DateUtil.parseDateTime("2023-02-07 15:00:00");
 	
 	@Test
 	public void calculateLeaveTime() {

@@ -264,7 +264,7 @@ public class LeaveTimeUtil {
 		if(d2hm > pe) {
 			end = DateUtil.parseDateTime(DateUtil.formatDate(d2) + " " + peStr + ":00");
 		} else if(d2hm >= ae && d2hm <= ps) {
-			end = DateUtil.parseDateTime(DateUtil.formatDate(d2) + " " + aeStr + ":00");
+			end = DateUtil.parseDateTime(DateUtil.formatDate(d2) + " " + psStr + ":00");
 		}
 		diffMin = DateUtil.between(start, end, DateUnit.MINUTE);
 		int starthm = Integer.parseInt(DateUtil.formatTime(start).replaceAll(":", "").substring(0, 4));
