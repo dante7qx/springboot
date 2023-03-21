@@ -16,13 +16,13 @@
 	<description>Dante Springboot Sharding Jdbc</description>
 
 	<properties>
-		<shardingsphere.version>3.1.0</shardingsphere.version>
+		<shardingsphere.version>5.3.1</shardingsphere.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>io.shardingsphere</groupId>
-			<artifactId>sharding-jdbc-core</artifactId>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>shardingsphere-jdbc-core</artifactId>
 			<version>${shardingsphere.version}</version>
 		</dependency>
 		<dependency>

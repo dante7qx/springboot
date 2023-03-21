@@ -15,8 +15,8 @@
 	<description>Dante Springboot Mybatis Multi Datasource</description>
 
 	<properties>
-		<druid.version>1.2.8</druid.version>
-		<mybatis.version>2.2.2</mybatis.version> 
+		<druid.version>1.2.16</druid.version>
+		<mybatis.version>2.3.0</mybatis.version> 
 		<pagehelper.version>5.3.0</pagehelper.version> 
 	</properties>
 

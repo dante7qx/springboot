@@ -22,7 +22,9 @@
             <property name="pageSizeZero" value="true" />
             <property name="reasonable" value="true" />
         </plugin>
+        <!--  
         <plugin interceptor="org.dante.springboot.plugin.SqlCostInterceptor"></plugin>
+        -->
     </plugins>
     
 </configuration> 

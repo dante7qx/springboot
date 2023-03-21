@@ -29,7 +29,7 @@ public class MultiThreadInsertDAOTests extends SpringbootHikariCPApplicationTest
 	@Autowired
 	private MultiThreadInsertDAO multiThreadInsertDAO;
 
-	private static int dataSize = 100000;
+	private static int dataSize = 10000;
 	private static List<MultiThreadInsertPO> list = new LinkedList<>();
 
 	@BeforeEach
@@ -51,11 +51,17 @@ public class MultiThreadInsertDAOTests extends SpringbootHikariCPApplicationTest
 		stopWatch.start();
 		
 		int nThreads = Runtime.getRuntime().availableProcessors();
+		int subSize = dataSize / nThreads;
 		ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
 		List<Future<Integer>> futures = new ArrayList<Future<Integer>>(nThreads);
 
 		for (int i = 0; i < nThreads; i++) {
-			final List<MultiThreadInsertPO> groupList = list.subList(dataSize / nThreads * i, dataSize / nThreads * (i + 1));
+			int fromIndex = i * subSize;
+			int toIndex = (i + 1) * subSize;
+			if (i == nThreads - 1) {
+				toIndex = dataSize; // 最后一个子列表包含剩余的元素
+			}
+			final List<MultiThreadInsertPO> groupList = list.subList(fromIndex, toIndex);
 			Callable<Integer> task = () -> {
 				multiThreadInsertDAO.saveAll(groupList);
 				return 1;

@@ -7,6 +7,7 @@ import org.dante.springboot.SpringbootFlowableDesignApplicationTests;
 import org.dante.springboot.enums.FlowEnum;
 import org.flowable.task.api.Task;
 import org.junit.jupiter.api.Test;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DevFlowTests extends SpringbootFlowableDesignApplicationTests {
 
 	String startUserId = "dante";
-	String procInstId = "c7e518d6-bb19-11ed-83e3-e65ba49fed55";
+	String procInstId = "238168da-c310-11ed-b48b-161abcb90495";
 						 
 	@Test
 	public void startProcessInstance() {
@@ -44,11 +45,21 @@ public class DevFlowTests extends SpringbootFlowableDesignApplicationTests {
 	}
 	
 	@Test
+	@Transactional
 	public void approval2() {
 		Map<String, Object> variableMap = Maps.newHashMap();
 		variableMap.put(FlowEnum.FLOW_ARG_AGREE.code(), Boolean.FALSE);
-		this.complete("lisi", "李四退回");
-		curTaskByProcInstId();
+//		this.complete("lisi", "李四退回");
+//		curTaskByProcInstId();
+		
+		String[] userArr = new String[] {"lisi", "wangwu"}; 
+		List<Task> tasks = taskService.createTaskQuery().processInstanceId(procInstId).active().list();
+		for (int i = 0; i < tasks.size(); i++) {
+			Task task = tasks.get(i);
+			taskService.setAssignee(task.getId(), userArr[i]);
+			taskService.complete(task.getId(), variableMap);
+		}
+				
 	}
 	
 	@Test

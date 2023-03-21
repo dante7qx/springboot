@@ -119,6 +119,7 @@
         <module>springboot-rsocket</module>
         <module>springboot-graphql</module>
         <module>springboot-special-tool</module>
+        <module>springboot-oci</module>
 	</modules>
 
 	<parent>

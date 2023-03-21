@@ -7,6 +7,15 @@
 	</select>
 	
 	<insert id="insertPerson">
-		insert into T_Person(Name, Age, Address, UpdateBy, UpdateDate) values(#{name}, #{age}, #{address}, #{updateBy}, now()) 
+		insert into T_Person(Name, Age, Address, UpdateBy, UpdateDate) values(#{name}, #{age}, #{address}, #{updateBy}, sysdate()) 
+	</insert>
+	
+	<insert id="insertPersons" parameterType="java.util.List">
+		insert into T_Person(Name, Age, Address, UpdateBy, UpdateDate) 
+		values
+		<foreach collection="list" item="p" index="index" separator=",">
+			(#{p.name}, #{p.age}, #{p.address}, #{p.updateBy}, sysdate()) 
+		</foreach>
+		
 	</insert>
 </mapper>

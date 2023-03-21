@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.crypto.KeyGenerator;
 import javax.sql.DataSource;
 
+import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
+import org.apache.shardingsphere.sharding.api.config.strategy.sharding.StandardShardingStrategyConfiguration;
 import org.dante.springboot.algorithm.ModuloShardingDatabaseAlgorithm;
 import org.dante.springboot.algorithm.ModuloShardingTableAlgorithm;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -16,12 +19,6 @@ import org.springframework.context.annotation.Primary;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import io.shardingsphere.api.config.rule.ShardingRuleConfiguration;
-import io.shardingsphere.api.config.rule.TableRuleConfiguration;
-import io.shardingsphere.api.config.strategy.StandardShardingStrategyConfiguration;
-import io.shardingsphere.core.keygen.DefaultKeyGenerator;
-import io.shardingsphere.core.keygen.KeyGenerator;
-import io.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 
 @Configuration
 public class SpiritShardingRuleConfig {

@@ -2,9 +2,6 @@ package org.dante.springboot.dao;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.dante.springboot.SpringbootHikariCPApplicationTests;
@@ -20,7 +17,7 @@ import cn.hutool.core.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MultiThreadInsertDAOTests2 extends SpringbootHikariCPApplicationTests {
+public class SingleThreadInsertDAOTests extends SpringbootHikariCPApplicationTests {
 
 	@Autowired
 	private MultiThreadInsertDAO multiThreadInsertDAO;
@@ -45,34 +42,25 @@ public class MultiThreadInsertDAOTests2 extends SpringbootHikariCPApplicationTes
 	public void batchInsert() {
 		StopWatch stopWatch = new StopWatch("多线程批量导入【" + dataSize + "】条数据");
 		stopWatch.start();
-		
-		int nThreads = Runtime.getRuntime().availableProcessors();
-		int subSize = dataSize / nThreads;
-		ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
-		CountDownLatch latch = new CountDownLatch(nThreads);
-		for (int i = 0; i < nThreads; i++) {
-			int fromIndex = i * subSize;
-			int toIndex = (i + 1) * subSize;
-			if (i == nThreads - 1) {
-				toIndex = dataSize; // 最后一个子列表包含剩余的元素
-			}
-			final List<MultiThreadInsertPO> groupList = list.subList(fromIndex, toIndex);
-			executorService.submit(() -> {
-				try {
-					multiThreadInsertDAO.saveAll(groupList);
-				} finally {
-					latch.countDown();
-				}
-			});
+		for (MultiThreadInsertPO po : list) {
+			multiThreadInsertDAO.save(po);
 		}
-		try {
-			latch.await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			executorService.shutdown();
-		}
-		
+		stopWatch.stop();
+		// 打印出耗时
+		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
+	}
+	
+	public void singleCRUD() {
+		StopWatch stopWatch = new StopWatch("单体数据的CRUD");
+		stopWatch.start();
+		MultiThreadInsertPO po = new MultiThreadInsertPO();
+		po.setUid(IdUtil.nanoId(32));
+		po.setName("测试数据");
+		po.setCreateTime(DateUtil.date());
+		po.setUpdateTime(DateUtil.date());
+		MultiThreadInsertPO savedPO = multiThreadInsertDAO.save(po);
+		log.info("MultiThreadInsertPO -> {}", savedPO);
+		multiThreadInsertDAO.deleteById(savedPO.getId());
 		stopWatch.stop();
 		// 打印出耗时
 		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));

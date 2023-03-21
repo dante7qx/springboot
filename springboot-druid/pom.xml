@@ -15,7 +15,7 @@
 	<description>Dante Springboot Druid</description>
 
 	<properties>
-		<druid.version>1.2.8</druid.version>
+		<druid.version>1.2.16</druid.version>
 	</properties>
 
 	<dependencies>

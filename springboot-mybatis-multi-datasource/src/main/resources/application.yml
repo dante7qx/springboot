@@ -40,5 +40,5 @@ spring:
     date-format: yyyy-MM-dd hh:mm:ss
 logging:
   level:
-    org.dante.springboot.mapper: debug
-    org.dante.springboot.plugin.SqlCostInterceptor: debug
+    org.dante.springboot.mapper: info
+    org.dante.springboot.plugin.SqlCostInterceptor: info

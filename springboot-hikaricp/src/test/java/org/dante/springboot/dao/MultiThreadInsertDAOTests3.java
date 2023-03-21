@@ -34,7 +34,7 @@ public class MultiThreadInsertDAOTests3 extends SpringbootHikariCPApplicationTes
 	@Autowired
 	private MultiThreadInsertDAO multiThreadInsertDAO;
 
-	private static int dataSize = 100000;
+	private static int dataSize = 10000;
 	private static List<MultiThreadInsertPO> list = Lists.newLinkedList();
 
 	@BeforeEach
@@ -57,9 +57,15 @@ public class MultiThreadInsertDAOTests3 extends SpringbootHikariCPApplicationTes
 		
 		List<CompletableFuture<List<MultiThreadInsertPO>>> futures = Lists.newArrayList();
 		int nThreads = Runtime.getRuntime().availableProcessors();
+		int subSize = dataSize / nThreads;
 		ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
 		for (int i = 0; i < nThreads; i++) {
-			final List<MultiThreadInsertPO> groupList = list.subList(dataSize / nThreads * i, dataSize / nThreads * (i + 1));
+			int fromIndex = i * subSize;
+			int toIndex = (i + 1) * subSize;
+			if (i == nThreads - 1) {
+				toIndex = dataSize; // 最后一个子列表包含剩余的元素
+			}
+			final List<MultiThreadInsertPO> groupList = list.subList(fromIndex, toIndex);
 			futures.add(CompletableFuture.supplyAsync(() -> groupList).thenApplyAsync(s -> multiThreadInsertDAO.saveAll(s), executorService));
 		}
 		CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]));

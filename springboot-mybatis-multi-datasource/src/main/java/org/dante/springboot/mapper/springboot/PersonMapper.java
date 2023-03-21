@@ -8,6 +8,8 @@ public interface PersonMapper {
 	
 	public List<PersonBO> queryPersons();
 	
-	public void insertPerson(PersonBO person);
+	public int insertPerson(PersonBO person);
+	
+	public int insertPersons(List<PersonBO> persons);
 	
 }
