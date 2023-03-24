@@ -1,12 +1,22 @@
 server:
   port: 8801
-spring: 
-  profiles:
-    include: db
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        format_sql: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:13308/sharding_proxy_db?characterEncoding=utf8&useSSL=true&useServerPrepStmts=true&cachePrepStmts=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://localhost:3306/proxy_ds_0?characterEncoding=utf8&useSSL=true&useServerPrepStmts=true&cachePrepStmts=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: iamdante
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: SSP-HikariCP
+      maximum-pool-size: 25 # 连接池中连接的最大数 = 使用中 + 空闲的。默认值 10。
+      auto-commit: true # 默认 false
+      connection-timeout: 30000 # 等待池中连接的最大毫秒数，没有连接可用并等待超过这个时间，会抛出SQLException。默认 30秒，不得小于 250毫秒。
+      minimum-idle: 10 # 最少空闲连接数，默认 = maximumPoolSize。（官方建议不设置此值）
+      idle-timeout: 60000 # 连接在池中空闲的最长时间，minimumIdle < maximumPoolSize 时适用，默认 600000（10分钟），0 表示永远不会从池中删除空闲连接，最小值 10秒
+      max-lifetime: 1800000 # 连接生命时长，比mysql的wait_timeout短1分钟左右。推荐设置，0 表示无限生命周期，默认 1800000（30分钟）
+
+mybatis: 
+  mapper-locations: classpath*:mappers/*Mapper.xml

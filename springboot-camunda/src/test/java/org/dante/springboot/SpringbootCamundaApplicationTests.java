@@ -26,6 +26,6 @@ public class SpringbootCamundaApplicationTests {
 	protected final String GROUP_LEADER = "leader";
 	
 	/** 测试流程Id */
-	protected final String PROC_INS_ID = "d2d18db0-6967-11ed-8ce9-5ee751a47c30";
+	protected final String PROC_INS_ID = "d707a772-c7be-11ed-9c32-8216c55d9f18";
 	
 }

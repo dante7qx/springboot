@@ -1,5 +1,6 @@
 package org.dante.springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@MapperScan("org.dante.springboot.repository")
 public class SpringbootShardingProxyApplication {
 
 	public static void main(String[] args) {

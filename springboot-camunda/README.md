@@ -8,7 +8,17 @@ flowable camunda activiti 三个框架都是从jbpm框架诞生出来的，先�
 
 ### 三.  开发说明
 
-### 四.  参考资料 
+### 四. Q&A
+
+1. 会签
+
+   遇到异常：
+
+   `Condition expression returns non-Boolean: Result has class java.lang.String and not java.lang.Boolean`
+
+   未解决
+
+### 五.  参考资料 
 
 - https://docs.camunda.org/manual/latest/
 - https://zhuanlan.zhihu.com/p/376904826

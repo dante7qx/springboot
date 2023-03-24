@@ -15,7 +15,7 @@ public class IFlowInstanceServiceTests extends SpringbootCamundaApplicationTests
 	
 	@Test
 	public void startLeaveFlow() {
-		int days = 2;
+		int days = 5;
 		StartFlowVO vo = new StartFlowVO();
 		vo.setBizId(IdUtil.fastSimpleUUID());
 		vo.setBizUid(IdUtil.fastSimpleUUID());
@@ -34,7 +34,7 @@ public class IFlowInstanceServiceTests extends SpringbootCamundaApplicationTests
 	
 	@Test
 	public void deleteFlowByProcInsId() {
-		flowInstanceService.deleteFlowByProcInsId(PROC_INS_ID);
+		flowInstanceService.deleteFlowByProcInsId("19bc6a3e-c884-11ed-9d0f-a27ad999dbf0");
 	}
 	
 }

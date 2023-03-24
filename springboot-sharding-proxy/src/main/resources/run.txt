@@ -1,0 +1,6 @@
+docker run -d --name dante-ss-proxy \
+	-v /Users/dante/Documents/Project/java-world/springboot/springboot-sharding-proxy/src/main/resources/lib:/opt/shardingsphere-proxy/ext-lib \
+	-v /Users/dante/Documents/Project/java-world/springboot/springboot-sharding-proxy/src/main/resources/conf:/opt/shardingsphere-proxy/conf \
+	-e JVM_OPTS="-Djava.awt.headless=true" \
+	-e PORT=3308 -p 13308:3308 \
+apache/shardingsphere-proxy:5.3.1

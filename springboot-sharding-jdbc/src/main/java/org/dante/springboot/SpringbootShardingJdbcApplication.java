@@ -1,5 +1,6 @@
 package org.dante.springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,9 +15,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
+@MapperScan("org.dante.springboot.repository")
 public class SpringbootShardingJdbcApplication {
 
 	public static void main(String[] args) {
+		/*
+		try (ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringbootShardingJdbcApplication.class, args)) {
+            ExampleService exampleService = applicationContext.getBean(ExampleService.class);
+            exampleService.run();
+        }
+        */
+		
 		SpringApplication.run(SpringbootShardingJdbcApplication.class, args);
 	}
 }

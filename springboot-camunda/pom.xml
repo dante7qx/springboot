@@ -16,8 +16,8 @@
 	<description>Dante Springboot camunda 工作流</description>
 
 	<properties>
-		<camunda.version>7.18.0</camunda.version>
-		<mybatis.version>2.2.2</mybatis.version>
+		<camunda.version>7.19.0-alpha4</camunda.version>
+		<mybatis.version>2.3.0</mybatis.version>
 	</properties>
 
 	<dependencies>
