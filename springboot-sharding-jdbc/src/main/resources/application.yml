@@ -3,6 +3,6 @@ server:
 spring: 
   datasource: 
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-    url: jdbc:shardingsphere:classpath:config.yaml
+    url: jdbc:shardingsphere:classpath:config-sharding-table.yaml
 mybatis: 
   mapper-locations: classpath*:mappers/*Mapper.xml

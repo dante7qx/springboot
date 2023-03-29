@@ -1,6 +1,6 @@
 
-#databaseName: sharding_proxy_db
-schemaName: sharding_proxy_db
+databaseName: sharding_proxy_db
+#schemaName: sharding_proxy_db
 
 dataSources:
   ds_0:
@@ -67,6 +67,10 @@ rules:
       type: INLINE
       props:
         algorithm-expression: t_order_item_${order_id % 2}
+    t_oper_log_inline:
+      type: INLINE
+      props:
+        algorithm-expression: t_oper_log_${oper_id % 3}
 
   keyGenerators:
     snowflake:

@@ -1,24 +1,22 @@
 package org.dante.springboot;
 
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 
 import org.dante.springboot.po.UserPO;
 import org.dante.springboot.service.UserService;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static org.junit.Assert.*;
-
 @Slf4j
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootJDBCApplicationTests {
 	
@@ -74,7 +72,7 @@ public class SpringbootJDBCApplicationTests {
 		assertNotNull(users);
 	}
 	
-	@After
+	@AfterAll
 	public void showUsers() {
 		List<UserPO> users = userService.queryUsers();
 		users.forEach(u -> log.info("user ==> {}", u));

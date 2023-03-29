@@ -67,6 +67,7 @@ public class UserService {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public List<UserPO> queryUsers() {
 		return jdbcTemplate.query("select t.id, t.name, t.age, t1.id as contactId, t1.user_id, t1.mobile, t1.address from t_user t left join t_contact t1 on t.id = t1.user_id order by t.age desc", new Object[]{}, new RowMapper<UserPO>(){
 			@Override

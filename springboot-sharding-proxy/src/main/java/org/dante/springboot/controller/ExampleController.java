@@ -31,10 +31,10 @@ public class ExampleController {
 	}
 	
 	
-	@GetMapping("/add")
-	public int addData() throws SQLException {
-//		exampleService.insertData();
-		return exampleService.insertOrder();
+	@GetMapping("/add/{count}")
+	public List<Long> addData(@PathVariable Integer count) throws SQLException {
+		return exampleService.insertData(count);
+//		return exampleService.insertOrder();
 	}
 	
 	@GetMapping("/list")

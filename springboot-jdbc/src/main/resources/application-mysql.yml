@@ -1,8 +1,15 @@
 spring:
+  sql: 
+    init:
+      platform: mysql
+      schema-locations: classpath:schema-mysql.sql
+      data-locations: classpath:data-mysql.sql
+      mode: never
   datasource:
-    platform: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:53306/test-mysql8?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT
+    
+    url: jdbc:mysql://127.0.0.1:13308/sharding_proxy_db?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT
+#    url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=false&serverTimezone=GMT
     username: root
     password: iamdante
     

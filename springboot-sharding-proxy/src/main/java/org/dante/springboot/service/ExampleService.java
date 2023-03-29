@@ -48,7 +48,6 @@ public final class ExampleService {
         this.addressRepository = addressRepository;
     }
     
-//    @PostConstruct
     public void init() throws SQLException {
     	cleanEnvironment();
     	initEnvironment();
@@ -68,7 +67,8 @@ public final class ExampleService {
         addressRepository.truncateTable();
     }
     
-    public int insertOrder() {
+    public List<Long> insertOrder() {
+    	List<Long> result = new ArrayList<>();
     	for (int i = 1; i <= 10; i++) {
     		Order order = new Order();
             order.setUserId(i);
@@ -76,9 +76,9 @@ public final class ExampleService {
             order.setAddressId(i);
             order.setStatus("新增");
             orderRepository.insert(order);
-            System.out.println(33333);
+            result.add(order.getOrderId());
     	}
-    	return 100;
+    	return result;
     }
     
     /**
@@ -88,10 +88,10 @@ public final class ExampleService {
      * @throws SQLException
      */
 //    @Transactional
-    public List<Long> insertData() throws SQLException {
+    public List<Long> insertData(int count) throws SQLException {
         log.info("---------------------------- Insert Data ----------------------------");
         List<Long> result = new ArrayList<>();
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= count; i++) {
             Order order = new Order();
             order.setUserId(i);
             order.setOrderType(i % 2);

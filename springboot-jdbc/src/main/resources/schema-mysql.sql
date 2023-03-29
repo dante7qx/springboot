@@ -1,4 +1,7 @@
-use test-mysql8;
+--use springboot;
+
+drop table t_user;
+drop table t_contact;
 
 create table if not exists t_user (
 	id bigint not null auto_increment,
@@ -12,5 +15,6 @@ create table if not exists t_contact (
 	user_id bigint,
 	mobile varchar(20) not null,
 	address varchar(512),
-	constraint fk_user_contact foreign key(user_id) references t_user(id) on delete cascade,
+	primary key(id),
+	constraint fk_user_contact foreign key(user_id) references t_user(id) on delete cascade
 );

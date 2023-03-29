@@ -16,7 +16,8 @@
 	<description>Dante Springboot 空架子</description>
 
 	<properties>
-		<dependency.version>dependency.version</dependency.version>
+		<java.version>17</java.version>
+		<dependency.version>version</dependency.version>
 	</properties>
 
 	<dependencies>

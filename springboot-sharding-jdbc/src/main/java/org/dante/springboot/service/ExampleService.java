@@ -21,8 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.dante.springboot.entity.Address;
 import org.dante.springboot.entity.Order;
 import org.dante.springboot.entity.OrderItem;
@@ -50,7 +48,6 @@ public final class ExampleService {
         this.addressRepository = addressRepository;
     }
     
-    @PostConstruct
     public void init() throws SQLException {
     	initEnvironment();
     }

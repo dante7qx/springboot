@@ -1,0 +1,76 @@
+
+databaseName: sharding_proxy_db
+#schemaName: sharding_proxy_db
+
+dataSources:
+  ds_0:
+    url: jdbc:mysql://docker.for.mac.host.internal:3306/proxy_ds_0?serverTimezone=UTC&useSSL=false
+    username: root
+    password: iamdante
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 50
+    minPoolSize: 1
+
+rules:
+- !SHARDING
+  tables:
+    t_oper_log_inline: 
+#      actualDataNodes: ds_0.t_oper_log_inline_${0..2}
+      actualDataNodes: ds_0.t_oper_log_inline_${1..12} ## ds_0.t_oper_log_inline_${2021..2023}${1..4} AUTO_INTERVAL 不支持，INTERVAL 支持
+      tableStrategy: 
+        standard:
+#          shardingColumn: user_id
+#          shardingAlgorithmName: t_oper_log_mod
+          shardingColumn: oper_time
+          shardingAlgorithmName: t_oper_log_auto_interval
+      keyGenerateStrategy:
+        column: oper_id
+        keyGeneratorName: snowflake
+  defaultTableStrategy:
+    none:
+
+  shardingAlgorithms:
+    t_oper_log_mod:
+      type: INLINE
+      props:
+        algorithm-expression: t_oper_log_inline_${user_id % 3}
+    t_oper_log_hash_mod:
+      type: INLINE
+      props:
+        algorithm-expression: t_oper_log_inline_${Math.abs(user_id.hashCode()) % 3}
+    ## 基于分片容量的范围分片，每个分片最多100条数据
+    t_oper_log_volume_range:  
+      type: VOLUME_RANGE
+      props:
+        range-lower: 100
+        range-upper: 300 # 范围上界，为300
+        sharding-volume: 100 # 分片容量，为1000
+    ## 基于分片边界的范围分片，适用于分片键是连续的数值类型，且数据分布比较均匀的场景
+    t_oper_log_boundary_range:  
+      type: BOUNDARY_RANGE # 分片算法类型，为基于分片边界的范围类型
+      props: 
+        sharding-ranges: 100,200,301 # 分片的范围边界，多个范围边界以逗号分隔
+    ## 自动时间段分片算法，分片键是时间类型，且数据按照时间顺序插入的场景
+    t_oper_log_auto_interval:  
+      type: AUTO_INTERVAL
+      props: 
+        datetime-lower: '2021-01-01 00:00:00'
+        datetime-upper: '2023-12-31 23:59:59'
+        ## 90天（3个月）划分
+        sharding-seconds: '7776000'
+    ## 时间范围分片算法
+    t_oper_log_interval:  
+      type: INTERVAL
+      props: 
+        datetime-pattern: yyyy-MM-dd HH:mm:ss
+        datetime-lower: '2021-01-01 00:00:00'
+        datetime-upper: '2023-12-31 23:59:59'
+        sharding-suffix-pattern: yyyy_Q
+        datetime-interval-unit: MONTHS
+        datetime-interval-amount: 3 # 分片键时间间隔，3个月分表
+
+  keyGenerators:
+    snowflake:
+      type: SNOWFLAKE
