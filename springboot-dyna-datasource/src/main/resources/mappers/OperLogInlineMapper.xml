@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.mapper.OperLogInlineMapper">
+
+	<resultMap type="org.dante.springboot.vo.OperLogInline" id="OperLogLineResult">
+		<id     property="operId"         column="oper_id"        />
+		<result property="userId"         column="user_id"          />
+		<result property="title"          column="title"          />
+		<result property="businessType"   column="business_type"  />
+		<result property="method"         column="method"         />
+		<result property="requestMethod"  column="request_method" />
+		<result property="operatorType"   column="operator_type"  />
+		<result property="operName"       column="oper_name"      />
+		<result property="deptName"       column="dept_name"      />
+		<result property="operUrl"        column="oper_url"       />
+		<result property="operIp"         column="oper_ip"        />
+		<result property="operLocation"   column="oper_location"  />
+		<result property="operParam"      column="oper_param"     />
+		<result property="jsonResult"     column="json_result"    />
+		<result property="status"         column="status"         />
+		<result property="errorMsg"       column="error_msg"      />
+		<result property="operTime"       column="oper_time"      />
+	</resultMap>
+
+	<sql id="selectOperLogInlineVo">
+        select 
+        	oper_id, user_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, oper_time
+        from t_oper_log_inline
+    </sql>
+    
+	<insert id="insertOperlogInline" parameterType="org.dante.springboot.vo.OperLogInline">
+		insert into t_oper_log_inline(user_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, oper_time)
+        values (#{userId}, #{title}, #{businessType}, #{method}, #{requestMethod}, #{operatorType}, #{operName}, #{deptName}, #{operUrl}, #{operIp}, #{operLocation}, #{operParam}, #{jsonResult}, #{status}, #{errorMsg}, #{operTime})
+	</insert>
+	
+	<insert id="batchInsertOperlogInline" parameterType="java.util.List">
+		insert into t_oper_log_inline(user_id, title, business_type, method, request_method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, json_result, status, error_msg, oper_time) 
+        values 
+        <foreach collection="list" item="p" index="index" separator=",">
+			(#{p.userId}, #{p.title}, #{p.businessType}, #{p.method}, #{p.requestMethod}, #{p.operatorType}, #{p.operName}, #{p.deptName}, #{p.operUrl}, #{p.operIp}, #{p.operLocation}, #{p.operParam}, #{p.jsonResult}, #{p.status}, #{p.errorMsg}, #{p.operTime})
+		</foreach>
+	</insert>
+	
+	<select id="selectOperLogInlineList" parameterType="org.dante.springboot.vo.OperLogInline" resultMap="OperLogLineResult">
+		<include refid="selectOperLogInlineVo"/>
+		<where>
+			<if test="title != null and title != ''">
+				AND title like concat('%', #{title}, '%')
+			</if>
+			<if test="businessType != null">
+				AND business_type = #{businessType}
+			</if>
+			<if test="businessTypes != null and businessTypes.length > 0">
+			    AND business_type in
+			    <foreach collection="businessTypes" item="businessType" open="(" separator="," close=")">
+		 			#{businessType}
+		        </foreach> 
+			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
+			<if test="operName != null and operName != ''">
+				AND oper_name like concat('%', #{operName}, '%')
+			</if>
+			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(oper_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+			</if>
+			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+				and date_format(oper_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+			</if>
+		</where>
+		order by oper_id desc
+	</select>
+	
+	<update id="cleanOperLogInline">
+        truncate table t_oper_log_inline
+    </update>
+    
+</mapper> 

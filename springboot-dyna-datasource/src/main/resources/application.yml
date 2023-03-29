@@ -1,0 +1,38 @@
+server:
+  port: 8101
+spring:
+  datasource:
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组,默认值即为master
+      strict: true # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      lazy: true # 默认立即初始化数据源，true则支持在需要建立连接时再初始化数据源
+      datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3316/test?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: iamdante
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.zaxxer.hikari.HikariDataSource
+        slave_1:
+          url: jdbc:mysql://127.0.0.1:3317/test?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: iamdante
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.zaxxer.hikari.HikariDataSource
+        slave_2:
+          url: jdbc:mysql://127.0.0.1:3318/test?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: iamdante
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: com.zaxxer.hikari.HikariDataSource
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:mappers/*Mapper.xml
+  typeAliasesPackage: org.dante.springboot.**.vo
+  
+logging:
+  level:
+    org:
+      dante:
+        springboot:
+          mapper: debug

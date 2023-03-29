@@ -16,7 +16,7 @@
 		<project.version>1.0.0</project.version>
 		<java.version>1.8</java.version>
 		<guava.version>31.1-jre</guava.version>
-		<hutool.version>5.8.11</hutool.version> 
+		<hutool.version>5.8.16</hutool.version> 
 		<!-- maven的插件版本的问题,造成与IDE的不兼容 -->
 		<!--
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -120,6 +120,7 @@
         <module>springboot-graphql</module>
         <module>springboot-special-tool</module>
         <module>springboot-oci</module>
+        <module>springboot-dyna-datasource</module>
 	</modules>
 
 	<parent>

@@ -2,8 +2,8 @@ package org.dante.springboot.controller;
 
 import java.util.List;
 
-import org.dante.springboot.entity.OperLogInline;
 import org.dante.springboot.service.OperLogInlineService;
+import org.dante.springboot.vo.OperLogInline;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,11 +39,5 @@ public class OperLogController {
 	public void clear() {
 		operLogService.cleanOperLog();
 	}
-	
-	@GetMapping("/drop")
-	public void drop() {
-		operLogService.dropOperLog();
-	}
-	
 	
 }
