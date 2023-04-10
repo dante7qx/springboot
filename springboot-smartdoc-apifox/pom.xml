@@ -10,13 +10,14 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>springboot-svn</artifactId>
+	<artifactId>springboot-smartdoc-apifox</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-svn</name>
-	<description>Dante Springboot 操作 SVN</description>
+	<name>springboot-smartdoc-apifox</name>
+	<description>Dante Springboot smart-doc+Apifox 管理接口文档</description>
 
 	<properties>
-		<svnkit.version>1.10.9</svnkit.version>
+		<java.version>17</java.version>
+		<dependency.version>version</dependency.version>
 	</properties>
 
 	<dependencies>
@@ -25,21 +26,14 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.springframework.boot</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.tmatesoft.svnkit</groupId>
-			<artifactId>svnkit</artifactId>
-			<version>${svnkit.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -56,16 +50,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- 生成API文档 -->
 			<plugin>
-			    <groupId>com.github.shalousun</groupId>
-			    <artifactId>smart-doc-maven-plugin</artifactId>
-			    <version>2.6.7</version>
-			    <configuration>
-			    	<configFile>./src/main/resources/smart-doc.json</configFile>
-			    	<projectName>睿阳科技项目源码监控</projectName>
-			    </configuration>
-    		</plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>2.6.7</version>
+                <configuration>
+                    <configFile>./src/main/resources/smart-doc.json</configFile>
+                    <projectName>XX管理系统API<![CDATA[<br/>]]>${serverUrl}</projectName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <!-- html、openapi、markdown -->
+                            <goal>html</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
-	
+
 </project>

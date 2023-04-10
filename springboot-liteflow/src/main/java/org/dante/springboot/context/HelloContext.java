@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class HelloContext  {
-	
+@EqualsAndHashCode(callSuper = false)
+public class HelloContext {
+
 	private String msgId;
 	private Date msgDate;
 	private String reqArg;
 	private String action;
-	
+
 }

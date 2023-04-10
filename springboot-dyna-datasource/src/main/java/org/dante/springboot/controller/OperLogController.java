@@ -40,4 +40,20 @@ public class OperLogController {
 		operLogService.cleanOperLog();
 	}
 	
+	
+	@GetMapping("/batch_add2/{count}")
+	public int batchAdd2(@PathVariable Integer count) {
+		return operLogService.batchInsertOperlog2(count);
+	}
+	
+	@PostMapping("/list2")
+	public List<OperLogInline> list2(@RequestBody OperLogInline operLog) {
+		return operLogService.selectOperLogList2(operLog);
+	}
+	
+	@GetMapping("/clear2")
+	public void clear2() {
+		operLogService.cleanOperLog2();
+	}
+	
 }

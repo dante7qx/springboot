@@ -12,11 +12,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.dante.springboot.SpringbootDruidApplicationTests;
 import org.dante.springboot.bo.springboot.PersonBO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.util.CollectionUtils;
 
 import com.google.common.collect.Lists;
@@ -40,21 +44,25 @@ import lombok.extern.slf4j.Slf4j;
 	StopWatch '多线程3批量导入【5000】条数据': running time = 1233 ms	单次2000
 	
 	StopWatch 'MyBatis批量导入【10000】条数据': running time = 1493 ms
+	StopWatch 'MyBatis ExecutorType.BATCH 导入【10000】条数据': running time = 1523 ms
 	StopWatch '多线程1批量导入【10000】条数据': running time = 1572 ms
 	StopWatch '多线程2批量导入【10000】条数据': running time = 1534 ms
 	StopWatch '多线程3批量导入【10000】条数据': running time = 1566 ms
 	
 	StopWatch 'MyBatis批量导入【100000】条数据': running time = 4347 ms
+	StopWatch 'MyBatis ExecutorType.BATCH 导入【100000】条数据': running time = 4421 ms
 	StopWatch '多线程1批量导入【100000】条数据': running time = 2717 ms
 	StopWatch '多线程2批量导入【100000】条数据': running time = 2888 ms
 	StopWatch '多线程3批量导入【100000】条数据': running time = 2950 ms
 	
 	StopWatch 'MyBatis批量导入【1000000】条数据': running time = 35 s
+	MyBatis ExecutorType.BATCH 导入【1000000】条数据': running time = 36 s
 	StopWatch '多线程1批量导入【1000000】条数据': running time = 12 s
 	StopWatch '多线程2批量导入【1000000】条数据': running time = 10 s
 	StopWatch '多线程3批量导入【1000000】条数据': running time = 10 s
 	
 	StopWatch 'MyBatis批量导入【10000000】条数据': running time = 340 s
+	StopWatch 'MyBatis ExecutorType.BATCH 导入【10000000】条数据': running time = 344 s
 	StopWatch '多线程1批量导入【10000000】条数据': running time = 183 s
 	StopWatch '多线程2批量导入【10000000】条数据': running time = 176 s
 	StopWatch '多线程3批量导入【10000000】条数据': running time = 176 s
@@ -69,14 +77,25 @@ public class PersonMapperTests extends SpringbootDruidApplicationTests {
 
 	@Autowired
 	private PersonMapper personMapper;
+	@Autowired
+	@Qualifier("springbootSqlSessionFactory")
+	private SqlSessionFactory sqlSessionFactory;
+	
+	// 一万数据，单次批量2000
+//	private static int dataSize = 10000;		// 数据集数量
+//	private static int batchSize = 2000;	    // 单次批处理数量
+	
+	// 十万数据，单次批量10000
+//	private static int dataSize = 100000;		// 数据集数量
+//	private static int batchSize = 10000;	    // 单次批处理数量
 	
 	// 百万数据，单次批量10000
-	private static int dataSize = 1000000;		// 数据集数量
-	private static int batchSize = 10000;	    // 单次批处理数量
+//	private static int dataSize = 1000000;		// 数据集数量
+//	private static int batchSize = 10000;	    // 单次批处理数量
 	
 	// 千万数据，单次批量100000
-//	private static int dataSize = 10000000;		// 数据集数量
-//	private static int batchSize = 100000;	    // 单次批处理数量
+	private static int dataSize = 10000000;		// 数据集数量
+	private static int batchSize = 100000;	    // 单次批处理数量
 	
 	
 	private static List<PersonBO> list = new LinkedList<>();
@@ -114,7 +133,41 @@ public class PersonMapperTests extends SpringbootDruidApplicationTests {
 	}
 	
 	/**
-	 * MyBatis批量插入
+	 * ExecutorType.BATCH 的插入方式
+	 */
+	@Test
+	public void executorTypeBatch() {
+		StopWatch stopWatch = new StopWatch("MyBatis ExecutorType.BATCH 导入【" + dataSize + "】条数据");
+		stopWatch.start();
+		if(dataSize < batchSize) {
+			personMapper.insertPersons(list);
+			list = null;
+			stopWatch.stop();
+			Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
+			return;
+		} 
+		try {
+			SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH);
+			int count = (dataSize + batchSize - 1) / batchSize; //计算需要分多少批
+			for (int i = 0; i < count; i++) {
+				int fromIndex = i * batchSize; //计算每批的起始索引
+			    int toIndex = Math.min(fromIndex + batchSize, dataSize); //计算每批的结束索引，注意不要越界
+			    List<PersonBO> groupList = list.subList(fromIndex, toIndex); //获取子列表
+			    personMapper.insertPersons(groupList);
+				session.commit();
+				groupList = null;
+			}
+			session.close();
+		} catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+        }
+		list = null;
+		stopWatch.stop();
+		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
+	}
+	
+	/**
+	 * MyBatis foreach 批量插入
 	 */
 	@Test
 	public void batchInsert() {

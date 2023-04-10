@@ -19,8 +19,11 @@ spring:
           password: iamdante
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.zaxxer.hikari.HikariDataSource
-        slave_2:
-          url: jdbc:mysql://127.0.0.1:3318/test?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+        v_node:
+#          url: jdbc:mysql://127.0.0.1:3326/demo?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#          url: jdbc:mysql://127.0.0.1:3336/demo?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+#          url: jdbc:mysql://127.0.0.1:3346/demo?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://127.0.0.1:3356/demo?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
           username: root
           password: iamdante
           driver-class-name: com.mysql.cj.jdbc.Driver

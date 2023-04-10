@@ -1,7 +1,6 @@
 package org.dante.springboot.controller;
 
 import org.dante.springboot.service.helloliteflow.HelloLiteFlowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +11,6 @@ public class LiteFlowController {
 	
 	private final HelloLiteFlowService helloLiteFlowService;
 
-	@Autowired
 	public LiteFlowController(HelloLiteFlowService helloLiteFlowService) {
 		this.helloLiteFlowService = helloLiteFlowService;
 	}

@@ -53,4 +53,5 @@ public class SpringbootDataSourceConfig {
         sessionFactory.setTypeAliasesPackage(SpringbootDataSourceConfig.MYBATIS_BO_PKG);
         return sessionFactory.getObject();
     }
+	
 }

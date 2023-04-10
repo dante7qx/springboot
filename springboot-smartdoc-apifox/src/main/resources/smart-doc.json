@@ -1,0 +1,14 @@
+{
+    "pathPrefix": "",
+    "outPath": "src/main/resources/static/doc",
+    "allInOne": true,
+    "showAuthor": true,
+    "requestHeaders": [{ 
+      "name": "token",
+      "type": "string",
+      "desc": "desc",
+      "value": "token请求头的值",
+      "required": true,
+      "excludePathPatterns":"/api/**,/login/**"
+  }]
+}
