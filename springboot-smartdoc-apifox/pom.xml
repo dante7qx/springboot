@@ -61,7 +61,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
                         <goals>
                             <!-- html、openapi、markdown -->
                             <goal>html</goal>
