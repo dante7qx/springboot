@@ -19,6 +19,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "rsocket-websocket-client": "0.0.19"
+    "rsocket-websocket-client": "1.0.0-alpha.3"
   }
 }
