@@ -1,0 +1,23 @@
+INSERT  INTO
+	jimu_report_share
+      ( 
+      ID                            
+      ,REPORT_ID                      
+      ,PREVIEW_URL                    
+      ,PREVIEW_LOCK                   
+      ,LAST_UPDATE_TIME               
+      ,TERM_OF_VALIDITY               
+      ,STATUS
+      ,PREVIEW_LOCK_STATUS                   
+      ) 
+values
+      (
+      :jimuReportShare.id                            
+      ,:jimuReportShare.reportId                      
+      ,:jimuReportShare.previewUrl                    
+      ,:jimuReportShare.previewLock                   
+      ,:jimuReportShare.lastUpdateTime                
+      ,:jimuReportShare.termOfValidity                
+      ,:jimuReportShare.status
+      ,:jimuReportShare.previewLockStatus
+      )

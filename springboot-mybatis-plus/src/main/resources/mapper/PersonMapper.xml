@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.mapper.PersonMapper">
+	
+	<select id="selectPersonComplex" resultType="PersonPO">
+		select * from T_Person
+	</select>
+
+	<select id="selectPageVo" resultType="PersonPO">
+	    select * from T_Person 
+	</select>
+</mapper>

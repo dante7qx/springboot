@@ -1,0 +1,23 @@
+INSERT  INTO
+	jimu_report_map
+      ( 
+      ID                            
+      ,CREATE_BY                      
+      ,CREATE_TIME                    
+      ,UPDATE_BY                     
+      ,NAME                           
+      ,DATA                           
+      ,DEL_FLAG      
+      ,LABEL                          
+      ) 
+values
+      (
+       :jimuReportMap.id                            
+      ,:jimuReportMap.createBy                      
+      ,:jimuReportMap.createTime                                       
+      ,:jimuReportMap.updateTime                                    
+      ,:jimuReportMap.name                          
+      ,:jimuReportMap.data                          
+      ,:jimuReportMap.delFlag                       
+      ,:jimuReportMap.label                         
+      )

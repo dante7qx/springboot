@@ -163,6 +163,12 @@
 			<version>${nanoid.version}</version>
 		</dependency>
 		
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>jacob</artifactId>
+		  <version>1.20</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- 在公司时打开 -->
@@ -170,7 +176,7 @@
 		<repository>
 			<id>maven-risun</id>
 			<name>maven-risun</name>
-			<url>http://116.176.33.76:9100/repository/maven-risun/</url>
+			<url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -180,7 +186,7 @@
         <pluginRepository>
             <id>maven-risun</id>
 			<name>maven-risun</name>
-            <url>http://116.176.33.76:9100/repository/maven-risun/</url>
+            <url>http://nexus.risun-tec.cn:9100/repository/maven-risun/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

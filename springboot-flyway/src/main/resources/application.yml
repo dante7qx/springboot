@@ -1,17 +1,12 @@
 server:
   port: 8080
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: none
-  h2:
-    console:
-      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost/springboot_flyway?characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: iamdante
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
   flyway:
-    baseline-version: 1
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-        - "*"
+    enabled: true
+    baseline-on-migrate: true 

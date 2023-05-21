@@ -12,25 +12,25 @@ import lombok.Data;
 @Data
 @TableName("T_Person")
 public class PersonPO {
-	
-	@TableId(type=IdType.AUTO)
+
+	@TableId(type = IdType.AUTO)
 	private Long id;
 
 	private String name;
-	
+
 	private int age;
-	
+
 	private String address;
-	
+
 	@TableField("UpdateBy")
 	private String updateBy;
-	
+
 	@TableField("UpdateDate")
 	private Date updateDate;
-	
+
 	public PersonPO() {
 	}
-	
+
 	public PersonPO(Long id) {
 		this.id = id;
 	}

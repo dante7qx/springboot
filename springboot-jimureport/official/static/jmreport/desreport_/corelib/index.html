@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>x-spreadsheet</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+<link href="xspreadsheet.css" rel="stylesheet"></head>
+<body onload="load()">
+  <div id="x-spreadsheet-demo"></div>
+  <script>
+    var xs;
+    function load(){
+      // x.spreadsheet.locale('zh-cn');
+      const rows = {
+        len: 80,
+        1: {
+          cells: {
+            0: { text: 'testingtesttestetst' },
+            2: { text: 'testing' },
+          },
+        },
+        2: {
+          cells: {
+            0: { text: 'render', style: 0 },
+            1: { text: 'Hello' },
+            2: { text: 'haha', merge: [1, 1] },
+          }
+        },
+        8: {
+          cells: {
+            8: { text: 'border test', style: 0 },
+          }
+        }
+      };
+       xs = x.spreadsheet('#x-spreadsheet-demo', {showToolbar: false, showGrid: true, rpBar: true,page:1,total:2})
+       .change((cdata) => {
+          // console.log(cdata);
+          // console.log(xs.validate());
+        })
+        .onAddChart(function(a){
+           // console.log(a)
+       })
+       .onExportExcelPage(function(a){
+           window.open("http://localhost:8082/jeecg-boot/design/report/export");
+       })
+       .onExportExcelAll(function(a){
+           // console.log('开始导出excel');
+       });
+
+       axios.get(`http://localhost:8080/jeecg-boot/design/report/show?id=e5692be4d9a844511366fbb4ef575a31&apiUrl=&params=%7B%22pageNo%22%3A1%7D`).then(res=>{
+              xs.data.settings.viewUrl = 'http://localhost:8080/jeecg-boot//design/report/view/e5692be4d9a844511366fbb4ef575a31';
+                    if (res.data.success) {
+                        var str = res.data.result.jsonStr;
+                        xs.loadData(JSON.parse(str));
+                    } else {
+                        xs.tip(res.message);
+                    }
+});
+    
+    
+     
+    
+      }
+ 
+  </script>
+<script type="text/javascript" src="xspreadsheet.js"></script></body>
+</html>

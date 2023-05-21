@@ -24,12 +24,12 @@ mvn -Dfile.encoding=UTF-8 smart-doc:openapi
 替换`serverUrl`
 
 ```sh
-mvn -Dfile.encoding=UTF-8 -DserverUrl=http://192.168.1.130:8101 smart-doc:html
+mvn -Dfile.encoding=UTF-8 -DserverUrl=http://192.168.1.130:9098 smart-doc:html
 ```
 
 
 
 ### 四.  参考资料 
 
-- https://smart-doc-group.github.io/#/
+- https://smart-doc-group.github.io/#/zh-cn/
 - https://blog.csdn.net/qq_37132495/article/details/122569906

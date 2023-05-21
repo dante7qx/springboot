@@ -4,8 +4,6 @@ import org.dante.springboot.po.PersonPO;
 import org.dante.springboot.service.IPersonService;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 public class PersonServiceImpl implements IPersonService {
 	@Override

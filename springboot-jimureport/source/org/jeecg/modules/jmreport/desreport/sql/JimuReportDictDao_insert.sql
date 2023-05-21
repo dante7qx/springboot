@@ -1,0 +1,25 @@
+INSERT  INTO
+    jimu_dict
+      ( 
+      ID                            
+      ,DICT_NAME                      
+      ,DICT_CODE                      
+      ,DESCRIPTION                    
+      ,DEL_FLAG                       
+      ,CREATE_BY                      
+      ,CREATE_TIME                                     
+      ,TYPE                           
+      ,TENANT_ID 
+      ) 
+values
+      (
+      :reportDict.id                            
+      ,:reportDict.dictName                      
+      ,:reportDict.dictCode                      
+      ,:reportDict.description                   
+      ,:reportDict.delFlag                       
+      ,:reportDict.createBy                      
+      ,:reportDict.createTime                                      
+      ,:reportDict.type                          
+      ,:reportDict.tenantId                
+      )

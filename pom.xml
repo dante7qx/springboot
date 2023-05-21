@@ -122,6 +122,8 @@
         <module>springboot-oci</module>
         <module>springboot-dyna-datasource</module>
         <module>springboot-smartdoc-apifox</module>
+        <module>springboot-easypoi</module>
+        <module>springboot-payment</module>
 	</modules>
 
 	<parent>

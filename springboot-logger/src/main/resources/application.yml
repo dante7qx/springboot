@@ -3,7 +3,7 @@ spring:
     name: dante-springboot-logger
   config:
     activate:
-      on-profile: dev
+      on-profile: uat
 server:
   port: 8101
   

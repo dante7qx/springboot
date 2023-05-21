@@ -22,10 +22,12 @@ public class OperLogInlineService {
 	
 	private final OperLogInlineMapper operLogMapper;
 	
+	private String START_DATE = "2021-01-01 00:00:00";
+	
 	@Transactional
 	public int insertOperlog(int count) {
 		int result = 0;
-		Date startDate = DateUtil.parse("2021-01-01 00:00:00", DatePattern.NORM_DATETIME_PATTERN);
+		Date startDate = DateUtil.parse(START_DATE, DatePattern.NORM_DATETIME_PATTERN);
 		for (int i = 1; i <= count; i++) {
 			OperLogInline log = new OperLogInline();
 			log.setUserId(Long.valueOf(i));
@@ -54,7 +56,7 @@ public class OperLogInlineService {
 	
 	@Transactional
 	public int batchInsertOperlog(int count) {
-		Date startDate = DateUtil.parse("2021-01-01 00:00:00", DatePattern.NORM_DATETIME_PATTERN);
+		Date startDate = DateUtil.parse(START_DATE, DatePattern.NORM_DATETIME_PATTERN);
 		List<OperLogInline> operLogs = Lists.newArrayList();
 		for (int i = 1; i <= count; i++) {
 			OperLogInline log = new OperLogInline();
@@ -95,7 +97,7 @@ public class OperLogInlineService {
 	@DS("v_node")
 	@Transactional
 	public int batchInsertOperlog2(int count) {
-		Date startDate = DateUtil.parse("2021-01-01 00:00:00", DatePattern.NORM_DATETIME_PATTERN);
+		Date startDate = DateUtil.parse(START_DATE, DatePattern.NORM_DATETIME_PATTERN);
 		List<OperLogInline> operLogs = Lists.newArrayList();
 		for (int i = 1; i <= count; i++) {
 			OperLogInline log = new OperLogInline();

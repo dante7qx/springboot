@@ -1,5 +1,6 @@
 server:
   port: 8920
+MYSQL-DB: springboot_jimureport_spirit
 spring:
   application:
     name: dante-springboot-jimureport
