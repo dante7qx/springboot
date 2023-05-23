@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import org.assertj.core.util.Lists;
+import org.dante.springboot.dto.EmpDTO;
+import org.dante.springboot.mapper.EmpMapper;
 import org.dante.springboot.mapper.HobbyMapper;
 import org.dante.springboot.mapper.PersonMapper;
+import org.dante.springboot.po.Address;
+import org.dante.springboot.po.Emp;
 import org.dante.springboot.po.HobbyPO;
 import org.dante.springboot.po.PersonPO;
 import org.junit.jupiter.api.Test;
@@ -32,6 +36,8 @@ class SpringbootMybatisPlusApplicationTests {
 	private PersonMapper personMapper;
 	@Autowired
 	private HobbyMapper hobbyMapper;
+	@Autowired
+	private EmpMapper empMapper;
 	
 	@Test
 	void findPage() {
@@ -100,6 +106,18 @@ class SpringbootMybatisPlusApplicationTests {
 			.leftJoin("T_Person p on p.id = t.PersonId");
 		List<HobbyPO> hobbys = hobbyMapper.selectJoinList(HobbyPO.class, leftJoin);
 		Console.log("Hobby List => {}", hobbys);
+	}
+	
+	@Test
+	void findEmp() {
+		MPJLambdaWrapper<Emp> wrapper = new MPJLambdaWrapper<Emp>()
+				.selectAll(Emp.class)// 查询t_emp表全部字段
+				.select(Address::getCity, Address::getAddress)
+				.leftJoin(Address.class, Address::getEmpId, Emp::getId)
+				.orderByDesc(Emp::getAge);
+
+		List<EmpDTO> userList = empMapper.selectJoinList(EmpDTO.class, wrapper);
+		userList.forEach(Console::log);
 	}
 
 }
