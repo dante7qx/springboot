@@ -15,8 +15,6 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -40,9 +38,9 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 	 * @return
 	 */
 	@Bean
-	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+	public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, RedisKeySerializer redisKeySerializer) {
 		// Key 序列化器
-		RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+//		RedisSerializer<String> redisKeySerializer = new StringRedisSerializer();
 		
 		// Value 序列化器
         Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
@@ -53,7 +51,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 		
 		// 配置序列化（解决乱码的问题）
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisKeySerializer))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
                 .disableCachingNullValues();
 		

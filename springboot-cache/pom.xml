@@ -13,6 +13,10 @@
 	<packaging>jar</packaging>
 	<name>springboot-cache</name>
 	<description>Dante Springboot Cache</description>
+	
+	<properties>
+		<redisson.version>3.18.0</redisson.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -30,7 +34,12 @@
 		<dependency>  
             <groupId>org.springframework.boot</groupId>  
             <artifactId>spring-boot-starter-cache</artifactId>  
-        </dependency> 
+        </dependency>
+        <dependency>
+		    <groupId>org.redisson</groupId>
+		    <artifactId>redisson-spring-boot-starter</artifactId>
+		    <version>${redisson.version}</version>
+		</dependency>
         <dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>

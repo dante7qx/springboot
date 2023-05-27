@@ -4,6 +4,8 @@
 
 http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html
 
+https://github.com/redisson/redisson/wiki [Redisson]
+
 #### Redis 缓存
 
 - 1 安装Redis
@@ -133,7 +135,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
       logger.info("没有从缓存中读取所有用户。。。。。。。。。。。。。");
       return userDAO.findAll(new Sort(Sort.Direction.DESC, "updateDate"));
   }
-
+  
   @Cacheable(value=RedisCacheConsts.FIND_USER_CACHE, key="\""+RedisCacheConsts.FIND_USER_CACHE+"\".concat('_').concat(#id)")
   public UserPO findUser(Long id) {
       logger.info("没有从缓存中读取指定 [{}] 的用户。。。。。。。。。。。。。", id);
@@ -181,7 +183,6 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
   }
   ```
   
-
 - 5 缓存的 Key
 
   ​	缓存的可以支持使用**SPEL**表达式

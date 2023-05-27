@@ -124,6 +124,7 @@
         <module>springboot-smartdoc-apifox</module>
         <module>springboot-easypoi</module>
         <module>springboot-payment</module>
+        <module>springboot-dameng</module>
 	</modules>
 
 	<parent>

@@ -2,7 +2,7 @@ server:
   port: 8199
 spring:
   redis:
-    database: 0
+    database: 7
     host: localhost
     password: null
     port: 6379

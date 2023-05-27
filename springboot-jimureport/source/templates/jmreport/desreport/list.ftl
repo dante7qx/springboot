@@ -511,7 +511,8 @@
                     },
                     success:(result)=>{
                         if (result.message != null && result.message != ""){
-                            if (result.message === "admin"){
+                        	console.log(result)
+                            if (result.message === "fqyczadmin"){
                                 that.userMessage = true;
                             }
                         }
