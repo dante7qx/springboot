@@ -197,3 +197,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
   | caches          | root object        | Collection of caches against which the current method is executed | `#root.caches[0].name`                   |
   | *argument name* | evaluation context | Name of any of the method arguments. If for some reason the names are not available (e.g. no debug information), the argument names are also available under the `#a<#arg>` where *#arg* stands for the argument index (starting from 0). | `#iban` or `#a0` (one can also use `#p0` or `#p<#arg>` notation as an alias). |
   | result          | evaluation context | The result of the method call (the value to be cached). Only available in `unless` expressions, `cache put` expressions (to compute the `key`), or `cache evict` expressions (when `beforeInvocation` is `false`). For supported wrappers such as `Optional`, `#result` refers to the actual object, not the wrapper. | `#result`                                |
+
+### 常见问题
+
+- https://blog.csdn.net/weixin_42214548/article/details/112939663	（找不到缓存key）

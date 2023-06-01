@@ -489,7 +489,7 @@
                                 <i-menu theme="light" style="margin-left: -25px;z-index: auto;width: auto !important;" :class="menuitemClasses">
                                         <div style="width:95%;height: 30px;border: none;margin-left: 10px; z-index:999;cursor: pointer;margin-left:27px">
                                             <span class="rightFontSize">数据集管理</span>
-                                            <Dropdown @on-click="onMenuSelect" placement="bottom-start" :transfer="true">
+                                            <Dropdown v-if="userMessage" @on-click="onMenuSelect" placement="bottom-start" :transfer="true">
                                                 <a href="javascript:void(0)">
                                                     <Icon type="md-add" style="position:relative;left:89px"/>
                                                 </a>
@@ -1041,7 +1041,6 @@
             token = getRequestUrl().token;
         }
         excel_req_token = token
-        console.log("index_load--------------",token);
         let reportConfig = getReportConfigJson();
         let colLength = 50, viewPageSize = [10,20,30], printPaper = []
         if(reportConfig['pageSize']){
@@ -1252,7 +1251,7 @@
             if(!str) return;
             //页面加载时设置报表宽度
             const jsonStr = JSON.parse(str);
-            console.log('jsonstr', jsonStr)
+            // console.log('jsonstr', jsonStr)
             // 设置增强
             vm.setEnhanceConfig(res.cssStr, res.jsStr)
             if(jsonStr.chartList)

@@ -125,6 +125,7 @@
         <module>springboot-easypoi</module>
         <module>springboot-payment</module>
         <module>springboot-dameng</module>
+        <module>springboot-clickhouse</module>
 	</modules>
 
 	<parent>

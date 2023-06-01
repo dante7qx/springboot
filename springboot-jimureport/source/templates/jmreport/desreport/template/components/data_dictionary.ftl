@@ -34,15 +34,15 @@
       </div>
         <#--begin字典-->
       <div style="margin-top: 10px">
-        <i-button type="primary" @click="dictClick">添加</i-button>
+        <i-button type="primary" @click="dictClick" v-if="userMessage">添加</i-button>
         <i-button icon="ios-loading" type="primary" @click="dictReflesh">刷新缓存</i-button>
-        <i-button v-if="dictDeleteShow==true" type="error" @click="dictDeleteBatch">删除</i-button>
+        <i-button v-if="dictDeleteShow==true" type="error" @click="dictDeleteBatch" v-if="userMessage">删除</i-button>
       </div>
       <div style="margin-top: 10px">
         <i-table @on-selection-change="dictTableSelect" border stripe :columns="dictData.columns" :data="dictData.data"
                  style="margin-top: 1%;">
           <template slot-scope="{ row, index }" slot="action">
-            <i-button type="primary" size="small"  @click="editDict(row)">编辑</i-button>
+            <i-button type="primary" size="small"  @click="editDict(row)" v-if="userMessage">编辑</i-button>
             <i-button type="primary" size="small"  @click="dictConfig(row.id)">字典配置</i-button>
             <Poptip
                     confirm
@@ -50,7 +50,7 @@
                     title="确定要删除吗?"
                     :transfer="true"
                     @on-ok="dictRemove(row)">
-              <i-button type="error" size="small" >删除</i-button>
+              <i-button type="error" size="small" v-if="userMessage">删除</i-button>
             </Poptip>
 
           </template>
@@ -124,7 +124,7 @@
         <#--字典配置页面 begin-->
       <Drawer :transfer="true" class="dictDrawer" width="500" title="字典列表"  v-model="itemDrawer">
         <div style="margin-top: 10px">
-          <i-button type="primary" @click="dictItemClick">添加</i-button>
+          <i-button type="primary" @click="dictItemClick" v-if="userMessage">添加</i-button>
         </div>
         <div style="margin-top: 10px">
           <i-table border stripe
@@ -132,7 +132,7 @@
                    :data="dictItemList.data"
                    :rowClassName="getRowClassname"
                    style="margin-top: 1%;">
-            <template slot-scope="{ row, index }" slot="action">
+            <template slot-scope="{ row, index }" slot="action" v-if="userMessage">
               <i-button type="primary" size="small" @click="editItemDict(row)">编辑</i-button>
               <Poptip
                       confirm
@@ -199,6 +199,7 @@
     template: '#data-dictionary',
     data() {
       return {
+        userMessage: false,
         moduleTitle: "数据字典",
         loading: false,
         dictShow: false,
@@ -346,6 +347,7 @@
       }
     },
     created() {
+      this.getUserInfo()
       this.loadData()
     },
    watch: {
@@ -362,6 +364,22 @@
       },
     },
     methods: {
+	  getUserInfo() {
+	    // 用户信息
+	  	let requestUrl = getRequestUrl();
+	    var that = this;
+	    $http.get({
+	      url: api.userReportInfo,
+	      data:{
+	        token: requestUrl.token
+	      },
+	      success:(result)=>{
+	        if (result != null){
+	          that.userMessage = result.isAdmin
+	        }
+	      }
+	    },that)
+	  },
       loadData(arg) {
         //加载数据列表
         let that = this;

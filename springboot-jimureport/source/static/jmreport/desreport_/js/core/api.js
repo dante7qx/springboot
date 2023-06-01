@@ -21,12 +21,15 @@ const api = {
     view: getUrl('/view/'),
     //查询用户名
     userInfo: getUrl('/userinfo'),
+    userReportInfo: getUrl('/design/userinfo'),
 
     /********************************************报表接口********************************************/
     //查询报表
     excelQuery: getUrl('/excelQuery'),
+    excelReportQuery: getUrl('/design/excelQuery'),
     //查询报表
     excelQueryByTemplate: getUrl('/excelQueryByTemplate'),
+    excelReportQueryByTemplate: getUrl('/design/excelQueryByTemplate'),
     //保存报表
     saveReport: getUrl('/save'),
     //报表预览

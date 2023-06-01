@@ -1,0 +1,20 @@
+server:
+  port: 8101
+spring:
+  datasource:
+    url: jdbc:ch://localhost:18123/default?compress=0
+    driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+    username: default
+    password:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: spirit-ch-pool
+      maximum-pool-size: 25
+      auto-commit: true
+      connection-timeout: 30000 
+      idle-timeout: 60000 
+      max-lifetime: 1800000 
+        
+mybatis:
+  type-aliases-package: org.dante.springboot.po
+  mapper-locations: classpath*:mapper/**/*Mapper.xml

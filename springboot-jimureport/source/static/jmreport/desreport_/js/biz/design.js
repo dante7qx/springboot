@@ -17,6 +17,7 @@ vm = new Vue({
             Vue.prototype.$Message.config({
               duration:5
             });
+            this.getUserInfo(requestUrl.token)
             //let abc = document.createElement('img')
             //abc.src = 'http://localhost:8080/jeecg-boot/excel_online/bg_1606295179160.png'
             //this.abc = abc
@@ -57,6 +58,7 @@ vm = new Vue({
                 settingsHeight: '',
                 actionUrlPre: baseFull,
                 createLoading: false,
+                userMessage: false,
                 treeObj:{},//数据集code和名称
                 dataXs:"",
                /* menuitem : "printinfo",*/
@@ -877,6 +879,26 @@ vm = new Vue({
             }
         },
         methods: {
+			// 用户信息
+			getUserInfo(token) {
+				var that = this;
+                $http.get({
+                    url: api.userReportInfo,
+                    data:{
+                        token: token
+                    },
+                    success:(result)=>{
+                        if (result != null){
+							that.userMessage = result.isAdmin
+						//	that.userMessage = false
+                        }
+                    },
+                    error:(err)=>{
+                       Vue.prototype.$Spin.hide();
+                        xs.tip(e.error);
+                    }
+                },that)
+			},
             // 导出报表配置
             exportReportConfig(){
                 let url = api.exportReportConfig + '?id='+excel_config_id;
@@ -1282,73 +1304,94 @@ vm = new Vue({
                             //update-end-author:wangshuai date:20210225 for: “数据集管理”中的数据集，默认是合并的；
                             treeResult.forEach(item=>{
                                 treeObj[item[0].title] = item[0].code;
-                                item[0].render=(h, { root, node, data })=>{
-                                    addDrag();
-                                    return h('div', {
-                                        style: {
-                                            display: 'flex',
-                                            width: '100%',
-                                            alignItems: 'end',
-                                            padding: '0 0 0 4px',
-                                            background: data.expand===true?'#d5e8fc':'none'
-                                        }
-                                    }, [
-                                        h('div', [
-                                            h('div',{style:{display: 'inline-block', width: '90px',overflow: 'hidden',textOverflow: 'ellipsis',whiteSpace: 'nowrap'}}, data.title)
-                                        ]),
-                                        h('div', [
-                                            h('i-button', {
-                                                props: Object.assign({}, {
-                                                    size: 'small',
-                                                    type:"text"
-                                                }, {
-                                                    icon: 'md-create',
-                                                }),
-                                                on: {
-                                                    "click": () => {
-                                                        if(data.type=='2'){
-                                                            //走javabean
-                                                            this.$refs.javabean.editById(data.dbId)
-                                                        }else{
-                                                            this.$refs.dataSource.editById(data.dbId)
-                                                        }
-                                                    }
-                                                }
-                                            }),
-                                            h('i-button', {
-                                                props: Object.assign({}, {
-                                                    size: 'small',
-                                                    type:"text"
-                                                }, {
-                                                    icon: 'md-close',
-                                                }),
-                                                on: {
-                                                    "click": () => {
-                                                        this.$Modal.confirm({
-                                                            title:'提示',
-                                                            render: (h) => {
-                                                                return h('div',{style:{ margin: '0 -15px'}},
-                                                                    [
-                                                                        h('div',{class:'modal-body-del'},'是否确认删除?'),
-                                                                    ])
-                                                            },
-                                                            /*content: '<i class="ivu-icon ivu-icon-ios-alert" style="color: #f90;font-size: 20px;margin-right: 5px;"></i>是否确认删除?',*/
-                                                            onOk: () => {
-                                                                $http.get({url:api.delDbData(data.dbId),success:(result)=>{
-                                                                    console.log('result=====',result);
-                                                                    this.$Notice.success({
-                                                                        title: '删除成功'
-                                                                    });
-                                                                    this.initFieldTree();
-                                                                }});
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            })
+                                if(this.userMessage) {
+									item[0].render=(h, { root, node, data })=>{
+	                                    addDrag();
+	                                    return h('div', {
+	                                        style: {
+	                                            display: 'flex',
+	                                            width: '100%',
+	                                            alignItems: 'end',
+	                                            padding: '0 0 0 4px',
+	                                            background: data.expand===true?'#d5e8fc':'none'
+	                                        }
+	                                    }, [
+	                                        h('div', [
+	                                            h('div',{style:{display: 'inline-block', width: '90px',overflow: 'hidden',textOverflow: 'ellipsis',whiteSpace: 'nowrap'}}, data.title)
+	                                        ]),
+	                                        h('div', [
+	                                            h('i-button', {
+	                                                props: Object.assign({}, {
+	                                                    size: 'small',
+	                                                    type:"text"
+	                                                }, {
+	                                                    icon: 'md-create',
+	                                                }),
+	                                                on: {
+	                                                    "click": () => {
+	                                                        if(data.type=='2'){
+	                                                            //走javabean
+	                                                            this.$refs.javabean.editById(data.dbId)
+	                                                        }else{
+	                                                            this.$refs.dataSource.editById(data.dbId)
+	                                                        }
+	                                                    }
+	                                                }
+	                                            }),
+	                                            h('i-button', {
+	                                                props: Object.assign({}, {
+	                                                    size: 'small',
+	                                                    type:"text"
+	                                                }, {
+	                                                    icon: 'md-close',
+	                                                }),
+	                                                on: {
+	                                                    "click": () => {
+	                                                        this.$Modal.confirm({
+	                                                            title:'提示',
+	                                                            render: (h) => {
+	                                                                return h('div',{style:{ margin: '0 -15px'}},
+	                                                                    [
+	                                                                        h('div',{class:'modal-body-del'},'是否确认删除?'),
+	                                                                    ])
+	                                                            },
+	                                                            /*content: '<i class="ivu-icon ivu-icon-ios-alert" style="color: #f90;font-size: 20px;margin-right: 5px;"></i>是否确认删除?',*/
+	                                                            onOk: () => {
+	                                                                $http.get({url:api.delDbData(data.dbId),success:(result)=>{
+	                                                                    console.log('result=====',result);
+	                                                                    this.$Notice.success({
+	                                                                        title: '删除成功'
+	                                                                    });
+	                                                                    this.initFieldTree();
+	                                                                }});
+	                                                            }
+	                                                        });
+	                                                    }
+	                                                }
+	                                            })
+	                                        ])
+	                                    ]);
+	                                }
+								} else {
+									item[0].render=(h, { root, node, data })=>{
+	                                    addDrag();
+	                                    return h('div', {
+	                                        style: {
+	                                            display: 'flex',
+	                                            width: '100%',
+	                                            alignItems: 'end',
+	                                            padding: '0 0 0 4px',
+	                                            background: data.expand===true?'#d5e8fc':'none'
+	                                        }
+	                                    }, [
+	                                        h('div', [
+	                                            h('div',{style:{display: 'inline-block', width: '90px',overflow: 'hidden',textOverflow: 'ellipsis',whiteSpace: 'nowrap'}}, data.title)
+	                                        ])
                                         ])
-                                    ]);
-                                }
+                                    }
+	                                        
+								}
+                                
                                 //设置tooltip的content属性 字段名+是否集合列表
                                 let bindAttr = { 'class': { 'jm-db-field': true }, 'slot': 'content' }
                                 if(item[0]['isList']=='1'){

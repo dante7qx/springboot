@@ -164,7 +164,7 @@
                     </div>
                   </div>
                     <div style="display: flex;flex-wrap: wrap;" v-if="previewModel =='view'">
-                        <div class="excel-view-item excel-list-add">
+                        <div v-show="userMessage" class="excel-view-item excel-list-add">
                             <a @click="createExcel">
                                 <i class="ivu-icon ivu-icon-md-add" style="font-size:20px; padding-bottom: 5px;"></i>
                                 <p style="letter-spacing: 2px;font-size: 14px;">新建报表</p>
@@ -182,7 +182,7 @@
                             <!-- 缩略图 &ndash;&gt;-->
                             <div class="thumb">
                                 <img :src="getThumbSrc(item)"/>
-                                <div class="excel-edit-container" v-show="item.editable">
+                                <div class="excel-edit-container" v-show="item.editable && userDesign">
                                     <a :href="getExcelEditUrl(item)" target="_blank">
                                         设计
                                     </a>
@@ -210,12 +210,12 @@
                                             <i class="ivu-icon ivu-icon-ios-star-outline" style="font-size: 16px"></i>
                                         </Tooltip>
                                     </a>
-                                    <a class="opt-show" @click="handleDelete(item)">
+                                    <a class="opt-show" v-show="userDesign" @click="handleDelete(item)">
                                         <Tooltip content="删除模板" placement="top" class="tooltip-footer-font-size">
                                             <i class="ivu-icon ivu-icon-ios-trash" style="font-size: 16px"></i>
                                         </Tooltip>
                                     </a>
-                                    <a class="opt-show" @click="handleCopy(item)">
+                                    <a class="opt-show" v-show="userDesign" @click="handleCopy(item)">
                                         <Tooltip content="复制模板" placement="top" class="tooltip-footer-font-size">
                                             <i class="ivu-icon ivu-icon-ios-browsers" style="font-size: 16px"></i>
                                         </Tooltip>
@@ -271,7 +271,7 @@
                     </i-table>
                   </div>
                 </tab-pane>
-                <tab-pane icon="md-options" label="模板案例" name="name2" class="jimu-tab">
+                <tab-pane icon="md-options" label="报表模板" name="name2" class="jimu-tab">
                   <div style="display: flex;justify-content:space-between;margin-left:16px;margin-right: 38px">
                     <div>
                       <i-input size="small" v-model="name" @keyup.enter.native="loadData" placeholder="回车搜索报表名称"></i-input>
@@ -311,7 +311,7 @@
                             <!-- 缩略图 &ndash;&gt;-->
                             <div class="thumb">
                                 <img :src="getThumbSrc(item)"/>
-                                <div class="excel-edit-container" v-show="item.editable">
+                                <div class="excel-edit-container" v-show="item.editable && userMessage">
                                     <a v-show="userMessage" :href="getExcelEditUrl(item)" target="_blank">
                                         设计
                                     </a>
@@ -339,7 +339,7 @@
                                             <i class="ivu-icon ivu-icon-ios-star" style="font-size: 16px"></i>
                                         </Tooltip>
                                     </a>
-                                    <a class="opt-show" @click="handleCopy(item)">
+                                    <a class="opt-show" v-show="userDesign" @click="handleCopy(item)">
                                         <Tooltip content="复制模板" placement="top" class="tooltip-footer-font-size">
                                             <i class="ivu-icon ivu-icon-ios-browsers" style="font-size: 16px"></i>
                                         </Tooltip>
@@ -423,6 +423,7 @@
             menuitem : "datainfo",
             tabpan : "name1",
             userMessage: false,
+            userDesign: false,
             file:null,
             uploadHeader:{},
             actionUrl:"",
@@ -505,15 +506,19 @@
             userInfo: function(){
                 var that = this;
                 $http.get({
-                    url:api.userInfo,
+           			//url:api.userInfo,
+                    url:api.userReportInfo,
                     data:{
                         token:that.token
                     },
                     success:(result)=>{
-                        if (result.message != null && result.message != ""){
-                        	console.log(result)
-                            if (result.message === "fqyczadmin"){
+                        if (result != null){
+                            if (result.isAdmin){
                                 that.userMessage = true;
+                                that.userDesign = true;
+                            }
+                            if (result.isReportSpecialist) {
+                            	that.userDesign = true;
                             }
                         }
                         that.$nextTick(()=>{
@@ -535,10 +540,13 @@
                 var url = "";
                 that.dataSource=[];
                 if (that.tabpan == "name1"){
-                    url = api.excelQuery
+                    //url = api.excelQuery
+                    url = api.excelReportQuery
                 }else {
-                    url = api.excelQueryByTemplate
+                    //url = api.excelQueryByTemplate
+                    url = api.excelReportQueryByTemplate
                 }
+                
                 $http.get({
                     url:url,
                     data:{
@@ -549,6 +557,7 @@
                         token:that.token
                     },
                     success:(result)=>{
+                    	//console.log("===>", result)
                         var ls = result.records;
                         that.page.total = result.total
                         if(ls && ls.length>0){

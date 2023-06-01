@@ -26,6 +26,8 @@ import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Console;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -42,6 +44,7 @@ class SpringbootMybatisPlusApplicationTests {
 	@Test
 	void findPage() {
 		IPage<PersonPO> page = personMapper.selectPageVo(Page.of(1, 2), null);
+		log.info("{}", JSONUtil.toJsonStr(page));
 		log.info("Persons Page ==> {}", page);
 	}
 	

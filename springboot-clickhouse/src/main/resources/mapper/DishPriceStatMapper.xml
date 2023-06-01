@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.dao.DishPriceStatMapper">
+    
+
+    <select id="selectAvgHistPriceOfDish" parameterType="Integer" resultType="DishPriceStatPO">
+    	<![CDATA[
+        select
+		    round(toUInt32OrZero(extract(menu_date, '^\\d{4}')), -1) as year,
+		    count() as count,
+		    round(avg(price), 2) as avgPrice,
+		    bar(avg(price), 0, 100, 100) as barChart
+		from menu_item_denorm
+		where (menu_currency = 'Dollars') and (year > 0) and (year < #{year})
+		group by year
+		order by year asc
+		]]>
+    </select>
+</mapper>
