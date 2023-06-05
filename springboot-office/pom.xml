@@ -26,7 +26,7 @@
 		<xmlworker-tool.version>5.5.13.3</xmlworker-tool.version>
 		<nanoid.version>2.0.0</nanoid.version>
 		<poi.version>5.2.0</poi.version>
-		
+		<docx4j.version>8.3.9</docx4j.version>
 		<!-- itext -->
 		<itextpdf.version>5.5.13.3</itextpdf.version>
 		<itext-asian.version>5.2.0</itext-asian.version>
@@ -132,6 +132,18 @@
 		  <artifactId>spire-xls-free</artifactId>
 		  <version>5.1.0</version>
 		</dependency>
+		<!-- 数学公式 -->
+		<dependency>
+		  <groupId>com.risun</groupId>
+		  <artifactId>latex-mathml-ooxml</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jdom</groupId>
+		    <artifactId>jdom2</artifactId>
+		</dependency>
+		<!-- 数学公式 -->
+		
 
 		<!-- To PDF -->
 		<dependency>
@@ -167,6 +179,12 @@
 		  <groupId>com.risun</groupId>
 		  <artifactId>jacob</artifactId>
 		  <version>1.20</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.docx4j</groupId>
+		    <artifactId>docx4j-core</artifactId>
+		    <version>${docx4j.version}</version>
 		</dependency>
 		
 	</dependencies>

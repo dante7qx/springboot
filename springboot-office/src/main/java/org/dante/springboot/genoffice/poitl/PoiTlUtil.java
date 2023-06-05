@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.dante.springboot.genoffice.poitl.plugin.LaTeXPolicy;
 import org.dante.springboot.genoffice.poitl.plugin.TreeTablePolicy;
 import org.springframework.util.StringUtils;
 
@@ -36,6 +37,8 @@ public class PoiTlUtil {
 		// 添加插件
 		Configure config = Configure.builder()
 				.bind("normTable", new TreeTablePolicy())
+//				.bind("laTeX", new LaTeXPolicy())
+				.addPlugin('%', new LaTeXPolicy())
 				.build();
 
 		String templatePath = StringUtils.hasText(filePath) ? templateDir.concat(filePath).concat(templateName) : templateDir.concat(templateName);
