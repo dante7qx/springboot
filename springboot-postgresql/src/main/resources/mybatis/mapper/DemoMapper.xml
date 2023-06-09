@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.dao.DemoMapper">
+    
+    <resultMap type="Demo" id="DemoResult">
+        <result property="demoId"    column="demo_id"    />
+        <result property="demoName"    column="demo_name"    />
+        <result property="demoTime"    column="demo_time"    />
+        <result property="demoImage"    column="demo_image"    />
+        <result property="attachment"    column="attachment"    />
+        <result property="demoContent"    column="demo_content"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectDemoVo">
+        select t.demo_id, t.demo_name, t.demo_time, t.demo_image, t.attachment, t.demo_content, t.del_flag, t.create_by, t.create_time, t.update_by, t.update_time from t_demo t
+    </sql>
+
+    <select id="selectDemoList" parameterType="Demo" resultMap="DemoResult">
+        <include refid="selectDemoVo"/>
+        <where>  
+	    del_flag = 0
+            <if test="demoName != null  and demoName != ''"> and t.demo_name like concat('%', #{demoName}, '%')</if>
+            <if test="params.beginDemoTime != null and params.beginDemoTime != '' and params.endDemoTime != null and params.endDemoTime != ''"> and t.demo_time &gt;= #{params.beginDemoTime} and t.demo_time &lt;= #{params.endDemoTime}</if>
+            <if test="demoContent != null  and demoContent != ''"> and t.demo_content = #{demoContent}</if>
+        </where>
+    </select>
+    
+    <select id="selectDemoByDemoId" parameterType="Long" resultMap="DemoResult">
+        <include refid="selectDemoVo"/>
+        where t.demo_id = #{demoId}
+    </select>
+        
+    <insert id="insertDemo" parameterType="Demo" useGeneratedKeys="true" keyProperty="demoId">
+        insert into t_demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="demoName != null">demo_name,</if>
+            <if test="demoTime != null">demo_time,</if>
+            <if test="demoImage != null">demo_image,</if>
+            <if test="attachment != null">attachment,</if>
+            <if test="demoContent != null">demo_content,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="demoName != null">#{demoName},</if>
+            <if test="demoTime != null">#{demoTime},</if>
+            <if test="demoImage != null">#{demoImage},</if>
+            <if test="attachment != null">#{attachment},</if>
+            <if test="demoContent != null">#{demoContent},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDemo" parameterType="Demo">
+        update t_demo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="demoName != null">demo_name = #{demoName},</if>
+            <if test="demoTime != null">demo_time = #{demoTime},</if>
+            <if test="demoImage != null">demo_image = #{demoImage},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="demoContent != null">demo_content = #{demoContent},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where demo_id = #{demoId}
+    </update>
+    
+    <delete id="deleteDemoByDemoId">
+	    update t_demo set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where demo_id = #{demoId}
+    </delete>
+
+    <delete id="deleteDemoByDemoIds">
+        update t_demo set del_flag = 1, update_by = #{deleteBy}, update_time = sysdate() where demo_id in 
+        <foreach item="demoId" collection="demoIds" open="(" separator="," close=")">
+            #{demoId}
+        </foreach>
+    </delete>
+    
+    <insert id="batchInsertDemo" parameterType="List">
+   		insert into t_demo (demo_name, demo_time, demo_image, attachment, demo_content, create_by, create_time)
+   		values
+   		<foreach item="demo" collection="list" separator=",">
+   			<trim prefix="(" suffix=")" suffixOverrides=",">
+	   			#{demo.demoName}, #{demo.demoTime}, #{demo.demoImage}, #{demo.attachment}, #{demo.demoContent}, #{demo.createBy}, #{demo.createTime}
+   			</trim>
+    	</foreach>
+    </insert>
+    
+    <delete id="clearDemoData">
+    	truncate table t_demo
+    </delete>
+</mapper>

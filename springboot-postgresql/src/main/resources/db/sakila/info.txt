@@ -1,0 +1,18 @@
+https://www.sjkjc.com/postgresql/sample-database/
+
+演员表 actor: 演员的信息
+地址表 address: 包含客户、员工和商店的地址信息
+类别表 category: 影片的类别
+城市表 city: 城市列表
+国家表 country: 国家/地区列表
+客户表 customer: 客户信息
+影片演员关系表 film_actor: 影片和演员的多对多对应关系
+影片类别关系表 film_category: 影片和类别的多对多对应关系
+影片描述表 film_text: 影片的标题、描述信息
+影片表 film: 所有影片
+库存表 inventory: 影片拷贝的库存信息
+语言表 language: 影片的语言信息
+支付表 payment: 记录了客户的每笔付款
+租赁表 rental: 包含每个库存物品的每次租赁明细
+员工表 staff: 列出了所有员工的信息
+商店表 store: 列出了系统中的所有商店
