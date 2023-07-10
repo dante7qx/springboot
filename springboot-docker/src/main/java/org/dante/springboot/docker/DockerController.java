@@ -11,9 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.hutool.core.util.StrUtil;
 
 @RestController
 public class DockerController {
@@ -96,6 +99,12 @@ public class DockerController {
 		} catch (InterruptedException e) {
 		}
 		return returnStr;
+	}
+	
+	@GetMapping("/undefined/{id}")
+	public String undefined(@PathVariable String id) throws InterruptedException {
+		String result = StrUtil.isNullOrUndefined(id) ? "参数格式错误" : id;
+		return "result -> " + result;
 	}
 	
 	private void handleReqProxy(HttpServletRequest request) {

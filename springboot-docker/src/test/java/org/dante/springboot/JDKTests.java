@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.NumberUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,6 +34,15 @@ public class JDKTests {
 		List<String> list = new ArrayList<>(Arrays.asList(arr));
 		list.add("Grovvy");
 		log.info("{}", list);
+	}
+	
+	@Test
+	public void calculateOverflow() {
+		int x1 = 2;
+		int x2 = Integer.MAX_VALUE;
+		
+		Console.log(x1 * x2);
+		Console.log(NumberUtil.mul(x1, x2));
 	}
 	
 }
