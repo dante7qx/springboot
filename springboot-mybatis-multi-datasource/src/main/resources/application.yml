@@ -29,9 +29,12 @@ spring:
         login-username: druid
         login-password: 123456
       springboot: 
-        url: jdbc:mysql://localhost/springboot
+#        url: jdbc:mysql://localhost/springboot
+#        username: root
+#        password: iamdante
+        url: jdbc:mysql://61.134.65.198:33306/risun_rsp_test
         username: root
-        password: iamdante
+        password: "risun8768!#"
       shiro: 
         url: jdbc:mysql://localhost/springboot2
         username: root
@@ -42,3 +45,4 @@ logging:
   level:
     org.dante.springboot.mapper: info
     org.dante.springboot.plugin.SqlCostInterceptor: info
+    

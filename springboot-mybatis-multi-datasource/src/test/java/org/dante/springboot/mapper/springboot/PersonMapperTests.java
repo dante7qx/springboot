@@ -89,13 +89,13 @@ public class PersonMapperTests extends SpringbootDruidApplicationTests {
 //	private static int dataSize = 100000;		// 数据集数量
 //	private static int batchSize = 10000;	    // 单次批处理数量
 	
-	// 百万数据，单次批量10000
-//	private static int dataSize = 1000000;		// 数据集数量
-//	private static int batchSize = 10000;	    // 单次批处理数量
+//	// 百万数据，单次批量10000
+	private static int dataSize = 1000000;		// 数据集数量
+	private static int batchSize = 10000;	    // 单次批处理数量
 	
 	// 千万数据，单次批量100000
-	private static int dataSize = 10000000;		// 数据集数量
-	private static int batchSize = 100000;	    // 单次批处理数量
+//	private static int dataSize = 10000000;		// 数据集数量
+//	private static int batchSize = 100000;	    // 单次批处理数量
 	
 	
 	private static List<PersonBO> list = new LinkedList<>();
