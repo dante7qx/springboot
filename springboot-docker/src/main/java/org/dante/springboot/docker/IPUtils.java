@@ -1,6 +1,6 @@
 package org.dante.springboot.docker;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 客户端IP地址工具类

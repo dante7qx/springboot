@@ -2,14 +2,14 @@ package org.dante.springboot.listener;
 
 import java.util.Date;
 
-import javax.annotation.Resource;
-
 import org.springframework.boot.availability.AvailabilityChangeEvent;
 import org.springframework.boot.availability.LivenessState;
 import org.springframework.boot.availability.ReadinessState;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.annotation.Resource;
 
 @RestController
 @RequestMapping("/staterwriter")
