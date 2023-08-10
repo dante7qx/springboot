@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "8590bf2f29a14fbebea3591139bf89f6",
+  "name" : "示例1",
+  "type" : "api",
+  "parentId" : "0",
+  "path" : "demo1",
+  "createTime" : 1691637907154,
+  "updateTime" : null,
+  "createBy" : null,
+  "updateBy" : null,
+  "paths" : [ ],
+  "options" : [ ]
+}

@@ -13,9 +13,19 @@ server:
       dir: logs/undertow
     url-charset: UTF-8
     max-http-post-size: -1B
+    ## Undertow 线程和连接管理
     threads:
-      io: 8
-      worker: 64
+      io: 8               ## cpu数量
+      worker: 256          ## 默认IO线程数*8
+    buffer-size: 1024     ## 默认：1024 字节
+    direct-buffers: false ## 虽然直接内存的性能通常优于堆内存，但它对系统的资源消耗更高。因此，对于资源受限的环境或不处理大文件上传、下载的场景，可以将 directBuffers 设置为 false，让 Undertow 使用堆内存来管理网络连接的缓冲区。
+  ## Tomcat 线程和连接管理
+  tomcat:
+    threads:
+      min-spare: 25 ## 默认：10
+      max: 300  ## 默认：200
+    accept-count: 100
+    max-connections: 8192
 management:
   endpoints: 
     web:

@@ -16,7 +16,7 @@
 	<description>Dante Springboot Alibaba EasyExcel</description>
 
 	<properties>
-		<easyexcel.version>3.1.1</easyexcel.version>
+		<easyexcel.version>3.2.1</easyexcel.version>
 	</properties>
 
 	<dependencies>
