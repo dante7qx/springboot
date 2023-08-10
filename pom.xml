@@ -15,8 +15,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.version>1.0.0</project.version>
 		<java.version>1.8</java.version>
-		<guava.version>31.1-jre</guava.version>
-		<hutool.version>5.8.16</hutool.version> 
+		<guava.version>32.1.2-jre</guava.version>
+		<hutool.version>5.8.21</hutool.version> 
 		<!-- maven的插件版本的问题,造成与IDE的不兼容 -->
 		<!--
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
