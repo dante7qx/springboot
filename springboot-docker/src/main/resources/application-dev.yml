@@ -1,5 +1,11 @@
 server:
   port: 8100
+  
 hello:
   msg: '[DEV] 你好，'
   sleep: 2
+
+## server.tomcat.threads.min-spare=32
+## server.tomcat.threads.max=400
+## server.undertow.threads.io=32
+## server.undertow.threads.worker=400

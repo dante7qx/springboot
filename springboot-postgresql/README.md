@@ -83,7 +83,7 @@ CREATE TABLE category (
   name VARCHAR NOT NULL,
   parent_id INT,
   CONSTRAINT fk_category
-    FOREIGN KEY(parent_id) REFERENCES category(id)
+  FOREIGN KEY(parent_id) REFERENCES category(id)
 );
 
 INSERT INTO category (id, name, parent_id)
