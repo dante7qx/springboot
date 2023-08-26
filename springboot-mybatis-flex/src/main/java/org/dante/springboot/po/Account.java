@@ -1,10 +1,12 @@
 package org.dante.springboot.po;
 
 import java.util.Date;
+import java.util.List;
 
 import com.mybatisflex.annotation.ColumnMask;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.RelationOneToMany;
 import com.mybatisflex.annotation.Table;
 import com.mybatisflex.core.mask.Masks;
 
@@ -20,6 +22,9 @@ public class Account {
 	private String userName;
 	private Integer age;
 	private Date birthday;
+	
+	@RelationOneToMany(selfField = "id", targetField = "accountId")
+    private List<Book> books;
 	
 	//最大年龄
     private Integer maxAge;

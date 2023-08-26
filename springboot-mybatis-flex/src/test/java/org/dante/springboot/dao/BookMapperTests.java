@@ -29,6 +29,14 @@ public class BookMapperTests extends SpringbootMybatisFlexApplicationTests {
 		book.setContent("中国闲人杂谈");
 		bookMapper.insert(book);
 	}
+	
+	@Test
+	public void addOrUpdate() {
+		Book book = new Book();
+		book.setId(1);
+		book.setContent("中国闲人杂谈，光怪陆离！");
+		bookMapper.insertOrUpdateSelective(book);
+	}
 
 	@Test
 	public void func() {

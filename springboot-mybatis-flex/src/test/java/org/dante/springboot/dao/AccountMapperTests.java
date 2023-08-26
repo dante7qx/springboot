@@ -24,9 +24,18 @@ public class AccountMapperTests extends SpringbootMybatisFlexApplicationTests {
 	@Test
 	public void query() {
 		QueryWrapper queryWrapper = QueryWrapper.create()
-			.select()
+			.select(ACCOUNT.ID, ACCOUNT.USER_NAME, ACCOUNT.AGE, ACCOUNT.BIRTHDAY)
 			.where(ACCOUNT.AGE.eq(18));
 		Account account = accountMapper.selectOneByQuery(queryWrapper);
+		Console.log(account);
+	}
+	
+	@Test
+	public void queryWithRelation() {
+		QueryWrapper queryWrapper = QueryWrapper.create()
+			.select(ACCOUNT.ID, ACCOUNT.USER_NAME, ACCOUNT.AGE, ACCOUNT.BIRTHDAY)
+			.where(ACCOUNT.AGE.eq(18));
+		Account account = accountMapper.selectOneWithRelationsByQuery(queryWrapper);
 		Console.log(account);
 	}
 
