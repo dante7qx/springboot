@@ -129,6 +129,7 @@
         <module>springboot-clickhouse</module>
         <module>springboot-sms4j</module>
         <module>springboot-magic-api</module>
+        <module>springboot-opencv</module>
 	</modules>
 
 	<parent>
