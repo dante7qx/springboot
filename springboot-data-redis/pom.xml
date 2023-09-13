@@ -18,7 +18,7 @@
 	</parent>
 	
 	<properties>
-		<redisson.version>3.17.5</redisson.version>
+		<redisson.version>3.17.7</redisson.version>
 	</properties>
 
 	<dependencies>

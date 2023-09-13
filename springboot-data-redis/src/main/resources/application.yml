@@ -3,3 +3,9 @@ spring:
     active: redisson
 server:
   port: 8010
+
+redis-stream: 
+  ## stream key 数组
+  keys: mystream1, mystream2
+  ## stream 群组名称
+  groups: group1

@@ -3,11 +3,13 @@ package org.dante.springboot.plugin;
 import java.lang.reflect.Field;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.ParameterMapping;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
@@ -15,7 +17,6 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.defaults.DefaultSqlSession.StrictMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,15 +31,14 @@ public class SqlCostInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-//      Object target = invocation.getTarget();
-//      StatementHandler statementHandler = (StatementHandler)target;
+      Object target = invocation.getTarget();
+      StatementHandler statementHandler = (StatementHandler)target;
     	long startTime = System.currentTimeMillis();
         try {
             return invocation.proceed();
         } finally {
             long endTime = System.currentTimeMillis();
             long sqlCost = endTime - startTime;
-            /*
             BoundSql boundSql = statementHandler.getBoundSql();
             String sql = boundSql.getSql();
             Object parameterObject = boundSql.getParameterObject();
@@ -46,7 +46,6 @@ public class SqlCostInterceptor implements Interceptor {
             
             // 格式化Sql语句，去除换行符，替换参数
             sql = formatSql(sql, parameterObject, parameterMappingList);
-            */
             LOGGER.debug("执行耗时 ==> {} ms", sqlCost);
         }
     }
@@ -61,8 +60,7 @@ public class SqlCostInterceptor implements Interceptor {
         
     }
     
-    @SuppressWarnings("unchecked")
-    private String formatSql(String sql, Object parameterObject, List<ParameterMapping> parameterMappingList) {
+	private String formatSql(String sql, Object parameterObject, List<ParameterMapping> parameterMappingList) {
         // 输入sql字符串空判断
         if (sql == null || sql.length() == 0) {
             return "";
@@ -86,7 +84,8 @@ public class SqlCostInterceptor implements Interceptor {
                 // 如果参数是StrictMap且Value类型为Collection，获取key="list"的属性，这里主要是为了处理<foreach>循环时传入List这种参数的占位符替换
                 // 例如select * from xxx where id in <foreach collection="list">...</foreach>
                 if (isStrictMap(parameterObjectClass)) {
-                    StrictMap<Collection<?>> strictMap = (StrictMap<Collection<?>>)parameterObject;
+                    @SuppressWarnings("unchecked")
+					LinkedHashMap<String, Collection<?>> strictMap = (LinkedHashMap<String, Collection<?>>)parameterObject;
                     
                     if (isList(strictMap.get("list").getClass())) {
                         sql = handleListParameter(sql, strictMap.get("list"));
@@ -203,7 +202,7 @@ public class SqlCostInterceptor implements Interceptor {
      * 是否DefaultSqlSession的内部类StrictMap
      */
     private boolean isStrictMap(Class<?> parameterObjectClass) {
-        return parameterObjectClass.isAssignableFrom(StrictMap.class);
+        return parameterObjectClass.isAssignableFrom(LinkedHashMap.class);
     }
     
     /**

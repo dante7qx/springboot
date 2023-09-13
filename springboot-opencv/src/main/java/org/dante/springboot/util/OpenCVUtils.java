@@ -19,6 +19,14 @@ import org.bytedeco.javacv.Java2DFrameConverter;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * 对任意图片进行等比缩放(黑边填充)
+ * 
+ * https://blog.csdn.net/GerZhouGengCheng/article/details/125291883
+ * 
+ * @author dante
+ *
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OpenCVUtils {
 
@@ -40,22 +48,23 @@ public class OpenCVUtils {
 	
 	private static void createMp4(String mp4SavePath, Map<Integer, File> imgMap, int width, int height) throws FrameRecorder.Exception {
         //视频宽高最好是按照常见的视频的宽高  16：9  或者 9：16
-        FFmpegFrameRecorder recorder = new FFmpegFrameRecorder(mp4SavePath, width, height);
+        FFmpegFrameRecorder recorder = FFmpegFrameRecorder.createDefault(mp4SavePath, width, height);
         //设置视频编码层模式
         recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
-        //设置视频为25帧每秒
-        recorder.setFrameRate(25);
+//        recorder.setVideoCodec(27);
+        recorder.setFormat("mp4");
+        //设置视频为30帧每秒
+        recorder.setFrameRate(30);
         //设置视频图像数据格式
         recorder.setPixelFormat(avutil.AV_PIX_FMT_YUV420P);
-        recorder.setFormat("mp4");
         Java2DFrameConverter converter = new Java2DFrameConverter();
+        
         try {
             recorder.start();
-            //录制一个22秒的视频
             for (int i = 0; i < imgMap.size(); i++) {
                 BufferedImage read = ImageIO.read(imgMap.get(i));
                 //一秒是25帧 所以要记录25次
-                for (int j = 0; j < 25; j++) {
+                for (int j = 0; j < 30; j++) {
                     recorder.record(converter.getFrame(read));
                 }
             }
@@ -101,6 +110,7 @@ public class OpenCVUtils {
                     grabber2.getAudioChannels());
 
             recorder.setFormat("mp4");
+            recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
             recorder.setFrameRate(grabber1.getFrameRate());
             recorder.setSampleRate(grabber2.getSampleRate());
             recorder.start();
@@ -142,14 +152,14 @@ public class OpenCVUtils {
 	public static void main(String[] args) throws Exception {
 		String DIR = "/Users/dante/Documents/Project/java-world/springboot/springboot-opencv/sample/";
 		//合成的MP4
-        String mp4SavePath = DIR + "img.mp4";
+        String mp4SavePath = DIR + "img2.mp4";
         //图片地址
         String img = DIR + "img";
-		Image2Mp4(img, mp4SavePath);
+//		Image2Mp4(img, mp4SavePath);
 		// BGM
 		String audioPath = DIR + "bg.mp3";
 		// BGM MP4
-		String outPut = DIR + "img_bg.mp4";
+		String outPut = DIR + "img_bg3.mp4";
 		mergeAudioAndVideo(mp4SavePath, audioPath, outPut);
 	}
 }

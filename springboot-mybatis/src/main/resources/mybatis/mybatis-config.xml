@@ -20,6 +20,10 @@
 		<!-- 整个包下的，都使用别名 -->
 		<package name="org.dante.springboot.po"/>
 	</typeAliases>
+	
+	<typeHandlers>
+		<package name="org.dante.springboot.handler"/>
+	</typeHandlers>
     
     <!-- 分页帮助文档：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/README_zh.md -->
     <plugins>

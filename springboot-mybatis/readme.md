@@ -55,14 +55,14 @@
    public class MybatisConfig {
        static final String PACKAGE = "org.spring.springboot.dante.dao";
        static final String MAPPER_LOCATION = "classpath:mapper/master/*.xml";
-    	static final String MYBATIS_BO_PKG = "org.spring.springboot.dante.bo";	
+    		static final String MYBATIS_BO_PKG = "org.spring.springboot.dante.bo";	
      
-       @Primary
-   	@Bean
-   	@ConfigurationProperties("spring.datasource.druid.dante")
-   	public DataSource danteDataSource(){
-   	    return DruidDataSourceBuilder.create().build();
-   	}
+     	@Primary
+   		@Bean
+   		@ConfigurationProperties("spring.datasource.druid.dante")
+   		public DataSource danteDataSource(){
+   	    	return DruidDataSourceBuilder.create().build();
+   		}
     
        @Bean(name = "danteTransactionManager")
        @Primary

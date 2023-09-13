@@ -18,7 +18,7 @@ public class SpringbootMybatisApplicationTests {
 	private StudentMapper studentMapper;
 	
 	@Test
-	public void queryStudentInAddress() {
+	public void queryStudentInAddress() { 
 		List<String> citys = Arrays.asList("北京市", "深圳市");
 		studentMapper.queryStudentInAddress(citys).forEach(s -> log.info("Student {}", s));
 	}

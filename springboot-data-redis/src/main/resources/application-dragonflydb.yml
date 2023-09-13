@@ -1,0 +1,46 @@
+## 可以替换Redis，参考文档：https://www.dragonflydb.io
+
+spring:
+  redis:
+    host: localhost
+    port: 6380
+#    password: iamdante
+    timeout: 10s
+    jedis:
+      pool:
+        min-idle: 10
+        max-idle: 50
+        max-active: 200
+        max-wait: 3000  
+
+redisson:
+  # 线程池数量
+  threads: 16
+  # Netty线程池数量
+  nettyThreads: 32
+  # 传输模式
+  transportMode: "NIO"
+  # 单节点配置
+  singleServerConfig:
+    # 客户端名称
+    clientName: dante-springboot-dragonflydb
+    # 最小空闲连接数
+    connectionMinimumIdleSize: 32
+    # 连接池大小
+    connectionPoolSize: 64
+    # 连接空闲超时，单位：毫秒
+    idleConnectionTimeout: 10000
+    # 命令等待超时，单位：毫秒
+    timeout: 3000
+    # 如果尝试在此限制之内发送成功，则开始启用 timeout 计时。
+    retryAttempts: 3
+    # 命令重试发送时间间隔，单位：毫秒
+    retryInterval: 1500
+    # 发布和订阅连接的最小空闲连接数
+    subscriptionConnectionMinimumIdleSize: 1
+    # 发布和订阅连接池大小
+    subscriptionConnectionPoolSize: 50
+    # 单个连接最大订阅数量
+    subscriptionsPerConnection: 5
+    # DNS监测时间间隔，单位：毫秒
+    dnsMonitoringInterval: 5000  

@@ -13,6 +13,7 @@ mybatis:
     - classpath:mybatis/mapper/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: org.dante.springboot.po
+  type-handlers-package: org.dante.springboot.handler
 logging:
   level:
     root: info
