@@ -16,8 +16,8 @@
 	<description>Dante Springboot Flowable Design</description>
 
 	<properties>
-		<flowable.version>6.7.2</flowable.version>
-		<guava.version>31.1-jre</guava.version>
+		<flowable.version>6.8.0</flowable.version>
+		<guava.version>32.1.2-jre</guava.version>
 	</properties>
 
 	<dependencies>

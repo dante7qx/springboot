@@ -23,4 +23,5 @@ public class HolidayConfig {
 
 	/** 日期 */
 	private Date holidayDate;
+	
 }

@@ -17,7 +17,7 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
+class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	
 	private final VariableVO variable = new VariableVO(100L, "但丁", Date.from(Instant.now()), Lists.newArrayList("宣称部", "组织部"));
 	
@@ -27,7 +27,7 @@ public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	
 	
 	@Test
-	public void startProcessInstance() {
+	void startProcessInstance() {
 		Map<String, Object> variableMap = Maps.newHashMap();
 		variableMap.put("entity", variable);
 		this.startProcessInstance("leave-approval-delegate-1", variableMap);
@@ -37,7 +37,7 @@ public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	 * 待办列表
 	 */
 	@Test
-	public void todoList() {
+	void todoList() {
 		String currentUserId = approvalUserId; 
 		List<Task> tasks = flowTaskService.todoList(currentUserId);
 		log.info("Tasks => {}", tasks);
@@ -52,7 +52,7 @@ public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	 * 提交请假申请
 	 */
 	@Test
-	public void commitLeave() {
+	void commitLeave() {
 		Map<String, Object> variableMap = Maps.newHashMap();
 		variableMap.put("leaveDays", 7);
 		variableMap.put("approval", approvalUserId);
@@ -64,7 +64,7 @@ public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	 * 
 	 */
 	@Test
-	public void assignOtherUser() {
+	void assignOtherUser() {
 		List<Task> tasks = flowTaskService.todoList(approvalUserId);
 		Task task = tasks.get(0);
 		if(task == null) {
@@ -78,7 +78,7 @@ public class LeaveFlowTests extends SpringbootFlowableDesignApplicationTests {
 	 *	领导审批 
 	 */
 	@Test
-	public void approval() {
+	void approval() {
 		Map<String, Object> variableMap = Maps.newHashMap();
 		variableMap.put("command", Boolean.TRUE);
 		this.complete(approvalUserId, "同意", variableMap);

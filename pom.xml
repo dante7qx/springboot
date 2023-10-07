@@ -93,6 +93,7 @@
 		<module>springboot-fileupload</module>
 		<module>springboot-maven-multienvconfig</module>
 		<module>springboot-xxl-job</module>
+		<module>springboot-powerjob</module>
 		<module>springboot-richtext</module>
 		<module>springboot-easyexcel</module>
 		<module>springboot-resilience4j-common</module>
@@ -130,6 +131,8 @@
         <module>springboot-sms4j</module>
         <module>springboot-magic-api</module>
         <module>springboot-opencv</module>
+        <module>springboot-google-auth</module>
+        <module>springboot-jsr-303</module>
 	</modules>
 
 	<parent>
