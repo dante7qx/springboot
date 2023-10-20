@@ -8,6 +8,10 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.dante.springboot.prop.GenderVal;
 
+/**
+ * 性别约束校验器
+ * 
+ */
 public class GenderValConstraintValidator implements ConstraintValidator<GenderVal, Integer> {
 
 	private Set<Integer> set = new HashSet<>();

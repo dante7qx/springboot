@@ -10,15 +10,14 @@
 		<version>1.0</version>
 	</parent>
 
-	<artifactId>springboot-powerjob</artifactId>
+	<artifactId>springboot-x-file-storage</artifactId>
 	<packaging>jar</packaging>
-	<name>springboot-empty-shelf</name>
-	<description>Dante Springboot PowerJob 分布式任务调度与计算框架</description>
+	<name>springboot-x-file-storage</name>
+	<description>Dante Springboot 一站式文件存储</description>
 
 	<properties>
-		<java.version>8</java.version>
-		<junit-jupiter.version>5.10.0</junit-jupiter.version>
-		<powerjob.version>4.3.6</powerjob.version>
+		<java.version>17</java.version>
+        <x-file-storage.version>2.0.0</x-file-storage.version>
 	</properties>
 
 	<dependencies>
@@ -35,17 +34,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>tech.powerjob</groupId>
-			<artifactId>powerjob-worker-spring-boot-starter</artifactId>
-			<version>${powerjob.version}</version>
-		</dependency>
-		<dependency>
-		  <groupId>tech.powerjob</groupId>
-		  <artifactId>powerjob-client</artifactId>
-		  <version>${powerjob.version}</version>
-		</dependency>
+        </dependency>
+        <dependency>
+    <groupId>org.dromara.x-file-storage</groupId>
+    <artifactId>x-file-storage-spring</artifactId>
+    <version>${x-file-storage.version}</version>
+</dependency>
 	</dependencies>
 
 	<build>

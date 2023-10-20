@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ReUtil;
 import fmath.conversion.ConvertFromLatexToMathML;
 import fmath.conversion.ConvertFromMathMLToLatex;
+import fmath.conversion.ConvertFromWordToMathML;
 import fmath.conversion.c.a;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,16 @@ public class LaTeXUtil {
 	}
 
 	public static void main(String[] args) {
+		String mathML = ConvertFromWordToMathML.getMathMLFromDocFile("/Users/dante/Desktop/332.docx");
+//		Console.log(mathML);
+//		Console.log(mathML.replaceAll("\n\\s*", ""));
+		String latex = mathMLTolaTeX(mathML);
+		Console.log(latex);
+		String result = formatLatex(latex);
+		Console.log(result);
+	}
+	
+	public static void main1(String[] args) {
 //		String mathML="<math>  \n" +
 //                "      <mrow>  \n" +
 //                "        <msup><mi>a</mi><mn>2</mn></msup>  \n" +
@@ -47,17 +58,31 @@ public class LaTeXUtil {
 //                "        <msup><mi>c</mi><mn>2</mn></msup>  \n" +
 //                "      </mrow>  \n" +
 //                "    </math>  ";
-		String mathML = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">  <mfrac>    <mn>1</mn>    <mrow>      <mn>4</mn>      <msup>        <mi>n</mi>        <mrow>          <mn>2</mn>        </mrow>      </msup>      <mo>&#x2212;</mo>      <mn>1</mn>    </mrow>  </mfrac>  <mo>=</mo>  <mfrac>    <mn>1</mn>    <mn>2</mn>  </mfrac>  <mrow data-mjx-texclass=\"INNER\">    <mo data-mjx-texclass=\"OPEN\">(</mo>    <mfrac>      <mn>1</mn>      <mrow>        <mn>2</mn>        <mi>n</mi>        <mo>&#x2212;</mo>        <mn>1</mn>      </mrow>    </mfrac>    <mo>&#x2212;</mo>    <mfrac>      <mn>1</mn>      <mrow>        <mn>2</mn>        <mi>n</mi>        <mo>+</mo>        <mn>1</mn>      </mrow>    </mfrac>    <mo data-mjx-texclass=\"CLOSE\">)</mo>  </mrow></math>";
+		String mathML = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">  <msub>    <mi>S</mi>    <mrow>      <mi>n</mi>    </mrow>  </msub>  <mo>=</mo>  <mi>n</mi>  <msub>    <mi>a</mi>    <mrow>      <mn>1</mn>    </mrow>  </msub>  <mo>+</mo>  <mfrac>    <mrow>      <mi>n</mi>      <mrow data-mjx-texclass=\"INNER\">        <mo data-mjx-texclass=\"OPEN\">(</mo>        <mi>n</mi>        <mo>&#x2212;</mo>        <mn>1</mn>        <mo data-mjx-texclass=\"CLOSE\">)</mo>      </mrow>    </mrow>    <mrow>      <mn>2</mn>    </mrow>  </mfrac>  <mi>d</mi></math>";
 		String OOXml = mathML2OOXml(mathML);
 		String laTeX = mathMLTolaTeX(mathML);
 		String html = mathMLToHtml(mathML);
 		Console.log(OOXml);
 		Console.log("===========================");
 		Console.log(laTeX);
+		Console.log(formatLatex(laTeX));
 		Console.log("===========================");
 		Console.log(laTeXToMathML(laTeX));
 		Console.log("===========================");
 		Console.log(html);
+		
+	}
+	
+	private static String formatLatex(String latex) {
+		return latex
+				.replaceAll("\\^(\\\\pm\\s+\\w+\\s+%)", "^{$1}")
+				.replaceAll("\\%", "\\\\%")
+				.replaceAll("\\\\textdegree", "{°}")
+				.replaceAll("\\\\minus", "-")
+				.replaceAll("f\\^\\^", "\\\\hat f")
+				.replaceAll("\\\\pi(\\w?)", "\\\\pi $1 ")
+				.replaceAll("\\\\xi(\\w?)", "\\\\xi $1 ")
+				;
 	}
 }
 

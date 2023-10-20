@@ -133,12 +133,13 @@
         <module>springboot-opencv</module>
         <module>springboot-google-auth</module>
         <module>springboot-jsr-303</module>
+        <module>springboot-x-file-storage</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.15</version>
+		<version>2.7.17</version>
 	</parent>
 
 	<dependencies>

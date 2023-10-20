@@ -37,7 +37,7 @@ curl -X POST http://localhost:8101/user/list -H 'Content-Type: application/json'
 
 curl -X POST http://localhost:8101/user/add -H 'Content-Type: application/json' -d '{"password": "123@qwe", "email": "test@126"}'
 
-curl -X POST http://localhost:8101/user/update -H 'Content-Type: application/json' -d '{"name": "dante", "email": "dante@163.com", "phone": "139202911", "gender": 3}'
+curl -X POST http://localhost:8101/user/update -H 'Content-Type: application/json' -d '{"name": "dante", "email": "dante@163.com", "phone": "1392029112x", "gender": 3}'
 
 
  */

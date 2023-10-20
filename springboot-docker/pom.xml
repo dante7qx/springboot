@@ -17,6 +17,8 @@
 
 	<properties>
 		<java.version>19</java.version>
+		<maven.compiler.source>19</maven.compiler.source>
+  		<maven.compiler.target>19</maven.compiler.target>
 		<docker.image.prefix>dante</docker.image.prefix>
 		<logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 	</properties>

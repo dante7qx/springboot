@@ -1,2 +1,16 @@
 server:
-  port: 8101
+#  port: ${random.int(8101,8200)}  ## 自定义范围内的随机端口
+  port: 0 # 动态分配随机端口
+#  port: 8101 # 固定端口
+
+powerjob:
+  worker:
+    port: 27777                                 # akka 工作端口，可选，默认 27777
+    app-name: springboot-powerjob               # 接入应用名称，用于分组隔离
+    server-address: 127.0.0.1:7700              # 调度服务器地址，IP:Port 或 域名，多值逗号分隔
+    protocol: http                              # 通讯协议，支持 HTTP 和 AKKA 两种协议，推荐使用 HTTP 协议
+    store-strategy: memory                      # 持久化方式，可选，默认 disk
+    max-result-length: 4096                     # 任务返回结果信息的最大长度，超过这个长度的信息会被截断，默认值 8192
+    max-appended-wf-context-length: 4096        # 单个任务追加的工作流上下文最大长度，超过这个长度的会被直接丢弃，默认值 8192
+    max-lightweight-task-num: 1024              # 同时运行的轻量级任务数量上限
+    max-heavyweight-task-num: 64                # 同时运行的重量级任务数量上限
