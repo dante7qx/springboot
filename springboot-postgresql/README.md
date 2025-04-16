@@ -69,8 +69,6 @@ grant all privileges on schema public to root;
   password_encryption_type = 1 ## 密码格式sha256 MD5 都可用
   ```
 
-
-
 ### 七. 使用技巧
 
 #### 1. 递归查询

@@ -134,12 +134,14 @@
         <module>springboot-google-auth</module>
         <module>springboot-jsr-303</module>
         <module>springboot-x-file-storage</module>
+        <module>springboot-element-ui-api</module>
+        <module>springboot-act-captcha</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.17</version>
+		<version>2.7.18</version>
 	</parent>
 
 	<dependencies>

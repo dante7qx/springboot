@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dante.springboot.mapper.SurvyPaperMapper">
+
+	<resultMap type="SurvyPaper" 		id="SurvyPaperResult">
+        <result property="id"    		column="id"    />
+        <result property="type"    		column="type"    />
+        <result property="paperInfo"    column="paper_info"    />
+        <result property="paperTitle"   column="paperTitle"    />
+        <result property="num"    		column="num"    />
+        <result property="createBy"   	column="create_by"    />
+        <result property="createTime"   column="create_time"    />
+        <result property="updateBy"    	column="update_by"    />
+        <result property="updateTime"   column="update_time"    />
+    </resultMap>
+	
+	<select id="selectSurvyPaperList" parameterType="SurvyPaper" resultMap="SurvyPaperResult">
+		select 
+			t.id, t.type, t.paper_info ->> '$.title' as paperTitle, 
+			(select count(u.id) from spi_survy_paper_user u where u.paper_id = t.id) as num,
+			t.create_by, t.create_time, t.update_by, t.update_time 
+		from spi_survy_paper t
+		<where>
+			<if test="type != null  and type != ''"> and t.type = #{type}</if>
+			<if test="paperTitle != null  and paperTitle != ''"> and t.paper_info ->> '$.title' like concat('%', #{paperTitle}, '%')</if>
+		</where>
+	</select>
+	
+	
+	<insert id="insertSurvyPaper" parameterType="SurvyPaper" useGeneratedKeys="true" keyProperty="id">
+        insert into spi_survy_paper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	<if test="type != null">type,</if>
+            <if test="paperInfo != null">paper_info,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	<if test="type != null">#{type},</if>
+            <if test="paperInfo != null">#{paperInfo},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSurvyPaper" parameterType="SurvyPaper">
+        update spi_survy_paper
+        <trim prefix="SET" suffixOverrides=",">
+        	<if test="type != null">type = #{type},</if>
+            <if test="paperInfo != null">paper_info = #{paperInfo},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+    
+    <delete id="deleteSurvyPagerUser" parameterType="Long">
+    	delete from spi_survy_paper where id = #{id}
+    </delete>
+
+</mapper>

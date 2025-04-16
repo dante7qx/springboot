@@ -4,9 +4,15 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://root:iamdante@localhost:27017/springboot
-      authentication-database: admin    
+#      database: springboot
+#      uri: mongodb://127.0.0.1:27017
+#      username: root
+#      password: iamdante
+      uri: mongodb://root:iamdante@127.0.0.1:27017/springboot
+#      authentication-database: springboot
+      
 logging:
   level:
     root: INFO
     org.springframework.data.mongodb: DEBUG
+    

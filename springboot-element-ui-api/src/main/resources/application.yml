@@ -1,0 +1,28 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: spirit-el-ui-api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/daily_practice?characterEncoding=utf8&useSSL=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: iamdante
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: spirit-hikari
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations:
+    - classpath*:mybatis/mapper/**/*Mapper.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: org.dante.springboot.entity
+  type-handlers-package: org.dante.springboot.handler

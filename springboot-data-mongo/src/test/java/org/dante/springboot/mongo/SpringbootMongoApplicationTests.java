@@ -11,7 +11,6 @@ import org.dante.springboot.mongo.page.SpiritMongoPageable;
 import org.dante.springboot.mongo.po.UserPO;
 import org.dante.springboot.mongo.service.UserService;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,7 +44,7 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void insert() { 
+	void insert() { 
 		// 创建三个User，并验证User总数
 		userDAO.save(new UserPO(1L, "didi", 30, "F", "2017-11-11"));
 		userDAO.save(new UserPO(2L, "mama", 40, "M", "2017-11-11"));
@@ -62,7 +61,7 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void update() {
+	void update() {
 		UserPO u = userDAO.findById(1L).get();
 		u.setUsername("dante");
 		u.setAge(32);
@@ -70,7 +69,7 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void saveOne() {
+	void saveOne() {
 		int count = 50;
 		long start = Date.from(Instant.now()).getTime();
 		for (int i = 0; i < count; i++) {
@@ -84,7 +83,7 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void saveBatch() {
+	void saveBatch() {
 		List<UserPO> users = new ArrayList<>();
 		int count = 50;
 		long start = Date.from(Instant.now()).getTime();
@@ -98,13 +97,13 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void queryByAge() {
+	void queryByAge() {
 		List<UserPO> users = userDAO.queryByAge(23);
 		log.info("23岁用户数量 {} , {}", users.size(), users);
 	}
 
 	@Test
-	public void queryByAgePage() {
+	void queryByAgePage() {
 		Sort sortAge = Sort.by(Sort.Direction.DESC, "id");
 		Pageable pageable = PageRequest.of(1, 5, sortAge);
 		Page<UserPO> resp = userDAO.findByAge(23, pageable);
@@ -112,19 +111,19 @@ public class SpringbootMongoApplicationTests {
 	}
 
 	@Test
-	public void queryReturnName() {
+	void queryReturnName() {
 		List<UserPO> users = userDAO.queryReturnName("测试17");
 		log.info("用户 —> {}", users);
 	}
 
 	@Test
-	public void findByUsername() {
+	void findByUsername() {
 		UserPO user = userDAO.findByUsername("测试56");
 		log.info("user -> {}.", user);
 	}
 
 	@Test
-	public void findPage() {
+	void findPage() {
 		int page = 1;
 		int pageSize = 20;
 		Sort sortAge = Sort.by(Direction.ASC, "age");
@@ -137,7 +136,7 @@ public class SpringbootMongoApplicationTests {
 	 * 使用 Query、Criteria、MongoTemplate 进行查询分页
 	 */
 	@Test
-	public void queryPageWithMongoTemplate() {
+	void queryPageWithMongoTemplate() {
 		Query query = new Query();
 		Criteria criteria = new Criteria();
 		criteria.and("name").regex(".*?" + "30" + ".*");
@@ -165,7 +164,7 @@ public class SpringbootMongoApplicationTests {
 	}
 	
 	@Test
-	public void testPageTemplate() {
+	void testPageTemplate() {
 		PageReq pageReq = new PageReq();
 		pageReq.setSort("id");
 		pageReq.setOrder("desc");
