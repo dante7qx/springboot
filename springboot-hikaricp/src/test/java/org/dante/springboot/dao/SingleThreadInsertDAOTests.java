@@ -40,7 +40,7 @@ public class SingleThreadInsertDAOTests extends SpringbootHikariCPApplicationTes
 
 	@Test
 	public void batchInsert() {
-		StopWatch stopWatch = new StopWatch("多线程批量导入【" + dataSize + "】条数据");
+		StopWatch stopWatch = new StopWatch("单线程循环插入【" + dataSize + "】条数据");
 		stopWatch.start();
 		for (MultiThreadInsertPO po : list) {
 			multiThreadInsertDAO.save(po);

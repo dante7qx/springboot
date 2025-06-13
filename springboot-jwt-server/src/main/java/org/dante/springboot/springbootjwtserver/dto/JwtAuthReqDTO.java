@@ -1,5 +1,6 @@
 package org.dante.springboot.springbootjwtserver.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JwtAuthReqDTO implements Serializable {
 	
+    @Serial
     private static final long serialVersionUID = -8445943548965154778L;
 
     private String username;

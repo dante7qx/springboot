@@ -3,18 +3,17 @@ package org.dante.springboot.springbootjwtserver.security;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.dante.springboot.springbootjwtserver.po.RolePO;
 import org.dante.springboot.springbootjwtserver.po.UserPO;
+import org.hibernate.annotations.NotFound;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.CollectionUtils;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JwtUserFactory {
-
-	private JwtUserFactory() {
-		throw new IllegalAccessError("工厂类，不能实例化！");
-	}
-
 	public static JwtUserDetails create(UserPO user) {
 		return new JwtUserDetails(user.getId(), user.getUserName(), user.getPassword(), user.getEmail(),
 				user.getLastPasswordResetDate(),

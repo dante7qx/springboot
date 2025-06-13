@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.dante.springboot.genoffice.poitl.PoiTlUtil;
 import org.dante.springboot.genoffice.vo.NormColVO;
 import org.dante.springboot.util.LaTeXUtil;
@@ -22,6 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import cn.hutool.core.collection.CollUtil;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/word")

@@ -1,13 +1,12 @@
 package org.dante.springboot;
 
-import javax.xml.bind.DatatypeConverter;
-
 import org.dante.springboot.vo.Submit;
 import org.junit.jupiter.api.Test;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
+import jakarta.xml.bind.DatatypeConverter;
 
 public class ChinaMobileTests {
 	

@@ -3,14 +3,17 @@ server:
 spring:
   application:
     name: dante-springboot-jwt-server
-  datasource:
-    platform: h2
   jpa:
     open-in-view: true    # 主要注意的是，必须进行事务管理
     generate-ddl: false
     show-sql: true
     hibernate:
       ddl-auto: none
+  sql:
+    init:
+      platform: h2
+      schema-locations: classpath:schema-h2.sql
+      data-locations: classpath:data-h2.sql
 logging:
   level:
     root: info

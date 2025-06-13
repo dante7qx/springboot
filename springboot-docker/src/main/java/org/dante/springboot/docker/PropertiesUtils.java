@@ -1,12 +1,12 @@
 package org.dante.springboot.docker;
 
-import java.io.IOException;
-import java.util.MissingResourceException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.io.IOException;
+import java.util.MissingResourceException;
 
 @Component
 public class PropertiesUtils {

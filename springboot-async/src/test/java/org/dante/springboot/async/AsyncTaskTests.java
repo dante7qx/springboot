@@ -22,20 +22,19 @@ public class AsyncTaskTests extends SpringbootAsyncApplicationTests {
 
 	@Test
 	public void executeTask() {
-
 		try {
 			Future<String> task1 = asyncTask.doTask1();
 			map.put("a", task1);
 			Future<String> task2 = map.get("a");
 			for (;;) {
-				log.info("任务执行状态: {}", task2.isDone());
+				log.info("[任务2] 执行状态: {}", task2.isDone());
 				if (task2.isDone()) {
-					log.info("任务执行结果: {}", task2.get());
+					log.info("[任务2] 执行结果: {}", task2.get());
 					break;
 				}
 				TimeUnit.SECONDS.sleep(1L);
 			}
-			log.info("All tasks finished.");
+			log.info("所有任务执行完成.");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -48,7 +47,7 @@ public class AsyncTaskTests extends SpringbootAsyncApplicationTests {
 			if (!ct.isDone()) {
 				ct.cancel(true);
 			}
-			log.info("All tasks finished.");
+			log.info("所有任务执行完成.");
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -65,10 +64,9 @@ public class AsyncTaskTests extends SpringbootAsyncApplicationTests {
 				log.info("Task2 result: {}", task2.get());
 				break;
 			}
-			Thread.sleep(1000);
+			TimeUnit.SECONDS.sleep(1L);
 		}
-
-		log.info("All tasks finished.");
+		log.info("所有任务执行完成.");
 	}
 
 	@Test
@@ -82,9 +80,8 @@ public class AsyncTaskTests extends SpringbootAsyncApplicationTests {
 				log.info("Task4 result: {}", task4.get());
 				break;
 			}
-			Thread.sleep(1000);
+			TimeUnit.SECONDS.sleep(1L);
 		}
-
-		log.info("All tasks finished.");
+		log.info("所有任务执行完成.");
 	}
 }

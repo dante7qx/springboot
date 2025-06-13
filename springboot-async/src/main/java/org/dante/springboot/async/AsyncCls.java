@@ -17,12 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class AsyncCls {
-	
-	@Async("spiritExecutor")
+
+	@Async
+//	@Async("spiritExecutor")
 	public void sendMsg() {
-		log.info("=======>开始发送消息。。。。。");
+		log.info("{} ===> 开始发送消息。。。。。", Thread.currentThread().getName() + Thread.currentThread().threadId());
 		ThreadUtil.sleep(5, TimeUnit.SECONDS);
-		log.info("=======>消息发送完成。。。。。");
+		log.info("{} ===> 消息发送完成。。。。。", Thread.currentThread().getName() + Thread.currentThread().threadId());
 	}
 	
 }

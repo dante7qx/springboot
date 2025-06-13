@@ -6,9 +6,13 @@ spring:
   security:
     user:
       name: dante
-      password: 123456      
-          
-          
+      password: 123456
+      roles: ADMIN
+  boot:
+    admin:
+      context-path: /
+      ui:
+        title: Spirit Spring Boot Admin
 management:
   endpoints:
     web:

@@ -1,7 +1,6 @@
 package org.dante.springboot.practice.impl;
 
-import javax.annotation.PostConstruct;
-
+import jakarta.annotation.PostConstruct;
 import org.dante.springboot.practice.ConsumeModeService;
 import org.dante.springboot.practice.MailEventHandler;
 import org.dante.springboot.practice.StringEventFactory;

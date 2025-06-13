@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-
+import jakarta.annotation.PostConstruct;
 import org.dante.springboot.dao.SchedulerJobDAO;
 import org.dante.springboot.dao.SchedulerJobSpecification;
 import org.dante.springboot.dto.SchedulerDTO;

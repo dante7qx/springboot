@@ -14,22 +14,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.version>1.0.0</project.version>
-		<java.version>1.8</java.version>
-		<guava.version>32.1.2-jre</guava.version>
-		<hutool.version>5.8.21</hutool.version> 
-		<!-- maven的插件版本的问题,造成与IDE的不兼容 -->
-		<!--
-		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		-->
+		<java.version>21</java.version>
+		<guava.version>33.4.8-jre</guava.version>
+		<fastjson.version>2.0.57</fastjson.version>
+		<hutool.version>5.8.38</hutool.version>
 	</properties>
 
 	<modules>
+		<module>springboot-admin-server</module>
+		<module>springboot-admin-client</module>
         <module>springboot-empty-shelf</module>
-		<module>springboot-swagger</module>
-		<module>springboot-native</module>
 		<module>springboot-ldap</module>
 		<module>springboot-cache</module>
-		<module>springboot-caffeine</module>
 		<module>springboot-docker</module>
 		<module>springboot-logger</module>
 		<module>springboot-log4j2</module>
@@ -40,12 +36,10 @@
 		<module>springboot-scheduling-dynamic</module>
 		<module>springboot-quartz</module>
 		<module>springboot-async</module>
-		<module>springboot-restdocs</module>
+		<module>springboot-openapi3-knife4j</module>
 		<module>springboot-mybatis</module>
-		<module>springboot-mybatis-generator</module>
 		<module>springboot-mybatis-multi-datasource</module>
 		<module>springboot-mybatis-plus</module>
-		<module>springboot-mybatis-plus-generator</module>
 		<module>springboot-mybatis-flex</module>
 		<module>springboot-jwt-server</module>
 		<module>springboot-batch</module>
@@ -56,15 +50,12 @@
 		<module>springboot-statemachine</module>
 		<module>springboot-data-redis</module>
 		<module>springboot-data-mongo</module>
-		<module>springboot-data-reactive-mongo</module>
 		<module>springboot-mongodb-upload</module>
 		<module>springboot-jasypt</module>
 		<module>springboot-data-jpa</module>
 		<module>springboot-jdbc</module>
 		<module>springboot-ws-server</module>
 		<module>springboot-ws-client</module>
-		<module>springboot-admin-server</module>
-		<module>springboot-admin-client</module>
 		<module>springboot-poi</module>
 		<module>springboot-office</module>
 		<module>springboot-email</module>
@@ -106,22 +97,17 @@
 		<module>springboot-postgresql</module>
 		<module>springboot-camel</module>
         <module>springboot-retry</module>
-        <module>springboot-async-flow</module>
         <module>springboot-db-doc</module>
         <module>springboot-svn</module>
         <module>springboot-ai-baidu</module>
         <module>springboot-sso</module>
         <module>springboot-snmp</module>
-        <module>springboot-rmi-api</module>
-        <module>springboot-rmi-server</module>
-        <module>springboot-rmi-client</module>
         <module>springboot-jnetpcap</module>
         <module>springboot-disruptor</module>
         <module>springboot-less-jar</module>
         <module>springboot-rsocket</module>
         <module>springboot-graphql</module>
         <module>springboot-special-tool</module>
-        <module>springboot-oci</module>
         <module>springboot-dyna-datasource</module>
         <module>springboot-smartdoc-apifox</module>
         <module>springboot-easypoi</module>
@@ -135,13 +121,12 @@
         <module>springboot-jsr-303</module>
         <module>springboot-x-file-storage</module>
         <module>springboot-element-ui-api</module>
-        <module>springboot-act-captcha</module>
 	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.18</version>
+		<version>3.4.6</version>
 	</parent>
 
 	<dependencies>
@@ -154,6 +139,11 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.fastjson2</groupId>
+			<artifactId>fastjson2</artifactId>
+			<version>${fastjson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -175,5 +165,19 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
+	
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

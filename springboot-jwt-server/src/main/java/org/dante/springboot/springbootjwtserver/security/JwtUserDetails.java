@@ -1,5 +1,6 @@
 package org.dante.springboot.springbootjwtserver.security;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class JwtUserDetails implements UserDetails {
 
+	@Serial
 	private static final long serialVersionUID = -4386440994942082051L;
 
 	private final Long id;

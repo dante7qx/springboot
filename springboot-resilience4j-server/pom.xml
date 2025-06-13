@@ -15,10 +15,6 @@
 	<name>springboot-docker</name>
 	<description>Dante Springboot Resilience4j 轻量级熔断框架</description>
 
-	<properties>
-		<resilience4j.version>1.7.1</resilience4j.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,11 +24,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-		<dependency>
-			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-spring-boot2</artifactId>
-			<version>${resilience4j.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.dante.springboot</groupId>
 			<artifactId>springboot-resilience4j-common</artifactId>

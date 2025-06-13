@@ -20,9 +20,6 @@ public class DateUtils {
 	
 	/**
 	 * Date ==> LocalDate
-	 * 
-	 * @param date
-	 * @return
 	 */
 	public static LocalDate toLocalDate(Date date) {
 	    return date.toInstant()

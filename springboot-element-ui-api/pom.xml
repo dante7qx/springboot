@@ -16,13 +16,12 @@
 	<description>Dante Springboot Element UI 示例项目后端API</description>
 
 	<properties>
-		<java.version>17</java.version>
-		<mybatis.version>2.3.1</mybatis.version>
-		<fastjson2.version>2.0.41</fastjson2.version>
-		<hibernate-types-55.version>2.21.1</hibernate-types-55.version>
+		<mysql.version>8.4.0</mysql.version>
+		<mybatis.version>3.0.4</mybatis.version>
+		<hibernate-types.version>2.21.1</hibernate-types.version>
 		<jsoup.version>1.19.1</jsoup.version>
-		<hutool.version>5.8.37</hutool.version>
 		<pinyin4j.version>2.5.1</pinyin4j.version>
+		<tianai.version>1.5.1</tianai.version>
 	</properties>
 
 	<dependencies>
@@ -46,8 +45,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vladmihalcea</groupId>
-			<artifactId>hibernate-types-55</artifactId>
-			<version>${hibernate-types-55.version}</version>
+			<artifactId>hibernate-types-60</artifactId>
+			<version>${hibernate-types.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
@@ -55,30 +54,26 @@
 			<version>${mybatis.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba.fastjson2</groupId>
-			<artifactId>fastjson2</artifactId>
-			<version>${fastjson2.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
-			<version>${hutool.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.belerweb</groupId>
 		    <artifactId>pinyin4j</artifactId>
 		    <version>${pinyin4j.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- 行为二维码 -->
+		<dependency>
+			<groupId>cloud.tianai.captcha</groupId>
+			<artifactId>tianai-captcha-springboot-starter</artifactId>
+			<version>${tianai.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -3,6 +3,7 @@ package org.dante.springboot.holiday;
 import java.util.List;
 import java.util.Map;
 
+import cn.hutool.core.lang.Console;
 import org.dante.springboot.vo.HolidayConfig;
 
 import com.alibaba.fastjson2.JSON;
@@ -11,13 +12,10 @@ import com.google.common.collect.Lists;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.HttpUtil;
 
-public class HolidayUtil {
+public final class HolidayUtil {
 
 	/**
 	 * 获取指定年份的公共节假日以及补班信息
-	 * 
-	 * @param year
-	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<HolidayConfig> fetchYearHoliday(int year) {
@@ -37,6 +35,11 @@ public class HolidayUtil {
 			}
 		}
 		return holidays;
+	}
+
+	public static void main(String[] args) {
+		 List<HolidayConfig> holidays = fetchYearHoliday(2025);
+		 Console.log(holidays);
 	}
 	
 }

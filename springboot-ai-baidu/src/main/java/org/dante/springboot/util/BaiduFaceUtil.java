@@ -1,12 +1,14 @@
 package org.dante.springboot.util;
 
-import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
-
+import cn.hutool.core.util.IdUtil;
+import com.baidu.aip.face.AipFace;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.dante.springboot.consts.GroupEnum;
 import org.dante.springboot.prop.BaiduProp;
 import org.dante.springboot.vo.CheckFaceVO;
@@ -20,15 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.baidu.aip.face.AipFace;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
-
-import cn.hutool.core.util.IdUtil;
-import lombok.extern.slf4j.Slf4j;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component

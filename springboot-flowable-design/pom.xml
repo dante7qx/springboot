@@ -16,8 +16,7 @@
 	<description>Dante Springboot Flowable Design</description>
 
 	<properties>
-		<flowable.version>6.8.0</flowable.version>
-		<guava.version>32.1.2-jre</guava.version>
+		<flowable.version>7.1.0</flowable.version>
 	</properties>
 
 	<dependencies>
@@ -33,6 +32,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
 		<!-- flowable -->
 		<dependency>
 			<groupId>org.flowable</groupId>
@@ -40,7 +49,8 @@
 			<version>${flowable.version}</version>
 		</dependency>
 		
-		<!-- flowable ui -->
+		<!-- flowable ui ( Flowable7 之后不提供 ui)-->
+		<!-- 
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-spring-boot-starter-ui-idm</artifactId>
@@ -61,20 +71,7 @@
 			<artifactId>flowable-spring-boot-starter-ui-task</artifactId>
 			<version>${flowable.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
+		-->
 	</dependencies>
 
 </project>

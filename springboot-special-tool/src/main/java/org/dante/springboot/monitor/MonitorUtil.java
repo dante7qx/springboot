@@ -4,9 +4,8 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 
-public class MonitorUtil {
-	
-	
+public final class MonitorUtil {
+
 	public static void main(String[] args) {
         String data = "{\"sig\":\"82be8ccd9608a0e36a830a65d9b85c40\",\"operatorType\":1}";
 

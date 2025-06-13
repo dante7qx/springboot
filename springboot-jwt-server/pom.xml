@@ -16,7 +16,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<jjwt.version>0.10.7</jjwt.version>
+		<jjwt.version>0.12.6</jjwt.version>
 		<docker.image.prefix>dante2012</docker.image.prefix>
 	</properties>
 
@@ -55,13 +55,6 @@
 			<version>${jjwt.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!--  
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>${jjwt.version}</version>
-		</dependency>
-		-->
 	</dependencies>
 
 	<build>

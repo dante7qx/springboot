@@ -15,14 +15,10 @@
 	<description>Dante Springboot Cache</description>
 	
 	<properties>
-		<redisson.version>3.18.0</redisson.version>
+		<redisson.version>3.47.0</redisson.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -35,6 +31,14 @@
             <groupId>org.springframework.boot</groupId>  
             <artifactId>spring-boot-starter-cache</artifactId>  
         </dependency>
+
+		<!-- 本地缓存 — Caffeine -->
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
+
+		<!-- Redisson 分布式缓存 -->
         <dependency>
 		    <groupId>org.redisson</groupId>
 		    <artifactId>redisson-spring-boot-starter</artifactId>

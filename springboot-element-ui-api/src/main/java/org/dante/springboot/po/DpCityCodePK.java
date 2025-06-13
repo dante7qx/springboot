@@ -2,8 +2,7 @@ package org.dante.springboot.po;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

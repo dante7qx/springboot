@@ -321,4 +321,40 @@ public class PersonMapperTests extends SpringbootDruidApplicationTests {
 		stopWatch.stop();
 		Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
 	}
+	
+	/**
+	 * 虚拟线程批量插入
+	 */
+	@Test
+	public void batchInsert4() {
+		StopWatch stopWatch = new StopWatch("虚拟线程批量导入【" + dataSize + "】条数据");
+		stopWatch.start();
+		if(dataSize < batchSize) {
+			personMapper.insertPersons(list);
+			list = null;
+			stopWatch.stop();
+			Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
+			return;
+		} 
+		
+		List<CompletableFuture<Integer>> futures = Lists.newArrayList();
+	    int count = (dataSize + batchSize - 1) / batchSize; //计算需要分多少批
+	    
+	    try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
+	        for (int i = 0; i < count; i++) {
+	            int fromIndex = i * batchSize; //计算每批的起始索引
+	            int toIndex = Math.min(fromIndex + batchSize, dataSize); //计算每批的结束索引，注意不要越界
+	            List<PersonBO> groupList = list.subList(fromIndex, toIndex); //获取子列表
+	            futures.add(CompletableFuture.supplyAsync(() -> personMapper.insertPersons(groupList), executorService));
+	        }
+	        
+	        CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+	        // 调用join方法等待完成
+	        allOf.join();
+	    }
+	    
+	    list = null;
+	    stopWatch.stop();
+	    Console.log(stopWatch.prettyPrint(TimeUnit.MILLISECONDS));
+	}
 }

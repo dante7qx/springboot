@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/stock")
 public class StockController {
 	
-	@Autowired
-	private RankServiceImpl rankService;
-	
-	/**
+	private final RankServiceImpl rankService;
+
+    public StockController(RankServiceImpl rankService) {
+        this.rankService = rankService;
+    }
+
+    /**
 	 * 股票涨幅趋势
-	 * 
-	 * @param rankType	HighRise、HighPrice、LowPrice
-	 * @return
 	 */
 	@GetMapping("/{rankType}")
 	public List<Stock> stockRank(@PathVariable String rankType) {

@@ -3,8 +3,7 @@ package org.dante.springboot.designpattern.strategy.factory;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import jakarta.annotation.Resource;
 import org.dante.springboot.designpattern.strategy.Stock;
 import org.dante.springboot.designpattern.strategy.StockStrategy;
 import org.springframework.stereotype.Service;

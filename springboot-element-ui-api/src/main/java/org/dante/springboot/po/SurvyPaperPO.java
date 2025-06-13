@@ -4,25 +4,24 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+//import org.hibernate.annotations.TypeDef;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "spi_survy_paper")
-@TypeDef( name = "json", typeClass = JsonType.class )
+//@TypeDef( name = "json", typeClass = JsonType.class )
 @NoArgsConstructor
 public class SurvyPaperPO {
 
@@ -32,7 +31,7 @@ public class SurvyPaperPO {
 
 	private String type;
 	
-	@Type(type = "json")
+	@Type(JsonType.class)
 	@Column(columnDefinition = "json")
 	private Map<String, Object> paperInfo = new HashMap<>();
 	

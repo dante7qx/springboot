@@ -1,17 +1,28 @@
 # Compiled class file
 *.class
 
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
 # Custom file
 node_modules/
 target/
 logs/
-.project
-.classpath
-.factorypath
 *.data
 .DS_Store
-.springBeans
 .settings/
+.vscode/
 
 # Log file
 *.log

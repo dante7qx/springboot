@@ -2,8 +2,6 @@ package org.dante.springboot.service;
 
 import java.util.List;
 
-import javax.persistence.criteria.Predicate;
-
 import org.dante.springboot.dao.DpCityCodeDAO;
 import org.dante.springboot.po.DpCityCodePO;
 import org.dante.springboot.vo.PageReq;
@@ -17,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 
 import cn.hutool.core.util.StrUtil;
+import jakarta.persistence.criteria.Predicate;
 
 @Service
 @Transactional(readOnly = true)

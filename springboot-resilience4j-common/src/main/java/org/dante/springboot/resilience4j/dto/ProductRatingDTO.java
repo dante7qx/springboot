@@ -18,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class ProductRatingDTO {
 	private double avgRating;			// 平均评分
     private List<ReviewDTO> reviews;	// 评分列表
+    private String remark;			// 备注
 }

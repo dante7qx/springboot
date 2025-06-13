@@ -1,8 +1,7 @@
 package org.dante.springboot.mq.inner.consumer;
 
+import com.lmax.disruptor.EventHandler;
 import org.dante.springboot.mq.inner.event.BizEvent;
-
-import com.lmax.disruptor.WorkHandler;
 
 /**
  * 共同事件消息处理接口
@@ -11,6 +10,6 @@ import com.lmax.disruptor.WorkHandler;
  *
  * @param <T>
  */
-public interface TogetherConsumer<T> extends WorkHandler<BizEvent<T>> {
+public interface TogetherConsumer<T> extends EventHandler<BizEvent<T>> {
 
 }

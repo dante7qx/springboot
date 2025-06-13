@@ -2,8 +2,7 @@ package org.dante.springboot.scheduling.controller;
 
 import java.util.concurrent.ScheduledFuture;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.dante.springboot.scheduling.job.HelloJob;
 import org.dante.springboot.scheduling.util.SpringContextUtils;
 import org.springframework.beans.factory.BeanFactory;

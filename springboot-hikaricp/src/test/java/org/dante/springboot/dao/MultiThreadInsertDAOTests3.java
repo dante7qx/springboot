@@ -34,7 +34,7 @@ public class MultiThreadInsertDAOTests3 extends SpringbootHikariCPApplicationTes
 	@Autowired
 	private MultiThreadInsertDAO multiThreadInsertDAO;
 
-	private static int dataSize = 10000;
+	private static int dataSize = 100000;
 	private static List<MultiThreadInsertPO> list = Lists.newLinkedList();
 
 	@BeforeEach

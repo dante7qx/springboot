@@ -1,6 +1,6 @@
 drop table if exists t_multi_thread_insert;
 create table t_multi_thread_insert (
-  id bigint(20) not null auto_increment comment 'id',
+  id bigint not null auto_increment comment 'id',
   uid varchar(32) not null comment 'uid',
   name varchar(128) comment '名称',
   create_time datetime comment '创建时间',

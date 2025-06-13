@@ -3,5 +3,14 @@ spring:
     name: dante-springboot-async
   profiles:
     active: dev
+  threads:
+    virtual:
+      enabled: true   # 启用虚拟线程，@Async 方法默认使用虚拟线程
 server:
   port: 8111
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,threaddump

@@ -1,3 +1,28 @@
+server:
+  port: 8199
 spring:
-  profiles:
-    active: single
+  data:
+    redis:
+      database: 7
+      host: localhost
+      password: null
+      port: 6379
+  cache:
+    type: caffeine
+  sql:
+    init:
+      platform: h2
+      schema-locations: classpath:schema-h2.sql
+      data-locations: classpath:data-h2.sql
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: info
+    org.dante.springboot: debug

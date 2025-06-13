@@ -5,3 +5,6 @@ server:
     key-store-password: 1234@@qwer
     key-password: 12,qw,as
     key-alias: SpiritKey
+    enabled: true
+  http2:
+    enabled: true # 启用 HTTP/2，必须配置 HTTPS

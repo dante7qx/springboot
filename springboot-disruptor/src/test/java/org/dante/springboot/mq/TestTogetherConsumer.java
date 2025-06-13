@@ -12,7 +12,7 @@ public class TestTogetherConsumer implements TogetherConsumer<Order> {
 	}
 	
 	@Override
-	public void onEvent(final BizEvent<Order> event) throws Exception {
+	public void onEvent(final BizEvent<Order> event, long sequence, boolean endOfBatch) throws Exception {
 		log.info("订单共同消费 -> {}", event);
 		log.info("==================================================");
 		if(event.getPayload().getSeq() == 3) {

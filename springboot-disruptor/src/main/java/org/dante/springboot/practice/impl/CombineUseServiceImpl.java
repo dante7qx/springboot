@@ -25,10 +25,10 @@ public class CombineUseServiceImpl extends ConsumeModeService {
 		MailEventHandler c7 = new MailEventHandler(eventCountPrinter);
 
 		// C1和C2共同消费，C3和C4独立消费，但C3和C4都依赖C1和C2，然后C5和C6依赖C3和C4
-		disruptor.handleEventsWithWorkerPool(c1, c2)
-			.then(c3, c4)
-			.then(c5, c6)
-			.then(c7);
+//		disruptor.handleEventsWithWorkerPool(c1, c2)
+//			.then(c3, c4)
+//			.then(c5, c6)
+//			.then(c7);
 
 		// C3、C4独立消费，C5依赖C3和C4
 //		disruptor

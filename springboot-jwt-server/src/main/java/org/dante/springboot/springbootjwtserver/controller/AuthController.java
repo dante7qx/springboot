@@ -1,12 +1,10 @@
 package org.dante.springboot.springbootjwtserver.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.dante.springboot.springbootjwtserver.dto.JwtAuthReqDTO;
 import org.dante.springboot.springbootjwtserver.dto.JwtAuthRespDTO;
 import org.dante.springboot.springbootjwtserver.po.UserPO;
 import org.dante.springboot.springbootjwtserver.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -21,15 +19,14 @@ public class AuthController {
 	@Value("${jwt.header}")
     private String tokenHeader;
 
-    @Autowired
-    private AuthService authService;
-    
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
     /**
      * 登录，获取JWT Token
-     * 
-     * @param reqDTO
-     * @return
-     * @throws AuthenticationException
      */
     @PostMapping(value = "${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(
@@ -40,10 +37,6 @@ public class AuthController {
     
     /**
      * 刷新Token
-     * 
-     * @param request
-     * @return
-     * @throws AuthenticationException
      */
     @GetMapping("${jwt.route.authentication.refresh}")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(
@@ -59,10 +52,6 @@ public class AuthController {
     
     /**
      * 用户注册
-     * 
-     * @param addedUser
-     * @return
-     * @throws AuthenticationException
      */
     @PostMapping("${jwt.route.authentication.register}")
     public UserPO register(@RequestBody UserPO addedUser) throws AuthenticationException{

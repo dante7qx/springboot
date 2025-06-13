@@ -7,15 +7,14 @@ import org.dante.springboot.dao.PersonDAO;
 import org.dante.springboot.po.HobbyPO;
 import org.dante.springboot.po.PersonPO;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import cn.hutool.core.lang.Console;
 
 @SpringBootTest
 public class SpringbootDruidApplicationTests {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(SpringbootDruidApplicationTests.class);
 	
 	@Autowired
 	protected PersonDAO personDAO;
@@ -25,16 +24,16 @@ public class SpringbootDruidApplicationTests {
 	@Test
 	public void findPersons() {
 		List<PersonPO> persons = personDAO.findAll();
-		LOGGER.info(persons.toString());
+		Console.log(persons.toString());
 	}
 	
 	@Test
 	public void findHobbys() {
 		try {
 			List<HobbyPO> hobbys = hobbyDAO.findAll();
-			LOGGER.info(hobbys.toString());
+			Console.log(hobbys.toString());
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage(), e);
+			Console.error(e.getMessage(), e);
 		}
 		
 	}

@@ -16,8 +16,8 @@
 	<description>Dante Springboot Disruptor 高性能队列</description>
 
 	<properties>
-		<disruptor.version>3.4.4</disruptor.version>
-		<fastjson2.version>2.0.23</fastjson2.version>
+		<disruptor.version>4.0.0</disruptor.version>
+		<fastjson2.version>2.0.57</fastjson2.version>
 	</properties>
 
 	<dependencies>

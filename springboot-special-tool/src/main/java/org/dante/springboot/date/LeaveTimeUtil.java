@@ -1,16 +1,15 @@
 package org.dante.springboot.date;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import org.dante.springboot.holiday.HolidayUtil;
 import org.dante.springboot.util.DateUtils;
 import org.dante.springboot.vo.HolidayConfig;
 
-import cn.hutool.core.date.DateUnit;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 请假时长工具类
@@ -24,9 +23,9 @@ public class LeaveTimeUtil {
 	 * 计算请假时长
 	 * 
 	 * @param schedule 排班配置 （例如：08:00,12:00,14:00,18:00）
-	 * @param startTime
-	 * @param endTime
-	 * @return
+	 * @param startTime 请假开始时间
+	 * @param endTime 请假结束时间
+	 * @return 请假时长（分钟）
 	 */
 	public static long calculateLeaveTime(String schedule, Date startTime, Date endTime) {
 		long leaveTime = 0;
@@ -55,9 +54,9 @@ public class LeaveTimeUtil {
 	 * 计算请假时长
 	 * 
 	 * @param schedule 排班配置 （例如：08:00,12:00,14:00,18:00）
-	 * @param startTime
-	 * @param endTime
-	 * @return
+	 * @param startTime 请假开始时间
+	 * @param endTime 请假结束时间
+	 * @return 格式化请假时长，格式：xx天xx小时xx分钟
 	 */
 	public static String calculateLeaveTimeFormat(String schedule, Date startTime, Date endTime) {
 		return formatLeaveTime(calculateLeaveTime(schedule, startTime, endTime), calOneDayMin(schedule.split(",")));
@@ -232,10 +231,6 @@ public class LeaveTimeUtil {
 	 * 
 	 * @param d1
 	 * @param d2
-	 * @param asStr
-	 * @param aeStr
-	 * @param psStr
-	 * @param peStr
 	 * @param minus
 	 * @return
 	 */

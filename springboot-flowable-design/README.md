@@ -105,7 +105,67 @@ public class WebMvcConfig implements WebMvcConfigurer {
 }
 ```
 
+### 三. 升级到7.1.0
 
+Springboot3.4.4 集成 Flowable7.1.0。
+
+1. Flowable 7 之后不再提供 ui 设计器，但仍可以通过 6.8 的 ui 来定义流程。
+
+``` java
+docker pull flowable/flowable-ui:6.8.0
+
+docker run -d --name dante-flowable-ui \
+  -p 8901:8080 \
+  -e SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver \
+  -e SPRING_DATASOURCE_URL="jdbc:mysql://host.docker.internal:3307/sbt3_flowable_modeler?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true" \
+  -e SPRING_DATASOURCE_USERNAME=root \
+  -e SPRING_DATASOURCE_PASSWORD=iamdante \
+  flowable/flowable-ui:6.8.0
+  
+// 原镜像中缺少mysql驱动，需要自行添加
+```
+
+访问：http://localhost:8901/flowable-ui
+
+2. 定义线程池
+
+ Spring Boot 3.x 默认使用 Virtual Threads（虚拟线程），但 Flowable 仍然依赖传统线程池。
+ 
+ ``` java
+ /**
+ * Flowable 线程池
+ * 
+ * Spring Boot 3.x 默认使用 Virtual Threads（虚拟线程），但 Flowable 仍然依赖传统线程池。
+ */
+@Configuration
+public class FlowableThreadPoolConfig {
+	
+	/**
+	 * 注意Bean的名称一定要是applicationTaskExecutor
+	 * 
+	 * @return
+	 */
+	@Bean("applicationTaskExecutor")
+	public ThreadPoolTaskExecutor applicationTaskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        //此方法返回可用处理器的虚拟机的最大数量;
+        int core = Runtime.getRuntime().availableProcessors();
+		executor.setCorePoolSize(core);	// 设置核心线程数
+		executor.setMaxPoolSize(core * 2 + 1);	// 设置最大线程数
+		executor.setKeepAliveSeconds(120);	// 除核心线程外的线程存活时间
+		executor.setQueueCapacity(120);	// 如果传入值大于0，底层队列使用的是LinkedBlockingQueue,否则默认使用SynchronousQueue
+		executor.setThreadNamePrefix("thread-spirit-flowable-execute");	// 线程名称前缀
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());// 设置拒绝策略，抛出 RejectedExecutionException来拒绝新任务的处理。
+
+//      executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());//设置拒绝策略，使用主线程
+//      executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());//设置拒绝策略，直接丢弃掉
+//      executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardOldestPolicy());//设置拒绝策略，丢弃最早的未处理的任务请求。
+        
+	    return executor;
+	}
+	
+}
+ ```
 
 ### 八. 参考文档
 

@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.dante.springboot.prop.SpiritProperties;
 import org.slf4j.Logger;

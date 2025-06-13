@@ -2,9 +2,9 @@
 
 ### 一. 简介
 
-​	    Resilience4j 是受 Netflix Hystrix 启发的轻量级容错库，但专为Java 8和函数式编程而设计。 轻巧，因为该库仅使用Vavr，而Vavr没有任何其他外部库依赖项。 相比之下，Netflix Hystrix 对 Archaius 具有编译依赖性，而 Archaius 具有更多的外部库依赖性，例如Guava和Apache Commons Configuration。另外，Netflix Hystrix 目前处于维护状态，不在主动开发，SpringCloud 在2020版本后，已经移除了 spring-cloud-netflix 相关模块，容错这块也推荐使用Resilience4j。
+Resilience4j 是受 Netflix Hystrix 启发的轻量级容错库，但专为Java 8和函数式编程而设计。 轻巧，因为该库仅使用Vavr，而Vavr没有任何其他外部库依赖项。 相比之下，Netflix Hystrix 对 Archaius 具有编译依赖性，而 Archaius 具有更多的外部库依赖性，例如Guava和Apache Commons Configuration。另外，Netflix Hystrix 目前处于维护状态，不在主动开发，SpringCloud 在2020版本后，已经移除了 spring-cloud-netflix 相关模块，容错这块也推荐使用Resilience4j。
 
-​		Resilience4j提供了通过装饰器的方式，以使用断路器，速率限制器，重试或隔板来增强任何功能接口，lambda表达式或方法引用。 您可以在任何功能接口，lambda表达式或方法引用上堆叠多个装饰器来做熔断、限流等动作。
+Resilience4j提供了通过装饰器的方式，以使用断路器，速率限制器，重试或隔板来增强任何功能接口，lambda表达式或方法引用。 您可以在任何功能接口，lambda表达式或方法引用上堆叠多个装饰器来做熔断、限流等动作。
 
 ### 二. 原理说明
 
@@ -27,7 +27,7 @@
 
   **滑动窗口：**
 
-  ​	断路器使用滑动窗口来存储和汇总调用结果，有两种选择。基于计数的滑动窗口 Count-based 和基于时间的滑动窗口Time-based。
+  断路器使用滑动窗口来存储和汇总调用结果，有两种选择。基于计数的滑动窗口 Count-based 和基于时间的滑动窗口Time-based。
 
    - 基于计数的滑动窗口
 
@@ -37,21 +37,21 @@
 
      汇总最近N秒的调用结果。
 
-  **相关配置：**请查看附录 [CircuitBreaker 配置](#CircuitBreaker)。
+  **相关配置**：请查看附录 [CircuitBreaker 配置](#CircuitBreaker)。
 
 - **并发调用隔离 — Bulkhead**
 
   在系统设计中，需要预期故障的发生，将应用程序拆分成多个组件，通过资源隔离确保一个组件的故障不会影响其他的组件。例如：
 
-  ​	**生活：**就像轮船用隔板（Bulkhead）分成多个小隔间，每个隔间都被隔板密封，这样可以防止洪水时整艘船沉没。
+  **生活**: 就像轮船用隔板（Bulkhead）分成多个小隔间，每个隔间都被隔板密封，这样可以防止洪水时整艘船沉没。
 
-  ​	**系统：**两个服务A和服务B，A的某些API依赖B，当服务B运行速度非常慢的时候，A调用B的请求变多时，A的性能会受到影响，服务A中那些不依赖于服务B的功能也无法处理。因此，需要隔离资源专门处理服务A依赖服务B的调用请求。
+  **系统**: 两个服务A和服务B，A的某些API依赖B，当服务B运行速度非常慢的时候，A调用B的请求变多时，A的性能会受到影响，服务A中那些不依赖于服务B的功能也无法处理。因此，需要隔离资源专门处理服务A依赖服务B的调用请求。
 
   并发调用的隔离一般有两种方式来实现：信号量Semaphore 和线程池 ThreadPool。Resilience4j 提供了 SemaphoreBulkhead 和 
 
   FixedThreadPoolBulkhead 来实现 Bulkhead。
 
-  **相关配置：**请查看附录 [Bulkhead配置](#Bulkhead)。
+  **相关配置**: 请查看附录 [Bulkhead配置](#Bulkhead)。
 
 - **限流 — RateLimiter**
 
@@ -108,7 +108,7 @@
 </dependency>
 <dependency>
     <groupId>io.github.resilience4j</groupId>
-    <artifactId>resilience4j-spring-boot2</artifactId>
+    <artifactId>resilience4j-spring-boot3</artifactId>
   <version>${resilience4j.version}</version>
 </dependency>
 ```

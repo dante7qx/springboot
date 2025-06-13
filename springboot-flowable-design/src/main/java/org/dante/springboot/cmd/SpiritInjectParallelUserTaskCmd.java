@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.dante.springboot.enums.FlowEnum;
-import org.flowable.bpmn.BpmnAutoLayout;
 import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.bpmn.model.EndEvent;
 import org.flowable.bpmn.model.ExclusiveGateway;
@@ -213,7 +212,7 @@ public class SpiritInjectParallelUserTaskCmd extends AbstractDynamicInjectionCmd
 	        */
 	        
 	        // 调用自动排版方法
-	        new BpmnAutoLayout(bpmnModel).execute();
+//	        new BpmnAutoLayout(bpmnModel).execute();
         }
 
         BaseDynamicSubProcessInjectUtil.processFlowElements(commandContext, process, bpmnModel, originalProcessDefinitionEntity, newDeploymentEntity);

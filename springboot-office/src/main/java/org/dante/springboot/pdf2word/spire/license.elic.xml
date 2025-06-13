@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Key="Dt8BAHFK4tcPZekFUUSXNx8Ry3K19ZusEH8y7sH6RQpLHTHubgSnTkN/DZzsCj1WBtGLlyd0I79Tz/jonRtBJ6AXcvaL2rphNfaH9B9OEpTCqGodWyTugoECTehouydYNFY6TB6mJcK96iEG4L4dFcbzfJ/CYikRdI6C6qVJhhYZpa8lUqB2tfuhUXmS8Dl3VqVfOL33iwM5nCoucyUAPKtOIR15ikhCz98I5zdyw2rZGlZak9prMHx6IT8Wo0sxTbe4reJ8idFC071Dre7FOjz2utCjZuPuxmlQE2tCkIdxsQ5GjM/zGRAWwTHI50SaMNp0/l6evk/CWs3VJzFvLuDR7r07ha5T06nqGXC5MAijtpi2HFoFZggr91bCRlfPjLXBSONKghTArii/7ip49KTLaw03UaljEbNoXPmDuN5W5eYyNOyrDyA+txGHOvDcjl7deANQr8AMYy0Kq+UcgtzL2Zuzx5xRZ1/JVOGW+x/cnOUvrTmqKwF1DlWuRb9UVtiL01Ifua9ZvEJfbZeGz++3XI5gTBihFQsx1vdnoubRnQsRWyn3H+O6ItFP6Q1h4TQucl1zurmRJDtDqb3AYp2Ag7FBdnt/0VIzY29Brdm0sGCDuO0p+jIbZGdyR8QmhGtJC0+DKBzTqFyYrDhYuouI3viGGBPysgavk651UCeMyf6rppAJcjCWInGBQkJVje4v1src4gVmjanKH8ZDi6TXItRWjbco+ujOcFBJ7EEkVhGmkNIk+a5YMPotWL+fTw0tIYjDC2Mq9e0Ckba7AQvbava4rdj5VXVNEgzqrkTnXzzUtaIemXGc9VpdTx+S7eWQ0VFS93zGcD/i8hj4nHMUGN22YHe7FwLSKPI5JTLvAtsCOJU1MmZB+FZ59+3/ls2Z0ruK/SkScBtLD1HfqQxyFSzjT0oMo+k5BcnZkwJkSOYI96MM2va/I42YC7Lc7BczM1l6hal4prTmdU611vpijrerDvzlL1dKg9e6AM5z//zqdgKTJyhvHLDhmXdFRZh3Fue95i8UEGGMJ7MuQNtSLQoxb2C0V+hsZ2IqOGyp4O12JHi+Wg0ItbW6FaU11bBpPAK9HP2gFbhM3j/kDQxTlBHzg237aB8TsFM0hDZwmy1888nyf14tObCLZ7scLCSzvGmEXe9rlon/GRXAlavofE2/T/Mf7Hewu4TyK7H8otwoFOBpDffXsRh2AM7jN396biaMfBu8jNY0cTy/RZ7fPliqrROpp35+6+dMhioPSplUC0APaS6ev3DcATOxFIvXdKMKNZfgIl03Z/d/5R9uFYlVGly5T4zC3QbYcrySVVMqHBG3SQ3PKBo9bzsPFflDjRkIsoxBHTIMgP4nujsY77TfhOo/kLOd/nDIUTN14Uiy5EOxL8L9+07jy564V2OeVJ4SAnNdJxATNbk1SQ==" Version="1.3">
+	<Type>Temporary</Type>
+	<Username>孙超</Username>
+	<Email>sunchao.0129@163.com</Email>
+	<LicensedDate>2022-03-22T00:00:00Z</LicensedDate>
+	<ExpiredDate>2022-04-22T00:00:00Z</ExpiredDate>
+	<Products>
+		<Product>
+			<Name>Spire.Office for JAVA</Name>
+			<Version>5.2</Version>
+			<Subscription>
+				<NumberOfPermittedDeveloper>1</NumberOfPermittedDeveloper>
+				<NumberOfPermittedSite>2147483647</NumberOfPermittedSite>
+			</Subscription>
+		</Product>
+	</Products>
+	<Issuer>
+		<Name>e-iceblue</Name>
+		<Email>sales@e-iceblue.com</Email>
+		<Url>http://www.e-iceblue.com</Url>
+	</Issuer>
+</License>

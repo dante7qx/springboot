@@ -2,6 +2,7 @@ package org.dante.springboot.springbootjwtserver.controller;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
 import org.dante.springboot.springbootjwtserver.dao.RoleDAO;
 import org.dante.springboot.springbootjwtserver.po.RolePO;
 import org.dante.springboot.springbootjwtserver.po.UserPO;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private RoleDAO roleDAO;
+	private final UserService userService;
+	private final RoleDAO roleDAO;
 	
 	@PreAuthorize("hasAuthority('SUPERADMIN')")
 	@GetMapping("/query")

@@ -29,15 +29,14 @@ import com.google.common.collect.Sets;
 public class AuthServiceImpl implements AuthService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthServiceImpl.class);
 	
-	private AuthenticationManager authenticationManager;
-    private JwtUserDetailService userDetailsService;
-    private JwtTokenUtil jwtTokenUtil;
-    private UserDAO userDAO;
+	private final AuthenticationManager authenticationManager;
+    private final JwtUserDetailService userDetailsService;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserDAO userDAO;
     
     @Value("${jwt.tokenHead}")
     private String tokenHead;
     
-    @Autowired
     public AuthServiceImpl(
             AuthenticationManager authenticationManager,
             JwtUserDetailService userDetailsService,

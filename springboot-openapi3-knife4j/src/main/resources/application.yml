@@ -1,0 +1,22 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /
+
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类列表
+    enableFooter: true
+    enableFooterCustom: true
+    footerCustomContent: "Spirit 接口文档 © 2025"
+  basic:
+    enable: true
+    username: k4j
+    password: k4j@123
+  documents:
+    - group: public
+      name: 项目说明
+      locations: classpath:markdown/*

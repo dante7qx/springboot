@@ -10,12 +10,8 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.dante.springboot.genoffice.freemarker.FreemarkerUtil;
 import org.springframework.util.StringUtils;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
@@ -42,6 +38,7 @@ import com.itextpdf.tool.xml.pipeline.html.ImageProvider;
 
 public class PDFUtil {
 
+	/*
 	public static void pdfGenerate(String htmlStr, OutputStream out) throws Exception {
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		org.w3c.dom.Document doc = builder.parse(new ByteArrayInputStream(htmlStr.getBytes()));
@@ -51,6 +48,7 @@ public class PDFUtil {
 		renderer.createPDF(out);
 		out.close();
 	}
+	*/
 
 	public static void pdfGeneratePlus(String htmlTemplate, Map<String, Object> dataMap, String targetPdf,
 			Rectangle pageSize, String header, boolean isFooter, File watermark) throws Exception {

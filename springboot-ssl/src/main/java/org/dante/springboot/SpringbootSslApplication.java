@@ -30,4 +30,5 @@ public class SpringbootSslApplication {
 		connector.setRedirectPort(8443);
 		return connector;
 	}
+
 }

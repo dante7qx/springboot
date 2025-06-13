@@ -1,12 +1,11 @@
 package org.dante.springboot.listener;
 
-import java.time.Instant;
-
-import javax.annotation.Resource;
-
+import jakarta.annotation.Resource;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.Instant;
 
 /**
  * 用于获取存活和就绪状态

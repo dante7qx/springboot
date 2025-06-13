@@ -26,3 +26,16 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   type-aliases-package: org.dante.springboot.entity
   type-handlers-package: org.dante.springboot.handler
+
+# 滑块验证码配置
+captcha:
+  expire: # 验证码过期时间，默认是2分钟,单位毫秒， 可以根据自身业务进行调整
+    # 默认缓存时间 2分钟
+    default: 10000
+  secondary:
+    # 二次验证， 默认false 不开启
+    enabled: false
+    # 二次验证过期时间， 默认 2分钟
+    expire: 120000
+    # 二次验证缓存key前缀，默认是 captcha:secondary
+    keyPrefix: "captcha:secondary"

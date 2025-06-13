@@ -1,7 +1,6 @@
 package org.dante.springboot.logger;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.dante.springboot.prop.SpiritProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

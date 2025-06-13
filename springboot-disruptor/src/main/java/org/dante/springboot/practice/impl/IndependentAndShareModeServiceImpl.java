@@ -30,7 +30,7 @@ public class IndependentAndShareModeServiceImpl extends ConsumeModeService {
         // mailWorkHandler2模拟一号邮件服务器
         MailWorkEventHandler mailWorkHandler2 = new MailWorkEventHandler(eventCountPrinter);
         // 调用handleEventsWithWorkerPool，表示创建的多个消费者以共同消费的模式消费
-        disruptor.handleEventsWithWorkerPool(mailWorkHandler1, mailWorkHandler2);
+//        disruptor.handleEventsWithWorkerPool(mailWorkHandler1, mailWorkHandler2);
 	}
 
 }

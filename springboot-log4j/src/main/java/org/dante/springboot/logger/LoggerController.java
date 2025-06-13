@@ -1,15 +1,14 @@
 package org.dante.springboot.logger;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.log4j.Log4j;
 import org.dante.springboot.prop.SpiritProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.extern.log4j.Log4j;
 
 @Log4j
 @RestController

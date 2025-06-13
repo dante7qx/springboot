@@ -1,10 +1,10 @@
 package org.dante.springboot.docker;
 
-import java.util.regex.Pattern;
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import java.util.regex.Pattern;
 
 public class MsgPropValidator implements Validator {
 	final Pattern pattern = Pattern.compile("^(?:\\d){1,}{1,3}(?:\\.)(?:\\d){1,3}(?:\\.)(?:\\d){1,3}(?:\\.)(?:\\d){1,3}");
