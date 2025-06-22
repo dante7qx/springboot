@@ -1,10 +1,8 @@
 spring:
   application:
     name: dante-springboot-freemarker
-  profiles:
-    active: uat
   freemarker:
-    suffix: .html
+    suffix: .ftl
 server:
   port: 8101
   

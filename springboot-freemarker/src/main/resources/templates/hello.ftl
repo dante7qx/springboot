@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head >
 <title>Spring Boot Demo - FreeMarker</title>
 </head>
 <body>
-    <h2>首页<h2>
+    <h2>首页</h2>
     <#assign id = "${x}">
-    <font> 
+    <ul>
         <#list userList as item> 
-            ${item!}<br />
+            <li>${item!}</li>
         </#list>
-    </font>
-    <#include "part1.html">
+    </ul>
+    <#include "part1.ftl">
 </body>
 </html>
