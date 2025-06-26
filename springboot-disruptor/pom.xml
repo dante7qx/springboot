@@ -17,7 +17,6 @@
 
 	<properties>
 		<disruptor.version>4.0.0</disruptor.version>
-		<fastjson2.version>2.0.57</fastjson2.version>
 	</properties>
 
 	<dependencies>
@@ -40,11 +39,6 @@
             <artifactId>disruptor</artifactId>
             <version>${disruptor.version}</version>
         </dependency>
-        <dependency>
-		    <groupId>com.alibaba.fastjson2</groupId>
-		    <artifactId>fastjson2</artifactId>
-		    <version>${fastjson2.version}</version>
-		</dependency>
 	</dependencies>
 	
 	<build>
