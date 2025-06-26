@@ -86,7 +86,7 @@
 		<module>springboot-xxl-job</module>
 		<module>springboot-powerjob</module>
 		<module>springboot-richtext</module>
-		<module>springboot-easyexcel</module>
+		<module>springboot-fastexcel</module>
 		<module>springboot-resilience4j-common</module>
 		<module>springboot-resilience4j-server</module>
 		<module>springboot-resilience4j-client</module>

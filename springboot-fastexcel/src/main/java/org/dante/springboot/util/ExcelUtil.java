@@ -1,15 +1,16 @@
 package org.dante.springboot.util;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.write.builder.ExcelWriterBuilder;
-import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
-import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
+import cn.idev.excel.EasyExcel;
+import cn.idev.excel.write.builder.ExcelWriterBuilder;
+import cn.idev.excel.write.builder.ExcelWriterSheetBuilder;
+import cn.idev.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -30,7 +31,7 @@ public class ExcelUtil {
                                        Class<T> clazz, List<T> data) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
 
         EasyExcel.write(response.getOutputStream(), clazz)
@@ -56,7 +57,7 @@ public class ExcelUtil {
                                        Consumer<ExcelWriterBuilder> writerConsumer) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
 
         ExcelWriterBuilder writerBuilder = EasyExcel.write(response.getOutputStream(), clazz);
